@@ -1,0 +1,25 @@
+commit_regex='^(feat|fix|refactor|design|comment|test|chore|reanme|remove)(\(.+\))?: .{1,}'
+
+commit_message=$(cat "$1")
+
+echo "🔍 Checking commit message format..."
+
+if ! echo "$commit_message" | grep -qE "$commit_regex"; then
+  echo "❌ Invalid commit message format!"
+  echo ""
+  echo "📋 Please use conventional commit format:"
+  echo "   feat: 새로운 기능 추가"
+  echo "   fix: 버그 수정"
+  echo "   refactor: 코드 리팩토링"
+  echo "   design: 디자인, UI 변경"
+  echo "   comment: 주석 추가, 주석 수정"
+  echo "   test: 테스트 추가, 테스트 수정"
+  echo "   chore: 기타 변경사항, asset폴더의 img 추가 등"
+  echo "   rename: 파일 이름 변경"
+  echo "   remove: 파일 이동 및 삭제"
+  echo ""
+  echo "💡 Your message: '$commit_message'"
+  exit 1
+fi
+
+echo "✅ Commit message format is valid!" 
