@@ -1,4 +1,4 @@
-commit_regex='^(feat|fix|refactor|design|comment|test|chore|reanme|remove)(\(.+\))?: .{1,}'
+commit_regex='^(feat|fix|refactor|design|comment|test|chore|reanme|remove|init)(\(.+\))?: .{1,}'
 
 commit_message=$(cat "$1")
 
