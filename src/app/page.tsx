@@ -8,6 +8,7 @@ export default function Page() {
       <Button color="primary">Button</Button>
       <Button color="warning">Button</Button>
       <Button color="primary">Button</Button>
+      <Button color="primary">Button</Button>
     </div>
   );
 }

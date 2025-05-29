@@ -1,27 +1,32 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
 echo "🚀 GitHub Flow Pre-commit checks..."
 
-# 1. ESLint 체크 - 코드 품질 보장 (주석 컨벤션 포함)
-echo "🔍 Running ESLint..."
-if ! pnpm lint; then
-  echo "❌ ESLint failed! Code quality issues detected."
-  echo "💡 Please fix linting errors before committing."
-  exit 1
-fi
+#0. 트레킹
+echo "📁 Staged files:"
+git diff --cached --name-only --diff-filter=ACMR
 
-# 2. 빌드 체크 - 배포 가능한 상태 확인
+
+# 1. 변경된 파일만 Lint/Format
+echo "🔍 Running lint-staged (with debug)..."
+npx lint-staged --debug || {
+  echo "❌ Lint-staged failed! Aborting commit."
+  exit 1
+}
+
+# 2. 빌드 체크
 echo "🔨 Running build check..."
 if ! pnpm build; then
- echo "❌ Build failed! Code is not deployable."
-  echo "💡 Please fix build errors before committing."
+  echo "❌ Build failed! Code is not deployable."
   exit 1
 fi
 
-# 3. 테스트 실행 - 기능 정상 작동 확인 (선택사항)
+# 3. 테스트
 if [ -f "package.json" ] && grep -q '"test"' package.json; then
   echo "🧪 Running tests..."
   if ! pnpm test; then
-    echo "❌ Tests failed! Functionality may be broken."
-    echo "💡 Please fix failing tests before committing."
+    echo "❌ Tests failed!"
     exit 1
   fi
 else
