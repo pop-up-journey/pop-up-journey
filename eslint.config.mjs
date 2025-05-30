@@ -31,6 +31,19 @@ const eslintConfig = [
       'no-console': 'warn',
       'prefer-const': 'error',
       'no-var': 'error',
+      'prefer-destructuring': [
+        'error',
+        {
+          VariableDeclarator: {
+            array: false,
+            object: true,
+          },
+          AssignmentExpression: {
+            array: false,
+            object: false,
+          },
+        },
+      ],
     },
   }),
 
