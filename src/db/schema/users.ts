@@ -7,7 +7,7 @@ export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
-  emailVerified: timestamp('email_verified', { mode: 'date' }).notNull(),
+  emailVerified: timestamp('email_verified', { mode: 'date' }),
   image: text('image'),
   role: roleEnum('role').notNull(),
   phone: text('phone'),
