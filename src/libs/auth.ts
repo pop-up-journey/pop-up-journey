@@ -27,4 +27,41 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     sessionsTable: sessions,
     verificationTokensTable: verificationTokens,
   }),
+  // callbacks: {
+  //   async signIn({ user, account, profile }) {
+  //     if (!user.email) return false;
+
+  //     // Check if user exists
+  //     const existingUser = await db.select().from(users).where(eq(users.email, user.email)).limit(1);
+
+  //     if (existingUser.length === 0) {
+  //       // Create new user
+  //       await db.insert(users).values({
+  //         email: user.email,
+  //         name: user.name || '',
+  //         image: user.image,
+  //         role: 'participant', // default role
+  //       });
+  //     }
+
+  //     return true;
+  //   },
+  //   async jwt({ token, user }) {
+  //     // 로그인 시 user가 존재, 이후에는 token만 존재
+  //     if (user) {
+  //       token.id = user.id;
+  //     }
+  //     return token;
+  //   },
+  //   async session({ session, token }) {
+  //     if (token?.id) {
+  //       session.user = session.user || {};
+  //       session.user.id = token.id as string;
+  //     }
+  //     return session;
+  //   },
+  // },
+  // session: {
+  //   strategy: 'jwt',
+  // },
 });
