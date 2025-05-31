@@ -1,57 +1,50 @@
-import { pgTable, uuid, timestamp, pgEnum } from "drizzle-orm/pg-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-import { z } from "zod";
-import { users } from "./users";
-import { events } from "./events";
+import { pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { z } from 'zod';
+import { participantStatusEnum } from './enums';
+import { events } from './events';
+import { users } from './users';
 
-// Participant Status Enum
-export const participantStatusEnum = pgEnum("participant_status", [
-  "pending",
-  "approved",
-  "rejected",
-  "cancelled",
-]);
-
-// Event Participants Table
-export const eventParticipants = pgTable("event_participants", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  userId: uuid("user_id")
+export const eventParticipants = pgTable('event_participants', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id')
     .notNull()
-    .references(() => users.id),
-  eventId: uuid("event_id")
+    .references(() => users.id, { onDelete: 'cascade' }),
+  eventId: uuid('event_id')
     .notNull()
-    .references(() => events.id),
-  participantStatus: participantStatusEnum("participant_status")
-    .default("pending")
-    .notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
+    .references(() => events.id, { onDelete: 'cascade' }),
+  participantStatus: participantStatusEnum('participant_status').default('pending').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
-// Zod Schemas
-export const selectEventParticipantSchema =
-  createSelectSchema(eventParticipants);
-export const insertEventParticipantSchema =
-  createInsertSchema(eventParticipants);
+/**
+ * @description 데이터베이스에서 이벤트 참가자 정보를 조회할 때 사용되는 스키마
+ */
+export const selectEventParticipantSchema = createSelectSchema(eventParticipants);
 
-// Custom Validation Schemas
+/**
+ * @description 데이터베이스에 새로운 이벤트 참가자를 생성할 때 사용되는 스키마
+ */
+export const insertEventParticipantSchema = createInsertSchema(eventParticipants);
+
+/**
+ * @description 새로운 이벤트 참가자 생성 시 입력 데이터의 유효성을 검증하는 스키마
+ */
 export const createEventParticipantSchema = z.object({
-  userId: z.string().uuid("올바른 UUID 형식이 아닙니다"),
-  eventId: z.string().uuid("올바른 UUID 형식이 아닙니다"),
-  participantStatus: z
-    .enum(["pending", "approved", "rejected", "cancelled"])
-    .default("pending"),
+  userId: z.string().uuid('올바른 UUID 형식이 아닙니다'),
+  eventId: z.string().uuid('올바른 UUID 형식이 아닙니다'),
+  participantStatus: z.enum(['pending', 'approved', 'rejected', 'cancelled']).default('pending'),
 });
 
+/**
+ * @description 이벤트 참가자 상태 업데이트 시 입력 데이터의 유효성을 검증하는 스키마
+ */
 export const updateParticipantStatusSchema = z.object({
-  participantStatus: z.enum(["pending", "approved", "rejected", "cancelled"]),
+  participantStatus: z.enum(['pending', 'approved', 'rejected', 'cancelled']),
 });
 
 // Types
 export type EventParticipant = typeof eventParticipants.$inferSelect;
 export type NewEventParticipant = typeof eventParticipants.$inferInsert;
-export type CreateEventParticipant = z.infer<
-  typeof createEventParticipantSchema
->;
-export type UpdateParticipantStatus = z.infer<
-  typeof updateParticipantStatusSchema
->;
+export type CreateEventParticipant = z.infer<typeof createEventParticipantSchema>;
+export type UpdateParticipantStatus = z.infer<typeof updateParticipantStatusSchema>;
