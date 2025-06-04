@@ -1,41 +1,40 @@
-import Google from '@/assets/logos/google.svg';
-import Kakao from '@/assets/logos/kakao.svg';
-import Naver from '@/assets/logos/naver.svg';
-import Image from 'next/image';
-import { signInAction } from '../services/signInAction';
+'use client';
+
+import { signIn } from 'next-auth/react';
+import { ProviderLogo } from './ProviderLogo';
 
 interface SignInButtonProps {
   provider: 'google' | 'naver' | 'kakao';
-  logo: string;
 }
 
-export function SignInButton({ provider, logo }: SignInButtonProps) {
-  // 소셜별 색상
+export function SignInButton({ provider }: SignInButtonProps) {
   const bgColor = {
-    google: 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-200',
-    naver: 'bg-[#03C75A] text-white hover:bg-[#02b152]',
-    kakao: 'bg-[#FEE500] text-[#3C1E1E] hover:bg-yellow-300',
+    google: 'bg-white text-black border border-gray-300 hover:bg-white/90',
+    naver: 'bg-[#02C73D] text-white hover:bg-[#02b152]/90',
+    kakao: 'bg-[#FEE500] text-black hover:bg-[#FEE500]/90',
   }[provider];
 
+  const handleSignIn = () => {
+    signIn(provider, { redirectTo: '/' });
+  };
+
   return (
-    <form action={() => signInAction(provider)}>
-      <button
-        type="submit"
-        className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2 font-semibold transition-colors ${bgColor}`}
-      >
-        <Image src={logo} alt={provider} width={20} height={20} />
-        {provider.charAt(0).toUpperCase() + provider.slice(1)}로 로그인
-      </button>
-    </form>
+    <button
+      onClick={handleSignIn}
+      className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 font-semibold transition-colors ${bgColor}`}
+    >
+      <ProviderLogo provider={provider} />
+      {provider.charAt(0).toUpperCase() + provider.slice(1)}로 로그인
+    </button>
   );
 }
 
 export function SignInButtonList() {
   return (
     <div className="mx-auto flex w-full flex-col gap-3">
-      <SignInButton provider="google" logo={Google} />
-      <SignInButton provider="naver" logo={Naver} />
-      <SignInButton provider="kakao" logo={Kakao} />
+      <SignInButton provider="google" />
+      <SignInButton provider="naver" />
+      <SignInButton provider="kakao" />
     </div>
   );
 }

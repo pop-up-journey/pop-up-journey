@@ -19,6 +19,7 @@
     "@auth/supabase-adapter": "^1.9.1",
     "@heroui/react": "2.8.0-beta.6",
     "@supabase/supabase-js": "^2.49.8",
+    "@svgr/webpack": "^8.1.0",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.43.1",
     "drizzle-zod": "^0.8.2",
