@@ -6,6 +6,7 @@ import { SignInButtonList } from '../features/sign-in/components/SignInButton';
 export default function SignInPage() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
+    // HACK: 애네도 컴포넌트화 시켜서 UI로 만들면 좋을거같음
     <section aria-label="sign-in-title">
       <Button onPress={onOpen}>로그인</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

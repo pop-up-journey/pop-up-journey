@@ -1,5 +1,9 @@
-5/29
-후에 ssl 추가할 ㄱ것
+# 포폴용 뭐했는지
 
-config하는 폴더
-lib도 없어
+- 협업강조 내용 :
+
+1. husky : commit-msg 컨벤션
+2. eslint, prettier : 코드 일관성을 위한 컨벤션 (e.g, any금지, 구조분해 할당 {} 강제)
+3. notion : 정리
+4. swagger : 추가예정
+5. git : project, issue, PR컨벤션, 브랜치전략(github-flow)
