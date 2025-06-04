@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import { FlatCompat } from '@eslint/eslintrc';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -11,7 +14,6 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
-
   ...compat.config({
     plugins: ['react', 'react-hooks'],
     rules: {
@@ -46,7 +48,6 @@ const eslintConfig = [
       ],
     },
   }),
-
   ...compat.config({
     plugins: ['unicorn'],
     rules: {
@@ -56,6 +57,7 @@ const eslintConfig = [
       'unicorn/no-array-reduce': 'off',
     },
   }),
+  ...storybook.configs["flat/recommended"]
 ];
 
 export default eslintConfig;
