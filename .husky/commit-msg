@@ -1,4 +1,4 @@
-commit_regex='^(feat|fix|refactor|design|comment|test|chore|rename|remove|init)(\(.+\))?: .{1,}'
+commit_regex='^(merge|feat|fix|refactor|design|comment|test|chore|rename|remove|init)(\(.+\))?: .{1,}'
 
 commit_message=$(cat "$1")
 
@@ -8,6 +8,7 @@ if ! echo "$commit_message" | grep -qE "$commit_regex"; then
   echo "❌ Invalid commit message format!"
   echo ""
   echo "📋 Please use conventional commit format:"
+  echo "   merge: 브랜치 병합"
   echo "   feat: 새로운 기능 추가"
   echo "   fix: 버그 수정"
   echo "   refactor: 코드 리팩토링"
