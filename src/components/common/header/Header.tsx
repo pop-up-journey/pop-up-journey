@@ -19,7 +19,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className={`sticky top-0 z-[100] transition-all duration-300`}>
+    <div className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 transition-all duration-300`}>
       <Navbar
         className={`${hasScrolled ? 'mx-auto h-20 max-w-full bg-[#fff3f6]/40 px-6' : 'mx-auto h-[90px] bg-transparent px-30 pt-3 !backdrop-filter-none'} transition-all duration-300 ease-in-out`}
         isMenuOpen={isMenuOpen}
