@@ -1,5 +1,5 @@
 'use client';
-import SignInButton from '@/features/sign-in/components/SignInButton';
+import { SignInButton } from '@/features/sign-in/components/SignInButton';
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 
