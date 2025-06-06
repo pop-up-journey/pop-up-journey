@@ -12,11 +12,14 @@ export default function Page() {
   }, [session]);
 
   return (
-    <div className="flex h-screen items-center justify-center gap-10">
-      <Button color="primary">Button</Button>
-      <Button color="warning">Button</Button>
-      <Button color="primary">Button</Button>
-      <Button color="primary">Button</Button>
-    </div>
+    <>
+      <div className="relative z-10 flex h-screen items-center justify-center gap-10">
+        <Button color="primary">Button</Button>
+        <Button color="warning">Button</Button>
+        <Button color="primary">Button</Button>
+        <Button color="primary">Button</Button>
+      </div>
+      <div className="noise" />
+    </>
   );
 }
