@@ -1,11 +1,14 @@
 'use client';
 
 import { Button, Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 export default function Header() {
   const [hasScrolled, setHasScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const router = useRouter();
   React.useEffect(() => {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 10);
@@ -49,7 +52,7 @@ export default function Header() {
         <div className="flex-1">
           <NavbarContent justify="end">
             <NavbarItem>
-              <Button as={Link} color="primary" href="#" variant="flat">
+              <Button color="primary" onPress={() => router.push('/sign-in')} variant="flat">
                 로그인
               </Button>
             </NavbarItem>
