@@ -3,20 +3,18 @@
 import { Button, Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useScrollPosition } from 'react-haiku';
 
 export default function Header() {
   const [hasScrolled, setHasScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
+  const [scroll, _] = useScrollPosition() as [{ x: number; y: number }, unknown];
   const router = useRouter();
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 10);
-    };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  React.useEffect(() => {
+    if (!hasScrolled && scroll.y > 70) setHasScrolled(true);
+    else if (hasScrolled && scroll.y < 20) setHasScrolled(false);
+  }, [scroll.y, hasScrolled]);
 
   return (
     <div className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 transition-all duration-300`}>
