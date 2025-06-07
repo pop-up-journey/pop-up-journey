@@ -1,15 +1,27 @@
 'use client';
 
-import { Button, Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle } from '@heroui/react';
+import {
+  Avatar,
+  Button,
+  Input,
+  Link,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+} from '@heroui/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useScrollPosition } from 'react-haiku';
+import { If, useScrollPosition } from 'react-haiku';
 
 export default function Header() {
   const [hasScrolled, setHasScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [scroll, _] = useScrollPosition() as [{ x: number; y: number }, unknown];
   const router = useRouter();
+  const { data: session } = useSession();
 
   React.useEffect(() => {
     if (!hasScrolled && scroll.y > 70) setHasScrolled(true);
@@ -50,9 +62,22 @@ export default function Header() {
         <div className="flex-1">
           <NavbarContent justify="end">
             <NavbarItem>
-              <Button color="primary" onPress={() => router.push('/sign-in')} variant="flat">
-                로그인
-              </Button>
+              <If isTrue={!session?.user}>
+                <Button color="primary" onPress={() => router.push('/sign-in')} variant="flat">
+                  로그인
+                </Button>
+              </If>
+              <If isTrue={!!session?.user}>
+                <Avatar
+                  src={session?.user?.image ?? undefined}
+                  showFallback
+                  isBordered
+                  as="button"
+                  className="cursor-pointer"
+                  size="sm"
+                  color="danger"
+                />
+              </If>
             </NavbarItem>
           </NavbarContent>
         </div>
