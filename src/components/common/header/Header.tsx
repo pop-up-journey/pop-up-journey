@@ -15,7 +15,7 @@ import {
   NavbarItem,
   NavbarMenuToggle,
 } from '@heroui/react';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { If, useScrollPosition } from 'react-haiku';
@@ -86,7 +86,7 @@ export default function Header() {
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="light" color="danger">
                     <DropdownItem key="profile">프로필페이지</DropdownItem>
-                    <DropdownItem key="logout" variant="flat" color="danger">
+                    <DropdownItem key="logout" variant="flat" color="danger" onPress={() => signOut()}>
                       로그아웃
                     </DropdownItem>
                   </DropdownMenu>
