@@ -3,6 +3,10 @@
 import {
   Avatar,
   Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Input,
   Link,
   Navbar,
@@ -68,15 +72,25 @@ export default function Header() {
                 </Button>
               </If>
               <If isTrue={!!session?.user}>
-                <Avatar
-                  src={session?.user?.image ?? undefined}
-                  showFallback
-                  isBordered
-                  as="button"
-                  className="cursor-pointer"
-                  size="sm"
-                  color="danger"
-                />
+                <Dropdown placement="bottom-end">
+                  <DropdownTrigger>
+                    <Avatar
+                      src={session?.user?.image ?? undefined}
+                      showFallback
+                      isBordered
+                      as="button"
+                      className="cursor-pointer"
+                      size="sm"
+                      color="danger"
+                    />
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label="Profile Actions" variant="light" color="danger">
+                    <DropdownItem key="profile">프로필페이지</DropdownItem>
+                    <DropdownItem key="logout" variant="flat" color="danger">
+                      로그아웃
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </If>
             </NavbarItem>
           </NavbarContent>
