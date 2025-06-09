@@ -1,22 +1,36 @@
 'use client';
 
-import { Button, Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle } from '@heroui/react';
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Input,
+  Link,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+} from '@heroui/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { If, useScrollPosition } from 'react-haiku';
 
 export default function Header() {
   const [hasScrolled, setHasScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
+  const [scroll, _] = useScrollPosition() as [{ x: number; y: number }, unknown];
   const router = useRouter();
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 10);
-    };
+  const { data: session } = useSession();
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  React.useEffect(() => {
+    if (!hasScrolled && scroll.y > 70) setHasScrolled(true);
+    else if (hasScrolled && scroll.y < 20) setHasScrolled(false);
+  }, [scroll.y, hasScrolled]);
 
   return (
     <div className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 transition-all duration-300`}>
@@ -52,9 +66,32 @@ export default function Header() {
         <div className="flex-1">
           <NavbarContent justify="end">
             <NavbarItem>
-              <Button color="primary" onPress={() => router.push('/sign-in')} variant="flat">
-                로그인
-              </Button>
+              <If isTrue={!session?.user}>
+                <Button color="primary" onPress={() => router.push('/sign-in')} variant="flat">
+                  로그인
+                </Button>
+              </If>
+              <If isTrue={!!session?.user}>
+                <Dropdown placement="bottom-end">
+                  <DropdownTrigger>
+                    <Avatar
+                      src={session?.user?.image ?? undefined}
+                      showFallback
+                      isBordered
+                      as="button"
+                      className="cursor-pointer"
+                      size="sm"
+                      color="danger"
+                    />
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label="Profile Actions" variant="light" color="danger">
+                    <DropdownItem key="profile">프로필페이지</DropdownItem>
+                    <DropdownItem key="logout" variant="flat" color="danger" onPress={() => signOut()}>
+                      로그아웃
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </If>
             </NavbarItem>
           </NavbarContent>
         </div>
