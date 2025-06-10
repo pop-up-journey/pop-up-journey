@@ -17,17 +17,17 @@ import {
 } from '@heroui/react';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { If, useScrollPosition } from 'react-haiku';
 
 export default function Header() {
-  const [hasScrolled, setHasScrolled] = React.useState(false);
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scroll, _] = useScrollPosition() as [{ x: number; y: number }, unknown];
   const router = useRouter();
   const { data: session } = useSession();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!hasScrolled && scroll.y > 70) setHasScrolled(true);
     else if (hasScrolled && scroll.y < 20) setHasScrolled(false);
   }, [scroll.y, hasScrolled]);
