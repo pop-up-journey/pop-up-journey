@@ -33,7 +33,7 @@ export default function Header() {
   }, [scroll.y, hasScrolled]);
 
   return (
-    <div className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 transition-all duration-300`}>
+    <header className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 transition-all duration-300`}>
       <Navbar
         className={`${hasScrolled ? 'mx-auto h-20 max-w-full bg-[#fff3f6]/40 px-6' : 'mx-auto h-[90px] bg-transparent px-30 pt-3 !backdrop-filter-none'} transition-all duration-300 ease-in-out`}
         isMenuOpen={isMenuOpen}
@@ -130,6 +130,6 @@ export default function Header() {
           </nav>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
