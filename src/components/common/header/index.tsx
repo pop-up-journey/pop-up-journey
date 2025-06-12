@@ -17,23 +17,23 @@ import {
 } from '@heroui/react';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { If, useScrollPosition } from 'react-haiku';
 
 export default function Header() {
-  const [hasScrolled, setHasScrolled] = React.useState(false);
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scroll, _] = useScrollPosition() as [{ x: number; y: number }, unknown];
   const router = useRouter();
   const { data: session } = useSession();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!hasScrolled && scroll.y > 70) setHasScrolled(true);
     else if (hasScrolled && scroll.y < 20) setHasScrolled(false);
   }, [scroll.y, hasScrolled]);
 
   return (
-    <div className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 transition-all duration-300`}>
+    <header className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 transition-all duration-300`}>
       <Navbar
         className={`${hasScrolled ? 'mx-auto h-20 max-w-full bg-[#fff3f6]/40 px-6' : 'mx-auto h-[90px] bg-transparent px-30 pt-3 !backdrop-filter-none'} transition-all duration-300 ease-in-out`}
         isMenuOpen={isMenuOpen}
@@ -130,6 +130,6 @@ export default function Header() {
           </nav>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
