@@ -35,7 +35,7 @@ body {
   right: 0;
   bottom: 0;
   z-index: 0;
-  background-image: url('/noise.gif');
+  background-image: url('../assets/images/noise.gif');
   background-position: 0 0;
   background-size: 200px 200px;
   pointer-events: none;
