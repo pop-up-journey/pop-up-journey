@@ -1,5 +1,5 @@
 import SignInModal from '@/features/sign-in/components/SignInModal';
 
-export default function WrapperSignInPage() {
+export default function TestPage() {
   return <SignInModal />;
 }
