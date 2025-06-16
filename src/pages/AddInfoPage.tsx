@@ -1,11 +1,10 @@
 'use client';
-import Greeting from '@/assets/add-info/greeting.png';
-import HeroSection from '@/components/common/hero-section/HeroSection';
+import HeroSection from '@/components/common/hero-section';
+import Greeting from '@/features/add-info/components/Greeting';
 import { Button } from '@heroui/button';
 import { Chip } from '@heroui/chip';
 import { Input } from '@heroui/input';
 import { Select, SelectItem } from '@heroui/select';
-import Image from 'next/image';
 import { useState } from 'react';
 
 const interestsList = [
@@ -29,9 +28,18 @@ export const roles = [
 
 export default function AddInfoPage() {
   const [interests, setInterests] = useState<string[]>([]);
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [role, setRole] = useState<string>('');
 
   const handleInterestClick = (interest: string) => {
     setInterests((prev) => (prev.includes(interest) ? prev.filter((i) => i !== interest) : [...prev, interest]));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(name, email, phone, role, interests);
   };
 
   return (
@@ -39,19 +47,40 @@ export default function AddInfoPage() {
       <HeroSection title="회원 정보 입력" description="회원가입을 위해 정보를 입력해주세요." />
       <div className="flex flex-1 items-start justify-center px-4 py-12">
         <div className="flex w-full max-w-5xl gap-12">
-          {/* HACK: 회원 정보 입력 페이지 타이틀 임시 이미지 넣을까..  */}
           <div className="flex w-1/2 flex-col justify-center">
-            <Image src={Greeting} alt="greeting" />
+            <Greeting />
           </div>
-          {/* HACK: 오른쪽 폼 */}
-          <form className="w-1/2 space-y-6">
-            <Input label="Name" type="text" placeholder="사용하실 이름을 입력해주세요." />
-            <Input label="Email" type="email" placeholder="example@example.com" />
-            <Input label="Phone Number" type="tel" placeholder="010-1234-5678" />
-            <Select items={roles} label="Role" placeholder="Select an role">
+          <form className="w-1/2 space-y-6" onSubmit={handleSubmit}>
+            <Input
+              label="Name"
+              type="text"
+              placeholder="사용하실 이름을 입력해주세요."
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              label="Email"
+              type="email"
+              placeholder="example@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              label="Phone Number"
+              type="tel"
+              placeholder="010-1234-5678"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <Select
+              items={roles}
+              label="Role"
+              placeholder="Select an role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
               {(role) => <SelectItem>{role.label}</SelectItem>}
             </Select>
-
             <div>
               <label className="mb-1 block">관심사</label>
               <div className="mb-1 flex flex-wrap gap-2">
