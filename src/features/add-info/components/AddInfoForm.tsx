@@ -5,10 +5,7 @@ import { categories } from '@/configs/category';
 import { roles } from '@/configs/roles';
 import Greeting from '@/features/add-info/components/Greeting';
 import { clientApi } from '@/libs/api';
-import { Button } from '@heroui/button';
-import { Chip } from '@heroui/chip';
-import { Input } from '@heroui/input';
-import { Select, SelectItem } from '@heroui/select';
+import { Button, Chip, Input, Select, SelectItem } from '@heroui/react';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 

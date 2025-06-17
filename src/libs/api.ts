@@ -17,11 +17,6 @@ export const clientApi = async <T>(segment: string, options: FetchOptions<T>) =>
       headers: options.headers,
     });
 
-    // if (!response.ok) {
-    //   const errorData = await response.json().catch(() => ({}));
-    //   throw new Error(errorData.message || `API Error: ${response.status}`);
-    // }
-
     return response.json();
   } catch (error) {
     console.error('API Error:', error);
