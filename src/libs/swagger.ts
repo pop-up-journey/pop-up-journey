@@ -2,11 +2,11 @@ import { createSwaggerSpec } from 'next-swagger-doc';
 
 export const getApiDocs = async () => {
   const spec = createSwaggerSpec({
-    apiFolder: 'src/app/api', // define api folder under app folder
+    apiFolder: 'src/app/api',
     definition: {
       openapi: '3.0.0',
       info: {
-        title: 'Next Swagger API Example',
+        title: '팝업의 여정 API 문서',
         version: '1.0',
       },
       components: {
