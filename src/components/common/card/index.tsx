@@ -9,22 +9,23 @@ interface CardProps {
 
 export default function CardComponent({ title, thumbnail, tags, date }: CardProps) {
   return (
-    <Card className="flex h-[345px] w-[260px] flex-col justify-between overflow-hidden shadow-sm" radius="sm">
+    <Card className="flex w-[240px] flex-col justify-between overflow-hidden shadow-sm" radius="sm">
       <CardBody className="overflow-visible p-0">
         <Image
+          removeWrapper
           alt="Card background"
-          className="h-[245px] w-full object-cover"
+          className="z-0 aspect-[4/5] w-full object-cover"
           src={thumbnail}
-          width="100%"
           radius="none"
         />
       </CardBody>
-      <CardFooter className="flex-col items-start px-4 py-2">
-        <small className="text-default-500 mb-1">{date}</small>
-        <h4 className="text-large mb-1 font-bold">{title}</h4>
-        <div className="mb-1 flex gap-1">
+
+      <CardFooter className="absolute bottom-0 z-10 flex-col items-start bg-gradient-to-t from-black/60 via-black/20 to-transparent">
+        <small className="text-default-400">{date}</small>
+        <h4 className="mb-1 font-bold text-white">{title}</h4>
+        <div className="flex gap-1">
           {tags.map((tag, index) => (
-            <Chip key={index} size="sm" radius="sm" variant="flat" color="default">
+            <Chip key={index} size="sm" radius="sm" variant="flat" color="danger">
               {tag}
             </Chip>
           ))}
