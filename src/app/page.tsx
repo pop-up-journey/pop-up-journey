@@ -1,6 +1,7 @@
 'use client';
 
-import { Button } from '@heroui/react';
+import { Button } from '@/components/common/Button';
+import { Input } from '@/components/common/input';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
@@ -14,12 +15,9 @@ export default function Page() {
   return (
     <>
       <div className="relative z-10 flex h-screen items-center justify-center gap-10">
-        <Button color="primary">Button</Button>
-        <Button color="warning">Button</Button>
-        <Button color="primary">Button</Button>
-        <Button color="primary">Button</Button>
+        <Input label="Email" />
+        <Button>로그인</Button>
       </div>
-      <div className="noise" />
     </>
   );
 }
