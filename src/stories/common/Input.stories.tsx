@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { useState } from 'react';
-import { Input } from '../components/common/input';
-import { LABELS } from '../components/common/input/labels';
+import { Input } from '../../components/common/input';
+import { LABELS } from '../../components/common/input/labels';
 
 const meta: Meta<typeof Input> = {
   title: 'Common/Input',
@@ -62,7 +62,7 @@ export const Name: Story = {
   },
 };
 
-export const sm: Story = {
+export const Small: Story = {
   args: {
     label: LABELS.EMAIL,
     placeholder: 'example@example.com',
@@ -72,7 +72,7 @@ export const sm: Story = {
   },
 };
 
-export const md: Story = {
+export const Medium: Story = {
   args: {
     label: LABELS.EMAIL,
     placeholder: 'example@example.com',
@@ -82,7 +82,7 @@ export const md: Story = {
   },
 };
 
-export const lg: Story = {
+export const Large: Story = {
   args: {
     label: LABELS.EMAIL,
     placeholder: 'example@example.com',
@@ -92,7 +92,7 @@ export const lg: Story = {
   },
 };
 
-export const custom: Story = {
+export const Custom: Story = {
   args: {
     label: LABELS.EMAIL,
     placeholder: 'example@example.com',
