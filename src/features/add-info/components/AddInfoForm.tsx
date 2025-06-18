@@ -136,7 +136,7 @@ export default function AddInfoForm() {
               />
             )}
             <Input
-              label="Phone Number"
+              label="Phone"
               type="tel"
               placeholder="010-1234-5678"
               value={phone ?? ''}
