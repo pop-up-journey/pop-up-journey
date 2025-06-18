@@ -111,6 +111,7 @@ export default function AddInfoForm() {
           <form className="w-1/2 space-y-6" onSubmit={handleSubmit}>
             <Input
               label="Name"
+              color="primary"
               type="text"
               placeholder="사용하실 이름을 입력해주세요."
               value={name}

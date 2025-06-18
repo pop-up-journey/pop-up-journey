@@ -15,6 +15,8 @@ const meta: Meta<typeof Input> = {
     placeholder: { control: 'text' },
     value: { control: 'text' },
     onChange: { action: 'changed' },
+    /** sm, md, lg, full, [000px] */
+    width: { control: 'text' },
   },
 };
 
@@ -57,5 +59,45 @@ export const Name: Story = {
   render: (args) => {
     const [value, setValue] = useState('');
     return <Input {...args} value={value} onChange={(e) => setValue(e.target.value)} />;
+  },
+};
+
+export const sm: Story = {
+  args: {
+    label: LABELS.EMAIL,
+    placeholder: 'example@example.com',
+    type: 'email',
+    value: '',
+    width: 'sm',
+  },
+};
+
+export const md: Story = {
+  args: {
+    label: LABELS.EMAIL,
+    placeholder: 'example@example.com',
+    type: 'email',
+    value: '',
+    width: 'md',
+  },
+};
+
+export const lg: Story = {
+  args: {
+    label: LABELS.EMAIL,
+    placeholder: 'example@example.com',
+    type: 'email',
+    value: '',
+    width: 'lg',
+  },
+};
+
+export const custom: Story = {
+  args: {
+    label: LABELS.EMAIL,
+    placeholder: 'example@example.com',
+    type: 'email',
+    value: '',
+    width: '[100px]',
   },
 };

@@ -1,14 +1,17 @@
 import { EnvelopeIcon, PhoneIcon, TagIcon } from '@heroicons/react/24/outline';
 import { Input as HerouiInput } from '@heroui/react';
+import { type FC, type SVGProps } from 'react';
 import { type Label, LABELS } from './labels';
+
 type HerouiInputProps = React.ComponentProps<typeof HerouiInput>;
 
 interface InputProps extends Omit<HerouiInputProps, 'label'> {
   label: Label;
+  width?: string;
 }
 
-export const Input = ({ label, ...props }: InputProps) => {
-  let Icon: React.ElementType | null = null;
+export const Input = ({ label, width = '', ...props }: InputProps) => {
+  let Icon: FC<SVGProps<SVGSVGElement>> | null = null;
   switch (label) {
     case LABELS.EMAIL:
       Icon = EnvelopeIcon;
@@ -46,6 +49,7 @@ export const Input = ({ label, ...props }: InputProps) => {
           'group-data-[focus=true]:bg-default-200/50',
           'dark:group-data-[focus=true]:bg-default/60',
           '!cursor-text',
+          `w-${width}`,
         ],
       }}
       startContent={
