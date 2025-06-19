@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CardComponent from '../../../components/common/card';
 import { upcomingPopupList } from '../../../mock/mockdata';
@@ -6,6 +7,7 @@ export default function CurrentPopupList() {
   return (
     <section className="mx-auto max-w-6xl overflow-hidden px-4">
       <h2 className="mb-8 text-2xl font-bold">지금! 서울 인기 팝업</h2>
+      {/* HACK : 애니메이션 변경 예정*/}
       <Swiper
         spaceBetween={10}
         slidesPerView={1}
@@ -30,7 +32,9 @@ export default function CurrentPopupList() {
       >
         {upcomingPopupList.map((popup) => (
           <SwiperSlide key={popup.id} className="min-w-0">
-            <CardComponent title={popup.title} thumbnail={popup.thumbnail} tags={popup.tags} date={popup.date} />
+            <Link href={`/event/${popup.id}`} className="block">
+              <CardComponent title={popup.title} thumbnail={popup.thumbnail} tags={popup.tags} date={popup.date} />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

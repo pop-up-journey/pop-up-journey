@@ -44,7 +44,11 @@ export default function CardComponent({ title, thumbnail, tags, date, variant }:
         </Card>
       </If>
       <If isTrue={isCompact}>
-        <Card className="bg-bgcolor max-w-[480px] py-4" shadow="none" radius="sm">
+        <Card
+          className="bg-bgcolor max-w-[480px] rounded-3xl border border-white/20 bg-white/10 p-10 py-4 shadow-2xl backdrop-blur-2xl"
+          shadow="none"
+          radius="sm"
+        >
           <CardBody className="relative grid grid-cols-6 gap-6 px-0 md:grid-cols-12 md:gap-4">
             {/* 이미지 영역 */}
             <div className="relative col-span-6 md:col-span-4">

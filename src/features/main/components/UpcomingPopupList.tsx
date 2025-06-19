@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import CardComponent from '../../../components/common/card';
 import { upcomingPopupList } from '../../../mock/mockdata';
@@ -16,17 +17,18 @@ export default function UpcomingPopupList() {
   return (
     <section className="mx-auto max-w-6xl px-4 pb-10">
       <h2 className="mb-8 text-2xl font-bold">오픈 예정 팝업</h2>
-
-      <div className="-mx-4 grid grid-cols-1 gap-x-10 px-4 md:grid-cols-2">
+      <div className="-mx-4 grid grid-cols-1 gap-10 px-4 md:grid-cols-2">
         {upcomingPopupList.slice(0, visibleCount).map((popup) => (
-          <CardComponent
-            key={popup.id}
-            title={popup.title}
-            thumbnail={popup.thumbnail}
-            tags={popup.tags}
-            date={popup.date}
-            variant="compact"
-          />
+          <Link href={`/event/${popup.id}`} key={popup.id} className="block">
+            <CardComponent
+              key={popup.id}
+              title={popup.title}
+              thumbnail={popup.thumbnail}
+              tags={popup.tags}
+              date={popup.date}
+              variant="compact"
+            />
+          </Link>
         ))}
       </div>
 
@@ -36,6 +38,7 @@ export default function UpcomingPopupList() {
             onClick={handleShowMore}
             className="border-default-200 hover:bg-default-100 w-full cursor-pointer rounded-md border px-6 py-2 text-sm"
           >
+            {/* TODO: 더보기 Button -> 공통 UI로 디자인 변경 예정 */}
             더보기
           </button>
         </div>
