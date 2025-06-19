@@ -2,7 +2,6 @@
 
 import {
   Avatar,
-  Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -16,15 +15,15 @@ import {
   NavbarMenuToggle,
 } from '@heroui/react';
 import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { If, useScrollPosition } from 'react-haiku';
+import SignInModal from '../../../features/sign-in/components/SignInModal';
 
 export default function Header() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scroll, _] = useScrollPosition() as [{ x: number; y: number }, unknown];
-  const router = useRouter();
+
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -67,9 +66,10 @@ export default function Header() {
           <NavbarContent justify="end">
             <NavbarItem>
               <If isTrue={!session?.user}>
-                <Button color="primary" onPress={() => router.push('/sign-in')} variant="flat">
+                {/* <Button color="primary" onPress={() => router.push('/sign-in')} variant="flat">
                   로그인
-                </Button>
+                </Button> */}
+                <SignInModal />
               </If>
               <If isTrue={!!session?.user}>
                 <Dropdown placement="bottom-end">

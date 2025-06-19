@@ -16,7 +16,6 @@ export default function Page() {
       <div className="relative z-10 flex items-center justify-center gap-10">
         <MainPage />
       </div>
-      <div className="noise" />
     </>
   );
 }
