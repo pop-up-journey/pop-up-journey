@@ -1,21 +1,39 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
 import CardComponent from '../../../components/common/card';
 import { upcomingPopupList } from '../../../mock/mockdata';
 
 export default function CurrentPopupList() {
   return (
-    <section className="mx-auto max-w-6xl px-4">
+    <section className="mx-auto max-w-6xl overflow-hidden px-4">
       <h2 className="mb-8 text-2xl font-bold">지금! 서울 인기 팝업</h2>
-      <div className="scrollbar-hide flex gap-4 overflow-x-auto pb-2">
+      <Swiper
+        spaceBetween={10}
+        slidesPerView={1}
+        breakpoints={{
+          '@0.00': {
+            slidesPerView: 1.5,
+            spaceBetween: 10,
+          },
+          '@0.75': {
+            slidesPerView: 2.5,
+            spaceBetween: 20,
+          },
+          '@1.00': {
+            slidesPerView: 3.5,
+            spaceBetween: 30,
+          },
+          '@1.50': {
+            slidesPerView: 4.5,
+            spaceBetween: 40,
+          },
+        }}
+      >
         {upcomingPopupList.map((popup) => (
-          <CardComponent
-            key={popup.id}
-            title={popup.title}
-            thumbnail={popup.thumbnail}
-            tags={popup.tags}
-            date={popup.date}
-          />
+          <SwiperSlide key={popup.id} className="min-w-0">
+            <CardComponent title={popup.title} thumbnail={popup.thumbnail} tags={popup.tags} date={popup.date} />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   );
 }

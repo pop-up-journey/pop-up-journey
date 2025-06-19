@@ -1,4 +1,5 @@
 import { Card, CardBody, CardFooter, Chip, Image } from '@heroui/react';
+import NextImage from 'next/image';
 
 interface CardProps {
   title: string;
@@ -9,14 +10,18 @@ interface CardProps {
 
 export default function CardComponent({ title, thumbnail, tags, date }: CardProps) {
   return (
-    <Card className="flex w-[240px] flex-col justify-between overflow-hidden shadow-sm" radius="sm">
-      <CardBody className="overflow-visible p-0">
+    <Card className="flex max-w-[240px] cursor-pointer flex-col overflow-hidden shadow-sm" radius="sm">
+      <CardBody className="overflow-x-auto p-0">
         <Image
-          removeWrapper
+          isZoomed
+          as={NextImage}
           alt="Card background"
           className="z-0 aspect-[4/5] w-full object-cover"
           src={thumbnail}
           radius="none"
+          width={240}
+          height={300}
+          loading="eager"
         />
       </CardBody>
 

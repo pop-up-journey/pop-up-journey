@@ -4,7 +4,7 @@ import UpcomingPopupList from '../features/main/components/UpcomingPopupList';
 
 export default function MainPage() {
   return (
-    <main className="m space-y-24">
+    <main className="w-100vw space-y-24 overflow-hidden">
       {/* Section 1: Hero */}
       <HeroSection />
 

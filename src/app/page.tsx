@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-import MainPage from '../pages/MainPage';
+import MainPage from '../_pages/MainPage';
 
 export default function Page() {
   const { data: session } = useSession();
