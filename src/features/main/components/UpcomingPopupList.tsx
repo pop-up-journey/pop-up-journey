@@ -15,8 +15,8 @@ export default function UpcomingPopupList() {
   const isAllVisible = visibleCount >= upcomingPopupList.length;
 
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-10">
-      <h2 className="mb-8 text-2xl font-bold">오픈 예정 팝업</h2>
+    <section className="mx-auto mb-10 max-w-6xl px-4 pb-10">
+      <h2 className="mb-4 text-2xl font-bold">오픈 예정 팝업</h2>
       <div className="-mx-4 grid grid-cols-1 gap-10 px-4 md:grid-cols-2">
         {upcomingPopupList.slice(0, visibleCount).map((popup) => (
           <Link href={`/event/${popup.id}`} key={popup.id} className="block">

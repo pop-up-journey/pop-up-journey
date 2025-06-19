@@ -2,7 +2,7 @@ export default function MainBanner() {
   return (
     // HACK : GSAP 애니메이션 적용 예정
     <section
-      className="relative flex h-[60vh] items-center justify-center bg-cover bg-center text-white"
+      className="relative mb-10 flex h-[60vh] items-center justify-center bg-cover bg-center text-white"
       style={{ backgroundImage: "url('/hero-bg.jpg')" }}
     >
       <div className="px-4 text-center">
