@@ -33,11 +33,9 @@ export default function HostCenterPage() {
     <main className="min-h-screen">
       <HeroSection title="팝업의 여정 호스트 센터" description="이벤트를 주최하고 관리할 수 있습니다." />
 
-      {/* 프로필 및 버튼 영역 */}
-      <div className="mx-auto mt-8 flex max-w-5xl items-center justify-between border-b pb-8">
-        {/* 프로필 */}
+      {/* 프로필 */}
+      <section className="mx-auto mt-8 flex max-w-5xl items-center justify-between border-b pb-8">
         <div className="flex items-center gap-6">
-          {/* 프로필 이미지 (placeholder) */}
           <Image src={userInfo && userInfo[0]?.image} alt="profile" width={80} height={80} className="rounded-full" />
           <div>
             <div className="flex items-center gap-2">
@@ -50,15 +48,15 @@ export default function HostCenterPage() {
             </div>
           </div>
         </div>
-        {/* 버튼 */}
+
         <div className="flex gap-3">
           <Button onClick={() => router.push('/event/register')}>새로운 이벤트 등록</Button>
           <Button>프로필 수정</Button>
         </div>
-      </div>
+      </section>
 
       {/* 이벤트 통계 영역 */}
-      <div className="mx-auto mt-8 grid max-w-5xl grid-cols-3 gap-6">
+      <section className="mx-auto mt-8 grid max-w-5xl grid-cols-3 gap-6">
         <div className="rounded-lg bg-gray-50 p-6">
           <div className="mb-2 text-sm text-gray-500">Ongoing Events</div>
           <div className="text-2xl font-bold">1</div>
@@ -71,10 +69,10 @@ export default function HostCenterPage() {
           <div className="mb-2 text-sm text-gray-500">Upcoming Events</div>
           <div className="text-2xl font-bold">1</div>
         </div>
-      </div>
+      </section>
 
       {/* 이벤트 리스트 */}
-      <div className="mx-auto mt-12 max-w-5xl">
+      <section className="mx-auto mt-12 max-w-5xl">
         <ul className="space-y-6">
           {/* 이벤트 아이템 1 */}
           <li className="flex items-start justify-between border border-gray-200 p-4">
@@ -120,7 +118,7 @@ export default function HostCenterPage() {
             </div>
           </li>
         </ul>
-      </div>
+      </section>
     </main>
   );
 }
