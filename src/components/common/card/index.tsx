@@ -1,11 +1,11 @@
 import { Card, CardBody, CardFooter, Image } from '@heroui/react';
-import NextImage from 'next/image';
+import NextImage, { StaticImageData } from 'next/image';
 import { If } from 'react-haiku';
 import Chip from '../chip';
 
 interface CardProps {
   title: string;
-  thumbnail: string;
+  thumbnail: string | StaticImageData;
   tags: string[];
   date: string;
   variant?: 'default' | 'compact';
@@ -23,7 +23,7 @@ export default function CardComponent({ title, thumbnail, tags, date, variant }:
               as={NextImage}
               alt="Card background"
               className="z-0 aspect-[4/5] w-full object-cover"
-              src={thumbnail}
+              src={typeof thumbnail === 'string' ? thumbnail : thumbnail.src}
               radius="none"
               width={240}
               height={300}
@@ -55,7 +55,7 @@ export default function CardComponent({ title, thumbnail, tags, date, variant }:
                 alt="썸네일"
                 className="h-full w-full cursor-pointer object-cover"
                 height={175}
-                src={thumbnail}
+                src={typeof thumbnail === 'string' ? thumbnail : thumbnail.src}
                 width={140}
               />
             </div>

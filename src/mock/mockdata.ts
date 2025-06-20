@@ -1,10 +1,11 @@
-// mock/upcomingPopupList.ts
+import { StaticImageData } from 'next/image';
+import mockThumb01 from './thumbnails/mock01.webp';
 export interface PopupItem {
   id: number;
   title: string;
   region: string;
   date: string;
-  thumbnail: string;
+  thumbnail: string | StaticImageData;
   tags: string[];
   organizer: string;
 }
@@ -15,7 +16,7 @@ export const upcomingPopupList: PopupItem[] = [
     title: '무인양품 팝업',
     region: '서울 성수',
     date: '6.1 ~ 6.15',
-    thumbnail: 'https://heroui.com/images/card-example-4.jpeg',
+    thumbnail: mockThumb01,
     tags: ['라이프스타일', '패브릭'],
     organizer: '무인양품코리아',
   },
