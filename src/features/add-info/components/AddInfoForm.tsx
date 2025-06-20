@@ -1,9 +1,7 @@
 'use client';
 
-import HeroSection from '@/components/common/hero-section';
 import { categories } from '@/configs/category';
 import { roles } from '@/configs/roles';
-import Greeting from '@/features/add-info/components/Greeting';
 import { clientApi } from '@/libs/api';
 import { Button, Chip, Input, Select, SelectItem } from '@heroui/react';
 import { useSession } from 'next-auth/react';
@@ -101,14 +99,12 @@ export default function AddInfoForm() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-gray-100">
-      <HeroSection title="회원 정보 입력" description="회원가입을 위해 정보를 입력해주세요." />
+    <main className="flex min-h-screen flex-col bg-gradient-to-tr from-pink-400 to-blue-400">
+      {/* <HeroSection title="회원 정보 입력" description="회원가입을 위해 정보를 입력해주세요." /> */}
       <div className="flex flex-1 items-start justify-center px-4 py-12">
         <div className="flex w-full max-w-5xl gap-12">
-          <div className="flex w-1/2 flex-col justify-center">
-            <Greeting />
-          </div>
-          <form className="w-1/2 space-y-6" onSubmit={handleSubmit}>
+          <div className="flex flex-col justify-center">{/* <Greeting /> */}</div>
+          {/* <form className="w-1/2 space-y-6" onSubmit={handleSubmit}>
             <Input
               label="Name"
               color="primary"
@@ -143,12 +139,28 @@ export default function AddInfoForm() {
               value={phone ?? ''}
               onChange={handlePhoneChange}
             />
+
             <Select
               items={roles}
               label="Role"
-              placeholder="Select an role"
+              placeholder="Select a role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
+              variant="bordered"
+              classNames={{
+                trigger: `
+              bg-white/20
+              backdrop-blur-lg
+              border border-white/30
+              shadow-lg
+              text-white
+              placeholder:text-white/60
+              focus:ring-2 focus:ring-pink-400
+              transition
+            `,
+                label: 'text-white font-bold drop-shadow',
+                value: 'text-white',
+              }}
             >
               {(role) => <SelectItem>{role.label}</SelectItem>}
             </Select>
@@ -170,6 +182,108 @@ export default function AddInfoForm() {
               <p className="text-primary/80 text-xs">관심있는 팝업을 선택해주세요.</p>
             </div>
             <Button type="submit" className="w-full">
+              완료
+            </Button>
+          </form> */}
+          <form
+            className="mx-auto flex w-full max-w-5xl flex-col gap-6 rounded-3xl border border-white/20 bg-white/10 p-10 shadow-2xl backdrop-blur-2xl"
+            onSubmit={handleSubmit}
+          >
+            <h2 className="mb-2 text-3xl font-extrabold text-white drop-shadow">회원 정보 입력</h2>
+            <Input
+              label="Name"
+              variant="underlined"
+              color="primary"
+              placeholder="사용하실 이름을 입력해주세요."
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              classNames={{
+                input: 'bg-transparent border-white/40 placeholder:text-white/60 ',
+                mainWrapper: 'shadow-lg',
+                label: 'text-white font-bold drop-shadow',
+              }}
+            />
+            <Input
+              label="Email"
+              variant="underlined"
+              color="secondary"
+              placeholder="example@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              classNames={{
+                input: 'bg-transparent border-white/40 placeholder:text-white/60 ',
+                mainWrapper: 'shadow-lg',
+                label: 'text-white font-bold drop-shadow',
+              }}
+            />
+            <Input
+              label="Phone"
+              variant="underlined"
+              placeholder="010-1234-5678"
+              color="danger"
+              value={phone ?? ''}
+              onChange={handlePhoneChange}
+              classNames={{
+                input: 'bg-transparent border-white/40 placeholder:text-white/60 ',
+                mainWrapper: 'shadow-lg border-white/20 shadow backdrop-blur-md',
+                label: 'text-white font-bold drop-shadow',
+              }}
+            />
+            {/* <Select
+          items={roles}
+          label="Role"
+          placeholder="Select an role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          {(role) => <SelectItem>{role.label}</SelectItem>}
+        </Select> */}
+            <Select
+              items={roles}
+              label="Role"
+              placeholder="Select a role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              variant="bordered"
+              classNames={{
+                trigger: `
+              bg-white/20
+              backdrop-blur-lg
+              border border-white/30
+              shadow-lg
+              text-white
+              placeholder:text-white/60
+              focus:ring-2 focus:ring-pink-400
+              transition
+            `,
+                label: 'text-white font-bold drop-shadow',
+                value: 'text-white',
+              }}
+            >
+              {(role) => <SelectItem>{role.label}</SelectItem>}
+            </Select>
+            <div>
+              <label className="mb-1 block">관심사</label>
+              <div className="mb-1 flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <Chip
+                    key={category}
+                    onClick={() => handleInterestClick(category)}
+                    color="danger"
+                    radius="md"
+                    className="w-fit cursor-pointer border border-white/20 shadow backdrop-blur-md"
+                    variant={interests.includes(category) ? 'flat' : 'bordered'}
+                  >
+                    {category}
+                  </Chip>
+                ))}
+              </div>
+              <p className="text-primary/80 text-xs">관심있는 팝업을 선택해주세요.</p>
+            </div>
+            <Button
+              type="submit"
+              className="w-full rounded-full bg-gradient-to-r from-pink-400 to-blue-400 py-3 font-bold text-white shadow-lg transition hover:scale-105"
+            >
               완료
             </Button>
           </form>
