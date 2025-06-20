@@ -1,13 +1,14 @@
 'use client';
 
-import HeroSection from '@/components/common/hero-section';
+import Button from '@/components/common/button';
+import Input from '@/components/common/input';
 import { categories } from '@/configs/category';
 import { roles } from '@/configs/roles';
-import Greeting from '@/features/add-info/components/Greeting';
 import { clientApi } from '@/libs/api';
-import { Button, Chip, Input, Select, SelectItem } from '@heroui/react';
+import { Chip, Select, SelectItem } from '@heroui/react';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import FloatingShape from '../../../components/common/floating';
 
 export default function AddInfoForm() {
   const { data: session, status } = useSession();
@@ -20,6 +21,7 @@ export default function AddInfoForm() {
   const [role, setRole] = useState<string>('');
   const [userInfo, setUserInfo] = useState<any>(null);
 
+  // TODO: hook으로 분리할 것
   const getUserInfo = async () => {
     try {
       if (status === 'authenticated' && session?.user?.id) {
@@ -43,8 +45,7 @@ export default function AddInfoForm() {
     }
   }, [userInfo]);
 
-  console.log(userInfo);
-
+  // TODO: 관심 목록을 db에 저장할까 아니면 local에 저장할까.
   const handleInterestClick = (interest: string) => {
     setInterests((prev) => (prev.includes(interest) ? prev.filter((i) => i !== interest) : [...prev, interest]));
   };
@@ -81,6 +82,14 @@ export default function AddInfoForm() {
     }
   };
 
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 10) {
+      setName(e.target.value.slice(0, 10));
+    } else {
+      setName(e.target.value);
+    }
+  };
+
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/[^0-9]/g, ''); // 숫자만 남김
 
@@ -103,41 +112,35 @@ export default function AddInfoForm() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-gray-100">
-      <HeroSection title="회원 정보 입력" description="회원가입을 위해 정보를 입력해주세요." />
-      <div className="flex flex-1 items-start justify-center px-4 py-12">
+    <>
+      {/* TODO: main 태그에 있는거 상위로 끌어올려야함 */}
+      {/* <main className="flex min-h-screen flex-col bg-gradient-to-tr from-pink-400 to-blue-400"> */}
+      <FloatingShape color="bg-yellow-500" size="w-64 h-64" top="40%" left="50%" delay={0} />
+      <FloatingShape color="bg-emerald-500" size="w-48 h-48" top="70%" left="60%" delay={5} />
+      <FloatingShape color="bg-lime-500" size="w-32 h-32" top="60%" left="10%" delay={2} />
+
+      <div className="flex min-h-screen flex-1 items-start justify-center bg-gradient-to-tr from-pink-400 to-blue-400 px-4 py-12">
         <div className="flex w-full max-w-5xl gap-12">
-          <div className="flex w-1/2 flex-col justify-center">
-            <Greeting />
-          </div>
-          <form className="w-1/2 space-y-6" onSubmit={handleSubmit}>
+          <form
+            className="mx-auto w-1/2 flex-1 flex-col gap-6 space-y-6 rounded-3xl border border-white/20 bg-white/10 p-10 shadow-2xl backdrop-blur-2xl"
+            onSubmit={handleSubmit}
+          >
+            <h2 className="mb-2 text-3xl font-extrabold text-white drop-shadow">회원 정보 입력</h2>
             <Input
               label="Name"
-              color="primary"
               type="text"
               placeholder="사용하실 이름을 입력해주세요."
+              description="이름은 최대 10자까지 입력할 수 있습니다."
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleNameChange}
             />
-            {userInfo && userInfo[0]?.email ? (
-              <Input
-                isReadOnly
-                isDisabled
-                label="Email"
-                type="email"
-                placeholder="example@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            ) : (
-              <Input
-                label="Email"
-                type="email"
-                placeholder="example@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            )}
+            <Input
+              label="Email"
+              type="email"
+              placeholder="example@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <Input
               label="Phone"
               type="tel"
@@ -148,35 +151,47 @@ export default function AddInfoForm() {
             <Select
               items={roles}
               label="Role"
-              placeholder="Select an role"
+              placeholder="참여하실 역할을 선택해주세요."
               value={role}
+              color="primary"
               onChange={(e) => setRole(e.target.value)}
+              variant="underlined"
+              classNames={{
+                label: 'text-black dark:text-white/90',
+              }}
             >
               {(role) => <SelectItem>{role.label}</SelectItem>}
             </Select>
+
             <div>
               <label className="mb-1 block">관심사</label>
               <div className="mb-1 flex flex-wrap gap-2">
                 {categories.map((category) => (
+                  // NOTE: 임시 관심사 리스트임
                   <Chip
                     key={category}
                     onClick={() => handleInterestClick(category)}
-                    color="primary"
-                    className="w-fit cursor-pointer"
+                    color="danger"
+                    radius="md"
+                    className="w-fit cursor-pointer border border-white/20 shadow backdrop-blur-md"
                     variant={interests.includes(category) ? 'flat' : 'bordered'}
                   >
                     {category}
                   </Chip>
                 ))}
               </div>
-              <p className="text-primary/80 text-xs">관심있는 팝업을 선택해주세요.</p>
+              <p className="text-xs text-black/80 dark:text-white/80">관심있는 팝업을 선택해주세요.</p>
             </div>
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="rounded-full bg-gradient-to-r from-pink-400 to-blue-400 font-semibold text-white shadow-lg transition hover:scale-105"
+            >
               완료
             </Button>
           </form>
         </div>
       </div>
-    </main>
+      {/* </main> */}
+    </>
   );
 }
