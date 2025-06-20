@@ -1,7 +1,7 @@
+import { Input } from '@/components/common/input';
+import { LABELS } from '@/components/common/input/labels';
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { useState } from 'react';
-import { Input } from '../../components/common/input';
-import { LABELS } from '../../components/common/input/labels';
 
 const meta: Meta<typeof Input> = {
   title: 'Common/Input',
