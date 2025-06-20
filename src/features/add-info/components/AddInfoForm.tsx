@@ -1,9 +1,10 @@
 'use client';
 
+import Input from '@/components/common/input';
 import { categories } from '@/configs/category';
 import { roles } from '@/configs/roles';
 import { clientApi } from '@/libs/api';
-import { Button, Chip, Input, Select, SelectItem } from '@heroui/react';
+import { Button, Chip, Select, SelectItem } from '@heroui/react';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
@@ -16,6 +17,7 @@ export default function AddInfoForm() {
   const [role, setRole] = useState<string>('');
   const [userInfo, setUserInfo] = useState<any>(null);
 
+  // TODO: hook으로 분리할 것
   const getUserInfo = async () => {
     try {
       if (status === 'authenticated' && session?.user?.id) {
@@ -39,8 +41,7 @@ export default function AddInfoForm() {
     }
   }, [userInfo]);
 
-  console.log(userInfo);
-
+  // TODO: 관심 목록을 db에 저장할까 아니면 local에 저장할까.
   const handleInterestClick = (interest: string) => {
     setInterests((prev) => (prev.includes(interest) ? prev.filter((i) => i !== interest) : [...prev, interest]));
   };
@@ -99,7 +100,8 @@ export default function AddInfoForm() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-gradient-to-tr from-pink-400 to-blue-400">
+    <>
+      {/* <main className="flex min-h-screen flex-col bg-gradient-to-tr from-pink-400 to-blue-400"> */}
       {/* <HeroSection title="회원 정보 입력" description="회원가입을 위해 정보를 입력해주세요." /> */}
       <div className="flex flex-1 items-start justify-center px-4 py-12">
         <div className="flex w-full max-w-5xl gap-12">
@@ -192,52 +194,25 @@ export default function AddInfoForm() {
             <h2 className="mb-2 text-3xl font-extrabold text-white drop-shadow">회원 정보 입력</h2>
             <Input
               label="Name"
-              variant="underlined"
-              color="primary"
+              type="text"
               placeholder="사용하실 이름을 입력해주세요."
               value={name}
               onChange={(e) => setName(e.target.value)}
-              classNames={{
-                input: 'bg-transparent border-white/40 placeholder:text-white/60 ',
-                mainWrapper: 'shadow-lg',
-                label: 'text-white font-bold drop-shadow',
-              }}
             />
             <Input
               label="Email"
-              variant="underlined"
-              color="secondary"
+              type="email"
               placeholder="example@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              classNames={{
-                input: 'bg-transparent border-white/40 placeholder:text-white/60 ',
-                mainWrapper: 'shadow-lg',
-                label: 'text-white font-bold drop-shadow',
-              }}
             />
             <Input
               label="Phone"
-              variant="underlined"
+              type="tel"
               placeholder="010-1234-5678"
-              color="danger"
               value={phone ?? ''}
               onChange={handlePhoneChange}
-              classNames={{
-                input: 'bg-transparent border-white/40 placeholder:text-white/60 ',
-                mainWrapper: 'shadow-lg border-white/20 shadow backdrop-blur-md',
-                label: 'text-white font-bold drop-shadow',
-              }}
             />
-            {/* <Select
-          items={roles}
-          label="Role"
-          placeholder="Select an role"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-        >
-          {(role) => <SelectItem>{role.label}</SelectItem>}
-        </Select> */}
             <Select
               items={roles}
               label="Role"
@@ -278,7 +253,7 @@ export default function AddInfoForm() {
                   </Chip>
                 ))}
               </div>
-              <p className="text-primary/80 text-xs">관심있는 팝업을 선택해주세요.</p>
+              <p className="text-xs text-black/80 dark:text-white/80">관심있는 팝업을 선택해주세요.</p>
             </div>
             <Button
               type="submit"
@@ -289,6 +264,7 @@ export default function AddInfoForm() {
           </form>
         </div>
       </div>
-    </main>
+      {/* </main> */}
+    </>
   );
 }

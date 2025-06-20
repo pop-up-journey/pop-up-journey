@@ -1,67 +1,71 @@
-import { EnvelopeIcon, PhoneIcon, TagIcon } from '@heroicons/react/24/outline';
 import { Input as HerouiInput } from '@heroui/react';
-import { type FC, type SVGProps } from 'react';
-import { type Label, LABELS } from './labels';
+import type { ChangeEvent, FC, SVGProps } from 'react';
+import { Label } from './labels';
+import { getIconByLabel } from './utils/IconMappter';
 
-type HerouiInputProps = React.ComponentProps<typeof HerouiInput>;
-
-interface InputProps extends Omit<HerouiInputProps, 'label'> {
+interface InputProps {
   label: Label;
-  width?: string;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  type: 'text' | 'email' | 'url' | 'password' | 'tel' | 'search' | 'file' | 'number';
+  variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
+  isReadOnly?: boolean;
+  isRequired?: boolean;
+  errorMessage?: string;
+  description?: string;
+  isInvalid?: boolean;
 }
+// NOTE: 필요시 스타일링은 여기서 작성 할 것
+const styles = {
+  label: ['text-black/50 dark:text-white/90'],
+  // inputWrapper: []
+  // innerWrapper: []
+  // mainWrapper: []
+  // input: []
+  // clearButton: []
+  // helperWrapper: []
+  // description: []
+  // errorMessage: []
+  // helperWrapper: []
+};
 
-export const Input = ({ label, width = '', ...props }: InputProps) => {
-  let Icon: FC<SVGProps<SVGSVGElement>> | null = null;
-  switch (label) {
-    case LABELS.EMAIL:
-      Icon = EnvelopeIcon;
-      break;
-    case LABELS.PHONE:
-      Icon = PhoneIcon;
-      break;
-    case LABELS.NAME:
-      Icon = TagIcon;
-      break;
-    default:
-      Icon = null;
-      break;
-  }
+export default function Input({
+  label,
+  value,
+  onChange,
+  placeholder,
+  type,
+  isReadOnly = false,
+  errorMessage,
+  description,
+  isInvalid,
+  isRequired,
+}: InputProps) {
+  const Icon: FC<SVGProps<SVGSVGElement>> | null = getIconByLabel(label);
 
   return (
     <HerouiInput
-      isClearable
-      classNames={{
-        label: 'text-black/50 dark:text-white/90',
-        input: [
-          'bg-transparent',
-          'text-black/90 dark:text-white/90',
-          'placeholder:text-default-700/50 dark:placeholder:text-white/60',
-        ],
-        innerWrapper: 'bg-transparent',
-        inputWrapper: [
-          'shadow-xl',
-          'bg-default-200/50',
-          'dark:bg-default/60',
-          'backdrop-blur-xl',
-          'backdrop-saturate-200',
-          'hover:bg-default-200/70',
-          'dark:hover:bg-default/70',
-          'group-data-[focus=true]:bg-default-200/50',
-          'dark:group-data-[focus=true]:bg-default/60',
-          '!cursor-text',
-          `w-${width}`,
-        ],
-      }}
+      variant="underlined"
+      size="md"
+      fullWidth={true}
+      label={label}
+      type={type}
+      color="primary"
+      value={value}
+      onChange={onChange}
+      isReadOnly={isReadOnly}
+      isRequired={isRequired}
+      isInvalid={isInvalid}
+      errorMessage={errorMessage}
+      description={description}
+      placeholder={placeholder}
+      classNames={{ ...styles }}
       startContent={
         Icon && (
-          <Icon
-            className="pointer-events-none mb-0.5 flex-shrink-0 text-black/50 dark:text-white/90"
-            width={20}
-            height={20}
-          />
+          <Icon className="pointer-events-none flex-shrink-0 text-black/50 dark:text-white/90" width={20} height={20} />
         )
       }
-      {...props}
     />
   );
-};
+}
