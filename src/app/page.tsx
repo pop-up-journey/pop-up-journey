@@ -1,7 +1,3 @@
-'use client';
-
-import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
 import MainPage from '../_pages/MainPage';
 
 export default function Page() {

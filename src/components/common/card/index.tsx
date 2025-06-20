@@ -1,6 +1,7 @@
-import { Card, CardBody, CardFooter, Chip, Image } from '@heroui/react';
+import { Card, CardBody, CardFooter, Image } from '@heroui/react';
 import NextImage from 'next/image';
 import { If } from 'react-haiku';
+import Chip from '../chip';
 
 interface CardProps {
   title: string;
@@ -35,9 +36,7 @@ export default function CardComponent({ title, thumbnail, tags, date, variant }:
             <h4 className="mb-1 font-bold text-white">{title}</h4>
             <div className="flex gap-1">
               {tags.map((tag, index) => (
-                <Chip key={index} size="sm" radius="sm" variant="flat" color="danger">
-                  {tag}
-                </Chip>
+                <Chip key={index}>{tag}</Chip>
               ))}
             </div>
           </CardFooter>
