@@ -1,12 +1,14 @@
 'use client';
 
+import Button from '@/components/common/button';
 import Input from '@/components/common/input';
 import { categories } from '@/configs/category';
 import { roles } from '@/configs/roles';
 import { clientApi } from '@/libs/api';
-import { Button, Chip, Select, SelectItem } from '@heroui/react';
+import { Chip, Select, SelectItem } from '@heroui/react';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import FloatingShape from '../../../components/common/floating';
 
 export default function AddInfoForm() {
   const { data: session, status } = useSession();
@@ -78,6 +80,14 @@ export default function AddInfoForm() {
     }
   };
 
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 10) {
+      setName(e.target.value.slice(0, 10));
+    } else {
+      setName(e.target.value);
+    }
+  };
+
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/[^0-9]/g, ''); // 숫자만 남김
 
@@ -101,94 +111,16 @@ export default function AddInfoForm() {
 
   return (
     <>
+      {/* TODO: main 태그에 있는거 상위로 끌어올려야함 */}
       {/* <main className="flex min-h-screen flex-col bg-gradient-to-tr from-pink-400 to-blue-400"> */}
-      {/* <HeroSection title="회원 정보 입력" description="회원가입을 위해 정보를 입력해주세요." /> */}
-      <div className="flex flex-1 items-start justify-center px-4 py-12">
-        <div className="flex w-full max-w-5xl gap-12">
-          <div className="flex flex-col justify-center">{/* <Greeting /> */}</div>
-          {/* <form className="w-1/2 space-y-6" onSubmit={handleSubmit}>
-            <Input
-              label="Name"
-              color="primary"
-              type="text"
-              placeholder="사용하실 이름을 입력해주세요."
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            {userInfo && userInfo[0]?.email ? (
-              <Input
-                isReadOnly
-                isDisabled
-                label="Email"
-                type="email"
-                placeholder="example@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            ) : (
-              <Input
-                label="Email"
-                type="email"
-                placeholder="example@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            )}
-            <Input
-              label="Phone"
-              type="tel"
-              placeholder="010-1234-5678"
-              value={phone ?? ''}
-              onChange={handlePhoneChange}
-            />
+      <FloatingShape color="bg-yellow-500" size="w-64 h-64" top="40%" left="50%" delay={0} />
+      <FloatingShape color="bg-emerald-500" size="w-48 h-48" top="70%" left="60%" delay={5} />
+      <FloatingShape color="bg-lime-500" size="w-32 h-32" top="60%" left="10%" delay={2} />
 
-            <Select
-              items={roles}
-              label="Role"
-              placeholder="Select a role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              variant="bordered"
-              classNames={{
-                trigger: `
-              bg-white/20
-              backdrop-blur-lg
-              border border-white/30
-              shadow-lg
-              text-white
-              placeholder:text-white/60
-              focus:ring-2 focus:ring-pink-400
-              transition
-            `,
-                label: 'text-white font-bold drop-shadow',
-                value: 'text-white',
-              }}
-            >
-              {(role) => <SelectItem>{role.label}</SelectItem>}
-            </Select>
-            <div>
-              <label className="mb-1 block">관심사</label>
-              <div className="mb-1 flex flex-wrap gap-2">
-                {categories.map((category) => (
-                  <Chip
-                    key={category}
-                    onClick={() => handleInterestClick(category)}
-                    color="primary"
-                    className="w-fit cursor-pointer"
-                    variant={interests.includes(category) ? 'flat' : 'bordered'}
-                  >
-                    {category}
-                  </Chip>
-                ))}
-              </div>
-              <p className="text-primary/80 text-xs">관심있는 팝업을 선택해주세요.</p>
-            </div>
-            <Button type="submit" className="w-full">
-              완료
-            </Button>
-          </form> */}
+      <div className="flex min-h-screen flex-1 items-start justify-center bg-gradient-to-tr from-pink-400 to-blue-400 px-4 py-12">
+        <div className="flex w-full max-w-5xl gap-12">
           <form
-            className="mx-auto flex w-full max-w-5xl flex-col gap-6 rounded-3xl border border-white/20 bg-white/10 p-10 shadow-2xl backdrop-blur-2xl"
+            className="mx-auto w-1/2 flex-1 flex-col gap-6 space-y-6 rounded-3xl border border-white/20 bg-white/10 p-10 shadow-2xl backdrop-blur-2xl"
             onSubmit={handleSubmit}
           >
             <h2 className="mb-2 text-3xl font-extrabold text-white drop-shadow">회원 정보 입력</h2>
@@ -196,8 +128,9 @@ export default function AddInfoForm() {
               label="Name"
               type="text"
               placeholder="사용하실 이름을 입력해주세요."
+              description="이름은 최대 10자까지 입력할 수 있습니다."
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={handleNameChange}
             />
             <Input
               label="Email"
@@ -216,31 +149,23 @@ export default function AddInfoForm() {
             <Select
               items={roles}
               label="Role"
-              placeholder="Select a role"
+              placeholder="참여하실 역할을 선택해주세요."
               value={role}
+              color="primary"
               onChange={(e) => setRole(e.target.value)}
-              variant="bordered"
+              variant="underlined"
               classNames={{
-                trigger: `
-              bg-white/20
-              backdrop-blur-lg
-              border border-white/30
-              shadow-lg
-              text-white
-              placeholder:text-white/60
-              focus:ring-2 focus:ring-pink-400
-              transition
-            `,
-                label: 'text-white font-bold drop-shadow',
-                value: 'text-white',
+                label: 'text-black dark:text-white/90',
               }}
             >
               {(role) => <SelectItem>{role.label}</SelectItem>}
             </Select>
+
             <div>
               <label className="mb-1 block">관심사</label>
               <div className="mb-1 flex flex-wrap gap-2">
                 {categories.map((category) => (
+                  // NOTE: 임시 관심사 리스트임
                   <Chip
                     key={category}
                     onClick={() => handleInterestClick(category)}
@@ -257,7 +182,7 @@ export default function AddInfoForm() {
             </div>
             <Button
               type="submit"
-              className="w-full rounded-full bg-gradient-to-r from-pink-400 to-blue-400 py-3 font-bold text-white shadow-lg transition hover:scale-105"
+              className="rounded-full bg-gradient-to-r from-pink-400 to-blue-400 font-semibold text-white shadow-lg transition hover:scale-105"
             >
               완료
             </Button>

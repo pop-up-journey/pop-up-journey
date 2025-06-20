@@ -25,7 +25,7 @@ const styles = {
   // input: []
   // clearButton: []
   // helperWrapper: []
-  // description: []
+  description: ['text-black/50 dark:text-white/90'],
   // errorMessage: []
   // helperWrapper: []
 };

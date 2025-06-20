@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/common/button';
+import Button from '@/components/common/button';
 
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
