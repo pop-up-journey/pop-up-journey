@@ -68,6 +68,9 @@ importers:
       swagger-ui-react:
         specifier: ^5.24.1
         version: 5.24.1(@types/react@19.1.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      swiper:
+        specifier: ^11.2.8
+        version: 11.2.8
       zod:
         specifier: ^3.25.32
         version: 3.25.32
@@ -5777,6 +5780,10 @@ packages:
     peerDependencies:
       react: '>=16.8.0 <19'
       react-dom: '>=16.8.0 <19'
+
+  swiper@11.2.8:
+    resolution: {integrity: sha512-S5FVf6zWynPWooi7pJ7lZhSUe2snTzqLuUzbd5h5PHUOhzgvW0bLKBd2wv0ixn6/5o9vwc/IkQT74CRcLJQzeg==}
+    engines: {node: '>= 4.7.0'}
 
   tailwind-merge@3.0.2:
     resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
@@ -13200,6 +13207,8 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
       - debug
+
+  swiper@11.2.8: {}
 
   tailwind-merge@3.0.2: {}
 

@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { Providers } from '../providers/providers';
 
-import Header from '../components/common/header';
+import Header from '@/components/layouts/header';
 import '../styles/globals.css';
 
 const pretendard = localFont({
@@ -19,10 +22,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) {
   return (
     <html lang="ko">
@@ -30,7 +31,6 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
-          {modal}
         </Providers>
       </body>
     </html>

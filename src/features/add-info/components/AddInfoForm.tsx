@@ -12,6 +12,8 @@ import FloatingShape from '../../../components/common/floating';
 
 export default function AddInfoForm() {
   const { data: session, status } = useSession();
+  // TODO: useSession대신 로그인 정보로 바꿔야함
+  // const user = useAuthStore((state) => state.user);
   const [interests, setInterests] = useState<string[]>([]);
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');

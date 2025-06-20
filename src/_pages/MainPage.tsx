@@ -1,8 +1,13 @@
+import CurrentPopupList from '@/features/main/components/CurrentPopupList';
+import MainBanner from '@/features/main/components/MainBanner';
+import UpcomingPopupList from '@/features/main/components/UpcomingPopupList';
+
 export default function MainPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold">Main Page</h1>
-      <p>메인 페이지 내용이 여기에 들어갑니다.</p>
-    </div>
+    <main className="w-100vw space-y-24 overflow-hidden">
+      <MainBanner />
+      <CurrentPopupList />
+      <UpcomingPopupList />
+    </main>
   );
 }
