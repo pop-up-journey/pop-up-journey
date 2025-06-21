@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/common/button';
+import Button from '@/components/common/button';
 import HeroSection from '@/components/common/hero-section';
 import { clientApi } from '@/libs/api';
 import { useSession } from 'next-auth/react';
@@ -11,11 +11,13 @@ import { useEffect, useState } from 'react';
 export default function TempMain() {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState<any>(null);
+  const [hostEvents, setHostEvents] = useState<any>(null);
   const router = useRouter();
   const getUserInfo = async () => {
     try {
       if (status === 'authenticated' && session?.user?.id) {
         const res = await clientApi(`/api/users/${session?.user?.id}`, { method: 'GET' });
+        console.log(res);
         setUserInfo(res);
       }
     } catch (error) {
@@ -23,8 +25,24 @@ export default function TempMain() {
     }
   };
 
+  const getHostEvents = async () => {
+    try {
+      if (status === 'authenticated' && session?.user?.id) {
+        const res = await clientApi(`/api/host/${session?.user?.id}`, { method: 'GET' });
+        console.log(res);
+        setHostEvents(res);
+      }
+    } catch (error) {
+      console.error('Failed to get host events', error);
+    }
+  };
+  // HACK: unused value에 대한 에러 방지용 콘솔
+  // regist 페이지 후에 데이터 연결 할 것
+  console.log(hostEvents);
+
   useEffect(() => {
     getUserInfo();
+    getHostEvents();
   }, [session, status]);
 
   console.log(userInfo);
@@ -34,9 +52,11 @@ export default function TempMain() {
       <HeroSection title="팝업의 여정 호스트 센터" description="이벤트를 주최하고 관리할 수 있습니다." />
 
       {/* 프로필 */}
-      <section className="mx-auto mt-8 flex max-w-5xl items-center justify-between border-b pb-8">
+      <section id="defaultSt" className="mx-auto mt-8 flex max-w-5xl items-center justify-between border-b pb-8">
         <div className="flex items-center gap-6">
-          <Image src={userInfo && userInfo[0]?.image} alt="profile" width={80} height={80} className="rounded-full" />
+          {userInfo && userInfo[0]?.image && (
+            <Image src={userInfo[0]?.image} alt="profile" width={80} height={80} className="rounded-full" />
+          )}
           <div className="flex-col items-start">
             <div className="flex items-center gap-2">
               <div className="mt-1 text-sm text-gray-500">Host: </div>
@@ -56,7 +76,7 @@ export default function TempMain() {
       </section>
 
       {/* 이벤트 통계 영역 */}
-      <section className="mx-auto mt-8 grid max-w-5xl grid-cols-3 gap-6">
+      <section id="defaultSt" className="mx-auto mt-8 grid max-w-5xl grid-cols-3 gap-6">
         <div className="rounded-lg bg-gray-50 p-6">
           <div className="mb-2 text-sm text-gray-500">Ongoing Events</div>
           <div className="text-2xl font-bold">1</div>
@@ -72,7 +92,7 @@ export default function TempMain() {
       </section>
 
       {/* 이벤트 리스트 */}
-      <section className="mx-auto mt-12 max-w-5xl">
+      <section id="defaultSt" className="mx-auto mt-12 max-w-5xl">
         <ul className="space-y-6">
           {/* 이벤트 아이템 1 */}
           <li className="flex items-start justify-between border border-gray-200 p-4">

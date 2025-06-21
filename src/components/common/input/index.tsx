@@ -1,14 +1,14 @@
 import { Input as HerouiInput } from '@heroui/react';
 import type { ChangeEvent, FC, SVGProps } from 'react';
-import { Label } from './labels';
+import { Label, LABELS } from './labels';
 import { getIconByLabel } from './utils/IconMappter';
 
 interface InputProps {
-  label: Label;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
   type: 'text' | 'email' | 'url' | 'password' | 'tel' | 'search' | 'file' | 'number';
+  label?: Label | string;
   variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
   isReadOnly?: boolean;
   isRequired?: boolean;
@@ -42,7 +42,8 @@ export default function Input({
   isInvalid,
   isRequired,
 }: InputProps) {
-  const Icon: FC<SVGProps<SVGSVGElement>> | null = getIconByLabel(label);
+  const isLabelEnum = label && Object.values(LABELS).includes(label as Label);
+  const Icon: FC<SVGProps<SVGSVGElement>> | null = isLabelEnum ? getIconByLabel(label as Label) : null;
 
   return (
     <HerouiInput
