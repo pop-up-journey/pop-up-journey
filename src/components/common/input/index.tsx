@@ -22,7 +22,7 @@ const styles = {
   // inputWrapper: []
   // innerWrapper: []
   // mainWrapper: []
-  // input: []
+  input: ['text-black/50 dark:text-white/90'],
   // clearButton: []
   // helperWrapper: []
   description: ['text-black/50 dark:text-white/90'],

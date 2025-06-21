@@ -3,10 +3,15 @@
 /* You may need to change the path to fit your project structure */
 @source "../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}";
 @custom-variant dark (&:is(.dark *));
+@import './defaultWrapper.styles.css';
 
 :root {
   --background: #ffc0d4;
   --foreground: #171717;
+}
+.dark:root {
+  --background: #171717;
+  --foreground: #ffc0d4;
 }
 
 @theme inline {
@@ -15,6 +20,8 @@
   --font-pretendard: var(--font-pretendard);
 }
 /*
+
+// NOTE: OS/브라우저가 다크모드일 때 적용
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
