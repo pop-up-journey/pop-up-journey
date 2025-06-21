@@ -19,6 +19,8 @@
   --font-pretendard: var(--font-pretendard);
 }
 /*
+
+// NOTE: OS/브라우저가 다크모드일 때 적용
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
