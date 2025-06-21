@@ -1,10 +1,10 @@
 import Header from '@/components/layouts/header';
+import { Providers } from '@/providers/providers';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Providers } from '../providers/Providers';
 import '../styles/globals.css';
 
 const pretendard = localFont({
