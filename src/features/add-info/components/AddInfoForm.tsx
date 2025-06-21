@@ -2,6 +2,7 @@
 
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
+import { LABELS } from '@/components/common/input/labels';
 import { categories } from '@/configs/category';
 import { roles } from '@/configs/roles';
 import { clientApi } from '@/libs/api';
@@ -127,7 +128,7 @@ export default function AddInfoForm() {
           >
             <h2 className="mb-2 text-3xl font-extrabold text-white drop-shadow">회원 정보 입력</h2>
             <Input
-              label="Name"
+              label={LABELS.NAME}
               type="text"
               placeholder="사용하실 이름을 입력해주세요."
               description="이름은 최대 10자까지 입력할 수 있습니다."
@@ -135,14 +136,14 @@ export default function AddInfoForm() {
               onChange={handleNameChange}
             />
             <Input
-              label="Email"
+              label={LABELS.EMAIL}
               type="email"
               placeholder="example@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
-              label="Phone"
+              label={LABELS.PHONE}
               type="tel"
               placeholder="010-1234-5678"
               value={phone ?? ''}
@@ -150,7 +151,7 @@ export default function AddInfoForm() {
             />
             <Select
               items={roles}
-              label="Role"
+              label="역할"
               placeholder="참여하실 역할을 선택해주세요."
               value={role}
               color="primary"

@@ -1,7 +1,7 @@
 import { Input as HerouiInput } from '@heroui/react';
 import type { ChangeEvent, FC, SVGProps } from 'react';
+import LabelIconMapper from './LabelIconMapper';
 import { Label, LABELS } from './labels';
-import { getIconByLabel } from './utils/IconMappter';
 
 interface InputProps {
   value?: string;
@@ -43,7 +43,7 @@ export default function Input({
   isRequired,
 }: InputProps) {
   const isLabelEnum = label && Object.values(LABELS).includes(label as Label);
-  const Icon: FC<SVGProps<SVGSVGElement>> | null = isLabelEnum ? getIconByLabel(label as Label) : null;
+  const Icon: FC<SVGProps<SVGSVGElement>> | null = isLabelEnum ? LabelIconMapper(label as Label) : null;
 
   return (
     <HerouiInput
