@@ -37,14 +37,14 @@ export default function TempMain() {
       <section className="mx-auto mt-8 flex max-w-5xl items-center justify-between border-b pb-8">
         <div className="flex items-center gap-6">
           <Image src={userInfo && userInfo[0]?.image} alt="profile" width={80} height={80} className="rounded-full" />
-          <div>
+          <div className="flex-col items-start">
             <div className="flex items-center gap-2">
               <div className="mt-1 text-sm text-gray-500">Host: </div>
               <span className="text-xl font-bold">{userInfo && userInfo[0]?.name}</span>
             </div>
             <div className="mt-2 flex items-center gap-2">
-              <span className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">{userInfo && userInfo[0]?.email}</span>
-              <span className="rounded bg-gray-100 px-2 py-1 font-mono text-xs">{userInfo && userInfo[0]?.phone}</span>
+              <span className="rounded px-2 py-1 font-mono text-xs">{userInfo && userInfo[0]?.email}</span>
+              <span className="rounded px-2 py-1 font-mono text-xs">{userInfo && userInfo[0]?.phone}</span>
             </div>
           </div>
         </div>

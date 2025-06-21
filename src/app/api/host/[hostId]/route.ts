@@ -79,14 +79,3 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ hos
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
-
-// export async function POST(req: NextRequest, { params }: { params: Promise<{ hostId: string }> }) {
-// const { hostId } = await params;
-// const { title, description, startDate, endDate, location, eventStatus } = await req.json();
-
-// const newEvent = await db
-//   .insert(events)
-//   .values({ title, description, startDate, endDate, location, eventStatus, hostId });
-
-// return NextResponse.json(newEvent);
-// }
