@@ -14,7 +14,7 @@ export const upcomingPopupList: PopupItem[] = [
   {
     id: 1,
     title: '무인양품 팝업',
-    region: '서울 성수',
+    region: '서울특별시 성동구 성수동',
     date: '6.1 ~ 6.15',
     thumbnail: mockThumb01,
     tags: ['라이프스타일', '패브릭'],
