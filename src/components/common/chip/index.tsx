@@ -1,3 +1,4 @@
+'use client';
 import { Chip as HerouiChip } from '@heroui/react';
 
 interface ChipProps extends Omit<React.ComponentProps<typeof HerouiChip>, 'color' | 'variant'> {
