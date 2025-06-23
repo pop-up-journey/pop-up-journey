@@ -30,15 +30,15 @@ interface FileWithPreview extends File {
 }
 
 export default function EventRegisterPage() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState('');
-  const [recruitmentMethod, setRecruitmentMethod] = useState<string[]>([]);
-  const [email, setEmail] = useState('');
-  const [selectedInfo, setSelectedInfo] = useState<string[]>([]);
-  const [files, setFiles] = useState<FileWithPreview[]>([]);
-  const [startDate, setStartDate] = useState<DateValue | null>(null);
-  const [endDate, setEndDate] = useState<DateValue | null>(null);
+  const [title, setTitle] = useState(''); // 제목
+  const [description, setDescription] = useState(''); // 본문
+  const [location, setLocation] = useState(''); // TODO: 위치 더 정확하게 할 수 있는 주소 검색 도입해야함
+  const [recruitmentMethod, setRecruitmentMethod] = useState<string[]>([]); // 참가자 모집 방법
+  const [email, setEmail] = useState(''); // 이메일
+  const [selectedInfo, setSelectedInfo] = useState<string[]>([]); // 기타 안내 사항
+  const [files, setFiles] = useState<FileWithPreview[]>([]); // 이미지 파일(thumbnail)
+  const [startDate, setStartDate] = useState<DateValue | null>(null); // 시작일
+  const [endDate, setEndDate] = useState<DateValue | null>(null); // 종료일
 
   console.log(title, description, location, recruitmentMethod, email, selectedInfo, files, startDate, endDate);
 
@@ -161,9 +161,8 @@ export default function EventRegisterPage() {
                 wrapper: 'gap-20',
               }}
             >
-              <Checkbox value="현장">현장</Checkbox>
-              <Checkbox value="사이트 신청 폼">사이트 신청 폼</Checkbox>
-              <Checkbox value="외부 신청 링크">외부 신청 링크</Checkbox>
+              <Checkbox value="auto">자동 신청</Checkbox>
+              <Checkbox value="manual">외부 신청 링크</Checkbox>
             </CheckboxGroup>
           </div>
           <div>
