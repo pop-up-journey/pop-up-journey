@@ -15,6 +15,7 @@ interface InputProps {
   errorMessage?: string;
   description?: string;
   isInvalid?: boolean;
+  className?: string;
 }
 // NOTE: 필요시 스타일링은 여기서 작성 할 것
 const styles = {
@@ -41,6 +42,7 @@ export default function Input({
   description,
   isInvalid,
   isRequired,
+  className,
 }: InputProps) {
   const isLabelEnum = label && Object.values(LABELS).includes(label as Label);
   const Icon: FC<SVGProps<SVGSVGElement>> | null = isLabelEnum ? LabelIconMapper(label as Label) : null;
@@ -61,6 +63,7 @@ export default function Input({
       errorMessage={errorMessage}
       description={description}
       placeholder={placeholder}
+      className={className}
       classNames={{ ...styles }}
       startContent={
         Icon && (

@@ -41,9 +41,11 @@ export default function PostCode() {
   return (
     <>
       <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" strategy="lazyOnload" />
-      <Button onClick={handleOpenPostcode} type="button">
-        주소 검색
-      </Button>
+      <div className="w-sm">
+        <Button onClick={handleOpenPostcode} type="button">
+          주소 검색
+        </Button>
+      </div>
     </>
   );
 }
