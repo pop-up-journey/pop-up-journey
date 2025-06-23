@@ -3,6 +3,7 @@
 import useKakaoLoader from '@/hooks/useKakaoLoader';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import Button from '../../../../components/common/button';
 
 interface KakaoMapProps {
   address: string;
@@ -26,8 +27,8 @@ export default function EventMapPanel({ address }: KakaoMapProps) {
   }, [isLoaded, address]);
 
   return (
-    <section>
-      <div className="h-120 w-100 bg-blue-500">
+    <section className="h-130 w-80">
+      <div className="mb-6 w-full max-w-4xl transform overflow-hidden rounded-2xl shadow-2xl transition-transform hover:-translate-y-2">
         <Map
           id="map"
           center={position}
@@ -39,6 +40,13 @@ export default function EventMapPanel({ address }: KakaoMapProps) {
         >
           <MapMarker position={position} />
         </Map>
+      </div>
+      <div className="mt-4 flex flex-col gap-2">
+        <Button fullWidth>신청하기</Button>
+        <div className="flex flex-row items-center gap-6">
+          <Button fullWidth>관심 행사</Button>
+          <Button fullWidth>공유하기</Button>
+        </div>
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+import { formatDate } from '@/utils/dateformatter';
 import { Card, CardBody, CardFooter, Image } from '@heroui/react';
 import NextImage, { StaticImageData } from 'next/image';
 import { If } from 'react-haiku';
@@ -7,11 +8,12 @@ interface CardProps {
   title: string;
   thumbnail: string | StaticImageData;
   tags: string[];
-  date: string;
+  event_start: string;
+  event_end: string;
   variant?: 'default' | 'compact';
 }
 
-export default function CardComponent({ title, thumbnail, tags, date, variant }: CardProps) {
+export default function CardComponent({ title, thumbnail, tags, event_start, event_end, variant }: CardProps) {
   const isCompact = variant === 'compact';
   return (
     <>
@@ -32,8 +34,10 @@ export default function CardComponent({ title, thumbnail, tags, date, variant }:
           </CardBody>
 
           <CardFooter className="absolute bottom-0 z-10 flex-col items-start bg-gradient-to-t from-black/60 via-black/20 to-transparent">
-            <small className="text-default-400">{date}</small>
             <h4 className="mb-1 font-bold text-white">{title}</h4>
+            <small className="text-default-400">
+              {formatDate(event_start)} ~ {formatDate(event_end)}
+            </small>
             <div className="flex gap-1">
               {tags.map((tag, index) => (
                 <Chip key={index}>{tag}</Chip>
@@ -70,7 +74,9 @@ export default function CardComponent({ title, thumbnail, tags, date, variant }:
               <div className="flex flex-col gap-1">
                 <h4 className="text-foreground text-base font-bold">{title}</h4>
                 <p className="text-default-500 text-sm">📍 홍대입구역</p>
-                <p className="text-default-400 text-sm">{date}</p>
+                <p className="text-default-400 text-sm">
+                  {formatDate(event_start)} ~ {formatDate(event_end)}
+                </p>
               </div>
             </div>
           </CardBody>
