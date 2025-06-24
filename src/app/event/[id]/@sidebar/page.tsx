@@ -14,8 +14,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* 이제 이 페이지에는 단 하나의 Map만 렌더링됩니다 */}
-      <EventMapPanel address={popup.region} />
+      <EventMapPanel address={popup.region} organizer={popup.organizer} />
     </div>
   );
 }
