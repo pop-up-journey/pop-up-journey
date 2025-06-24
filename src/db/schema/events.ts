@@ -11,14 +11,16 @@ export const events = pgTable('events', {
     .references(() => users.id, { onDelete: 'cascade' }),
   title: text('title').notNull(),
   thumbnail: text('thumbnail'),
-  body: text('body'),
-  location: text('location'),
+  email: text('email'),
+  description: text('description'),
+  address: text('address'), // zonecode + address + extraAddress
   capacity: integer('capacity').default(0),
-  eventStatus: eventStatusEnum('event_status').notNull(),
+  eventStatus: eventStatusEnum('event_status').notNull(), // 검증 api 로직에서 필요
   participationMode: participationModeEnum('participation_mode').default('auto').notNull(),
+  extraInfo: text('extra_info'),
   eventStart: timestamp('event_start').notNull(),
   eventEnd: timestamp('event_end').notNull(),
-  saveCount: integer('save_count').default(0).notNull(),
+  saveCount: integer('save_count').default(0),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

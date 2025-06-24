@@ -79,3 +79,33 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ hos
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
+
+export async function POST(req: NextRequest, { params }: { params: Promise<{ hostId: string }> }) {
+  const { hostId } = await params;
+
+  try {
+    const data = await req.json();
+    console.log(data);
+
+    const eventDataDto = {
+      hostId,
+      title: data.title,
+      thumbnail: data.thumbnail,
+      email: data.email,
+      description: data.description,
+      address: `${data.zonecode}, ${data.address}, ${data.extraAddress}`,
+      capacity: data.capacity,
+      eventStart: data.eventStart,
+      eventEnd: data.eventEnd,
+      participationMode: data.recruitmentMethod,
+      extraInfo: data.extraInfo,
+      eventStatus: 'upcoming' as const,
+    };
+
+    const result = await db.insert(events).values(eventDataDto).returning();
+    return NextResponse.json({ success: true, event: result[0] }, { status: 201 });
+  } catch (error) {
+    console.error('Error inserting event:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}
