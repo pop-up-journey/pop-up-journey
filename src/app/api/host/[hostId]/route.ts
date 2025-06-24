@@ -95,8 +95,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
 
   try {
     const data = await req.json();
-    console.log('클라이언트에서 받은 데이터:', data);
-    console.log('data.title', data.title);
+    // NOTE: 디버깅용으로 남겨둠
+    // console.log('클라이언트에서 받은 데이터:', data);
+    // console.log('data.title', data.title);
 
     const eventStart = parseDate(data.eventStart) ?? new Date();
     const eventEnd = parseDate(data.eventEnd) ?? new Date();
@@ -118,7 +119,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
       //TODO: 이벤트 상태 추적하는 로직 필요 upcoming, ongoing, ended 이걸 추적해야함
       eventStatus: 'upcoming' as const,
     };
-    console.log('DB에 저장할 eventDataDto:', eventDataDto);
+    // console.log('DB에 저장할 eventDataDto:', eventDataDto);
 
     const result = await db.insert(events).values(eventDataDto).returning();
     return NextResponse.json({ success: true, event: result[0] }, { status: 201 });
