@@ -83,9 +83,23 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ hos
 export async function POST(req: NextRequest, { params }: { params: Promise<{ hostId: string }> }) {
   const { hostId } = await params;
 
+  function parseDate(val: any) {
+    if (!val) return undefined;
+    if (val instanceof Date) return val;
+    if (typeof val === 'string') return new Date(val);
+    if (typeof val === 'object' && val.year && val.month && val.day) {
+      return new Date(val.year, val.month - 1, val.day);
+    }
+    return undefined;
+  }
+
   try {
     const data = await req.json();
-    console.log(data);
+    console.log('클라이언트에서 받은 데이터:', data);
+    console.log('data.title', data.title);
+
+    const eventStart = parseDate(data.eventStart) ?? new Date();
+    const eventEnd = parseDate(data.eventEnd) ?? new Date();
 
     const eventDataDto = {
       hostId,
@@ -93,14 +107,18 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
       thumbnail: data.thumbnail,
       email: data.email,
       description: data.description,
-      address: `${data.zonecode}, ${data.address}, ${data.extraAddress}`,
-      capacity: data.capacity,
-      eventStart: data.eventStart,
-      eventEnd: data.eventEnd,
-      participationMode: data.recruitmentMethod,
-      extraInfo: data.extraInfo,
+      address: [data.zonecode, data.address, data.extraAddress].filter(Boolean).join(', '),
+      capacity: typeof data.capacity === 'number' ? data.capacity : Number(data.capacity),
+      eventStart,
+      eventEnd,
+      participationMode: Array.isArray(data.recruitmentMethod)
+        ? data.recruitmentMethod[0]
+        : data.recruitmentMethod || 'auto',
+      extraInfo: Array.isArray(data.selectedInfo) ? data.selectedInfo.join(',') : '',
+      //TODO: 이벤트 상태 추적하는 로직 필요 upcoming, ongoing, ended 이걸 추적해야함
       eventStatus: 'upcoming' as const,
     };
+    console.log('DB에 저장할 eventDataDto:', eventDataDto);
 
     const result = await db.insert(events).values(eventDataDto).returning();
     return NextResponse.json({ success: true, event: result[0] }, { status: 201 });

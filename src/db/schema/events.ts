@@ -37,6 +37,7 @@ export const insertEventSchema = createInsertSchema(events);
 
 /**
  * @description 새로운 이벤트 생성 시 입력 데이터의 유효성을 검증하는 스키마
+ * //TODO: 수정 필요함
  */
 export const createEventSchema = z.object({
   host_id: z.string().uuid('올바른 UUID 형식이 아닙니다'),

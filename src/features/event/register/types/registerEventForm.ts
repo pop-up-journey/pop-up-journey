@@ -1,6 +1,6 @@
 import { DateValue } from '@heroui/react';
 
-export interface FormDto {
+export interface RegisterEventForm {
   title: string;
   description: string;
   email: string;

@@ -160,7 +160,7 @@ export default function EventRegisterPage() {
 
     await clientApi(`/api/host/${hostId}`, {
       method: 'POST',
-      body: JSON.stringify({
+      body: {
         title,
         description,
         recruitmentMethod,
@@ -173,7 +173,7 @@ export default function EventRegisterPage() {
         zonecode,
         address,
         extraAddress,
-      }),
+      },
       headers: {
         'Content-Type': 'application/json',
       },
