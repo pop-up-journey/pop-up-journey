@@ -24,7 +24,10 @@ import { EventData } from '../../../types/event';
 interface Props {
   params: { id: string };
 }
-
+interface UserData {
+  id: string;
+  name: string;
+}
 export default async function Page({ params }: Props) {
   const { id } = await params;
   const event = await clientApi<EventData>(`/api/events/${id}`, { method: 'GET' });
@@ -46,6 +49,10 @@ export default async function Page({ params }: Props) {
         ? event.extraInfo
         : [];
 
+  // 주최자 이름
+  const host = await clientApi<UserData>(`/api/users/${event.hostId}`, { method: 'GET' });
+  const hostName = host[0].name;
+
   return (
     <>
       <section>
@@ -56,7 +63,7 @@ export default async function Page({ params }: Props) {
         <div className="flex items-baseline space-x-3">
           <strong className="text-3xl drop-shadow-lg">{event.title}</strong>
           <Link href="/host-center" className="inline-flex items-center space-x-1 text-sm text-gray-500 lg:hidden">
-            <span className="truncate font-medium">임시 호스트</span>
+            <span className="truncate font-medium">{hostName}</span>
             <ChevronDoubleRightIcon className="h-4 w-4" />
           </Link>
         </div>
