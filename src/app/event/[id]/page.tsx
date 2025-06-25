@@ -4,6 +4,7 @@ import {
   BanknotesIcon,
   ChevronDoubleRightIcon,
   HeartIcon,
+  InformationCircleIcon,
   LinkIcon,
   MapPinIcon,
 } from '@heroicons/react/24/outline'; // Importing icons if needed
@@ -16,6 +17,7 @@ import { Image } from '@heroui/image';
 import NextImage from 'next/image';
 import Link from 'next/link';
 import Button from '../../../components/common/button';
+import Chip from '../../../components/common/chip';
 import { clientApi } from '../../../libs/api';
 import { EventData } from '../../../types/event';
 
@@ -34,16 +36,21 @@ export default async function Page({ params }: Props) {
   // 주소 쪼개기
   const place = event.address.split(',').map((s: string) => s.trim())[1];
 
+  const extraInfos: string[] =
+    typeof event.extraInfo === 'string'
+      ? event.extraInfo
+          .split(',')
+          .map((s: string) => s.trim())
+          .filter(Boolean)
+      : Array.isArray(event.extraInfo)
+        ? event.extraInfo
+        : [];
+
   return (
     <>
       <section>
         <div className="mb-6 flex justify-center">
           <Image isBlurred as={NextImage} src={imgSrc} alt={event.title} width={400} height={500} />
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          {/* {event.tags.map((tag, index) => (
-          <Chip key={index}>{tag}</Chip>
-        ))} */}
         </div>
         {/* 타이틀 + organizer 링크를 한 줄로 */}
         <div className="flex items-baseline space-x-3">
@@ -83,7 +90,14 @@ export default async function Page({ params }: Props) {
           </div>
           <p className="text-sm text-gray-500">무료</p>
         </div>
-        {/* <p className="text-sm text-gray-500">{event.organizer}</p> */}
+        <div className="mb-2 flex flex-row items-center gap-4">
+          <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded border-none">
+            <InformationCircleIcon className="h-5 w-5 text-gray-500" />
+          </div>
+          {extraInfos.map((info, index) => (
+            <Chip key={index}>{info}</Chip>
+          ))}
+        </div>
         <Divider className="my-4" />
         <div className="mb-14">
           <p className="mb-2 text-lg font-semibold">이벤트 소개</p>

@@ -17,6 +17,7 @@ export const events = pgTable('events', {
   participationMode: participationModeEnum('participation_mode').default('auto').notNull(),
   eventStart: timestamp('event_start').notNull(),
   eventEnd: timestamp('event_end').notNull(),
+  extraInfo: text('extra_info'),
   saveCount: integer('save_count').default(0).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
