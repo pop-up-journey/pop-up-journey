@@ -17,6 +17,7 @@ export default async function Page({ params }: Props) {
 
   const host = await clientApi<UserData>(`/api/users/${event.hostId}`, { method: 'GET' });
   const hostName = host[0].name;
+
   if (!event) return notFound();
   if (!host) return notFound();
 

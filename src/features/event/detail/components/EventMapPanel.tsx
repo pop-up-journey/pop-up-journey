@@ -13,7 +13,7 @@ interface KakaoMapProps {
   address: string;
   organizer: string;
 }
-
+// 맵 로드
 export default function EventMapPanel({ address, organizer }: KakaoMapProps) {
   const { isLoaded } = useKakaoLoader();
   const [position, setPosition] = useState({ lat: 33.167, lng: 126.570667 });
