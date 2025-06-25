@@ -144,13 +144,6 @@ export default async function Page({ params }: Props) {
             <HeartIcon className="h-5 w-5 text-red-500" />
           </Button>
           {/* 링크 공유 */}
-          {/* <Button
-            isIconOnly
-            className="flex items-center justify-center rounded-lg border border-white/30 bg-white/30 shadow-2xl backdrop-blur-2xl transition hover:scale-105 dark:text-white"
-          >
-            <LinkIcon className="h-5 w-5 text-gray-700" />
-          </Button>
-           */}
           <ShareButton />
           {/* 신청 버튼 */}
           <Button className="flex-1 rounded-lg bg-gradient-to-r from-pink-400 to-blue-400 font-semibold text-white shadow-2xl backdrop-blur-2xl transition hover:scale-105 dark:text-white">
