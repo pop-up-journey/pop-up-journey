@@ -1,3 +1,4 @@
+'use client';
 import { Button as HerouiButton } from '@heroui/react';
 
 interface ButtonProps extends Omit<React.ComponentProps<typeof HerouiButton>, 'color' | 'variant'> {
