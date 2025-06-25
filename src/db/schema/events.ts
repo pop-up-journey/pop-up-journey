@@ -11,14 +11,17 @@ export const events = pgTable('events', {
     .references(() => users.id, { onDelete: 'cascade' }),
   title: text('title').notNull(),
   thumbnail: text('thumbnail'),
+  email: text('email'),
   description: text('description'),
-  address: text('address'),
-  eventStatus: eventStatusEnum('event_status').notNull(),
+  address: text('address'), // zonecode + address + extraAddress
+  capacity: integer('capacity').default(0),
+  eventStatus: eventStatusEnum('event_status').notNull(), // 검증 api 로직에서 필요
   participationMode: participationModeEnum('participation_mode').default('auto').notNull(),
+  extraInfo: text('extra_info'),
   eventStart: timestamp('event_start').notNull(),
   eventEnd: timestamp('event_end').notNull(),
   extraInfo: text('extra_info'),
-  saveCount: integer('save_count').default(0).notNull(),
+  saveCount: integer('save_count').default(0),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -35,6 +38,7 @@ export const insertEventSchema = createInsertSchema(events);
 
 /**
  * @description 새로운 이벤트 생성 시 입력 데이터의 유효성을 검증하는 스키마
+ * //TODO: 수정 필요함
  */
 export const createEventSchema = z.object({
   host_id: z.string().uuid('올바른 UUID 형식이 아닙니다'),

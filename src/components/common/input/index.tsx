@@ -1,20 +1,21 @@
 import { Input as HerouiInput } from '@heroui/react';
 import type { ChangeEvent, FC, SVGProps } from 'react';
-import { Label } from './labels';
-import { getIconByLabel } from './utils/IconMappter';
+import LabelIconMapper from './LabelIconMapper';
+import { Label, LABELS } from './labels';
 
 interface InputProps {
-  label: Label;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
   type: 'text' | 'email' | 'url' | 'password' | 'tel' | 'search' | 'file' | 'number';
+  label?: Label | string;
   variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
   isReadOnly?: boolean;
   isRequired?: boolean;
   errorMessage?: string;
   description?: string;
   isInvalid?: boolean;
+  className?: string;
 }
 // NOTE: 필요시 스타일링은 여기서 작성 할 것
 const styles = {
@@ -22,7 +23,7 @@ const styles = {
   // inputWrapper: []
   // innerWrapper: []
   // mainWrapper: []
-  // input: []
+  input: ['text-black/50 dark:text-white/90'],
   // clearButton: []
   // helperWrapper: []
   description: ['text-black/50 dark:text-white/90'],
@@ -41,8 +42,10 @@ export default function Input({
   description,
   isInvalid,
   isRequired,
+  className,
 }: InputProps) {
-  const Icon: FC<SVGProps<SVGSVGElement>> | null = getIconByLabel(label);
+  const isLabelEnum = label && Object.values(LABELS).includes(label as Label);
+  const Icon: FC<SVGProps<SVGSVGElement>> | null = isLabelEnum ? LabelIconMapper(label as Label) : null;
 
   return (
     <HerouiInput
@@ -60,6 +63,7 @@ export default function Input({
       errorMessage={errorMessage}
       description={description}
       placeholder={placeholder}
+      className={className}
       classNames={{ ...styles }}
       startContent={
         Icon && (

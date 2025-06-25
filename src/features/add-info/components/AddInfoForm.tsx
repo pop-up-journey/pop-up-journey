@@ -2,6 +2,7 @@
 
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
+import { LABELS } from '@/components/common/input/labels';
 import { categories } from '@/configs/category';
 import { roles } from '@/configs/roles';
 import { clientApi } from '@/libs/api';
@@ -119,7 +120,7 @@ export default function AddInfoForm() {
       <FloatingShape color="bg-emerald-500" size="w-48 h-48" top="70%" left="60%" delay={5} />
       <FloatingShape color="bg-lime-500" size="w-32 h-32" top="60%" left="10%" delay={2} />
 
-      <div className="flex min-h-screen flex-1 items-start justify-center bg-gradient-to-tr from-pink-400 to-blue-400 px-4 py-12">
+      <div className="flex min-h-screen flex-1 items-start justify-center px-4 py-12 dark:bg-black">
         <div className="flex w-full max-w-5xl gap-12">
           <form
             className="mx-auto w-1/2 flex-1 flex-col gap-6 space-y-6 rounded-3xl border border-white/20 bg-white/10 p-10 shadow-2xl backdrop-blur-2xl"
@@ -127,7 +128,7 @@ export default function AddInfoForm() {
           >
             <h2 className="mb-2 text-3xl font-extrabold text-white drop-shadow">회원 정보 입력</h2>
             <Input
-              label="Name"
+              label={LABELS.NAME}
               type="text"
               placeholder="사용하실 이름을 입력해주세요."
               description="이름은 최대 10자까지 입력할 수 있습니다."
@@ -135,14 +136,14 @@ export default function AddInfoForm() {
               onChange={handleNameChange}
             />
             <Input
-              label="Email"
+              label={LABELS.EMAIL}
               type="email"
               placeholder="example@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
-              label="Phone"
+              label={LABELS.PHONE}
               type="tel"
               placeholder="010-1234-5678"
               value={phone ?? ''}
@@ -150,7 +151,7 @@ export default function AddInfoForm() {
             />
             <Select
               items={roles}
-              label="Role"
+              label="역할"
               placeholder="참여하실 역할을 선택해주세요."
               value={role}
               color="primary"
@@ -158,6 +159,7 @@ export default function AddInfoForm() {
               variant="underlined"
               classNames={{
                 label: 'text-black dark:text-white/90',
+                listbox: 'text-black dark:text-white/90',
               }}
             >
               {(role) => <SelectItem>{role.label}</SelectItem>}
@@ -184,7 +186,7 @@ export default function AddInfoForm() {
             </div>
             <Button
               type="submit"
-              className="rounded-full bg-gradient-to-r from-pink-400 to-blue-400 font-semibold text-white shadow-lg transition hover:scale-105"
+              className="w-full rounded-full bg-gradient-to-r from-pink-400 to-blue-400 font-semibold text-white shadow-lg transition hover:scale-105"
             >
               완료
             </Button>

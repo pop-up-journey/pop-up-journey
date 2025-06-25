@@ -16,9 +16,10 @@ export default function Chip({
   radius = 'sm',
   variant = 'flat',
   className = '',
+  ...props
 }: ChipProps) {
   return (
-    <HerouiChip size={size} radius={radius} variant={variant} color={color} className={className}>
+    <HerouiChip size={size} radius={radius} variant={variant} color={color} className={className} {...props}>
       {children}
     </HerouiChip>
   );
