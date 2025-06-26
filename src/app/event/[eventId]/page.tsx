@@ -30,14 +30,12 @@ export default async function Page({ params }: Props) {
   const { eventId } = await params;
   // 이벤트 정보 조회
   const event = await clientApi<EventData>(`/api/events/${eventId}`, { method: 'GET' });
-  console.log(event);
   const imgSrc = Array.isArray(event.thumbnail) ? event.thumbnail[0] : event.thumbnail;
 
   // 달력 아이콘(커스텀)
   const start = event.eventStart;
   const month = format(start, 'M', { locale: ko });
   const day = format(start, 'd', { locale: ko });
-  console.log(start);
 
   // 주소 쪼개기
   const place = event.address.split(',').map((s: string) => s.trim())[1];

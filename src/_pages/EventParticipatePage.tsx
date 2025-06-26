@@ -71,7 +71,6 @@ export default function EventParticipationPage({ event }: Props) {
     const fetchUser = async () => {
       try {
         const res = await clientApi<UserInfo[]>(`/api/users/${session?.user?.id}`, { method: 'GET' });
-        console.log('Fetched user info:', res);
         if (res.length > 0) {
           setUserInfo(res[0]);
         }
@@ -100,7 +99,6 @@ export default function EventParticipationPage({ event }: Props) {
     }
     setPhone(value);
   };
-  console.log(phone);
   return (
     <>
       <main className="mx-auto max-h-screen max-w-4xl">
