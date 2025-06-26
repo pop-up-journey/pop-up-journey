@@ -6,6 +6,7 @@ import useKakaoLoader from '@/hooks/useKakaoLoader';
 import { ChevronDoubleRightIcon } from '@heroicons/react/24/outline';
 import { Avatar } from '@heroui/react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
@@ -15,6 +16,7 @@ interface KakaoMapProps {
 }
 // 맵 로드
 export default function EventMapPanel({ address, organizer }: KakaoMapProps) {
+  const { eventId } = useParams();
   const { isLoaded } = useKakaoLoader();
   const [position, setPosition] = useState({ lat: 33.167, lng: 126.570667 });
 
@@ -56,7 +58,7 @@ export default function EventMapPanel({ address, organizer }: KakaoMapProps) {
           <ChevronDoubleRightIcon className="h-5 w-5 text-gray-500" />
         </Link>
         {/* 신청 버튼*/}
-        <Link href="/event/participate">
+        <Link href={`/event/${eventId}/participate`}>
           <Button fullWidth>신청하기</Button>
         </Link>
         {/* 관심 행사 등록*/}
