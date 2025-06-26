@@ -1,3 +1,8 @@
+import Button from '@/components/common/button';
+import Chip from '@/components/common/chip';
+import ShareButton from '@/features/event/detail/components/ShareButton';
+import { clientApi } from '@/libs/api';
+import type { EventData } from '@/types/event';
 import { formatDate } from '@/utils/dateformatter';
 import {
   ArrowTopRightOnSquareIcon,
@@ -13,23 +18,18 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import NextImage from 'next/image';
 import Link from 'next/link';
-import Button from '../../../components/common/button';
-import Chip from '../../../components/common/chip';
-import ShareButton from '../../../features/event/detail/components/ShareButton';
-import { clientApi } from '../../../libs/api';
-import { EventData } from '../../../types/event';
 
 interface Props {
-  params: { id: string };
+  params: { eventId: string };
 }
 interface UserData {
   id: string;
   name: string;
 }
 export default async function Page({ params }: Props) {
-  const { id } = await params;
+  const { eventId } = await params;
   // 이벤트 정보 조회
-  const event = await clientApi<EventData>(`/api/events/${id}`, { method: 'GET' });
+  const event = await clientApi<EventData>(`/api/events/${eventId}`, { method: 'GET' });
   const imgSrc = Array.isArray(event.thumbnail) ? event.thumbnail[0] : event.thumbnail;
 
   // 달력 아이콘(커스텀)

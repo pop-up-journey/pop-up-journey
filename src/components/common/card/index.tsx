@@ -1,8 +1,8 @@
+import Chip from '@/components/common/chip';
 import { formatDate } from '@/utils/dateformatter';
 import { Card, CardBody, CardFooter, Image } from '@heroui/react';
 import NextImage, { StaticImageData } from 'next/image';
 import { If } from 'react-haiku';
-import Chip from '../chip';
 
 interface CardProps {
   title: string;

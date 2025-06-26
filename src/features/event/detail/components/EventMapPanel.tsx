@@ -1,13 +1,13 @@
 'use client';
 
+import Button from '@/components/common/button';
+import ShareButton from '@/features/event/detail/components/ShareButton';
 import useKakaoLoader from '@/hooks/useKakaoLoader';
 import { ChevronDoubleRightIcon } from '@heroicons/react/24/outline';
 import { Avatar } from '@heroui/react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import Button from '../../../../components/common/button';
-import ShareButton from './ShareButton';
 
 interface KakaoMapProps {
   address: string;

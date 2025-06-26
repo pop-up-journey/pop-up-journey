@@ -5,11 +5,11 @@ import { NextResponse } from 'next/server';
 
 const db = drizzle(process.env.DATABASE_URL!);
 
-export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export async function GET(_req: Request, { params }: { params: Promise<{ eventId: string }> }) {
+  const { eventId } = await params;
 
   try {
-    const result = await db.select().from(events).where(eq(events.id, id)).limit(1);
+    const result = await db.select().from(events).where(eq(events.id, eventId)).limit(1);
     const event = result[0];
     return NextResponse.json(event);
   } catch (error) {
