@@ -5,7 +5,7 @@ export interface EventData {
   tags: string[];
   eventStart: string;
   eventEnd: string;
-  address: string[];
+  address: string;
   description?: string;
   hostId: string;
 }

@@ -26,7 +26,7 @@ export default function EventList({ events }: Props) {
       {events.map((evt) => (
         <li key={evt.id} className="transform transition-transform hover:scale-105">
           <Link href={`/event/${evt.id}`} className="block">
-            <CardComponent title={evt.title} thumbnail={evt.thumbnail} tags={evt.tags ?? []} date={evt.date} />
+            <CardComponent title={evt.title} thumbnail={evt.thumbnail} tags={evt.tags ?? []} />
           </Link>
         </li>
       ))}
