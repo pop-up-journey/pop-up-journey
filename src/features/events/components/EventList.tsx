@@ -17,14 +17,14 @@ interface Props {
 }
 
 export default function EventList({ events }: Props) {
-  if (!events || !events.length) {
-    return <p className="text-center text-gray-500">등록된 이벤트가 없습니다.</p>;
+  if (!events || events.length === 0) {
+    return <p className="py-10 text-center text-gray-500">등록된 이벤트가 없습니다.</p>;
   }
 
   return (
-    <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {events.map((evt) => (
-        <li key={evt.id}>
+        <li key={evt.id} className="transform transition-transform hover:scale-105">
           <Link href={`/event/${evt.id}`} className="block">
             <CardComponent title={evt.title} thumbnail={evt.thumbnail} tags={evt.tags ?? []} date={evt.date} />
           </Link>

@@ -1,6 +1,6 @@
 'use client';
 
-import ClickableChip from '@/components/common/selectable-chip/selectableChip';
+import ClickableChip from '@/components/common/selectable-chip';
 import { Zone, zones } from '@/configs/regions';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -20,16 +20,19 @@ export default function EventsFilter({ selectedZone }: Props) {
   };
 
   return (
-    <div className="mb-6 flex flex-wrap gap-2">
-      <ClickableChip label="전체" isSelected={!selectedZone} onClick={() => handleSelect(null)} />
-      {zones.map((zoneItem) => (
-        <ClickableChip
-          key={zoneItem}
-          label={zoneItem}
-          isSelected={selectedZone === zoneItem}
-          onClick={() => handleSelect(zoneItem)}
-        />
-      ))}
-    </div>
+    <section className="mx-auto my-8 max-w-5xl px-4">
+      <h1 className="mb-4 text-center text-3xl font-bold">지역별</h1>
+      <div className="flex flex-wrap justify-center gap-6">
+        <ClickableChip label="전체" isSelected={!selectedZone} onClick={() => handleSelect(null)} />
+        {zones.map((zoneItem) => (
+          <ClickableChip
+            key={zoneItem}
+            label={zoneItem}
+            isSelected={selectedZone === zoneItem}
+            onClick={() => handleSelect(zoneItem)}
+          />
+        ))}
+      </div>
+    </section>
   );
 }

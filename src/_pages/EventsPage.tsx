@@ -2,24 +2,24 @@ import { regionGroups } from '@/configs/regions';
 import EventsFilter from '@/features/events/components/EventFilter';
 import EventList from '@/features/events/components/EventList';
 import { clientApi } from '@/libs/api';
+import { Divider } from '@heroui/react';
 
 interface PageProps {
   searchParams: { zone?: string };
 }
 
-export default async function EventsPage({ searchParams }: PageProps) {
+export default async function EventPage({ searchParams }: PageProps) {
   const selectedZone = searchParams.zone ?? null;
-  const events = await clientApi(`/api/events`, { method: 'GET' });
+  const events = (await clientApi('/api/events', { method: 'GET' })) as any[];
 
-  type Event = { region: string; [key: string]: any };
-  const filteredEvents = selectedZone
-    ? (events as Event[]).filter((e: Event) => regionGroups[selectedZone].includes(e.region))
-    : events;
-
+  const filteredEvents = selectedZone ? events.filter((e) => regionGroups[selectedZone].includes(e.region)) : events;
+  // TODO: 전국 팝업 지도도 같이 띄워 주면 좋을 것 같음.
+  // TODO: 데이터 여러개인 경우에 무한 스크롤
   return (
-    <section className="px-4 py-6">
-      <h1 className="mb-4 text-2xl font-bold">전체 이벤트 조회</h1>
+    <section className="mx-auto my-10 min-h-screen max-w-6xl overflow-hidden px-4">
+      <Divider />
       <EventsFilter selectedZone={selectedZone} />
+      <Divider />
       <EventList events={filteredEvents} />
     </section>
   );
