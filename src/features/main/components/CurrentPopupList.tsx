@@ -35,7 +35,13 @@ export default function CurrentPopupList() {
         {upcomingPopupList.map((popup) => (
           <SwiperSlide key={popup.id} className="min-w-0">
             <Link href={`/event/${popup.id}`} className="block">
-              <CardComponent title={popup.title} thumbnail={popup.thumbnail} tags={popup.tags} date={popup.date} />
+              <CardComponent
+                title={popup.title}
+                thumbnail={popup.thumbnail}
+                tags={popup.tags}
+                event_start={popup.event_start}
+                event_end={popup.event_end}
+              />
             </Link>
           </SwiperSlide>
         ))}
