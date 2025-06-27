@@ -78,7 +78,7 @@ export default async function Page({ params }: Props) {
         <div className="mb-2 flex items-center gap-4">
           <div className="flex h-8 w-8 flex-col overflow-hidden rounded border text-center shadow-sm">
             <div className="bg-gray-600/30 py-[2px] text-[8px] leading-none text-gray-500">{month}월</div>
-            <div className="bg-transparent py-[1px] text-xs font-semibold text-black">{day}</div>
+            <div className="bg-transparent py-[1px] text-xs font-semibold">{day}</div>
           </div>
           <p className="text-sm text-gray-500">
             {formatDate(event.eventStart)} ~ {formatDate(event.eventEnd)}
@@ -146,10 +146,12 @@ export default async function Page({ params }: Props) {
           {/* 링크 공유 */}
           <ShareButton />
           {/* 신청 버튼 */}
-          <Button className="flex-1 rounded-lg bg-gradient-to-r from-pink-400 to-blue-400 font-semibold text-white shadow-2xl backdrop-blur-2xl transition hover:scale-105 dark:text-white">
-            <div className="pointer-events-none absolute top-0 left-0 h-2 w-full animate-pulse bg-gradient-to-b from-white/50 to-transparent" />
-            신청하기
-          </Button>
+          <Link href={`/event/${eventId}/participate`}>
+            <Button className="flex-1 rounded-lg bg-gradient-to-r from-pink-400 to-blue-400 font-semibold text-white shadow-2xl backdrop-blur-2xl transition hover:scale-105 dark:text-white">
+              <div className="pointer-events-none absolute top-0 left-0 h-2 w-full animate-pulse bg-gradient-to-b from-white/50 to-transparent" />
+              신청하기
+            </Button>
+          </Link>
         </div>
       </div>
     </>

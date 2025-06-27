@@ -25,6 +25,7 @@ export default function EventList({ events }: Props) {
               eventStart={evt.eventStart}
               eventEnd={evt.eventEnd}
             />
+
           </Link>
         </li>
       ))}

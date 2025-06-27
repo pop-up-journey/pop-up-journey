@@ -2,6 +2,7 @@ import { regionGroups } from '@/configs/regions';
 import EventsFilter from '@/features/events/components/EventFilter';
 import EventList from '@/features/events/components/EventList';
 import EventsMap from '@/features/events/components/EventsMap';
+
 import { clientApi } from '@/libs/api';
 import { Divider } from '@heroui/react';
 

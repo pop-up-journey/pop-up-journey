@@ -1,5 +1,5 @@
 // iconMapper.ts
-import { EnvelopeIcon, MapPinIcon, PhoneIcon, TagIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, MapPinIcon, PhoneIcon, TagIcon, TicketIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import type { FC, SVGProps } from 'react';
 import { Label, LABELS } from './labels';
 
@@ -17,6 +17,9 @@ export default function LabelIconMapper(label: Label): FC<SVGProps<SVGSVGElement
       return UserGroupIcon;
     case LABELS.LOCATION:
       return MapPinIcon;
+    case LABELS.TICKETS:
+      return TicketIcon;
+
     default:
       return null;
   }
