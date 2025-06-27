@@ -1,4 +1,4 @@
-import { pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { integer, pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { z } from 'zod';
 import { participantStatusEnum } from './enums';
@@ -15,6 +15,7 @@ export const eventParticipants = pgTable('event_participants', {
     .references(() => events.id, { onDelete: 'cascade' }),
   participantStatus: participantStatusEnum('participant_status').default('pending').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
+  tickets: integer('tickets').notNull().default(1),
 });
 
 /**
@@ -34,6 +35,7 @@ export const createEventParticipantSchema = z.object({
   userId: z.string().uuid('올바른 UUID 형식이 아닙니다'),
   eventId: z.string().uuid('올바른 UUID 형식이 아닙니다'),
   participantStatus: z.enum(['pending', 'approved', 'rejected', 'cancelled']).default('pending'),
+  tickets: z.number().int('티켓 수량은 정수여야 합니다').min(1, '최소 1장 이상 신청해야 합니다').default(1),
 });
 
 /**
