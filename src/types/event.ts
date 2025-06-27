@@ -1,7 +1,7 @@
 export interface EventData {
   id: number;
   title: string;
-  thumbnail: string[];
+  thumbnail: string;
   tags: string[];
   eventStart: string;
   eventEnd: string;

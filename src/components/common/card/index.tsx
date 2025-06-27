@@ -8,12 +8,12 @@ interface CardProps {
   title?: string;
   thumbnail: string | StaticImageData;
   tags?: string[];
-  event_start?: string;
-  event_end?: string;
+  eventStart?: string;
+  eventEnd?: string;
   variant?: 'default' | 'compact';
 }
 
-export default function CardComponent({ title, thumbnail, tags, event_start, event_end, variant }: CardProps) {
+export default function CardComponent({ title, thumbnail, tags, eventStart, eventEnd, variant }: CardProps) {
   const isCompact = variant === 'compact';
   return (
     <>
@@ -36,7 +36,7 @@ export default function CardComponent({ title, thumbnail, tags, event_start, eve
           <CardFooter className="absolute bottom-0 z-10 flex-col items-start bg-gradient-to-t from-black/60 via-black/20 to-transparent">
             <h4 className="mb-1 font-bold text-white">{title}</h4>
             <small className="text-default-400">
-              {formatDate(event_start ?? '')} ~ {formatDate(event_end ?? '')}
+              {formatDate(eventStart ?? '')} ~ {formatDate(eventEnd ?? '')}
             </small>
             <div className="flex gap-1">{tags && tags.map((tag, index) => <Chip key={index}>{tag}</Chip>)}</div>
           </CardFooter>
@@ -71,7 +71,7 @@ export default function CardComponent({ title, thumbnail, tags, event_start, eve
                 <h4 className="text-foreground text-base font-bold">{title}</h4>
                 <p className="text-default-500 text-sm">📍 홍대입구역</p>
                 <p className="text-default-400 text-sm">
-                  {event_start && ` ~ ${formatDate(event_start)}`}~ {event_end && ` ~ ${formatDate(event_end)}`}
+                  {eventStart && ` ~ ${formatDate(eventStart)}`}~ {eventEnd && ` ~ ${formatDate(eventEnd)}`}
                 </p>
               </div>
             </div>

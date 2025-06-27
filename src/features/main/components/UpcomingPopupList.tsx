@@ -25,8 +25,8 @@ export default function UpcomingPopupList() {
               title={popup.title}
               thumbnail={popup.thumbnail}
               tags={popup.tags}
-              event_start={popup.event_start}
-              event_end={popup.event_end}
+              eventStart={popup.event_start}
+              eventEnd={popup.event_end}
               variant="compact"
             />
           </Link>

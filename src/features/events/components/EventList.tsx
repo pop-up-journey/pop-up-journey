@@ -1,19 +1,11 @@
 'use client';
 
 import CardComponent from '@/components/common/card';
+import type { EventData } from '@/types/event';
 import Link from 'next/link';
 
-interface Event {
-  id: number;
-  title: string;
-  region: string;
-  date: string;
-  thumbnail: string;
-  tags?: string[];
-}
-
 interface Props {
-  events: Event[];
+  events: EventData[];
 }
 
 export default function EventList({ events }: Props) {
@@ -26,7 +18,14 @@ export default function EventList({ events }: Props) {
       {events.map((evt) => (
         <li key={evt.id} className="transform transition-transform hover:scale-105">
           <Link href={`/event/${evt.id}`} className="block">
-            <CardComponent title={evt.title} thumbnail={evt.thumbnail} tags={evt.tags ?? []} />
+            <CardComponent
+              title={evt.title}
+              thumbnail={evt.thumbnail}
+              tags={evt.tags ?? []}
+              eventStart={evt.eventStart}
+              eventEnd={evt.eventEnd}
+            />
+
           </Link>
         </li>
       ))}
