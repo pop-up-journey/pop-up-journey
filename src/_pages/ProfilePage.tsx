@@ -4,12 +4,16 @@ import HeroSection from '@/components/common/hero-section';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useLocalStorage } from 'react-haiku';
 import Button from '../components/common/button';
+import CardComponent from '../components/common/card';
 import { clientApi } from '../libs/api';
+import { upcomingPopupList } from '../mock/mockdata';
 
 export default function ProfilePage() {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState<any>(null);
+  const [favorites] = useLocalStorage<number[]>('favoritePopups', []);
 
   const getUserInfo = async () => {
     try {
@@ -55,7 +59,30 @@ export default function ProfilePage() {
           <Button>프로필 수정</Button>
         </div>
       </section>
-      <section id="defaultSt" className="mx-auto mt-8 grid max-w-5xl grid-cols-3 gap-6"></section>
+
+      {/* 관심팝업 */}
+      {/* TODO: 페이지네이션 어떻게 할지 추가적인 설정 필요 */}
+      <section className="mx-auto mt-12 mb-10 max-w-5xl pb-10">
+        <h2 className="mb-4 text-2xl font-bold">나의 관심 팝업</h2>
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+          {upcomingPopupList
+            .filter((p) => favorites.includes(p.id))
+            .map((p) => (
+              <CardComponent
+                key={p.id}
+                id={p.id}
+                title={p.title}
+                thumbnail={p.thumbnail}
+                tags={p.tags}
+                eventStart={p.event_start}
+                eventEnd={p.event_end}
+                variant="compact"
+                isFavorite={true}
+              />
+            ))}
+        </div>
+        {favorites.length === 0 && <p className="col-span-3 text-center text-gray-500">아직 관심 팝업이 없습니다.</p>}
+      </section>
     </main>
   );
 }
