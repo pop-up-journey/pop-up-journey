@@ -3,6 +3,7 @@
 import HeroSection from '@/components/common/hero-section';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from 'react-haiku';
 import Button from '../components/common/button';
@@ -14,7 +15,7 @@ export default function ProfilePage() {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState<any>(null);
   const [favorites] = useLocalStorage<number[]>('favoritePopups', []);
-
+  const router = useRouter();
   const getUserInfo = async () => {
     try {
       if (status === 'authenticated' && session?.user?.id) {
@@ -55,8 +56,9 @@ export default function ProfilePage() {
           </div>
         </div>
 
+        {/* 프로필수정 */}
         <div className="flex gap-3">
-          <Button>프로필 수정</Button>
+          <Button onPress={() => router.push('/add-info')}>프로필 수정</Button>
         </div>
       </section>
 
