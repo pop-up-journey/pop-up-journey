@@ -1,11 +1,28 @@
 'use client';
 
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useLocalStorage } from 'react-haiku';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CardComponent from '../../../components/common/card';
 import { upcomingPopupList } from '../../../mock/mockdata';
 
 export default function CurrentPopupList() {
+  const [favorites, setFavorites] = useLocalStorage<number[]>('favoritePopups', []);
+  // NOTE: next.js가 기본적으로 컴포넌트를 서버에서 미리 렌더링(SSR/SSG)하기 때문에 localStorage에 바로 접근할 수 없음
+  // 개발환경에서는 느린데 빌드 후에는 어떨지 모르겠음.
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) {
+    // TODO: Skelleton
+    return null;
+  }
+  const handleFavToggle = (id: number) => {
+    setFavorites((prev: number[]) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]));
+  };
   return (
     <section className="mx-auto mb-10 max-w-6xl overflow-hidden px-4">
       <h2 className="mb-4 text-2xl font-bold">지금! 서울 인기 팝업</h2>
@@ -34,15 +51,17 @@ export default function CurrentPopupList() {
       >
         {upcomingPopupList.map((popup) => (
           <SwiperSlide key={popup.id} className="min-w-0">
-            <Link href={`/event/${popup.id}`} className="block">
-              <CardComponent
-                title={popup.title}
-                thumbnail={popup.thumbnail}
-                tags={popup.tags}
-                eventStart={popup.event_start}
-                eventEnd={popup.event_end}
-              />
-            </Link>
+            <CardComponent
+              id={popup.id}
+              title={popup.title}
+              thumbnail={popup.thumbnail}
+              tags={popup.tags}
+              eventStart={popup.event_start}
+              eventEnd={popup.event_end}
+              isFavorite={favorites.includes(popup.id)}
+              onToggleFav={handleFavToggle}
+            />
+            {/* </Link> */}
           </SwiperSlide>
         ))}
       </Swiper>

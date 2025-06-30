@@ -19,13 +19,13 @@ export default function EventList({ events }: Props) {
         <li key={evt.id} className="transform transition-transform hover:scale-105">
           <Link href={`/event/${evt.id}`} className="block">
             <CardComponent
+              id={evt.id}
               title={evt.title}
               thumbnail={evt.thumbnail}
               tags={evt.tags ?? []}
               eventStart={evt.eventStart}
               eventEnd={evt.eventEnd}
             />
-
           </Link>
         </li>
       ))}

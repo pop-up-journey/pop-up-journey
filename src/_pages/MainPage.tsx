@@ -1,3 +1,4 @@
+'use client';
 import CurrentPopupList from '@/features/main/components/CurrentPopupList';
 import MainBanner from '@/features/main/components/MainBanner';
 import UpcomingPopupList from '@/features/main/components/UpcomingPopupList';
