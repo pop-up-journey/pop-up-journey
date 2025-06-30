@@ -98,7 +98,7 @@ export default function CardComponent({
             </div>
             <div className="relative col-span-6 flex cursor-pointer flex-col justify-end gap-2 md:col-span-8">
               {/* 좋아요/조회수 아이콘 (compact) */}
-              <div className="text-default-400 absolute top-0 right-0 p-2 text-sm">❤️ {isFavorite ? '♥' : '123'}</div>
+              <div className="text-default-400 absolute top-0 right-0 p-2 text-sm">❤️ {isFavorite ? '' : '123'}</div>
               <div className="text-default-400 absolute top-0 right-15 p-2 text-sm">👁️ 123</div>
               <div className="flex flex-col gap-1">
                 <h4 className="text-foreground text-base font-bold">{title}</h4>
