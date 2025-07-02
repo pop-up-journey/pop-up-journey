@@ -86,11 +86,18 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
   function parseDate(val: any) {
     if (!val) return undefined;
     if (val instanceof Date) return val;
-    if (typeof val === 'string') return new Date(val);
+    if (typeof val === 'string' || typeof val === 'number') return new Date(val);
     if (typeof val === 'object' && val.year && val.month && val.day) {
       return new Date(val.year, val.month - 1, val.day);
     }
     return undefined;
+  }
+
+  function computeEventStatus(start: Date, end: Date): 'upcoming' | 'ongoing' | 'ended' {
+    const now = new Date();
+    if (now < start) return 'upcoming';
+    if (now >= start && now <= end) return 'ongoing';
+    return 'ended';
   }
 
   try {
@@ -101,6 +108,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
 
     const eventStart = parseDate(data.eventStart) ?? new Date();
     const eventEnd = parseDate(data.eventEnd) ?? new Date();
+
+    const eventStatus = computeEventStatus(eventStart, eventEnd);
 
     const eventDataDto = {
       hostId,
@@ -117,7 +126,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
         : data.recruitmentMethod || 'auto',
       extraInfo: Array.isArray(data.selectedInfo) ? data.selectedInfo.join(',') : '',
       //TODO: 이벤트 상태 추적하는 로직 필요 upcoming, ongoing, ended 이걸 추적해야함
-      eventStatus: 'upcoming' as const,
+      eventStatus,
     };
     // console.log('DB에 저장할 eventDataDto:', eventDataDto);
 
