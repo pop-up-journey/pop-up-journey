@@ -1,7 +1,8 @@
 'use client';
+
+import { useCallback } from 'react';
+
 // TODO: 이거 기반으로 이제 만들면된다.
-import Button from '@/components/common/button';
-import Script from 'next/script';
 
 declare global {
   interface Window {
@@ -9,8 +10,14 @@ declare global {
   }
 }
 
-export default function PostCode() {
-  const handleOpenPostcode = () => {
+interface PostcodeData {
+  zonecode: string;
+  address: string;
+  extraAddress: string;
+}
+
+export default function usePostcode(onComplete: (data: PostcodeData) => void) {
+  const openPostcode = useCallback(() => {
     if (typeof window.daum === 'undefined' || typeof window.daum.Postcode === 'undefined') {
       alert('Daum Postcode 서비스가 로드되지 않았습니다.');
       return;
@@ -19,7 +26,6 @@ export default function PostCode() {
     new window.daum.Postcode({
       oncomplete: function (data: any) {
         let fullAddress = data.address;
-        console.log(data);
         let extraAddress = '';
 
         if (data.addressType === 'R') {
@@ -32,20 +38,14 @@ export default function PostCode() {
           fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
 
-        // 선택된 주소를 alert으로 표시
-        alert(`우편번호: ${data.zonecode}\n주소: ${fullAddress}`);
+        onComplete({
+          zonecode: data.zonecode,
+          address: fullAddress,
+          extraAddress,
+        });
       },
     }).open();
-  };
+  }, [onComplete]);
 
-  return (
-    <>
-      <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" strategy="lazyOnload" />
-      <div className="w-sm">
-        <Button onClick={handleOpenPostcode} type="button">
-          주소 검색
-        </Button>
-      </div>
-    </>
-  );
+  return openPostcode;
 }
