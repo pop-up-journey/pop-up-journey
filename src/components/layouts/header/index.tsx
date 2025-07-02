@@ -15,6 +15,7 @@ import {
   NavbarMenuToggle,
 } from '@heroui/react';
 import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { If, useScrollPosition } from 'react-haiku';
 import SignInModal from '../../../features/sign-in/components/SignInModal';
@@ -25,6 +26,7 @@ export default function Header() {
   const [scroll, _] = useScrollPosition() as [{ x: number; y: number }, unknown];
 
   const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (!hasScrolled && scroll.y > 70) setHasScrolled(true);
@@ -85,7 +87,9 @@ export default function Header() {
                     />
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="light" color="danger">
-                    <DropdownItem key="profile">프로필페이지</DropdownItem>
+                    <DropdownItem key="profile" onPress={() => router.push('/profile')}>
+                      프로필페이지
+                    </DropdownItem>
                     <DropdownItem key="logout" variant="flat" color="danger" onPress={() => signOut()}>
                       로그아웃
                     </DropdownItem>

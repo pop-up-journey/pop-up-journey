@@ -22,6 +22,7 @@ export default function UpcomingPopupList() {
           <Link href={`/event/${popup.id}`} key={popup.id} className="block">
             <CardComponent
               key={popup.id}
+              id={popup.id}
               title={popup.title}
               thumbnail={popup.thumbnail}
               tags={popup.tags}
