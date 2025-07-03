@@ -41,14 +41,20 @@ export const insertEventSchema = createInsertSchema(events);
  */
 export const createEventSchema = z.object({
   host_id: z.string().uuid('올바른 UUID 형식이 아닙니다'),
-  thumbnail: z.string().url('올바른 이미지 URL이 아닙니다').optional(),
   title: z.string().min(1, '제목은 필수입니다').max(100, '제목은 최대 100글자'),
+  thumbnail: z.string().url('올바른 이미지 URL이 아닙니다').optional(),
+  email: z.string().email('올바른 이메일 형식이 아닙니다').optional(),
   description: z.string().max(5000, '내용은 최대 5000글자').optional(),
   address: z.string().min(1, '지역은 필수입니다'),
   event_status: z.enum(['upcoming', 'ongoing', 'ended']),
   participation_mode: z.enum(['auto', 'manual']).default('auto'),
   event_start: z.date({ required_error: '시작 날짜는 필수입니다' }),
   event_end: z.date({ required_error: '종료 날짜는 필수입니다' }),
+  capacity: z
+    .number({ invalid_type_error: '수용인원은 숫자여야 합니다.' })
+    .int('수용인원은 정수여야 합니다.')
+    .nonnegative('수용인원은 0이상의 정수여야 합니다.')
+    .optional(),
 });
 
 /**
