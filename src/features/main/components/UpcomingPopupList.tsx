@@ -1,33 +1,40 @@
-'use client';
-
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CardComponent from '../../../components/common/card';
-import { upcomingPopupList } from '../../../mock/mockdata';
+import { clientApi } from '../../../libs/api';
 
 export default function UpcomingPopupList() {
+  const [events, setEvents] = useState<any[]>([]);
   const [visibleCount, setVisibleCount] = useState(4);
 
+  useEffect(() => {
+    clientApi('/api/events?status=ongoing', { method: 'GET' }).then((data) => {
+      setEvents(data);
+      console.log(data);
+    });
+  }, []);
+
   const handleShowMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 4, upcomingPopupList.length));
+    setVisibleCount((prev) => Math.min(prev + 4, events.length));
   };
 
-  const isAllVisible = visibleCount >= upcomingPopupList.length;
+  const isAllVisible = visibleCount >= events.length;
 
   return (
     <section className="mx-auto mb-10 max-w-6xl px-4 pb-10">
       <h2 className="mb-4 text-2xl font-bold">오픈 예정 팝업</h2>
       <div className="-mx-4 grid grid-cols-1 gap-10 px-4 md:grid-cols-2">
-        {upcomingPopupList.slice(0, visibleCount).map((popup) => (
+        {events.slice(0, visibleCount).map((popup) => (
           <Link href={`/event/${popup.id}`} key={popup.id} className="block">
             <CardComponent
               key={popup.id}
               id={popup.id}
               title={popup.title}
+              location={popup.address.split(',').map((s: any) => s.trim())[2] || ''}
               thumbnail={popup.thumbnail}
-              tags={popup.tags}
-              eventStart={popup.event_start}
-              eventEnd={popup.event_end}
+              eventStart={popup.eventStart}
+              eventEnd={popup.eventEnd}
+              favCount={popup.saveCount}
               variant="compact"
             />
           </Link>

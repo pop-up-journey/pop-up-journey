@@ -2408,7 +2408,7 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-aria/comYujeong Kimox@3.12.3':
+  '@react-aria/bob@3.12.3':
     resolution:
       { integrity: sha512-nCLFSQjOR3r3tB1AURtZKSZhi2euBMw0QxsIjnMVF73BQOfwfHMrIFctNULbL070gEnXofzeBd3ykJQpnsGH+Q== }
     peerDependencies:
@@ -2647,7 +2647,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-stately/comYujeong Kimox@3.10.5':
+  '@react-stately/bob@3.10.5':
     resolution:
       { integrity: sha512-27SkClMqbMAKuVnmXhYzYisbLfzV7MO/DEiqWO4/3l+PZ+whL7Wi/Ek7Wqlfluid/y4pN4EkHCKNt4HJ2mhORQ== }
     peerDependencies:
@@ -2802,7 +2802,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-types/comYujeong Kimox@3.13.5':
+  '@react-types/bob@3.13.5':
     resolution:
       { integrity: sha512-wqHBF0YDkrp4Ylyxpd3xhnDECe5eao27bsu+4AvjlVKtaxaoppNq2MwSzkuSSS/GEUXT6K9DDjrGFcp07ad5gA== }
     peerDependencies:
@@ -8657,14 +8657,14 @@ snapshots:
       '@heroui/theme': 2.4.16-beta.2(tailwindcss@4.1.7)
       '@heroui/use-aria-button': 2.2.14-beta.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@heroui/use-safe-layout-effect': 2.1.8-beta.0(react@19.1.0)
-      '@react-aria/comYujeong Kimox': 3.12.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@react-aria/bob': 3.12.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/focus': 3.20.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/i18n': 3.12.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/interactions': 3.25.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/utils': 3.29.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/visually-hidden': 3.8.23(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@react-stately/comYujeong Kimox': 3.10.5(react@19.1.0)
-      '@react-types/comYujeong Kimox': 3.13.5(react@19.1.0)
+      '@react-stately/bob': 3.10.5(react@19.1.0)
+      '@react-types/bob': 3.13.5(react@19.1.0)
       '@react-types/shared': 3.29.1(react@19.1.0)
       framer-motion: 12.15.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
@@ -10040,7 +10040,7 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@react-aria/comYujeong Kimox@3.12.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@react-aria/bob@3.12.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@react-aria/focus': 3.20.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/i18n': 3.12.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -10052,10 +10052,10 @@ snapshots:
       '@react-aria/textfield': 3.17.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-aria/utils': 3.29.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@react-stately/collections': 3.12.4(react@19.1.0)
-      '@react-stately/comYujeong Kimox': 3.10.5(react@19.1.0)
+      '@react-stately/bob': 3.10.5(react@19.1.0)
       '@react-stately/form': 3.1.4(react@19.1.0)
       '@react-types/button': 3.12.1(react@19.1.0)
-      '@react-types/comYujeong Kimox': 3.13.5(react@19.1.0)
+      '@react-types/bob': 3.13.5(react@19.1.0)
       '@react-types/shared': 3.29.1(react@19.1.0)
       '@swc/helpers': 0.5.15
       react: 19.1.0
@@ -10465,7 +10465,7 @@ snapshots:
       '@swc/helpers': 0.5.15
       react: 19.1.0
 
-  '@react-stately/comYujeong Kimox@3.10.5(react@19.1.0)':
+  '@react-stately/bob@3.10.5(react@19.1.0)':
     dependencies:
       '@react-stately/collections': 3.12.4(react@19.1.0)
       '@react-stately/form': 3.1.4(react@19.1.0)
@@ -10473,7 +10473,7 @@ snapshots:
       '@react-stately/overlays': 3.6.16(react@19.1.0)
       '@react-stately/select': 3.6.13(react@19.1.0)
       '@react-stately/utils': 3.10.6(react@19.1.0)
-      '@react-types/comYujeong Kimox': 3.13.5(react@19.1.0)
+      '@react-types/bob': 3.13.5(react@19.1.0)
       '@react-types/shared': 3.29.1(react@19.1.0)
       '@swc/helpers': 0.5.15
       react: 19.1.0
@@ -10668,7 +10668,7 @@ snapshots:
       '@react-types/shared': 3.29.1(react@19.1.0)
       react: 19.1.0
 
-  '@react-types/comYujeong Kimox@3.13.5(react@19.1.0)':
+  '@react-types/bob@3.13.5(react@19.1.0)':
     dependencies:
       '@react-types/shared': 3.29.1(react@19.1.0)
       react: 19.1.0

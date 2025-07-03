@@ -1,12 +1,15 @@
 'use client';
 
+import CardComponent from '@/components/common/card';
+import { clientApi } from '@/libs/api';
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from 'react-haiku';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import CardComponent from '../../../components/common/card';
-import { upcomingPopupList } from '../../../mock/mockdata';
 
 export default function CurrentPopupList() {
+  // HACK: 이벤트를 꼭 상태에 넣어주어야 할까. 정적으로 미리 받아와서 뿌려주는 걸로 변경해보자.
+  const [events, setEvents] = useState<any[]>([]);
+
   const [favorites, setFavorites] = useLocalStorage<number[]>('favoritePopups', []);
   // NOTE: next.js가 기본적으로 컴포넌트를 서버에서 미리 렌더링(SSR/SSG)하기 때문에 localStorage에 바로 접근할 수 없음
   // 개발환경에서는 느린데 빌드 후에는 어떨지 모르겠음.
@@ -16,10 +19,17 @@ export default function CurrentPopupList() {
     setHydrated(true);
   }, []);
 
-  if (!hydrated) {
-    // TODO: Skelleton
-    return null;
-  }
+  useEffect(() => {
+    if (hydrated) {
+      // clientApi가 fetch wrapper라면 이렇게 사용!
+      clientApi('/api/events?status=ongoing', { method: 'GET' }).then((data) => {
+        setEvents(data);
+      });
+    }
+  }, [hydrated]);
+  if (!hydrated) return null;
+  // TODO: Skelleton
+
   const handleFavToggle = (id: number) => {
     setFavorites((prev: number[]) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]));
   };
@@ -49,15 +59,14 @@ export default function CurrentPopupList() {
           },
         }}
       >
-        {upcomingPopupList.map((popup) => (
+        {events.map((popup) => (
           <SwiperSlide key={popup.id} className="min-w-0">
             <CardComponent
               id={popup.id}
               title={popup.title}
               thumbnail={popup.thumbnail}
-              tags={popup.tags}
-              eventStart={popup.event_start}
-              eventEnd={popup.event_end}
+              eventStart={popup.eventStart}
+              eventEnd={popup.eventEnd}
               isFavorite={favorites.includes(popup.id)}
               onToggleFav={handleFavToggle}
             />
