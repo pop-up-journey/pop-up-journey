@@ -110,42 +110,30 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
     const eventEnd = parseDate(rawData.eventEnd) ?? new Date();
 
     // 날짜 유효성 검사 (종료일 > 시작일)
-    validateEventDates({ event_start: eventStart, event_end: eventEnd });
+    validateEventDates({ eventStart, eventEnd });
     // 이벤트 상태 분류
     const eventStatus = computeEventStatus(eventStart, eventEnd);
 
     // 데이터 검증
     const validatedData = createEventSchema.parse({
-      host_id: hostId,
+      hostId,
       title: rawData.title,
       thumbnail: rawData.thumbnail,
       email: rawData.email,
       description: rawData.description,
       address: [rawData.zonecode, rawData.address, rawData.extraAddress].filter(Boolean).join(', '),
       capacity: typeof rawData.capacity === 'number' ? rawData.capacity : Number(rawData.capacity),
-      event_start: eventStart,
-      event_end: eventEnd,
+      eventStart,
+      eventEnd,
       participationMode: Array.isArray(rawData.recruitmentMethod)
         ? rawData.recruitmentMethod[0]
         : rawData.recruitmentMethod || 'auto',
-      event_status: eventStatus,
+      eventStatus,
+      extraInfo: Array.isArray(rawData.selectedInfo) ? rawData.selectedInfo.join(',') : '',
     });
 
     // 검증된 데이터 삽입
-    const insertData = insertEventSchema.parse({
-      hostId: validatedData.host_id,
-      title: validatedData.title,
-      thumbnail: validatedData.thumbnail,
-      email: validatedData.email,
-      description: validatedData.description,
-      address: validatedData.address,
-      capacity: validatedData.capacity,
-      eventStart: validatedData.event_start,
-      eventEnd: validatedData.event_end,
-      participationMode: validatedData.participation_mode,
-      extraInfo: Array.isArray(rawData.selectedInfo) ? rawData.selectedInfo.join(',') : '',
-      eventStatus: validatedData.event_status,
-    });
+    const insertData = insertEventSchema.parse(validatedData);
 
     const result = await db.insert(events).values(insertData).returning();
     return NextResponse.json({ success: true, event: result[0] }, { status: 201 });
