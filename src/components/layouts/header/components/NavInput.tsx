@@ -13,7 +13,7 @@ export default function NavInput() {
   };
 
   return (
-    <section aria-label="search-input" className="flex flex-[3] items-center justify-center">
+    <section aria-label="search-input" className="flex flex-[3]">
       <div className="relative w-full">
         <MagnifyingGlassIcon className="absolute top-1/2 left-2 z-10 size-5 -translate-y-1/2" />
         <Input
@@ -24,7 +24,6 @@ export default function NavInput() {
           }}
           placeholder="관심있는 팝업을 찾아보세요!"
           type="search"
-          className="w-full"
           size={isMdUp ? 'md' : 'sm'}
         />
       </div>
