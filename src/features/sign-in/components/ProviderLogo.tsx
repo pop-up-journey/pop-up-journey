@@ -8,5 +8,5 @@ export function ProviderLogo({ provider }: { provider: 'google' | 'kakao' | 'nav
     kakao: Kakao,
     naver: Naver,
   }[provider];
-  return <Logo width={20} height={20} className="rounded-full" />;
+  return <Logo width={24} height={24} className="block rounded-full" />;
 }

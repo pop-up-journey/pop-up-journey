@@ -1,5 +1,6 @@
 import Footer from '@/components/layouts/footer';
 import Header from '@/components/layouts/header';
+import TempFooter from '@/components/layouts/temp/Footer';
 import { Providers } from '@/providers/providers';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -33,6 +34,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <TempFooter />
         </Providers>
       </body>
     </html>
