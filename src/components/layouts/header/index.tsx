@@ -19,15 +19,13 @@ export default function Header() {
   }, [scroll.y, hasScrolled]);
 
   return (
-    <header
-      className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 mx-auto max-w-[1440px] transition-all duration-300`}
-    >
+    <div className={`${hasScrolled ? 'z-[100]' : ''} sticky top-0 mx-auto w-full`}>
       <Navbar
-        className={`${hasScrolled ? 'mx-auto h-20 px-6' : 'mx-auto h-[80px] bg-transparent !backdrop-filter-none'} transition-all duration-300 ease-in-out`}
+        className={`transition-all duration-300 ease-in-out ${hasScrolled ? 'mx-auto h-20 px-6' : 'mx-auto h-[80px] bg-transparent !backdrop-filter-none'}`}
         isMenuOpen={isMenuOpen}
         isBlurred={true}
         onMenuOpenChange={setIsMenuOpen}
-        maxWidth="full"
+        maxWidth="2xl"
       >
         <NavbarContent className="flex-1" justify="start">
           <NavbarMenuToggle className="pr-2 sm:hidden" aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />
@@ -54,6 +52,6 @@ export default function Header() {
         </NavbarMenu>
       </Navbar>
       <CategoryTab hasScrolled={hasScrolled} />
-    </header>
+    </div>
   );
 }
