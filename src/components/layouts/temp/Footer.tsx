@@ -9,7 +9,7 @@ export default function TempFooter() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between px-4 pt-5 pb-5 md:pb-20 md:flex-row">
         <div className="mb-2 text-center md:mb-0 md:text-left">
           <h3 className="relative mb-2 overflow-hidden bg-gradient-to-r from-purple-500 via-indigo-400 to-pink-500 bg-clip-text text-lg font-semibold text-transparent drop-shadow-[0_0_6px_rgba(255,150,200,0.5)]">
-            <span>A project by Hunter Joe & Yujeong Kim</span>
+            <span>Project by Hunter Joe & Yujeong Kim</span>
           </h3>
           <p className="mt-2 text-sm font-extralight">© 2025 Hunter Joe & Yujeong Kim. All rights reserved.</p>
         </div>
