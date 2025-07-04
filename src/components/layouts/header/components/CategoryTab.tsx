@@ -4,7 +4,7 @@ interface CategoryTabProps {
   hasScrolled: boolean;
 }
 
-const categories = [
+export const categories = [
   { name: 'Home', href: '/' },
   { name: 'Fashion', href: '/fashion' },
   { name: 'Electronics', href: '/electronics' },
@@ -17,10 +17,11 @@ const categories = [
 
 export default function CategoryTab({ hasScrolled }: CategoryTabProps) {
   return (
-    <div
+    <section
+      aria-label="category-tab"
       className={`border-divider w-full border-b transition-all duration-300 ${
         hasScrolled ? 'max-h-0 overflow-hidden opacity-0' : 'max-h-16 bg-transparent'
-      }`}
+      } hidden sm:block`}
     >
       <div className="container mx-auto flex overflow-x-auto">
         <nav className="flex items-center justify-center gap-6 px-4 py-2">
@@ -36,6 +37,6 @@ export default function CategoryTab({ hasScrolled }: CategoryTabProps) {
           ))}
         </nav>
       </div>
-    </div>
+    </section>
   );
 }
