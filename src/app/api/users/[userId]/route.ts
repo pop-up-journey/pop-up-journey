@@ -69,7 +69,11 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ use
   const { userId } = await params;
 
   try {
-    const user = await db.select().from(users).where(eq(users.id, userId));
+    const userArr = await db.select().from(users).where(eq(users.id, userId));
+    const user = userArr[0];
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
     return NextResponse.json(user);
   } catch (error) {
     console.error('Error fetching user:', error);
