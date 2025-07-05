@@ -16,9 +16,9 @@ interface CardProps {
   eventStart?: string;
   eventEnd?: string;
   variant?: 'default' | 'compact';
-  favCount?: number;
-  isFavorite?: boolean;
-  onToggleFav?: (id: number) => void;
+  savedCount?: number;
+  isSaved?: boolean;
+  onToggleSave?: (id: number) => void;
 }
 
 export default function CardComponent({
@@ -30,15 +30,15 @@ export default function CardComponent({
   eventStart,
   eventEnd,
   variant = 'default',
-  favCount,
-  isFavorite,
-  onToggleFav,
+  savedCount,
+  isSaved,
+  onToggleSave,
 }: CardProps) {
   const isCompact = variant === 'compact';
 
   const handleFavClick = () => {
-    if (onToggleFav) {
-      onToggleFav(id);
+    if (onToggleSave) {
+      onToggleSave(id);
     }
   };
 
@@ -59,7 +59,7 @@ export default function CardComponent({
                 handleFavClick();
               }}
             >
-              {isFavorite ? (
+              {isSaved ? (
                 <HeartIconSolid className="h-6 w-6 text-red-500" />
               ) : (
                 <HeartIconOutline className="h-6 w-6 text-[#ffc0d4]" />
@@ -90,6 +90,7 @@ export default function CardComponent({
       </If>
       <If isTrue={isCompact}>
         <Card
+          isPressable
           className="bg-bgcolor max-w-[480px] rounded-3xl border border-white/20 bg-white/10 p-10 py-4 shadow-2xl backdrop-blur-2xl"
           shadow="none"
           radius="sm"
@@ -109,7 +110,7 @@ export default function CardComponent({
               {/* 좋아요/조회수 아이콘 (compact) */}
               {/* TODO: 조회수 렌더링 필요 */}
               <div className="text-default-400 absolute top-0 right-0 p-2 text-sm">
-                ❤️ {isFavorite ? '' : `${favCount}`}
+                ❤️ {isSaved ? '' : `${savedCount}`}
               </div>
               <div className="text-default-400 absolute top-0 right-15 p-2 text-sm">👁️ 123</div>
               <div className="flex flex-col gap-1">

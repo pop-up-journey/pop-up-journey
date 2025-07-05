@@ -1,7 +1,6 @@
-import Link from 'next/link';
+import CardComponent from '@/components/common/card';
+import { clientApi } from '@/libs/api';
 import { useEffect, useState } from 'react';
-import CardComponent from '../../../components/common/card';
-import { clientApi } from '../../../libs/api';
 
 export default function UpcomingPopupList() {
   const [events, setEvents] = useState<any[]>([]);
@@ -25,19 +24,17 @@ export default function UpcomingPopupList() {
       <h2 className="mb-4 text-2xl font-bold">오픈 예정 팝업</h2>
       <div className="-mx-4 grid grid-cols-1 gap-10 px-4 md:grid-cols-2">
         {events.slice(0, visibleCount).map((popup) => (
-          <Link href={`/event/${popup.id}`} key={popup.id} className="block">
-            <CardComponent
-              key={popup.id}
-              id={popup.id}
-              title={popup.title}
-              location={popup.address.split(',').map((s: any) => s.trim())[2] || ''}
-              thumbnail={popup.thumbnail}
-              eventStart={popup.eventStart}
-              eventEnd={popup.eventEnd}
-              favCount={popup.saveCount}
-              variant="compact"
-            />
-          </Link>
+          <CardComponent
+            key={popup.id}
+            id={popup.id}
+            title={popup.title}
+            location={popup.address.split(',').map((s: any) => s.trim())[2] || ''}
+            thumbnail={popup.thumbnail}
+            eventStart={popup.eventStart}
+            eventEnd={popup.eventEnd}
+            savedCount={popup.saveCount}
+            variant="compact"
+          />
         ))}
       </div>
 
