@@ -3,16 +3,47 @@
 import CardComponent from '@/components/common/card';
 import { clientApi } from '@/libs/api';
 import { useSaveStore } from '@/store/useSaveStore';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function CurrentPopupList() {
   // HACK: 이벤트를 꼭 상태에 넣어주어야 할까. 정적으로 미리 받아와서 뿌려주는 걸로 변경해보자.
   const [events, setEvents] = useState<any[]>([]);
-
+  const { data: session } = useSession();
   //좋아요 zustand로 관리
   const saveStores = useSaveStore((s) => s.savedStores);
-  const handleSaves = useSaveStore((s) => s.toggleSaveStore);
+  // const handleSaves = useSaveStore((s) => s.toggleSaveStore);
+  const handleSaves = async (eventId: number) => {
+    useSaveStore.getState().toggleSaveStore(eventId);
+    const isNowSaved = useSaveStore.getState().savedStores.includes(eventId);
+
+    try {
+      if (isNowSaved) {
+        // 저장(좋아요) 등록 (POST)
+        await clientApi(`/api/like/${eventId}`, {
+          method: 'POST',
+          body: JSON.stringify({ userId: session?.user?.id }),
+          headers: { 'Content-Type': 'application/json' },
+        });
+      } else {
+        // 저장(좋아요) 해제 (DELETE)
+        await clientApi(`/api/like/${eventId}`, {
+          method: 'DELETE',
+          body: JSON.stringify({ userId: session?.user?.id }),
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+    } catch (e) {
+      // 실패 처리: 롤백(옵션), 알림 등
+      // 예시: 실패하면 다시 상태 롤백
+      useSaveStore.getState().toggleSaveStore(eventId);
+      alert('서버에 반영하지 못했습니다.');
+      console.error(e);
+    }
+  };
+
+  useSaveStore((s) => s.toggleSaveStore);
   // NOTE: next.js가 기본적으로 컴포넌트를 서버에서 미리 렌더링(SSR/SSG)하기 때문에 localStorage에 바로 접근할 수 없음
   // 개발환경에서는 느린데 빌드 후에는 어떨지 모르겠음.
   const [hydrated, setHydrated] = useState(false);
