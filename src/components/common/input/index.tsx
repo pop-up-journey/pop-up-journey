@@ -4,18 +4,27 @@ import LabelIconMapper from './LabelIconMapper';
 import { Label, LABELS } from './labels';
 
 interface InputProps {
+  // 기본 입력 관련
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   type: 'text' | 'email' | 'url' | 'password' | 'tel' | 'search' | 'file' | 'number';
+
+  // 라벨 관련
   label?: Label | string;
-  variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
+
+  // 상태 관련
   isReadOnly?: boolean;
   isRequired?: boolean;
+  isInvalid?: boolean;
+
+  // 메세지 관련
   errorMessage?: string;
   description?: string;
-  isInvalid?: boolean;
+
+  // 스타일 관련
   className?: string;
+  variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
 }
 // NOTE: 필요시 스타일링은 여기서 작성 할 것
 const styles = {
@@ -43,13 +52,14 @@ export default function Input({
   isInvalid,
   isRequired,
   className,
+  variant = 'underlined',
 }: InputProps) {
   const isLabelEnum = label && Object.values(LABELS).includes(label as Label);
   const Icon: FC<SVGProps<SVGSVGElement>> | null = isLabelEnum ? LabelIconMapper(label as Label) : null;
 
   return (
     <HerouiInput
-      variant="underlined"
+      variant={variant}
       size="md"
       fullWidth={true}
       label={label}
