@@ -36,6 +36,7 @@ export default function CardComponent({
   onToggleSave,
 }: CardProps) {
   const isCompact = variant === 'compact';
+  const router = useRouter();
 
   const handleFavClick = () => {
     if (onToggleSave) {
@@ -43,7 +44,6 @@ export default function CardComponent({
     }
   };
 
-  const router = useRouter();
   return (
     <>
       <If isTrue={!isCompact}>
@@ -92,7 +92,7 @@ export default function CardComponent({
       <If isTrue={isCompact}>
         <Card
           isPressable
-          className="bg-bgcolor max-w-[480px] rounded-3xl border border-white/20 bg-white/10 p-10 py-4 shadow-2xl backdrop-blur-2xl"
+          className="bg-bgcolor rounded-3xl border border-white/20 bg-white/10 p-10 py-4 shadow-2xl backdrop-blur-2xl"
           shadow="none"
           radius="sm"
           onPress={() => router.push(`/event/${id}`)}

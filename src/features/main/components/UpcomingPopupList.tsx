@@ -32,7 +32,7 @@ export default function UpcomingPopupList({ sectionTitle, initialCount, initialE
 
   return (
     <SectionLayout title={sectionTitle} isEmpty={!events || events.length === 0}>
-      <div className="-mx-4 grid grid-cols-1 gap-10 px-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-x-15 lg:gap-y-12">
         {events.map((popup) => (
           <CardComponent
             key={popup.id}
