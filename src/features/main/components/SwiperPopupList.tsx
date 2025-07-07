@@ -4,11 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface SwiperPopupListProps {
   events: EventData[];
+  maxLimit?: number;
   isSaved: (id: number) => boolean;
   onToggleSave: (id: number) => void;
 }
 
-export function SwiperPopupList({ events, isSaved, onToggleSave }: SwiperPopupListProps) {
+export function SwiperPopupList({ events, maxLimit = 8, isSaved, onToggleSave }: SwiperPopupListProps) {
   return (
     <Swiper
       spaceBetween={10}
@@ -20,7 +21,7 @@ export function SwiperPopupList({ events, isSaved, onToggleSave }: SwiperPopupLi
         '@1.50': { slidesPerView: 4.5, spaceBetween: 40 },
       }}
     >
-      {events.map((popup) => (
+      {events.slice(0, maxLimit).map((popup) => (
         <SwiperSlide key={popup.id} className="min-w-0">
           <CardComponent {...popup} isSaved={isSaved(popup.id)} onToggleSave={onToggleSave} />
         </SwiperSlide>

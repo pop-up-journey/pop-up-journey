@@ -32,7 +32,7 @@ export default function CurrentPopupList({ events, likeEventIds, sectionTitle }:
   };
 
   return (
-    <SectionLayout title={sectionTitle} isEmpty={!events || events.length === 0}>
+    <SectionLayout title={sectionTitle} isEmpty={!events || events.length === 0} rightSlot="더 많은 이벤트 보기">
       {/* HACK : 애니메이션 변경 예정*/}
       <SwiperPopupList events={events} isSaved={(id) => saveStores.includes(id)} onToggleSave={handleSaves} />
     </SectionLayout>
