@@ -1,3 +1,4 @@
+'use client';
 import Chip from '@/components/common/chip';
 import { formatDate } from '@/utils/dateformatter';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';

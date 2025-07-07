@@ -1,34 +1,44 @@
 'use client';
 
 import CardComponent from '@/components/common/card';
-import { clientApi } from '@/libs/api';
 import { useSaveStore } from '@/store/useSaveStore';
 import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-export default function CurrentPopupList() {
+interface CurrentPopupListProps {
+  events: any[];
+  likeEventIds: number[];
+}
+
+export default function CurrentPopupList({ events, likeEventIds }: CurrentPopupListProps) {
   // HACK: 이벤트를 꼭 상태에 넣어주어야 할까. 정적으로 미리 받아와서 뿌려주는 걸로 변경해보자.
-  const [events, setEvents] = useState<any[]>([]);
+  // const [events, setEvents] = useState<any[]>([]);
   const { data: session } = useSession();
-  const [hydrated, setHydrated] = useState(false);
+  // const [hydrated, setHydrated] = useState(false);
+
+  // 좋아요 초기화 (SSR → zustand로 한 번만 복사)
+  useEffect(() => {
+    useSaveStore.getState().setSavedStores(likeEventIds ?? []);
+  }, [likeEventIds]);
+
   //좋아요 zustand로 관리
   const saveStores = useSaveStore((s) => s.savedStores);
   const toggleSaveStore = useSaveStore((s) => s.toggleSaveStore);
 
   // NOTE: next.js가 기본적으로 컴포넌트를 서버에서 미리 렌더링(SSR/SSG)하기 때문에 localStorage에 바로 접근할 수 없음
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
+  // useEffect(() => {
+  //   setHydrated(true);
+  // }, []);
 
-  useEffect(() => {
-    if (hydrated) {
-      clientApi('/api/events?status=ongoing', { method: 'GET' }).then((data) => {
-        setEvents(data);
-      });
-    }
-  }, [hydrated]);
+  // useEffect(() => {
+  //   if (hydrated) {
+  //     clientApi('/api/events?status=ongoing', { method: 'GET' }).then((data) => {
+  //       setEvents(data);
+  //     });
+  //   }
+  // }, [hydrated]);
 
   const handleSaves = async (eventId: number) => {
     // zustand에 토글 실시간 반영
@@ -38,7 +48,7 @@ export default function CurrentPopupList() {
     saveStoreDebounce(eventId, isNowSaved, session?.user?.id);
   };
 
-  if (!hydrated) return null;
+  // if (!hydrated) return null;
 
   return (
     <section className="mx-auto mb-10 max-w-6xl overflow-hidden px-4">

@@ -1,17 +1,13 @@
+'use client';
 import CardComponent from '@/components/common/card';
-import { clientApi } from '@/libs/api';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export default function UpcomingPopupList() {
-  const [events, setEvents] = useState<any[]>([]);
+interface UpcomingPopupListProps {
+  events: any[]; // 타입 필요시 정확하게!
+}
+
+export default function UpcomingPopupList({ events }: UpcomingPopupListProps) {
   const [visibleCount, setVisibleCount] = useState(4);
-
-  useEffect(() => {
-    clientApi('/api/events?status=ongoing', { method: 'GET' }).then((data) => {
-      setEvents(data);
-      console.log(data);
-    });
-  }, []);
 
   const handleShowMore = () => {
     setVisibleCount((prev) => Math.min(prev + 4, events.length));
