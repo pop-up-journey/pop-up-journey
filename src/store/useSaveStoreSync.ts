@@ -1,13 +1,12 @@
 import { useSaveStore } from '@/store/useSaveStore';
 import { useEffect } from 'react';
 
-// 좋아요 초기화 (SSR → zustand로 한 번만 복사)
-// zustand setter를 무조건 실행 X, 값이 다를때만 실행
 export function useSaveStoreSync(likeEventIds: number[]) {
   useEffect(() => {
     const current = useSaveStore.getState().savedStores;
-    if (likeEventIds.length !== current.length || !likeEventIds.every((id, idx) => current[idx] === id)) {
-      useSaveStore.getState().setSavedStores(likeEventIds ?? []);
+    // zustand에 이미 값이 있으면 서버값으로 덮지 않음 (초기 진입시에만 동작)
+    if (current.length === 0 && likeEventIds.length > 0) {
+      useSaveStore.getState().setSavedStores(likeEventIds);
     }
-  }, [likeEventIds]);
+  }, []);
 }
