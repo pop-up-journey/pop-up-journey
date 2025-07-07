@@ -57,6 +57,7 @@ export default function AddInfoForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // TODO: 각 필드에 대한 값 validation 추가 해야함
     if (userId) {
       updateUserInfo({ name, email, phone, role }, userId);
       return;
