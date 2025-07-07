@@ -14,7 +14,7 @@ export default function InterestChip() {
     }
   };
   return (
-    <div>
+    <>
       <label className="mb-1 block">관심사</label>
       <div className="mb-1 flex flex-wrap gap-2">
         {categories.map((category) => (
@@ -30,6 +30,6 @@ export default function InterestChip() {
         ))}
       </div>
       <p className="text-xs text-black/80 dark:text-white/80">관심있는 팝업을 선택해주세요.</p>
-    </div>
+    </>
   );
 }
