@@ -5,10 +5,12 @@ import { Label, LABELS } from './labels';
 
 interface InputProps {
   // 기본 입력 관련
+  name?: string;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  type: 'text' | 'email' | 'url' | 'password' | 'tel' | 'search' | 'file' | 'number';
+  type: string;
+  // type?: 'text' | 'email' | 'url' | 'password' | 'tel' | 'search' | 'file' | 'number';
 
   // 라벨 관련
   label?: Label | string;
@@ -17,9 +19,10 @@ interface InputProps {
   isReadOnly?: boolean;
   isRequired?: boolean;
   isInvalid?: boolean;
+  isDisabled?: boolean;
 
   // 메세지 관련
-  errorMessage?: string;
+  errorMessage?: string | null;
   description?: string;
 
   // 스타일 관련
@@ -41,12 +44,14 @@ const styles = {
 };
 
 export default function Input({
+  name,
   label,
   value,
   onChange,
   placeholder,
   type,
   isReadOnly = false,
+  isDisabled = false,
   errorMessage,
   description,
   isInvalid,
@@ -59,6 +64,7 @@ export default function Input({
 
   return (
     <HerouiInput
+      name={name}
       variant={variant}
       size="md"
       fullWidth={true}
@@ -68,6 +74,7 @@ export default function Input({
       value={value}
       onChange={onChange}
       isReadOnly={isReadOnly}
+      isDisabled={isDisabled}
       isRequired={isRequired}
       isInvalid={isInvalid}
       errorMessage={errorMessage}
