@@ -10,20 +10,31 @@ export async function GET(req: NextRequest) {
     // 이벤트 상태에 따라 불러오기
     const { searchParams } = new URL(req.url);
     const status = searchParams.get('status');
+    const page = Number(searchParams.get('page') || 1);
+    const pageSize = Number(searchParams.get('pageSize') || 10);
 
-    let result;
     const allowedStatus = ['upcoming', 'ongoing', 'ended'] as const;
+    const baseQuery = db.select().from(events);
+
     if (status && allowedStatus.includes(status as any)) {
-      result = await db
-        .select()
-        .from(events)
-        .where(eq(events.eventStatus, status as (typeof allowedStatus)[number]));
-    } else {
-      result = await db.select().from(events);
+      baseQuery.where(eq(events.eventStatus, status as (typeof allowedStatus)[number]));
     }
-    return NextResponse.json(result);
+
+    //페이지네이션 계산
+    const countRows = await baseQuery.execute();
+    const totalCount = countRows.length;
+    //페이지네이션 적용
+    const offset = (page - 1) * pageSize;
+    const paginatedQuery = baseQuery.limit(pageSize).offset(offset);
+
+    const result = await paginatedQuery.execute();
+
+    return NextResponse.json({
+      events: result,
+      totalCount,
+    });
   } catch (error) {
-    console.error('Error fetching users:', error);
+    console.error('Error fetching events:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

@@ -11,8 +11,16 @@ export default async function MainPage() {
   return (
     <main className="w-100vw space-y-24 overflow-hidden">
       <MainBanner />
-      <CurrentPopupList sectionTitle="지금! 서울 인기 팝업" events={currentEvents} likeEventIds={likedEventIds} />
-      <UpcomingPopupList sectionTitle="오픈 예정 팝업" events={upcomingEvents} />
+      <CurrentPopupList
+        sectionTitle="지금! 서울 인기 팝업"
+        events={currentEvents.events}
+        likeEventIds={likedEventIds}
+      />
+      <UpcomingPopupList
+        sectionTitle="오픈 예정 팝업"
+        initialEvents={upcomingEvents.events}
+        initialCount={upcomingEvents.totalCount}
+      />
     </main>
   );
 }
