@@ -4,10 +4,10 @@ import Button from '@/components/common/button';
 import HeroSection from '@/components/common/hero-section';
 import HostEventsList from '@/features/host-center/components/HostEventsList';
 import HostEventStats from '@/features/host-center/components/HostEventStats';
-import { getEventIcon, getStatusLabel } from '@/features/host-center/services/eventLabelHelpers';
+import { EVENT_STATUS_ICON, EVENT_STATUS_LABEL } from '@/features/host-center/services/eventLabelHelpers';
 import { getHostEvents } from '@/features/host-center/services/getHostEvents';
 import { getUserInfo } from '@/features/host-center/services/getUserInfo';
-import type { EventData } from '@/types/event';
+import { EVENT_STATUS, type EventData, type EventStatusType } from '@/types/event';
 import type { User } from '@/types/user';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -18,6 +18,8 @@ export default function TempMain() {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState<User[]>([]);
   const [hostEvents, setHostEvents] = useState<EventData[]>([]);
+  const [selectedStatus, setSelectedStatus] = useState<EventStatusType>(EVENT_STATUS.Ongoing);
+
   const router = useRouter();
 
   // HACK: unused value에 대한 에러 방지용 콘솔
@@ -36,13 +38,17 @@ export default function TempMain() {
     }
   }, [session, status]);
 
-  const events = useMemo(() => {
+  const eventsByStatus = useMemo(() => {
     return {
-      ongoing: hostEvents.filter((e) => e.eventStatus === 'ongoing'),
-      ended: hostEvents.filter((e) => e.eventStatus === 'ended'),
-      upcoming: hostEvents.filter((e) => e.eventStatus === 'upcoming'),
+      ongoing: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Ongoing),
+      ended: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Ended),
+      upcoming: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Upcoming),
     };
   }, [hostEvents]);
+
+  function handleStatusClick(status: EventStatusType) {
+    setSelectedStatus(status);
+  }
 
   return (
     <main className="min-h-screen">
@@ -73,10 +79,19 @@ export default function TempMain() {
       </section>
 
       {/* 이벤트 통계 영역 */}
-      <HostEventStats ongoing={events.ongoing.length} ended={events.ended.length} upcoming={events.upcoming.length} />
+      <HostEventStats
+        ongoing={eventsByStatus.ongoing.length}
+        ended={eventsByStatus.ended.length}
+        upcoming={eventsByStatus.upcoming.length}
+        onStatusClick={handleStatusClick}
+      />
 
       {/* 이벤트 리스트 */}
-      <HostEventsList events={hostEvents} getEventIcon={getEventIcon} getStatusLabel={getStatusLabel} />
+      <HostEventsList
+        events={eventsByStatus[selectedStatus]}
+        getEventIcon={(status) => EVENT_STATUS_ICON[status as EventStatusType]}
+        getStatusLabel={(status) => EVENT_STATUS_LABEL[status as EventStatusType]}
+      />
     </main>
   );
 }

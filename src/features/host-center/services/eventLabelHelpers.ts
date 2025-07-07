@@ -1,25 +1,13 @@
-export function getEventIcon(status: string) {
-  switch (status) {
-    case 'ongoing':
-      return '📅';
-    case 'ended':
-      return '🎉';
-    case 'upcoming':
-      return '🚀';
-    default:
-      return '❓';
-  }
-}
+import { EVENT_STATUS } from '@/types/event';
 
-export function getStatusLabel(status: string) {
-  switch (status) {
-    case 'ongoing':
-      return '진행중';
-    case 'ended':
-      return '종료';
-    case 'upcoming':
-      return '예정';
-    default:
-      return status;
-  }
-}
+export const EVENT_STATUS_LABEL = {
+  [EVENT_STATUS.Ongoing]: '진행중',
+  [EVENT_STATUS.Ended]: '종료',
+  [EVENT_STATUS.Upcoming]: '예정',
+};
+
+export const EVENT_STATUS_ICON = {
+  [EVENT_STATUS.Ongoing]: '📅',
+  [EVENT_STATUS.Ended]: '🎉',
+  [EVENT_STATUS.Upcoming]: '🚀',
+};
