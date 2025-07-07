@@ -8,4 +8,5 @@ export interface EventData {
   address: string;
   description?: string;
   hostId: string;
+  saveCount: number;
 }
