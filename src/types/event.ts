@@ -9,4 +9,5 @@ export interface EventData {
   description?: string;
   hostId: string;
   saveCount: number;
+  eventStatus: string;
 }

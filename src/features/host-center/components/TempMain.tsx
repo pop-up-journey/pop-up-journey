@@ -2,50 +2,45 @@
 
 import Button from '@/components/common/button';
 import HeroSection from '@/components/common/hero-section';
-import { clientApi } from '@/libs/api';
+import HostEventStats from '@/features/host-center/components/HostEventStats';
+import { getHostEvents } from '@/features/host-center/services/getHostEvents';
+import { getUserInfo } from '@/features/host-center/services/getUserInfo';
+import type { EventData } from '@/types/event';
+import type { User } from '@/types/user';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function TempMain() {
   const { data: session, status } = useSession();
-  const [userInfo, setUserInfo] = useState<any>(null);
-  const [hostEvents, setHostEvents] = useState<any>(null);
+  const [userInfo, setUserInfo] = useState<User[]>([]);
+  const [hostEvents, setHostEvents] = useState<EventData[]>([]);
   const router = useRouter();
-  const getUserInfo = async () => {
-    try {
-      if (status === 'authenticated' && session?.user?.id) {
-        const res = await clientApi(`/api/users/${session?.user?.id}`, { method: 'GET' });
-        console.log(res);
-        setUserInfo(res);
-      }
-    } catch (error) {
-      console.error('Failed to get user info', error);
-    }
-  };
 
-  const getHostEvents = async () => {
-    try {
-      if (status === 'authenticated' && session?.user?.id) {
-        const res = await clientApi(`/api/host/${session?.user?.id}`, { method: 'GET' });
-        console.log(res);
-        setHostEvents(res);
-      }
-    } catch (error) {
-      console.error('Failed to get host events', error);
-    }
-  };
   // HACK: unused value에 대한 에러 방지용 콘솔
   // regist 페이지 후에 데이터 연결 할 것
-  console.log(hostEvents);
+  // console.log(hostEvents);
 
   useEffect(() => {
-    getUserInfo();
-    getHostEvents();
+    if (status === 'authenticated' && session?.user?.id) {
+      getUserInfo(session.user.id).then(setUserInfo);
+    }
   }, [session, status]);
 
-  console.log(userInfo);
+  useEffect(() => {
+    if (status === 'authenticated' && session?.user?.id) {
+      getHostEvents(session.user.id).then(setHostEvents);
+    }
+  }, [session, status]);
+
+  const events = useMemo(() => {
+    return {
+      ongoing: hostEvents.filter((e) => e.eventStatus === 'ongoing'),
+      ended: hostEvents.filter((e) => e.eventStatus === 'ended'),
+      upcoming: hostEvents.filter((e) => e.eventStatus === 'upcoming'),
+    };
+  }, [hostEvents]);
 
   return (
     <main className="min-h-screen">
@@ -76,20 +71,7 @@ export default function TempMain() {
       </section>
 
       {/* 이벤트 통계 영역 */}
-      <section id="defaultSt" className="mx-auto mt-8 grid max-w-5xl grid-cols-3 gap-6">
-        <div className="rounded-lg bg-gray-50 p-6">
-          <div className="mb-2 text-sm text-gray-500">Ongoing Events</div>
-          <div className="text-2xl font-bold">1</div>
-        </div>
-        <div className="rounded-lg bg-gray-50 p-6">
-          <div className="mb-2 text-sm text-gray-500">Closed Events</div>
-          <div className="text-2xl font-bold">1</div>
-        </div>
-        <div className="rounded-lg bg-gray-50 p-6">
-          <div className="mb-2 text-sm text-gray-500">Upcoming Events</div>
-          <div className="text-2xl font-bold">1</div>
-        </div>
-      </section>
+      <HostEventStats ongoing={events.ongoing.length} ended={events.ended.length} upcoming={events.upcoming.length} />
 
       {/* 이벤트 리스트 */}
       <section id="defaultSt" className="mx-auto mt-12 max-w-5xl">
