@@ -2,7 +2,9 @@
 
 import Button from '@/components/common/button';
 import HeroSection from '@/components/common/hero-section';
+import HostEventsList from '@/features/host-center/components/HostEventsList';
 import HostEventStats from '@/features/host-center/components/HostEventStats';
+import { getEventIcon, getStatusLabel } from '@/features/host-center/services/eventLabelHelpers';
 import { getHostEvents } from '@/features/host-center/services/getHostEvents';
 import { getUserInfo } from '@/features/host-center/services/getUserInfo';
 import type { EventData } from '@/types/event';
@@ -74,53 +76,7 @@ export default function TempMain() {
       <HostEventStats ongoing={events.ongoing.length} ended={events.ended.length} upcoming={events.upcoming.length} />
 
       {/* 이벤트 리스트 */}
-      <section id="defaultSt" className="mx-auto mt-12 max-w-5xl">
-        <ul className="space-y-6">
-          {/* 이벤트 아이템 1 */}
-          <li className="flex items-start justify-between border border-gray-200 p-4">
-            <div className="flex items-center gap-4">
-              {/* 아이콘/썸네일 */}
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-2xl">📅</div>
-              <div>
-                <div className="font-semibold">Charity Run</div>
-                <div className="text-xs text-gray-500">Status: Ongoing</div>
-              </div>
-            </div>
-            <div className="text-right text-sm text-gray-500">
-              Views: 150 | Likes: 30
-              <br />| Participants: 75
-            </div>
-          </li>
-          {/* 이벤트 아이템 2 */}
-          <li className="flex items-start justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-2xl">🎉</div>
-              <div>
-                <div className="font-semibold">Annual Gala</div>
-                <div className="text-xs text-gray-500">Status: Done</div>
-              </div>
-            </div>
-            <div className="text-right text-sm text-gray-500">
-              Views: 300 | Likes: 50
-              <br />| Participants: 100
-            </div>
-          </li>
-          {/* 이벤트 아이템 3 */}
-          <li className="flex items-start justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-2xl">🚀</div>
-              <div>
-                <div className="font-semibold">Startup Meetup</div>
-                <div className="text-xs text-gray-500">Status: Upcoming</div>
-              </div>
-            </div>
-            <div className="text-right text-sm text-gray-500">
-              Views: 200 | Likes: 25
-              <br />| Participants: 30
-            </div>
-          </li>
-        </ul>
-      </section>
+      <HostEventsList events={hostEvents} getEventIcon={getEventIcon} getStatusLabel={getStatusLabel} />
     </main>
   );
 }
