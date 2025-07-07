@@ -3,11 +3,11 @@
 import Button from '@/components/common/button';
 import { LABELS } from '@/components/common/input/labels';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
-import { clientApi } from '@/libs/api';
 import { useAddInfoFormStore } from '@/store/add-info/useAddInfoFormStore';
 import { useEffect } from 'react';
 import { validateName } from '../services/nameValidation';
 import { validatePhone } from '../services/phoneValidation';
+import { updateUserInfo } from '../services/updateUserInfo';
 import FormTitle from './FormTitle';
 import InputField from './InputField';
 import InterestChip from './InterestChip';
@@ -42,8 +42,10 @@ export default function AddInfoForm() {
   const { userInfo } = useGetUserInfo();
   const setValue = useAddInfoFormStore((state) => state.setValue);
 
-  const { name, email, phone, role, interests } = useAddInfoFormStore();
-  console.log(name, email, phone, role, interests);
+  // TODO: interests 항목을 db에 넣을지 아니면 localstorage에 넣을지 고민
+  const { name, email, phone, role } = useAddInfoFormStore();
+
+  const userId = userInfo?.id;
 
   useEffect(() => {
     if (userInfo) {
@@ -53,42 +55,12 @@ export default function AddInfoForm() {
     }
   }, [userInfo]);
 
-  //TODO: service로 분리
-  const handleUserInfo = async ({
-    name,
-    email,
-    phone,
-    role,
-  }: {
-    name: string;
-    email: string;
-    phone: string;
-    role: string;
-  }) => {
-    try {
-      const res = await clientApi(`/api/users/${userInfo?.id}`, {
-        method: 'POST',
-        body: {
-          name,
-          email,
-          phone,
-          role,
-        },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (res.ok) {
-        console.log('User info updated successfully');
-      }
-    } catch (error) {
-      console.error('Failed to update user info', error);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    handleUserInfo({ name, email, phone, role });
+    if (userId) {
+      updateUserInfo({ name, email, phone, role }, userId);
+      return;
+    }
   };
 
   return (
