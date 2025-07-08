@@ -4,7 +4,7 @@ import Button from '@/components/common/button';
 import { LABELS } from '@/components/common/input/labels';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useAddInfoFormStore } from '@/store/add-info/useAddInfoFormStore';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { validateName } from '../services/nameValidation';
 import { validatePhone } from '../services/phoneValidation';
 import { updateUserInfo } from '../services/updateUserInfo';
@@ -41,9 +41,9 @@ const inputOptions = {
 export default function AddInfoForm() {
   const { userInfo } = useGetUserInfo();
   const setValue = useAddInfoFormStore((state) => state.setValue);
+  const setIsValid = useAddInfoFormStore((state) => state.setIsValid);
 
   // TODO: interests 항목을 db에 넣을지 아니면 localstorage에 넣을지 고민
-  const { name, email, phone, role } = useAddInfoFormStore();
 
   const userId = userInfo?.id;
 
@@ -52,17 +52,33 @@ export default function AddInfoForm() {
       setValue('name', userInfo.name);
       setValue('email', userInfo.email ?? '');
       setValue('phone', userInfo.phone ?? '');
+      setIsValid('name', true);
+      setIsValid('email', true);
+      setIsValid('phone', true);
     }
-  }, [userInfo]);
+  }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: 각 필드에 대한 값 validation 추가 해야함
-    if (userId) {
-      updateUserInfo({ name, email, phone, role }, userId);
-      return;
-    }
-  };
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      const { name, email, phone, role, nameValid, emailValid, phoneValid } = useAddInfoFormStore.getState(); // NOTE: interest 어떻게
+      if (!name || !email || !phone || !role) {
+        alert('모든 필드를 입력해주세요.'); // TODO: Toast
+        return;
+      }
+
+      if (!nameValid || !emailValid || !phoneValid) {
+        alert('모든 필드를 입력해주세요.'); // TODO: Toast
+        return;
+      }
+
+      if (userId) {
+        updateUserInfo({ name, email, phone, role }, userId);
+        return;
+      }
+    },
+    [userId]
+  );
 
   return (
     <section aria-label="add-info-form">
