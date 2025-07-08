@@ -7,21 +7,23 @@ interface HostEventStatsProps {
   onStatusClick: (status: EventStatusType) => void;
 }
 
+const STATUS_LABELS: { status: EventStatusType; label: string }[] = [
+  { status: 'ongoing', label: '운영중인 팝업' },
+  { status: 'ended', label: '종료된 팝업' },
+  { status: 'upcoming', label: '예정된 팝업' },
+];
+
 export default function HostEventStats({ ongoing, ended, upcoming, onStatusClick }: HostEventStatsProps) {
+  const stats = { ongoing, ended, upcoming };
+
   return (
     <section id="defaultSt" className="mx-auto mt-8 grid max-w-5xl grid-cols-3 gap-6">
-      <div className="cursor-pointer rounded-lg bg-gray-50 p-6" onClick={() => onStatusClick('ongoing')}>
-        <div className="mb-2 text-sm text-gray-500">운영중인 팝업</div>
-        <div className="text-2xl font-bold">{ongoing}</div>
-      </div>
-      <div className="cursor-pointer rounded-lg bg-gray-50 p-6" onClick={() => onStatusClick('ended')}>
-        <div className="mb-2 text-sm text-gray-500">종료된 팝업</div>
-        <div className="text-2xl font-bold">{ended}</div>
-      </div>
-      <div className="cursor-pointer rounded-lg bg-gray-50 p-6" onClick={() => onStatusClick('upcoming')}>
-        <div className="mb-2 text-sm text-gray-500">예정된 팝업</div>
-        <div className="text-2xl font-bold">{upcoming}</div>
-      </div>
+      {STATUS_LABELS.map(({ status, label }) => (
+        <div key={status} className="cursor-pointer rounded-lg bg-gray-50 p-6" onClick={() => onStatusClick(status)}>
+          <div className="mb-2 text-sm text-gray-500">{label}</div>
+          <div className="text-2xl font-bold">{stats[status]}</div>
+        </div>
+      ))}
     </section>
   );
 }
