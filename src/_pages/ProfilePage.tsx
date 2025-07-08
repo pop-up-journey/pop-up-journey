@@ -19,6 +19,9 @@ export default function ProfilePage() {
   // TODO: 알림 -> 토스트로 변경
   // 모달창으로 한번 더 confirm 창 띄우기
   // save event api
+  {
+    /* TODO: 페이지네이션 어떻게 할지 추가적인 설정 필요 */
+  }
 
   return (
     <main className="min-h-screen">
@@ -26,10 +29,10 @@ export default function ProfilePage() {
         title={`${userInfo && userInfo.name}님 환영합니다!`}
         description="프로필 수정과 관심 팝업은 여기에서 볼 수 있어요"
       />
+      {/** TODO: 섹션 분리해야됨 mainpage 작업 이후에 진행할 예정*/}
       <div className="mx-auto max-w-6xl">
         <MyProfile userInfo={userInfo} />
         {/* 관심팝업 */}
-        {/* TODO: 페이지네이션 어떻게 할지 추가적인 설정 필요 */}
         <section className="mx-auto mt-12">
           <h2 className="mb-4 text-2xl font-bold">나의 관심 팝업</h2>
           {/* 관심 팝업 전체 삭제 버튼 : 관심팝업이 1개 이상일 경우*/}
