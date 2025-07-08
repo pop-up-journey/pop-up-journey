@@ -9,17 +9,17 @@ import { useRouter } from 'next/navigation';
 import { If } from 'react-haiku';
 
 interface CardProps {
-  id: number;
+  id: string;
   title?: string;
-  thumbnail: string | StaticImageData;
+  thumbnail?: string | StaticImageData | null;
   tags?: string[];
   location?: string;
-  eventStart?: string;
-  eventEnd?: string;
+  eventStart?: string | Date;
+  eventEnd?: string | Date;
   variant?: 'default' | 'compact';
-  savedCount?: number;
+  savedCount?: number | null;
   isSaved?: boolean;
-  onToggleSave?: (id: number) => void;
+  onToggleSave?: (id: string) => void;
 }
 
 export default function CardComponent({
@@ -73,7 +73,7 @@ export default function CardComponent({
               as={NextImage}
               alt="Card background"
               className="z-0 aspect-[4/5] w-full object-cover"
-              src={typeof thumbnail === 'string' ? thumbnail : thumbnail.src}
+              src={typeof thumbnail === 'string' ? thumbnail : thumbnail?.src}
               radius="none"
               width={240}
               height={300}
@@ -103,7 +103,7 @@ export default function CardComponent({
                 alt="썸네일"
                 className="h-full w-full cursor-pointer object-cover"
                 height={175}
-                src={typeof thumbnail === 'string' ? thumbnail : thumbnail.src}
+                src={typeof thumbnail === 'string' ? thumbnail : thumbnail?.src}
                 width={140}
               />
             </div>

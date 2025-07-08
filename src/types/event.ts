@@ -1,12 +1,3 @@
-export interface EventData {
-  id: number;
-  title: string;
-  thumbnail: string;
-  tags: string[];
-  eventStart: string;
-  eventEnd: string;
-  address: string;
-  description?: string;
-  hostId: string;
-  saveCount: number;
-}
+import type { Event as DBEvent } from '@/db/schema/events';
+
+export type EventData = DBEvent;

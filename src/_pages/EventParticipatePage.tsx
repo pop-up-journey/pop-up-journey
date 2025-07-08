@@ -30,7 +30,7 @@ export default function EventParticipationPage({ event }: Props) {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
   const imgSrc = Array.isArray(event.thumbnail) ? event.thumbnail[0] : event.thumbnail;
-  const place = event.address.split(',').map((s: string) => s.trim())[1];
+  const place = event?.address?.split(',').map((s: string) => s.trim())[1];
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');

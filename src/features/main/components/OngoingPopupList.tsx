@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 interface OngoingPopupListProps {
   events: EventData[];
-  likeEventIds: number[];
+  likeEventIds: string[];
   sectionTitle: string;
 }
 
@@ -29,7 +29,7 @@ export default function OngoingPopupList({ events, likeEventIds, sectionTitle }:
   const saveStores = useSaveStore((s) => s.savedStores);
   const toggleSaveStore = useSaveStore((s) => s.toggleSaveStore);
   // NOTE: Swiper 내부에서 re-render가 많다면 useCallback으로 래핑 가능
-  const handleSaves = async (eventId: number) => {
+  const handleSaves = async (eventId: string) => {
     // zustand 반영 : 실시간 토글 UI
     toggleSaveStore(eventId);
     const isNowSaved = !saveStores.includes(eventId);

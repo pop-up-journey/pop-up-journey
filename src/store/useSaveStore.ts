@@ -2,9 +2,9 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface SavedStoreState {
-  savedStores: number[];
-  toggleSaveStore: (id: number) => void;
-  setSavedStores: (ids: number[]) => void;
+  savedStores: string[];
+  toggleSaveStore: (id: string) => void;
+  setSavedStores: (ids: string[]) => void;
 }
 
 export const useSaveStore = create(

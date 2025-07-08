@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 interface SwiperPopupListProps {
   events: EventData[];
   maxLimit?: number;
-  isSaved: (id: number) => boolean;
-  onToggleSave: (id: number) => void;
+  isSaved: (id: string) => boolean;
+  onToggleSave: (id: string) => void;
 }
 
 export function SwiperPopupList({ events, maxLimit = 8, isSaved, onToggleSave }: SwiperPopupListProps) {
