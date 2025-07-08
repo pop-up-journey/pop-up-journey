@@ -1,13 +1,16 @@
 'use client';
+import Button from '@/components/common/button';
 import { SignInButtonList } from '@/features/sign-in/components/SignInButton';
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@heroui/react';
+import useResizeUi from '@/hooks/useResizeUi';
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@heroui/react';
 
 export default function SignInModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isMdUp } = useResizeUi();
 
   return (
     <>
-      <Button color="primary" variant="flat" onPress={onOpen}>
+      <Button color="primary" variant="flat" onPress={onOpen} size={isMdUp ? 'md' : 'sm'}>
         로그인
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
