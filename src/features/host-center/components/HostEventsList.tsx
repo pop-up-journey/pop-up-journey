@@ -37,9 +37,8 @@ export default function HostEventsList({ events, getEventIcon, getStatusLabel }:
               likes={event.saveCount ?? 0}
               participants={456}
             />
-            {/* 마지막 아이템에 ref 부착 */}
             {idx === visibleCount - 1 && visibleCount < events.length && (
-              <div ref={observeRef as React.RefObject<HTMLDivElement>} style={{ height: 30 }} />
+              <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-[30px]" />
             )}
           </li>
         ))}
