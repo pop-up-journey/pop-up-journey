@@ -26,7 +26,7 @@ export const useAddInfoFormStore = create<AddInfoFormState & AddInfoFormActions>
   nameValid: false,
   emailValid: false,
   phoneValid: false,
-  setIsValid: (key, isValid) => set({ [key]: isValid }),
   setValue: (key, value) => set({ [key]: value }),
+  setIsValid: (key, isValid) => set({ [`${key}Valid`]: isValid }),
   setInterests: (interests: string[]) => set({ interests: [...interests] }),
 }));
