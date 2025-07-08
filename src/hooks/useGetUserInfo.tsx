@@ -12,7 +12,7 @@ export default function useGetUserInfo() {
   const getUserInfo = async () => {
     try {
       if (status === 'authenticated' && session?.user?.id) {
-        const res = await clientApi(`/api/users/${session?.user?.id}`, { method: 'GET' });
+        const res: User = await clientApi(`/api/users/${session?.user?.id}`, { method: 'GET' });
         setUserInfo(res);
       }
     } catch (error) {

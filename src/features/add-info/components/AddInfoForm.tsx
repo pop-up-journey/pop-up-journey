@@ -49,9 +49,9 @@ export default function AddInfoForm() {
 
   useEffect(() => {
     if (userInfo) {
-      setValue('name', userInfo?.name);
-      setValue('email', userInfo?.email ?? '');
-      setValue('phone', userInfo?.phone ?? '');
+      setValue('name', userInfo.name);
+      setValue('email', userInfo.email ?? '');
+      setValue('phone', userInfo.phone ?? '');
     }
   }, [userInfo]);
 
