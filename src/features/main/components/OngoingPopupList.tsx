@@ -3,10 +3,10 @@
 import { SectionLayout } from '@/features/main/components/SectionLayout';
 import { SwiperPopupList } from '@/features/main/components/SwiperPopupList';
 import { useSaveStore } from '@/store/useSaveStore';
-import { useSaveStoreSync } from '@/store/useSaveStoreSync';
 import type { EventData } from '@/types/event';
 import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
 import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
 interface OngoingPopupListProps {
   events: EventData[];
@@ -16,8 +16,14 @@ interface OngoingPopupListProps {
 
 export default function OngoingPopupList({ events, likeEventIds, sectionTitle }: OngoingPopupListProps) {
   const { data: session } = useSession();
-  //SSR zustand 동기화 커스텀훅
-  useSaveStoreSync(likeEventIds);
+  //SSR zustand 동기화
+  useEffect(() => {
+    const current = useSaveStore.getState().savedStores;
+    // zustand에 이미 값이 있으면 서버값으로 덮지 않음 (초기 진입시에만 동작)
+    if (current.length === 0 && likeEventIds.length > 0) {
+      useSaveStore.getState().setSavedStores(likeEventIds);
+    }
+  }, []);
 
   // 관심이벤트 zustand 관리
   const saveStores = useSaveStore((s) => s.savedStores);
