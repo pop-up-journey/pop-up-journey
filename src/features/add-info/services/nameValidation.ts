@@ -9,8 +9,6 @@ export const nameSchema = z
 export const validateName = (value: string) => {
   const result = nameSchema.safeParse(value);
 
-  console.log(result);
-
   if (!result.success) {
     return {
       isValid: false,
