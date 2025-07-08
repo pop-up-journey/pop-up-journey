@@ -8,13 +8,13 @@ import type { EventData } from '@/types/event';
 import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
 import { useSession } from 'next-auth/react';
 
-interface CurrentPopupListProps {
+interface OngoingPopupListProps {
   events: EventData[];
   likeEventIds: number[];
   sectionTitle: string;
 }
 
-export default function CurrentPopupList({ events, likeEventIds, sectionTitle }: CurrentPopupListProps) {
+export default function OngoingPopupList({ events, likeEventIds, sectionTitle }: OngoingPopupListProps) {
   const { data: session } = useSession();
   //SSR zustand 동기화 커스텀훅
   useSaveStoreSync(likeEventIds);
