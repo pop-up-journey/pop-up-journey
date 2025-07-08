@@ -8,8 +8,8 @@ import EventExtraInfo from '@/features/event/register/components/EventExtraInfo'
 import EventImageUpload from '@/features/event/register/components/EventImageUpload';
 import EventLocation from '@/features/event/register/components/EventLocation';
 import EventRecruitment from '@/features/event/register/components/EventRecruitment';
-import { otherInfoOptions } from '@/features/event/register/constants';
 import useEventRegisterForm from '@/features/event/register/hooks/useEventRegisterForm';
+import { OTHER_INFO_OPTIONS } from '@/features/event/register/services/otherInfoLabelHelper';
 import { Textarea } from '@heroui/react';
 import { useSession } from 'next-auth/react';
 import Script from 'next/script';
@@ -125,7 +125,7 @@ export default function EventRegisterPage() {
             <EventRecruitment selectedMethods={recruitmentMethod} onChange={setRecruitmentMethod} />
 
             {/* 기타안내사항 */}
-            <EventExtraInfo options={otherInfoOptions} selectedInfo={selectedInfo} onToggle={handleInfoClick} />
+            <EventExtraInfo options={OTHER_INFO_OPTIONS} selectedInfo={selectedInfo} onToggle={handleInfoClick} />
 
             {/* 폼 제출 버튼 */}
             <Button type="submit">등록하기</Button>
