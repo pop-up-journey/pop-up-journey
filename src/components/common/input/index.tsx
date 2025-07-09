@@ -20,6 +20,8 @@ interface InputProps {
   isRequired?: boolean;
   isInvalid?: boolean;
   isDisabled?: boolean;
+  max?: number;
+  min?: number;
 
   // 메세지 관련
   errorMessage?: string | null;
@@ -58,6 +60,8 @@ export default function Input({
   isRequired,
   className,
   variant = 'underlined',
+  max,
+  min,
 }: InputProps) {
   const isLabelEnum = label && Object.values(LABELS).includes(label as Label);
   const Icon: FC<SVGProps<SVGSVGElement>> | null = isLabelEnum ? LabelIconMapper(label as Label) : null;
@@ -82,6 +86,8 @@ export default function Input({
       placeholder={placeholder}
       className={className}
       classNames={{ ...styles }}
+      max={max}
+      min={min}
       startContent={
         Icon && (
           <Icon className="pointer-events-none flex-shrink-0 text-black/50 dark:text-white/90" width={20} height={20} />

@@ -35,6 +35,8 @@ const inputOptions = {
     label: LABELS.TICKETS,
     type: 'number',
     validation: validateTickets,
+    max: 4,
+    min: 1,
   },
 };
 
