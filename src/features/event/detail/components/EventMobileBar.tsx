@@ -1,16 +1,30 @@
 import Button from '@/components/common/button';
 import ShareButton from '@/features/event/detail/components/ShareButton';
-import { HeartIcon } from '@heroicons/react/24/outline';
+import { useSaveStore } from '@/store/useSaveStore';
+import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
+import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 interface EventMobileBarProps {
   priceLabel: string;
-  onToggleSave?: () => void;
-  saved?: boolean;
   eventId: string;
 }
 
 export default function EventMobileBar({ priceLabel, eventId }: EventMobileBarProps) {
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
+
+  const savedStores = useSaveStore((s) => s.savedStores);
+  const toggleSaveStore = useSaveStore((s) => s.toggleSaveStore);
+  const isSaved = savedStores.includes(eventId);
+
+  const handleSaves = () => {
+    toggleSaveStore(eventId);
+    saveStoreDebounce(eventId, !isSaved, userId);
+  };
+
   return (
     <div className="fixed inset-x-4 bottom-4 z-50 flex items-center justify-center rounded-2xl bg-white/20 p-4 shadow-xl backdrop-blur-lg lg:hidden">
       {/* 가격 정보 */}
@@ -21,8 +35,12 @@ export default function EventMobileBar({ priceLabel, eventId }: EventMobileBarPr
       {/* 버튼 그룹  */}
       <div className="flex items-center space-x-3">
         {/* 관심 팝업(하트) */}
-        <Button isIconOnly>
-          <HeartIcon className="h-5 w-5 text-red-500" />
+        <Button isIconOnly onPress={handleSaves}>
+          {isSaved ? (
+            <HeartSolid className="h-5 w-5 text-red-500" />
+          ) : (
+            <HeartOutline className="h-5 w-5 text-red-500" />
+          )}
         </Button>
         {/* 링크 공유 */}
         <ShareButton />
