@@ -1,6 +1,6 @@
-import { EventStatusType } from '@/types/event';
+import type { EventStatusType } from '@/types/event';
 
-interface HostEventStatsProps {
+interface HostEventsStatsProps {
   ongoing: number;
   ended: number;
   upcoming: number;
@@ -13,7 +13,7 @@ const STATUS_LABELS: { status: EventStatusType; label: string }[] = [
   { status: 'upcoming', label: '예정된 팝업' },
 ];
 
-export default function HostEventStats({ ongoing, ended, upcoming, onStatusClick }: HostEventStatsProps) {
+export default function HostEventsStats({ ongoing, ended, upcoming, onStatusClick }: HostEventsStatsProps) {
   const stats = { ongoing, ended, upcoming };
 
   return (
