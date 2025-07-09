@@ -10,7 +10,11 @@ export default function ShareButton() {
   return (
     <>
       {/* 1024px 미만: 아이콘만 */}
-      <Button onPress={() => clipboard.copy(currentURL)} isIconOnly>
+      <Button
+        onPress={() => clipboard.copy(currentURL)}
+        isIconOnly
+        className="flex items-center justify-center rounded-lg border border-white/30 bg-white/30 shadow-2xl backdrop-blur-2xl transition hover:scale-105 lg:hidden dark:text-white"
+      >
         <LinkIcon className="h-5 w-5" />
       </Button>
 
