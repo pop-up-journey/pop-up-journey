@@ -1,6 +1,7 @@
 'use client';
 import Chip from '@/components/common/chip';
 import EventInfoItem from '@/features/event/detail/components/EventInfoItem';
+import { getAddressPart } from '@/utils/adress';
 import { formatDate } from '@/utils/dateformatter';
 import { BanknotesIcon, InformationCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
@@ -20,7 +21,7 @@ export default function EventInfoList({ eventStart, eventEnd, address, extraInfo
   const day = format(start, 'd', { locale: ko });
 
   // 장소
-  const place = address?.split(',').map((s) => s.trim())[1];
+  const place = getAddressPart(address!, 1);
 
   // 기타 정보
   const extraInfos =

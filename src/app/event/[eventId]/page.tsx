@@ -1,13 +1,10 @@
 import EventDetailPage from '@/_pages/EventDetailPage';
 import { getEventById } from '@/features/event/detail/services/getEventById';
 import { getHostByEventId } from '@/features/event/detail/services/getHostByEventId';
+import type { PageProps } from '@/features/event/detail/types';
 import { notFound } from 'next/navigation';
 
-interface Props {
-  params: Promise<{ eventId: string }>;
-}
-
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: PageProps) {
   const { eventId } = await params;
 
   const event = await getEventById(eventId);
