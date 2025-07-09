@@ -1,4 +1,4 @@
-export const otherInfoOptions = [
+export const OTHER_INFO_OPTIONS = [
   { id: 'parking_available', label: '주차가능' },
   { id: 'no_parking', label: '주차불가' },
   { id: 'kids_zone', label: '웰컴 키즈존' },

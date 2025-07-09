@@ -49,53 +49,35 @@ export default function useEventRegisterForm(hostId: string | undefined) {
   }, []);
 
   //제출 함수
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      if (!uploadedImage) {
-        alert('이미지를 업로드해주세요.');
-        return;
-      }
+    if (!uploadedImage) {
+      alert('이미지를 업로드해주세요.');
+      return;
+    }
 
-      await clientApi(`/api/host/${hostId}`, {
-        method: 'POST',
-        body: {
-          title,
-          description,
-          recruitmentMethod,
-          email,
-          capacity,
-          selectedInfo,
-          thumbnail: uploadedImage.url, // 업로드된 이미지 URL 전송
-          eventStart,
-          eventEnd,
-          zonecode,
-          address,
-          extraAddress,
-        },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    },
-    [
-      address,
-      capacity,
-      description,
-      email,
-      eventEnd,
-      eventStart,
-      hostId,
-      recruitmentMethod,
-      selectedInfo,
-      thumbnail,
-      uploadedImage,
-      zonecode,
-      title,
-      extraAddress,
-    ]
-  );
+    await clientApi(`/api/host/${hostId}`, {
+      method: 'POST',
+      body: {
+        title,
+        description,
+        recruitmentMethod,
+        email,
+        capacity,
+        selectedInfo,
+        thumbnail: uploadedImage.url, // 업로드된 이미지 URL 전송
+        eventStart,
+        eventEnd,
+        zonecode,
+        address,
+        extraAddress,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };
 
   return {
     fields: {
