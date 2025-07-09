@@ -1,24 +1,14 @@
 'use client';
 
 import Button from '@/components/common/button';
-import Chip from '@/components/common/chip';
 import ShareButton from '@/features/event/detail/components/ShareButton';
 import type { EventData } from '@/types/event';
 import type { User } from '@/types/user';
-import { formatDate } from '@/utils/dateformatter';
-import {
-  ArrowTopRightOnSquareIcon,
-  BanknotesIcon,
-  ChevronDoubleRightIcon,
-  HeartIcon,
-  InformationCircleIcon,
-  MapPinIcon,
-} from '@heroicons/react/24/outline';
+import { ChevronDoubleRightIcon, HeartIcon } from '@heroicons/react/24/outline';
 import { Divider, Image } from '@heroui/react';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale';
 import NextImage from 'next/image';
 import Link from 'next/link';
+import InfoList from '../features/event/detail/components/InfoList';
 
 interface EventDetailProps {
   event: EventData;
@@ -27,23 +17,7 @@ interface EventDetailProps {
 
 export default function EventDetailPage({ event, host }: EventDetailProps) {
   const imgSrc = Array.isArray(event.thumbnail) ? event.thumbnail[0] : event.thumbnail;
-  // 달력 아이콘(커스텀)
-  const start = event.eventStart;
-  const month = format(start, 'M', { locale: ko });
-  const day = format(start, 'd', { locale: ko });
-  // 주소 쪼개기
-  const place = event?.address?.split(',').map((s: string) => s.trim())[1];
-  // 기타 안내 사항
-  // NOTE: 아이콘이랑 같이 띄워주면 좋을듯
-  const extraInfos: string[] =
-    typeof event.extraInfo === 'string'
-      ? event.extraInfo
-          .split(',')
-          .map((s: string) => s.trim())
-          .filter(Boolean)
-      : Array.isArray(event.extraInfo)
-        ? event.extraInfo
-        : [];
+
   return (
     // NOTE: 시맨틱하게 바꿀 수 있는 요소들 리팩토링 필요
     <>
@@ -62,46 +36,13 @@ export default function EventDetailPage({ event, host }: EventDetailProps) {
           </Link>
         </div>
         <Divider className="my-4" />
-        {/* 일시 */}
-        <div className="mb-2 flex items-center gap-4">
-          <div className="flex h-8 w-8 flex-col overflow-hidden rounded border text-center shadow-sm">
-            <div className="bg-gray-600/30 py-[2px] text-[8px] leading-none text-gray-500">{month}월</div>
-            <div className="bg-transparent py-[1px] text-xs font-semibold">{day}</div>
-          </div>
-          <p className="text-sm text-gray-500">
-            {formatDate(event.eventStart)} ~ {formatDate(event.eventEnd)}
-          </p>
-        </div>
-        {/* 장소 */}
-        <div className="mb-2 flex flex-row items-center gap-4">
-          <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded border-none">
-            <MapPinIcon className="h-5 w-5 text-gray-500" />
-          </div>
-          <Link
-            href={`http://map.kakao.com/link/search/${place}`}
-            target="_blank"
-            className="inline-flex items-center space-x-1 text-sm text-gray-500"
-          >
-            <p>{place}</p>
-            <ArrowTopRightOnSquareIcon className="h-5 w-5 lg:hidden" />
-          </Link>
-        </div>
-        {/* 비용 */}
-        <div className="mb-2 flex flex-row items-center gap-4">
-          <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded border-none">
-            <BanknotesIcon className="h-5 w-5 text-gray-500" />
-          </div>
-          <p className="text-sm text-gray-500">무료</p>
-        </div>
-        {/* 기타 정보 */}
-        <div className="mb-2 flex flex-row items-center gap-4">
-          <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded border-none">
-            <InformationCircleIcon className="h-5 w-5 text-gray-500" />
-          </div>
-          {extraInfos.map((info, index) => (
-            <Chip key={index}>{info}</Chip>
-          ))}
-        </div>
+        {/* 이벤트 정보 */}
+        <InfoList
+          eventStart={event.eventStart}
+          eventEnd={event.eventEnd}
+          address={event.address}
+          extraInfo={event.extraInfo}
+        />
         <Divider className="my-4" />
         {/* 본문 */}
         <div className="mb-14">
