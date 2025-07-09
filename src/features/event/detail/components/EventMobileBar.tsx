@@ -1,7 +1,6 @@
 import Button from '@/components/common/button';
 import ShareButton from '@/features/event/detail/components/ShareButton';
-import { useSaveStore } from '@/store/useSaveStore';
-import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
+import useHandleSave from '@/hooks/useHandleSave';
 import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
@@ -15,15 +14,7 @@ interface EventMobileBarProps {
 export default function EventMobileBar({ priceLabel, eventId }: EventMobileBarProps) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
-
-  const savedStores = useSaveStore((s) => s.savedStores);
-  const toggleSaveStore = useSaveStore((s) => s.toggleSaveStore);
-  const isSaved = savedStores.includes(eventId);
-
-  const handleSaves = () => {
-    toggleSaveStore(eventId);
-    saveStoreDebounce(eventId, !isSaved, userId);
-  };
+  const { isSaved, toggle } = useHandleSave(eventId, userId);
 
   return (
     <div className="fixed inset-x-4 bottom-4 z-50 flex items-center justify-center rounded-2xl bg-white/20 p-4 shadow-xl backdrop-blur-lg lg:hidden">
@@ -35,7 +26,7 @@ export default function EventMobileBar({ priceLabel, eventId }: EventMobileBarPr
       {/* 버튼 그룹  */}
       <div className="flex items-center space-x-3">
         {/* 관심 팝업(하트) */}
-        <Button isIconOnly onPress={handleSaves}>
+        <Button isIconOnly onPress={toggle}>
           {isSaved ? (
             <HeartSolid className="h-5 w-5 text-red-500" />
           ) : (
