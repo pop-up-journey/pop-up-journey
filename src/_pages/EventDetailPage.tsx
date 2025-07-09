@@ -1,6 +1,8 @@
 'use client';
 
 import Button from '@/components/common/button';
+import EventDescription from '@/features/event/detail/components/EventDescription';
+import EventInfoList from '@/features/event/detail/components/EventInfoList';
 import ShareButton from '@/features/event/detail/components/ShareButton';
 import type { EventData } from '@/types/event';
 import type { User } from '@/types/user';
@@ -8,7 +10,6 @@ import { ChevronDoubleRightIcon, HeartIcon } from '@heroicons/react/24/outline';
 import { Divider, Image } from '@heroui/react';
 import NextImage from 'next/image';
 import Link from 'next/link';
-import InfoList from '../features/event/detail/components/InfoList';
 
 interface EventDetailProps {
   event: EventData;
@@ -37,7 +38,7 @@ export default function EventDetailPage({ event, host }: EventDetailProps) {
         </div>
         <Divider className="my-4" />
         {/* 이벤트 정보 */}
-        <InfoList
+        <EventInfoList
           eventStart={event.eventStart}
           eventEnd={event.eventEnd}
           address={event.address}
@@ -45,16 +46,7 @@ export default function EventDetailPage({ event, host }: EventDetailProps) {
         />
         <Divider className="my-4" />
         {/* 본문 */}
-        <div className="mb-14">
-          <p className="mb-2 text-lg font-semibold">이벤트 소개</p>
-          {/* Glassmorphic Card */}
-          <div className="relative overflow-hidden rounded-3xl border border-white/30 bg-white/20 p-6 shadow-xl backdrop-blur-lg">
-            {/* Glossy Sheen */}
-            <div className="pointer-events-none absolute top-0 left-0 h-2 w-full animate-pulse bg-gradient-to-b from-white/50 to-transparent" />
-            {/* 실제 본문 */}
-            <p className="relative text-sm leading-relaxed text-gray-800">{event.description}</p>
-          </div>
-        </div>
+        <EventDescription description={event.description} />
       </section>
       {/* 1024px 미만 반응형: 하단 바 */}
       <div className="fixed inset-x-4 bottom-4 z-50 flex items-center rounded-2xl bg-white/20 p-4 shadow-xl backdrop-blur-lg lg:hidden">
