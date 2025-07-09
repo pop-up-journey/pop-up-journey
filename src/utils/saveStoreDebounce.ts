@@ -1,7 +1,7 @@
 import { clientApi } from '@/libs/api';
 import debounce from 'lodash.debounce';
 
-export const saveStoreDebounce = debounce(async (eventId: number, isNowSaved: boolean, userId: string | undefined) => {
+export const saveStoreDebounce = debounce(async (eventId: string, isNowSaved: boolean, userId: string | undefined) => {
   try {
     if (isNowSaved) {
       await clientApi(`/api/like/${eventId}`, {

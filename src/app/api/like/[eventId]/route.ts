@@ -1,15 +1,14 @@
+import { createEventSaveSchema, eventSave, insertEventSaveSchema } from '@/db/schema';
+import { auth } from '@/libs/auth';
 import { and, eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextRequest, NextResponse } from 'next/server';
-import { createEventSaveSchema, eventSave, insertEventSaveSchema } from '../../../../db/schema';
-import { auth } from '../../../../libs/auth';
 
 const db = drizzle(process.env.DATABASE_URL!);
 
-export async function POST(req: NextRequest, { params }: { params: Promise<{ eventId: string }> }) {
+export async function POST(_req: NextRequest, { params }: { params: Promise<{ eventId: string }> }) {
   try {
     const { eventId } = await params;
-    // const { userId } = await req.json();
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -33,10 +32,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ eve
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ eventId: string }> }) {
+export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ eventId: string }> }) {
   try {
     const { eventId } = await params;
-    // const { userId } = await req.json();
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

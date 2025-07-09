@@ -36,7 +36,7 @@ export default function UpcomingPopupList({ sectionTitle, initialCount, initialE
         {events.map((popup) => (
           <CardComponent
             key={popup.id}
-            location={popup.address.split(',').map((s: any) => s.trim())[2] || ''}
+            location={popup?.address?.split(',').map((s: any) => s.trim())[2] || ''}
             savedCount={popup.saveCount}
             {...popup}
             variant="compact"
