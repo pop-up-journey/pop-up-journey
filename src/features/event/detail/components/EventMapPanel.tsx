@@ -2,12 +2,11 @@
 
 import Button from '@/components/common/button';
 import ShareButton from '@/features/event/detail/components/ShareButton';
-import useKakaoLoader from '@/hooks/useKakaoLoader';
+import useGeocode from '@/features/event/detail/hooks/useGeocode';
 import { ChevronDoubleRightIcon } from '@heroicons/react/24/outline';
 import { Avatar } from '@heroui/react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 interface KakaoMapProps {
@@ -17,21 +16,8 @@ interface KakaoMapProps {
 // 맵 로드
 export default function EventMapPanel({ address, organizer }: KakaoMapProps) {
   const { eventId } = useParams();
-  const { isLoaded } = useKakaoLoader();
-  const [position, setPosition] = useState({ lat: 33.167, lng: 126.570667 });
   const safeAddress = address ?? '';
-  useEffect(() => {
-    if (!window.kakao?.maps) return;
-    const geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(safeAddress, (result, status) => {
-      if (status === window.kakao.maps.services.Status.OK) {
-        setPosition({
-          lat: parseFloat(result[0].y),
-          lng: parseFloat(result[0].x),
-        });
-      }
-    });
-  }, [isLoaded, address]);
+  const { position } = useGeocode(safeAddress);
 
   return (
     <section className="h-130 w-80">
@@ -39,14 +25,14 @@ export default function EventMapPanel({ address, organizer }: KakaoMapProps) {
       <div className="mb-6 w-full max-w-4xl transform overflow-hidden rounded-2xl shadow-2xl transition-transform hover:-translate-y-2">
         <Map
           id="map"
-          center={position}
+          center={position!}
           style={{
             width: '100%',
             height: '400px',
           }}
           level={3}
         >
-          <MapMarker position={position} />
+          <MapMarker position={position!} />
         </Map>
       </div>
       {/* 주최자 */}
