@@ -2,6 +2,7 @@
 
 import type { EventData } from '@/types/event';
 
+import FloatingBundle from '@/features/add-info/components/FloatingBundle';
 import EventSummary from '@/features/event/participate/components/EventSummary';
 import ParticipateForm from '@/features/event/participate/components/ParticipateForm';
 
@@ -19,9 +20,8 @@ export default function EventParticipationPage({ event }: Props) {
   return (
     <>
       <main className="mx-auto min-h-screen max-w-6xl">
-        {/* 왼쪽 블록 */}
+        <FloatingBundle />
         <EventSummary event={event} />
-
         <ParticipateForm eventId={eventId} />
       </main>
     </>

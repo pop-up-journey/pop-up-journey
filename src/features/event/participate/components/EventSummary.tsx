@@ -15,8 +15,8 @@ export default function EventSummary({ event }: EventSummaryProps) {
 
   return (
     <section className="flex flex-col space-y-4">
-      <h1 className="text-3xl font-bold">{event.title}</h1>
-      <div className="relative">
+      <h1 className="text-center text-3xl font-bold">{event.title}</h1>
+      <div className="relative mx-auto">
         <Image
           isZoomed
           as={NextImage}
@@ -30,7 +30,7 @@ export default function EventSummary({ event }: EventSummaryProps) {
         />
       </div>
       {/* 일시 */}
-      <div>
+      <div id="defaultSt" className="mb-4">
         <div className="flex flex-row items-center gap-2">
           <div className="flex h-8 w-8 items-center overflow-hidden rounded border-none">
             <CalendarIcon className="h-5 w-5 text-gray-500" />
