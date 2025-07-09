@@ -1,6 +1,7 @@
 'use client';
 import Chip from '@/components/common/chip';
 import EventInfoItem from '@/features/event/detail/components/EventInfoItem';
+import { OTHER_INFO_MAP } from '@/features/event/register/services/otherInfoLabelHelper';
 import { getAddressPart } from '@/utils/adress';
 import { formatDate } from '@/utils/dateformatter';
 import { BanknotesIcon, InformationCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';
@@ -63,9 +64,14 @@ export default function EventInfoList({ eventStart, eventEnd, address, extraInfo
         icon={<InformationCircleIcon className="h-5 w-5 text-gray-500" />}
         label={
           <>
-            {extraInfos.map((info, idx) => (
-              <Chip key={idx}>{info}</Chip>
-            ))}
+            {extraInfos.map((infoId, idx) => {
+              const label = OTHER_INFO_MAP[infoId] ?? infoId;
+              return (
+                <Chip key={idx} className="mr-2">
+                  {label}{' '}
+                </Chip>
+              );
+            })}
           </>
         }
       />
