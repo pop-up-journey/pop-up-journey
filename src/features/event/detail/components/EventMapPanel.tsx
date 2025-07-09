@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 interface KakaoMapProps {
-  address: string;
+  address?: string;
   organizer: string;
 }
 // 맵 로드
@@ -19,11 +19,11 @@ export default function EventMapPanel({ address, organizer }: KakaoMapProps) {
   const { eventId } = useParams();
   const { isLoaded } = useKakaoLoader();
   const [position, setPosition] = useState({ lat: 33.167, lng: 126.570667 });
-
+  const safeAddress = address ?? '';
   useEffect(() => {
     if (!window.kakao?.maps) return;
     const geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(address, (result, status) => {
+    geocoder.addressSearch(safeAddress, (result, status) => {
       if (status === window.kakao.maps.services.Status.OK) {
         setPosition({
           lat: parseFloat(result[0].y),
