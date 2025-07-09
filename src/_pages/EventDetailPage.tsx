@@ -3,12 +3,11 @@
 import EventDescription from '@/features/event/detail/components/EventDescription';
 import EventInfoList from '@/features/event/detail/components/EventInfoList';
 import EventMobileBar from '@/features/event/detail/components/EventMobileBar';
+import EventTitle from '@/features/event/detail/components/EventTitle';
 import type { EventData } from '@/types/event';
 import type { User } from '@/types/user';
-import { ChevronDoubleRightIcon } from '@heroicons/react/24/outline';
 import { Divider, Image } from '@heroui/react';
 import NextImage from 'next/image';
-import Link from 'next/link';
 
 interface EventDetailProps {
   event: EventData;
@@ -27,14 +26,7 @@ export default function EventDetailPage({ event, host }: EventDetailProps) {
           <Image isBlurred as={NextImage} src={imgSrc} alt={event.title} width={400} height={500} />
         </div>
         {/* 타이틀 */}
-        <div className="flex items-baseline space-x-3">
-          <strong className="text-3xl drop-shadow-lg">{event.title}</strong>
-          {/* 1024px 미만 반응형: 주최자명 */}
-          <Link href="/host-center" className="inline-flex items-center space-x-1 text-sm text-gray-500 lg:hidden">
-            <span className="truncate font-medium">{host.name}</span>
-            <ChevronDoubleRightIcon className="h-4 w-4" />
-          </Link>
-        </div>
+        <EventTitle title={event.title} hostName={host.name} hostLink="/host-center" />
         <Divider className="my-4" />
         {/* 이벤트 정보 */}
         <EventInfoList
