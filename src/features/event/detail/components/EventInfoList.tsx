@@ -34,7 +34,7 @@ export default function EventInfoList({ eventStart, eventEnd, address, extraInfo
         : [];
 
   return (
-    <div className="space-y-2">
+    <section className="space-y-2">
       {/* 일시 */}
       <EventInfoItem
         icon={
@@ -68,6 +68,6 @@ export default function EventInfoList({ eventStart, eventEnd, address, extraInfo
           </>
         }
       />
-    </div>
+    </section>
   );
 }
