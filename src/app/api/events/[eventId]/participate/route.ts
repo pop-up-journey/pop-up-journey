@@ -26,7 +26,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ eve
     userId,
     eventId,
     participantStatus: body.participantStatus,
-    tickets: body.tickets,
+    tickets: Number(body.tickets),
   });
   if (!parsed.success) {
     return NextResponse.json({ error: parsed.error.issues }, { status: 400 });
