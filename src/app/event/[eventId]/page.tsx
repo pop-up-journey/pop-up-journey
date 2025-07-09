@@ -1,17 +1,20 @@
 import EventDetailPage from '@/_pages/EventDetailPage';
-import { clientApi } from '@/libs/api';
-import type { EventData } from '@/types/event';
-import type { User } from '@/types/user';
+import { getEventById } from '@/features/event/detail/services/getEventById';
+import { getHostByEventId } from '@/features/event/detail/services/getHostByEventId';
+import { notFound } from 'next/navigation';
 
 interface Props {
-  params: { eventId: string };
+  params: Promise<{ eventId: string }>;
 }
 
 export default async function Page({ params }: Props) {
   const { eventId } = await params;
-  const event = await clientApi<EventData>(`/api/events/${eventId}`, { method: 'GET' });
-  const hostList = await clientApi<User[]>(`/api/users/${event.hostId}`, { method: 'GET' });
-  const host = hostList[0];
+
+  const event = await getEventById(eventId);
+  if (!event) notFound();
+
+  const host = await getHostByEventId(event.hostId);
+  if (!host) notFound();
 
   return <EventDetailPage event={event} host={host} />;
 }
