@@ -1,50 +1,59 @@
 'use client';
+import Button from '@/components/common/button';
+import CardComponent from '@/components/common/card';
+import { SectionLayout } from '@/features/main/components/SectionLayout';
+import { getEvents } from '@/features/main/services/getEvents';
+import { usePagination } from '@/hooks/usePagination';
+import type { EventData } from '@/types/event';
 
-import Link from 'next/link';
-import { useState } from 'react';
-import CardComponent from '../../../components/common/card';
-import { upcomingPopupList } from '../../../mock/mockdata';
+interface UpcomingPopupListProps {
+  initialEvents: EventData[];
+  sectionTitle: string;
+  initialCount?: number;
+}
 
-export default function UpcomingPopupList() {
-  const [visibleCount, setVisibleCount] = useState(4);
-
-  const handleShowMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 4, upcomingPopupList.length));
-  };
-
-  const isAllVisible = visibleCount >= upcomingPopupList.length;
+export default function UpcomingPopupList({ sectionTitle, initialCount, initialEvents }: UpcomingPopupListProps) {
+  const pageSize = 4;
+  const {
+    items: events,
+    loadMore,
+    loading,
+    isEnd,
+  } = usePagination<EventData>(
+    ({ page, pageSize }) =>
+      getEvents({ status: 'upcoming', page, pageSize }).then((res) => ({
+        items: res?.events ?? [],
+        totalCount: res?.totalCount ?? 0,
+      })),
+    initialEvents,
+    initialCount ?? 0,
+    pageSize
+  );
 
   return (
-    <section className="mx-auto mb-10 max-w-6xl px-4 pb-10">
-      <h2 className="mb-4 text-2xl font-bold">오픈 예정 팝업</h2>
-      <div className="-mx-4 grid grid-cols-1 gap-10 px-4 md:grid-cols-2">
-        {upcomingPopupList.slice(0, visibleCount).map((popup) => (
-          <Link href={`/event/${popup.id}`} key={popup.id} className="block">
-            <CardComponent
-              key={popup.id}
-              id={popup.id}
-              title={popup.title}
-              thumbnail={popup.thumbnail}
-              tags={popup.tags}
-              eventStart={popup.event_start}
-              eventEnd={popup.event_end}
-              variant="compact"
-            />
-          </Link>
+    <SectionLayout title={sectionTitle} isEmpty={!events || events.length === 0}>
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-x-15 lg:gap-y-12">
+        {events.map((popup) => (
+          <CardComponent
+            key={popup.id}
+            location={popup?.address?.split(',').map((s: any) => s.trim())[2] || ''}
+            savedCount={popup.saveCount}
+            {...popup}
+            variant="compact"
+          />
         ))}
       </div>
-
-      {!isAllVisible && (
+      {!isEnd && (
         <div className="mt-8 flex justify-center">
-          <button
-            onClick={handleShowMore}
+          <Button
+            onClick={loadMore}
+            disabled={loading}
             className="border-default-200 hover:bg-default-100 w-full cursor-pointer rounded-md border px-6 py-2 text-sm"
           >
-            {/* TODO: 더보기 Button -> 공통 UI로 디자인 변경 예정 */}
             더보기
-          </button>
+          </Button>
         </div>
       )}
-    </section>
+    </SectionLayout>
   );
 }
