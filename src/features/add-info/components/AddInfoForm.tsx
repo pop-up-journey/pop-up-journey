@@ -59,7 +59,6 @@ export default function AddInfoForm() {
   }, [userInfo]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log('handleSubmit');
     e.preventDefault();
     const { name, email, phone, role, nameValid, emailValid, phoneValid } = useAddInfoFormStore.getState(); // NOTE: interest 어떻게
     if (!name || !email || !phone || !role) {
@@ -88,7 +87,7 @@ export default function AddInfoForm() {
           >
             <FormTitle>회원 정보 입력</FormTitle>
             {Object.entries(inputOptions).map(([k, v]) => (
-              <InputField key={k} {...v} />
+              <InputField key={k} {...v} useStore={useAddInfoFormStore} />
             ))}
             <Select />
             <InterestChip />

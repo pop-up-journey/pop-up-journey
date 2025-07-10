@@ -34,7 +34,7 @@ export const insertEventParticipantSchema = createInsertSchema(eventParticipants
 export const createEventParticipantSchema = z.object({
   userId: z.string().uuid('올바른 UUID 형식이 아닙니다'),
   eventId: z.string().uuid('올바른 UUID 형식이 아닙니다'),
-  participantStatus: z.enum(['pending', 'approved', 'rejected', 'cancelled']).default('pending'),
+  participantStatus: z.enum(['pending', 'approved', 'rejected', 'cancelled']).default('pending'), // TODO: default approve인듯
   tickets: z.number().int('티켓 수량은 정수여야 합니다').min(1, '최소 1장 이상 신청해야 합니다').default(1),
 });
 

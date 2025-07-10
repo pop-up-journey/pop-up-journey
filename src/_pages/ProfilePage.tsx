@@ -56,14 +56,14 @@ export default function ProfilePage() {
               .map((p) => (
                 <CardComponent
                   key={p.id}
-                  id={p.id}
+                  id={p.id.toString()}
                   title={p.title}
                   thumbnail={p.thumbnail}
                   tags={p.tags}
                   eventStart={p.event_start}
                   eventEnd={p.event_end}
                   variant="compact"
-                  isFavorite={true}
+                  isSaved={true}
                 />
               ))}
           </div>
