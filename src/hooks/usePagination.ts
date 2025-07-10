@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type FetchFunction<T> = (params: { page: number; pageSize: number }) => Promise<{ items: T[]; totalCount: number }>;
 
@@ -12,6 +12,12 @@ export function usePagination<T>(
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(initialTotalCount);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setItems(initialItems);
+    setPage(1);
+    setTotalCount(initialTotalCount);
+  }, [initialItems, initialTotalCount]);
 
   const isEnd = items.length >= totalCount;
 

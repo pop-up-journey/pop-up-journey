@@ -1,17 +1,12 @@
 'use client';
 
 import useKakaoLoader from '@/hooks/useKakaoLoader';
+import type { EventData } from '@/types/event';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-interface Event {
-  id: number;
-  address: string;
-  title: string;
-}
-
 interface Props {
-  events: Event[];
+  events: EventData[];
 }
 // NOTE: 선택한 지역 권역에 따라 중심좌표를 이동하게 할까
 export default function EventsMap({ events }: Props) {
@@ -23,7 +18,7 @@ export default function EventsMap({ events }: Props) {
     const geocoder = new kakao.maps.services.Geocoder();
 
     events.forEach((event) => {
-      const place = event.address.split(',').map((s: string) => s.trim())[1];
+      const place = event?.address?.split(',').map((s: string) => s.trim())[1] ?? '';
 
       geocoder.addressSearch(place, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
