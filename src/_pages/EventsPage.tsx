@@ -5,8 +5,9 @@ import EventList from '@/features/events/components/EventList';
 import EventsMap from '@/features/events/components/EventsMap';
 
 import { regionGroups } from '@/configs/regions';
+import { PAGE_SIZE } from '@/features/events/services/constants';
+import { fetchEvents } from '@/features/events/services/fetchEvents';
 import { usePagination } from '@/hooks/usePagination';
-import { clientApi } from '@/libs/api';
 import { EventData } from '@/types/event';
 import { Divider } from '@heroui/react';
 import { useEffect } from 'react';
@@ -17,29 +18,14 @@ interface Props {
   selectedZone: string | null;
 }
 
-const PAGE_SIZE = 6;
-
 export default function EventPage({ initialItems, initialTotalCount, selectedZone }: Props) {
   //NOTE: UseCallback
-  const fetchFn = async ({ page, pageSize }: { page: number; pageSize: number }) => {
-    const params = new URLSearchParams({
-      page: String(page),
-      pageSize: String(pageSize),
-      ...(selectedZone ? { zone: selectedZone } : {}),
-    });
-
-    const { events, totalCount } = (await clientApi(`/api/events?${params.toString()}`, { method: 'GET' })) as {
-      events: EventData[];
-      totalCount: number;
-    };
-
-    return {
+  const fetchFn = ({ page, pageSize }: { page: number; pageSize: number }) =>
+    fetchEvents({ zone: selectedZone, page, pageSize }).then(({ events, totalCount }) => ({
       items: events,
       totalCount,
-    };
-  };
+    }));
 
-  // usePagination 훅
   const { items, loading, isEnd, loadMore } = usePagination<EventData>(
     fetchFn,
     initialItems,

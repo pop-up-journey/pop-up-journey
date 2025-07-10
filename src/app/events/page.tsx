@@ -1,6 +1,6 @@
 import EventsPage from '@/_pages/EventsPage';
-import { clientApi } from '@/libs/api';
-import type { EventData } from '@/types/event';
+import { PAGE_SIZE } from '@/features/events/services/constants';
+import { fetchEvents } from '@/features/events/services/fetchEvents';
 
 interface PageProps {
   searchParams: Promise<{ zone?: string }>;
@@ -8,18 +8,11 @@ interface PageProps {
 
 export default async function Page({ searchParams }: PageProps) {
   const { zone } = await searchParams;
-
-  const params = new URLSearchParams({
-    page: '1',
-    pageSize: '6',
+  const { events, totalCount } = await fetchEvents({
+    zone,
+    page: 1,
+    pageSize: PAGE_SIZE,
   });
-  if (zone) params.set('zone', zone);
 
-  const { events: initialItems, totalCount: initialTotalCount } = (await clientApi(`/api/events?${params.toString()}`, {
-    method: 'GET',
-  })) as {
-    events: EventData[];
-    totalCount: number;
-  };
-  return <EventsPage selectedZone={zone ?? null} initialItems={initialItems} initialTotalCount={initialTotalCount} />;
+  return <EventsPage selectedZone={zone ?? null} initialItems={events} initialTotalCount={totalCount} />;
 }
