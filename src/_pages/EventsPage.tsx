@@ -6,6 +6,7 @@ import EventsMap from '@/features/events/components/EventsMap';
 
 import { regionGroups } from '@/configs/regions';
 import { usePagination } from '@/hooks/usePagination';
+import { clientApi } from '@/libs/api';
 import { EventData } from '@/types/event';
 import { Divider } from '@heroui/react';
 import { useEffect } from 'react';
@@ -16,15 +17,18 @@ interface Props {
   selectedZone: string | null;
 }
 
-export default function EventPage({ initialItems, initialTotalCount, selectedZone }: Props) {
-  const fetchFn = async ({ page, pageSize }: { page: number; pageSize: number }) => {
-    const url = new URL('/api/events', window.location.origin);
-    url.searchParams.set('page', page.toString());
-    url.searchParams.set('pageSize', pageSize.toString());
-    if (selectedZone) url.searchParams.set('zone', selectedZone);
+const PAGE_SIZE = 6;
 
-    const res = await fetch(url.toString());
-    const { events, totalCount } = (await res.json()) as {
+export default function EventPage({ initialItems, initialTotalCount, selectedZone }: Props) {
+  //NOTE: UseCallback
+  const fetchFn = async ({ page, pageSize }: { page: number; pageSize: number }) => {
+    const params = new URLSearchParams({
+      page: String(page),
+      pageSize: String(pageSize),
+      ...(selectedZone ? { zone: selectedZone } : {}),
+    });
+
+    const { events, totalCount } = (await clientApi(`/api/events?${params.toString()}`, { method: 'GET' })) as {
       events: EventData[];
       totalCount: number;
     };
@@ -40,7 +44,7 @@ export default function EventPage({ initialItems, initialTotalCount, selectedZon
     fetchFn,
     initialItems,
     initialTotalCount,
-    /* pageSize */ 6
+    PAGE_SIZE
   );
 
   const { observeRef, isVisible } = useIntersectionObserver({
@@ -56,7 +60,7 @@ export default function EventPage({ initialItems, initialTotalCount, selectedZon
     }
   }, [isVisible, loading, isEnd, loadMore]);
 
-  //
+  // NOTE: useMemo로 items가 바뀔때만 필터가 재계산 되도록 최적화 가능
   const filtered = selectedZone
     ? items.filter((e) => regionGroups[selectedZone].some((region) => e?.address?.includes(region)))
     : items;
