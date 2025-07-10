@@ -21,14 +21,14 @@ export default function HostCenterPage() {
   useEffect(() => {
     if (status === 'authenticated' && session?.user?.id) {
       getUserInfo(session.user.id).then((res) => {
-        setUserInfo(res[0] ?? null);
+        setUserInfo(res ?? null);
       });
       getHostEvents(session.user.id).then(setHostEvents);
     }
   }, [session, status]);
 
   return (
-    <main className="min-h-screen">
+    <main className="mb-10 min-h-screen">
       <HeroSection title="팝업의 여정 호스트 센터" description="이벤트를 주최하고 관리할 수 있습니다." />
       <HostProfile userInfo={userInfo} />
       <HostEvents events={hostEvents} />
