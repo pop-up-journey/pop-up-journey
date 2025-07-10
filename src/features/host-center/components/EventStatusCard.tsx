@@ -9,7 +9,7 @@ interface EventStatusCardProps {
 export default function EventStatusCard({ icon, title, status, views, likes, participants }: EventStatusCardProps) {
   return (
     <article
-      className="flex items-start justify-between border border-gray-200 p-4"
+      className="flex items-center justify-between border border-gray-200 p-4"
       aria-label={`Event card: ${title}`}
     >
       <section className="flex items-center gap-4">
@@ -21,17 +21,18 @@ export default function EventStatusCard({ icon, title, status, views, likes, par
             {title}
           </h2>
           <p className="text-xs text-gray-500">
-            <label>Status: </label>
+            <label>운영 상태 : </label>
             {status}
           </p>
         </div>
       </section>
       <aside className="text-right text-sm text-gray-500">
         <p>
-          <label>Views: </label>
-          {views} | <label>Likes: </label>
+          <label>조회수: </label>
+          {views} | <label>관심등록수: </label>
           {likes}
-          <br />| <label>Participants: </label>
+          <br />
+          <label>참여자수: </label>
           {participants}
         </p>
       </aside>
