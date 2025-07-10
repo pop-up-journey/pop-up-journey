@@ -10,3 +10,7 @@ export const OTHER_INFO_OPTIONS = [
   { id: 'wifi', label: '와이파이 가능' },
   { id: 'photography_allowed', label: '사진촬영 가능' },
 ];
+
+export const OTHER_INFO_MAP: Record<string, string> = Object.fromEntries(
+  OTHER_INFO_OPTIONS.map(({ id, label }) => [id, label])
+);

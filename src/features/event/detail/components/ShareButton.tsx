@@ -1,6 +1,6 @@
 'use client';
 import Button from '@/components/common/button';
-import { LinkIcon } from '@heroui/react';
+import { LinkIcon } from '@heroicons/react/24/outline';
 import { useParams } from 'next/navigation';
 import { useClipboard } from 'react-haiku';
 export default function ShareButton() {
@@ -15,7 +15,7 @@ export default function ShareButton() {
         isIconOnly
         className="flex items-center justify-center rounded-lg border border-white/30 bg-white/30 shadow-2xl backdrop-blur-2xl transition hover:scale-105 lg:hidden dark:text-white"
       >
-        <LinkIcon />
+        <LinkIcon className="h-5 w-5" />
       </Button>
 
       {/* 1024px 이상: 기존 버튼 */}
