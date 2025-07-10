@@ -6,7 +6,7 @@ import { useClipboard } from 'react-haiku';
 export default function ShareButton() {
   const params = useParams();
   const clipboard = useClipboard({ timeout: 2000 });
-  const currentURL = `${process.env.NEXT_PUBLIC_API_URL_DEV}/event/${params.id}`;
+  const currentURL = `${process.env.NEXT_PUBLIC_API_URL_DEV}/event/${params.eventId}`;
   return (
     <>
       {/* 1024px 미만: 아이콘만 */}

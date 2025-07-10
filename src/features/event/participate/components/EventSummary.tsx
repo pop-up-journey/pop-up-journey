@@ -11,7 +11,7 @@ interface EventSummaryProps {
 
 export default function EventSummary({ event }: EventSummaryProps) {
   const imgSrc = Array.isArray(event.thumbnail) ? event.thumbnail[0] : event.thumbnail;
-  const place = event.address.split(',').map((s: string) => s.trim())[1];
+  const place = event?.address?.split(',').map((s: string) => s.trim())[1];
 
   return (
     <section className="flex flex-col space-y-4">
