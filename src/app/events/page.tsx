@@ -14,5 +14,18 @@ export default async function Page({ searchParams }: PageProps) {
     pageSize: PAGE_SIZE,
   });
 
-  return <EventsPage selectedZone={zone ?? null} initialItems={events} initialTotalCount={totalCount} />;
+  const { events: fullEvents } = await fetchEvents({
+    zone,
+    page: 1,
+    pageSize: totalCount, // totalCount만큼 다 가져옴
+  });
+
+  return (
+    <EventsPage
+      selectedZone={zone ?? null}
+      initialItems={events}
+      initialTotalCount={totalCount}
+      fullEvents={fullEvents}
+    />
+  );
 }

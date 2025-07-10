@@ -16,9 +16,10 @@ interface Props {
   initialItems: EventData[];
   initialTotalCount: number;
   selectedZone: string | null;
+  fullEvents: EventData[];
 }
 
-export default function EventPage({ initialItems, initialTotalCount, selectedZone }: Props) {
+export default function EventPage({ initialItems, initialTotalCount, selectedZone, fullEvents }: Props) {
   //NOTE: UseCallback
   const fetchFn = ({ page, pageSize }: { page: number; pageSize: number }) =>
     fetchEvents({ zone: selectedZone, page, pageSize }).then(({ events, totalCount }) => ({
@@ -51,11 +52,15 @@ export default function EventPage({ initialItems, initialTotalCount, selectedZon
     ? items.filter((e) => regionGroups[selectedZone].some((region) => e?.address?.includes(region)))
     : items;
 
+  const mapEvents = selectedZone
+    ? fullEvents.filter((e) => regionGroups[selectedZone].some((r) => e.address?.includes(r)))
+    : fullEvents;
+
   return (
     <section className="mx-auto my-3 min-h-screen max-w-6xl overflow-hidden px-4">
       <EventsFilter selectedZone={selectedZone} />
       <Divider />
-      <EventsMap events={filtered} />
+      <EventsMap events={mapEvents} />
       <EventList events={filtered} />
       <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-1" />
     </section>
