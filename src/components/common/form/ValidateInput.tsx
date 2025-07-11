@@ -1,21 +1,18 @@
 'use client';
 
 import Input from '@/components/common/input';
+import { formatPhone } from '@/features/add-info/services/formatPhone';
+import type { ValidationResult } from '@/features/add-info/types/validationResult';
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'react-haiku';
-import { formatPhone } from '../services/formatPhone';
-import type { ValidationResult } from '../types/validationResult';
 
 interface InputFieldProps extends React.ComponentProps<typeof Input> {
   validation?: (value: string) => ValidationResult;
+  // TODO: 타입 정의 필요
   useStore?: any;
 }
 
 export default function ValidateInput(props: InputFieldProps) {
-  // const value = useAddInfoFormStore((state) => state[props.name as keyof typeof state]);
-  // const debouncedValue = useDebounce(value, 500);
-  // const setField = useAddInfoFormStore((state) => state.setValue);
-  // const setIsValid = useAddInfoFormStore((state) => state.setIsValid);
   const value = props.useStore((state: any) => state[props.name as string]);
   const debouncedValue = useDebounce(value, 500);
   const setField = props.useStore((state: any) => state.setValue);

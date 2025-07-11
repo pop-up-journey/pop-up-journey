@@ -1,16 +1,17 @@
 'use client';
 
 import Button from '@/components/common/button';
+import FormTitle from '@/components/common/form/FormTitle';
+import InputField from '@/components/common/form/ValidateInput';
 import { LABELS } from '@/components/common/input/labels';
-import InputField from '@/features/add-info/components/InputField';
+// validate는 따로 공통 utils로 빼기
 import { validateName } from '@/features/add-info/services/nameValidation';
 import { validatePhone } from '@/features/add-info/services/phoneValidation';
+import { createParticipate } from '@/features/popup-participate/api/createParticipate';
+import { validateTickets } from '@/features/popup-participate/services/validateTickets';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useEventParticipateFormStore } from '@/store/event-participate/useEventParticipateFormStore';
 import { useEffect } from 'react';
-import FormTitle from '../../../add-info/components/FormTitle';
-import { createParticipate } from '../services/createParticipate';
-import { validateTickets } from '../services/validateTickets';
 
 const inputOptions = {
   name: {

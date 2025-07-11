@@ -32,6 +32,13 @@ export default function Login() {
               <DropdownItem key="profile" onPress={() => router.push('/profile')}>
                 프로필
               </DropdownItem>
+              <DropdownItem key="host-center" onPress={() => router.push('/host-center')}>
+                {/** TODO: 호스트 인 경우에만 보여주기, 호스트 아닌 경우에는 disabled하게 혹은 호스트센터 버튼 누르면 호스트가 아닐 경우 host로 바꿀 수 있는 프로필 이동
+                 * 호스트가 아닌 경우 : 호스트로 변경
+                 * 호스트면 : 호스트 센터
+                 */}
+                호스트
+              </DropdownItem>
               <DropdownItem key="logout" variant="flat" color="danger" onPress={() => signOut()}>
                 로그아웃
               </DropdownItem>

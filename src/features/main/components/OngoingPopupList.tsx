@@ -18,6 +18,7 @@ export default function OngoingPopupList({ events, likeEventIds, sectionTitle }:
   const { data: session } = useSession();
   //SSR zustand 동기화
   useEffect(() => {
+    // TODO: 객분으로 가능
     const current = useSaveStore.getState().savedStores;
     // zustand에 이미 값이 있으면 서버값으로 덮지 않음 (초기 진입시에만 동작)
     if (current.length === 0 && likeEventIds.length > 0) {

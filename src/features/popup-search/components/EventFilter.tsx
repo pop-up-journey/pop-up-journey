@@ -1,7 +1,7 @@
 'use client';
 
-import ClickableChip from '@/components/common/selectable-chip';
 import { Zone, zones } from '@/configs/regions';
+import ClickableChip from '@/features/popup-search/components/SelectableChip';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface Props {

@@ -1,5 +1,5 @@
-import { PAGE_SIZE } from '@/features/events/services/constants';
-import { fetchEvents } from '@/features/events/services/fetchEvents';
+import { PAGE_SIZE } from '@/features/popup-search/services/constants';
+import { fetchEvents } from '@/features/popup-search/services/fetchEvents';
 import WrapperPopupSearch from '@/features/popup-search/WrapperPopupSearch';
 
 interface PageProps {

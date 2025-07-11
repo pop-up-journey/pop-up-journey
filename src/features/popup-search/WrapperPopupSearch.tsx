@@ -1,12 +1,12 @@
 'use client';
 
-import EventsFilter from '@/features/events/components/EventFilter';
-import EventList from '@/features/events/components/EventList';
-import EventsMap from '@/features/events/components/EventsMap';
+import EventsFilter from '@/features/popup-search/components/EventFilter';
+import EventList from '@/features/popup-search/components/EventList';
+import EventsMap from '@/features/popup-search/components/EventsMap';
 
 import { regionGroups } from '@/configs/regions';
-import { PAGE_SIZE } from '@/features/events/services/constants';
-import { fetchEvents } from '@/features/events/services/fetchEvents';
+import { PAGE_SIZE } from '@/features/popup-search/services/constants';
+import { fetchEvents } from '@/features/popup-search/services/fetchEvents';
 import { usePagination } from '@/hooks/usePagination';
 import { EventData } from '@/types/event';
 import { Divider } from '@heroui/react';

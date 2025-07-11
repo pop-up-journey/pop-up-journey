@@ -1,6 +1,6 @@
 'use client';
 
-import type { LatLng } from '@/features/event/detail/hooks/useGeocode';
+import type { LatLng } from '@/features/popup-detail/hooks/useGeocode';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 interface MapContainerProps {

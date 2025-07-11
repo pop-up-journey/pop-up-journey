@@ -7,8 +7,7 @@ import MembershipWithdrawal from '@/features/profile/components/MembershipWithdr
 import MyProfile from '@/features/profile/components/MyProfile';
 import { useLocalStorage } from 'react-haiku';
 import Button from '../../components/common/button';
-import CardComponent from '../../components/common/card';
-import { upcomingPopupList } from '../../mock/mockdata';
+// import { upcomingPopupList } from '../../mock/mockdata';
 
 export default function WrapperProfile() {
   const { userInfo } = useGetUserInfo();
@@ -51,7 +50,7 @@ export default function WrapperProfile() {
             </div>
           )}
           <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
-            {upcomingPopupList
+            {/* TODO: 실제데이터로 교체필요 {upcomingPopupList
               .filter((p) => favorites.includes(p.id))
               .map((p) => (
                 <CardComponent
@@ -65,7 +64,7 @@ export default function WrapperProfile() {
                   variant="compact"
                   isSaved={true}
                 />
-              ))}
+              ))} */}
           </div>
           {favorites.length === 0 && <p className="col-span-3 text-center text-gray-500">아직 관심 팝업이 없습니다.</p>}
         </section>

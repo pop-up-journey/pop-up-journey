@@ -32,28 +32,3 @@ export const validatePhone = (value: string) => {
     errorMessage: null,
   };
 };
-
-// 전화번호 검증 전처리 (rawPhoneSchema)
-// export const rawPhoneSchema = z
-//   .string()
-//   .transform((val) => val.replace(/[^0-9]/g, ''))
-//   .refine((d) => d.startsWith('010'), {
-//     message: '010으로 시작해야 합니다.',
-//   })
-//   .refine((d) => d.length === 11, {
-//     message: '숫자 11자리여야 합니다. (예: 01012345678)',
-//   });
-
-// // 포맷 적용 (phoneSchema)
-// export const formattedPhoneSchema = rawPhoneSchema.transform((d) => `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`);
-
-// export const validatePhone = (value: string) => {
-//   const result = formattedPhoneSchema.safeParse(value);
-
-//   if (!result.success) {
-//     return {
-//       isValid: false,
-//       errorMessage: result.error.issues[0].message,
-//     };
-//   }
-// };

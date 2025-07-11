@@ -4,12 +4,12 @@ import { CalendarIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Image } from '@heroui/react';
 import NextImage from 'next/image';
 
-// TODO: 수정 해야됨
 interface EventSummaryProps {
   event: EventData;
 }
 
 export default function EventSummary({ event }: EventSummaryProps) {
+  //TODO: 애도 수정해야함
   const imgSrc = Array.isArray(event.thumbnail) ? event.thumbnail[0] : event.thumbnail;
   const place = event?.address?.split(',').map((s: string) => s.trim())[1];
 

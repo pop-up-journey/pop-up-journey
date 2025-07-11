@@ -1,5 +1,6 @@
 'use client';
 
+// TODO: signIn : 서버컴포넌트에서 사용하는 방법 없나?
 import { signIn } from 'next-auth/react';
 import { ProviderLogo } from './ProviderLogo';
 

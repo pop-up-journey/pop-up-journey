@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={` ${pretendard.variable} antialiased`}>
         <Providers>
           <Header />
-          {children}
+          <div className="min-h-screen">{children}</div>
           <Footer />
         </Providers>
       </body>

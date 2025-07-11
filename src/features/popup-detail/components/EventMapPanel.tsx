@@ -1,9 +1,9 @@
 'use client';
 
-import EventActionButtons from '@/features/event/detail/components/EventActionButtons';
-import MapContainer from '@/features/event/detail/components/MapContainer';
-import OrganizerInfo from '@/features/event/detail/components/OrganizerInfo';
-import useGeocode from '@/features/event/detail/hooks/useGeocode';
+import EventActionButtons from '@/features/popup-detail/components/EventActionButtons';
+import MapContainer from '@/features/popup-detail/components/MapContainer';
+import OrganizerInfo from '@/features/popup-detail/components/OrganizerInfo';
+import useGeocode from '@/features/popup-detail/hooks/useGeocode';
 
 interface KakaoMapProps {
   address?: string;

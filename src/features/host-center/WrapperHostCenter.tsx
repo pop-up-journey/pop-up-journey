@@ -1,31 +1,22 @@
 'use client';
 
 import HeroSection from '@/components/common/hero-section';
+import { getHostEvents } from '@/features/host-center/api/getHostEvents';
 import HostEvents from '@/features/host-center/components/HostEvents';
 import HostProfile from '@/features/host-center/components/HostProfile';
-import { getHostEvents } from '@/features/host-center/services/getHostEvents';
-import { getUserInfo } from '@/features/host-center/services/getUserInfo';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { type EventData } from '@/types/event';
-import type { User } from '@/types/user';
-import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 export default function WrapperHostCenter() {
-  const { data: session, status } = useSession();
-  const [userInfo, setUserInfo] = useState<User | null>(null);
+  const { userInfo } = useGetUserInfo();
   const [hostEvents, setHostEvents] = useState<EventData[]>([]);
 
-  // HACK: unused value에 대한 에러 방지용 콘솔
-  // console.log(hostEvents);
-
   useEffect(() => {
-    if (status === 'authenticated' && session?.user?.id) {
-      getUserInfo(session.user.id).then((res) => {
-        setUserInfo(res ?? null);
-      });
-      getHostEvents(session.user.id).then(setHostEvents);
+    if (userInfo) {
+      getHostEvents(userInfo.id).then(setHostEvents);
     }
-  }, [session, status]);
+  }, [userInfo]);
 
   return (
     <main className="mb-10 min-h-screen">

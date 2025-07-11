@@ -1,10 +1,9 @@
-import { getEventById } from '@/features/event/detail/services/getEventById';
-import { getHostByEventId } from '@/features/event/detail/services/getHostByEventId';
-import type { PageProps } from '@/features/event/detail/types';
+import { getEventById } from '@/features/popup-detail/api/getEventById';
+import { getHostByEventId } from '@/features/popup-detail/api/getHostByEventId';
 import WrapperPopupDetail from '@/features/popup-detail/WrapperPopupDetail';
 import { notFound } from 'next/navigation';
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: { params: Promise<{ eventId: string }> }) {
   const { eventId } = await params;
 
   const event = await getEventById(eventId);

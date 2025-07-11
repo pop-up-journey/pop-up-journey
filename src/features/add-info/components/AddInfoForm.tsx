@@ -1,17 +1,17 @@
 'use client';
 
 import Button from '@/components/common/button';
+import FormTitle from '@/components/common/form/FormTitle';
+import InputField from '@/components/common/form/ValidateInput';
 import { LABELS } from '@/components/common/input/labels';
+import Select from '@/components/common/select';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useAddInfoFormStore } from '@/store/add-info/useAddInfoFormStore';
 import { useEffect } from 'react';
+import { updateUserInfo } from '../api/updateUserInfo';
 import { validateName } from '../services/nameValidation';
 import { validatePhone } from '../services/phoneValidation';
-import { updateUserInfo } from '../services/updateUserInfo';
-import FormTitle from './FormTitle';
-import InputField from './InputField';
 import InterestChip from './InterestChip';
-import Select from './Select';
 
 const inputOptions = {
   name: {
@@ -37,6 +37,9 @@ const inputOptions = {
     validation: validatePhone,
   },
 };
+
+// TODO: useGetUserInfo 대신 getUserSession 사용해서 유저 정보 가져오기 필요
+// 그렇게하면 WrapperAddInfo 컴포넌트에서 getUserSession을 사용해서 유저 정보 가져오기
 
 export default function AddInfoForm() {
   const { userInfo } = useGetUserInfo();

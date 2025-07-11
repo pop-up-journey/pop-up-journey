@@ -1,6 +1,7 @@
-import { getEvents } from '@/features/main/services/getEvents';
-import { getSavedStoreIds } from '@/features/main/services/getSavedStoreIds';
+import { getEvents } from '@/features/main/api/getEvents';
+import { getSavedStoreIds } from '@/features/main/api/getSavedStoreIds';
 
+// 일단 스킵
 export async function getMainPageData(userId?: string) {
   const [ongoingEvents, upcomingEvents, likedEventIds] = await Promise.all([
     getEvents({ status: 'ongoing' }),

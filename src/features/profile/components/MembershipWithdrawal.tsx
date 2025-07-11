@@ -2,7 +2,7 @@ import Button from '@/components/common/button';
 import type { User } from '@/types/user';
 import { Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@heroui/react';
 import { signOut } from 'next-auth/react';
-import { deleteUser } from '../services/deleteUser';
+import { deleteUser } from '../api/deleteUser';
 
 interface MembershipWithdrawalProps {
   userInfo: User;

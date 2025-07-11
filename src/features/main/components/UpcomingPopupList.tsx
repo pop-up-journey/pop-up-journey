@@ -1,8 +1,8 @@
 'use client';
 import Button from '@/components/common/button';
 import CardComponent from '@/components/common/card';
+import { getEvents } from '@/features/main/api/getEvents';
 import { SectionLayout } from '@/features/main/components/SectionLayout';
-import { getEvents } from '@/features/main/services/getEvents';
 import { usePagination } from '@/hooks/usePagination';
 import type { EventData } from '@/types/event';
 

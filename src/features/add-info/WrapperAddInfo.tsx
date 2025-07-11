@@ -1,5 +1,5 @@
+import FloatingBundle from '@/components/common/floating/FloatingBundle';
 import AddInfoForm from '@/features/add-info/components/AddInfoForm';
-import FloatingBundle from '@/features/add-info/components/FloatingBundle';
 
 export default function WrapperAddInfo() {
   return (

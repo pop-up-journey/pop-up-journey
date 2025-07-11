@@ -2,9 +2,9 @@
 
 import type { EventData } from '@/types/event';
 
-import FloatingBundle from '@/features/add-info/components/FloatingBundle';
-import EventSummary from '@/features/event/participate/components/EventSummary';
-import ParticipateForm from '@/features/event/participate/components/ParticipateForm';
+import FloatingBundle from '@/components/common/floating/FloatingBundle';
+import EventSummary from '@/features/popup-participate/components/EventSummary';
+import ParticipateForm from '@/features/popup-participate/components/ParticipateForm';
 
 // TODO: 중복신청시 어떻게 할지.(가능/불가능), zod로 db에 넘어가는 건 막아놓긴 했는데 토스트를 띄워준다던가 하는 처리를 해줘야함.
 // 추후 유정님 작업하신거 끝나면 interface 삭제해도 될 듯
@@ -14,11 +14,10 @@ interface Props {
 }
 
 export default function WrapperPopupParticipate({ event }: Props) {
-  // TODO: eventId 타입 수정 필요
-  const eventId = event.id.toString();
+  const eventId = event.id;
   return (
     <>
-      <main className="mx-auto min-h-screen max-w-6xl">
+      <main className="">
         <FloatingBundle />
         <EventSummary event={event} />
         <ParticipateForm eventId={eventId} />
