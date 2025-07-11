@@ -1,5 +1,5 @@
-import HostCenterPage from '@/_pages/HostCenterPage';
+import WrapperHostCenter from '@/features/host-center/WrapperHostCenter';
 
-export default function WrapperHostCenterPage() {
-  return <HostCenterPage />;
+export default function Page() {
+  return <WrapperHostCenter />;
 }

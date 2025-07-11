@@ -1,5 +1,5 @@
-import ProfilePage from '@/_pages/ProfilePage';
+import WrapperProfile from '@/features/profile/WrapperProfile';
 
-export default function WrapperProfilePage() {
-  return <ProfilePage />;
+export default function Page() {
+  return <WrapperProfile />;
 }

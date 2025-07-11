@@ -4,7 +4,7 @@ import UpcomingPopupList from '@/features/main/components/UpcomingPopupList';
 import { getMainPageData } from '@/features/main/services/getMainPageData';
 import { auth } from '@/libs/auth';
 
-export default async function MainPage() {
+export default async function WrapperMain() {
   const session = await auth();
   const { ongoingEvents, upcomingEvents, likedEventIds } = await getMainPageData(session?.user?.id);
 

@@ -10,7 +10,7 @@ import type { User } from '@/types/user';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
-export default function HostCenterPage() {
+export default function WrapperHostCenter() {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState<User | null>(null);
   const [hostEvents, setHostEvents] = useState<EventData[]>([]);

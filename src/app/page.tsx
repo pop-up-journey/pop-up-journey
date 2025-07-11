@@ -1,5 +1,5 @@
-import MainPage from '../_pages/MainPage';
+import WrapperMain from '@/features/main/WrapperMain';
 
 export default function Page() {
-  return <MainPage />;
+  return <WrapperMain />;
 }

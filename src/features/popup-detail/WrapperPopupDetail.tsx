@@ -14,7 +14,7 @@ interface EventDetailProps {
   host: User;
 }
 
-export default function EventDetailPage({ event, host }: EventDetailProps) {
+export default function WrapperPopupDetail({ event, host }: EventDetailProps) {
   const imgSrc = Array.isArray(event.thumbnail) ? event.thumbnail[0] : event.thumbnail;
 
   return (

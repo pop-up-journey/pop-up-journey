@@ -1,6 +1,6 @@
-import EventsPage from '@/_pages/EventsPage';
 import { PAGE_SIZE } from '@/features/events/services/constants';
 import { fetchEvents } from '@/features/events/services/fetchEvents';
+import WrapperPopupSearch from '@/features/popup-search/WrapperPopupSearch';
 
 interface PageProps {
   searchParams: Promise<{ zone?: string }>;
@@ -21,7 +21,7 @@ export default async function Page({ searchParams }: PageProps) {
   });
 
   return (
-    <EventsPage
+    <WrapperPopupSearch
       selectedZone={zone ?? null}
       initialItems={events}
       initialTotalCount={totalCount}

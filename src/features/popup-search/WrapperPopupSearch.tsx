@@ -19,7 +19,7 @@ interface Props {
   fullEvents: EventData[];
 }
 
-export default function EventPage({ initialItems, initialTotalCount, selectedZone, fullEvents }: Props) {
+export default function WrapperPopupSearch({ initialItems, initialTotalCount, selectedZone, fullEvents }: Props) {
   //NOTE: UseCallback
   const fetchFn = ({ page, pageSize }: { page: number; pageSize: number }) =>
     fetchEvents({ zone: selectedZone, page, pageSize }).then(({ events, totalCount }) => ({

@@ -6,11 +6,11 @@ import useGetUserInfo from '@/hooks/useGetUserInfo';
 import MembershipWithdrawal from '@/features/profile/components/MembershipWithdrawal';
 import MyProfile from '@/features/profile/components/MyProfile';
 import { useLocalStorage } from 'react-haiku';
-import Button from '../components/common/button';
-import CardComponent from '../components/common/card';
-import { upcomingPopupList } from '../mock/mockdata';
+import Button from '../../components/common/button';
+import CardComponent from '../../components/common/card';
+import { upcomingPopupList } from '../../mock/mockdata';
 
-export default function ProfilePage() {
+export default function WrapperProfile() {
   const { userInfo } = useGetUserInfo();
   const [favorites, setFavorites] = useLocalStorage<number[]>('favoritePopups', []);
 

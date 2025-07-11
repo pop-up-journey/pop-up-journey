@@ -21,7 +21,7 @@ declare global {
   }
 }
 
-export default function EventRegisterPage() {
+export default function WrapperPopupRegister() {
   const { data: session } = useSession();
   const hostId = session?.user?.id;
 

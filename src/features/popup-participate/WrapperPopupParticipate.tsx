@@ -13,7 +13,7 @@ interface Props {
   event: EventData;
 }
 
-export default function EventParticipationPage({ event }: Props) {
+export default function WrapperPopupParticipate({ event }: Props) {
   // TODO: eventId 타입 수정 필요
   const eventId = event.id.toString();
   return (
