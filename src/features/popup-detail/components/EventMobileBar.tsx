@@ -1,5 +1,5 @@
 import Button from '@/components/common/button';
-import ShareButton from '@/features/event/detail/components/ShareButton';
+import ShareButton from '@/features/popup-detail/components/ShareButton';
 import useHandleSave from '@/hooks/useHandleSave';
 import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';

@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/common/button';
-import ShareButton from '@/features/event/detail/components/ShareButton';
+import ShareButton from '@/features/popup-detail/components/ShareButton';
 import useHandleSave from '@/hooks/useHandleSave';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';

@@ -1,4 +1,4 @@
-export default function EventDetailLayout({
+export default function PopupDetailLayout({
   children,
   sidebar,
 }: {
@@ -7,7 +7,7 @@ export default function EventDetailLayout({
 }) {
   return (
     <main
-      aria-label="event-detail-layout"
+      aria-label="popup-detail-layout"
       className="relative mx-auto flex min-h-screen max-w-6xl justify-evenly space-x-4 px-4 py-10"
     >
       <section className="flex-1">{children}</section>

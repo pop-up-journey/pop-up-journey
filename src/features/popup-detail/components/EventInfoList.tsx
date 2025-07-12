@@ -1,7 +1,7 @@
 'use client';
 import Chip from '@/components/common/chip';
-import EventInfoItem from '@/features/event/detail/components/EventInfoItem';
-import { OTHER_INFO_MAP } from '@/features/event/register/services/otherInfoLabelHelper';
+import EventInfoItem from '@/features/popup-detail/components/EventInfoItem';
+import { OTHER_INFO_MAP } from '@/features/popup-register/services/otherInfoLabelHelper';
 import { getAddressPart } from '@/utils/adress';
 import { formatDate } from '@/utils/dateformatter';
 import { BanknotesIcon, InformationCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';

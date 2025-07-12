@@ -1,5 +1,5 @@
-import useDragAndDropImg from '@/features/event/register/hooks/useDragAndDropImg';
-import usePostcode from '@/features/event/register/hooks/usePostCode';
+import useDragAndDropImg from '@/features/popup-register/hooks/useDragAndDropImg';
+import usePostcode from '@/features/popup-register/hooks/usePostCode';
 import { clientApi } from '@/libs/api';
 import { DateValue } from '@heroui/react';
 import { useCallback, useState } from 'react';
