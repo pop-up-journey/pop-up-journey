@@ -8,10 +8,10 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 export default function EventActionButtons() {
-  const { eventId } = useParams() as { eventId: string };
+  const { popupId } = useParams() as { popupId: string };
   const { data: session } = useSession();
   const userId = session?.user?.id;
-  const { isSaved, toggle } = useHandleSave(eventId, userId);
+  const { isSaved, toggle } = useHandleSave(popupId, userId);
 
   {
     /* HACK : 관심팝업 등록이 되어 있는 상태에서 새로고침을 하면
@@ -20,7 +20,7 @@ export default function EventActionButtons() {
 
   return (
     <section className="mt-4 flex flex-col gap-2">
-      <Link href={`/event/${eventId}/participate`}>
+      <Link href={`/popup/${popupId}/participate`}>
         <Button fullWidth>신청하기</Button>
       </Link>
       <div className="flex flex-row items-center gap-6">

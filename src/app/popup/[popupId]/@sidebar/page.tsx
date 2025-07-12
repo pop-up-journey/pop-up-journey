@@ -5,10 +5,11 @@ import { getAddressPart } from '@/utils/adress';
 import { notFound } from 'next/navigation';
 
 // export default async function Page({ params }: PageProps) {
-export default async function Page({ params }: { params: Promise<{ eventId: string }> }) {
-  const { eventId } = await params;
+export default async function Page({ params }: { params: Promise<{ popupId: string }> }) {
+  const { popupId } = await params;
   // 이벤트 조회
-  const event = await getEventById(eventId);
+  const event = await getEventById(popupId);
+  console.log('event', event);
   if (!event) return notFound();
   // 호스트 조회
   const host = await getHostByEventId(event.hostId);

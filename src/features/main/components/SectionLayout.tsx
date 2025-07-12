@@ -12,7 +12,7 @@ export function SectionLayout({ title, isEmpty, rightSlot, children }: SectionLa
     <section className="mx-auto mb-15 max-w-6xl px-4">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-bold">{title}</h2>
-        <Link href="/events">
+        <Link href="/popup/search">
           <p className="text-sm">{rightSlot}</p>
         </Link>
       </div>

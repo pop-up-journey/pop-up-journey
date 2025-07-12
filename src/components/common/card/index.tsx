@@ -51,7 +51,7 @@ export default function CardComponent({
           isPressable
           className="relative flex max-w-[240px] cursor-pointer flex-col overflow-hidden shadow-sm"
           radius="sm"
-          onPress={() => router.push(`/event/${id}`)}
+          onPress={() => router.push(`/popup/${id}`)}
         >
           <CardHeader className="absolute top-1 z-10 flex-col items-end">
             <span
@@ -95,7 +95,7 @@ export default function CardComponent({
           className="bg-bgcolor rounded-3xl border border-white/20 bg-white/10 p-10 py-4 shadow-2xl backdrop-blur-2xl"
           shadow="none"
           radius="sm"
-          onPress={() => router.push(`/event/${id}`)}
+          onPress={() => router.push(`/popup/${id}`)}
         >
           <CardBody className="relative grid grid-cols-6 gap-6 px-0 md:grid-cols-12 md:gap-4">
             <div className="relative col-span-6 md:col-span-4">
