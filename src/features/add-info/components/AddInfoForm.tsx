@@ -2,7 +2,7 @@
 
 import Button from '@/components/common/button';
 import FormTitle from '@/components/common/form/FormTitle';
-import InputField from '@/components/common/form/ValidateInput';
+import ValidateInput from '@/components/common/form/ValidateInput';
 import { LABELS } from '@/components/common/input/labels';
 import Select from '@/components/common/select';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
@@ -38,16 +38,11 @@ const inputOptions = {
   },
 };
 
-// TODO: useGetUserInfo 대신 getUserSession 사용해서 유저 정보 가져오기 필요
-// 그렇게하면 WrapperAddInfo 컴포넌트에서 getUserSession을 사용해서 유저 정보 가져오기
-
 export default function AddInfoForm() {
   const { userInfo } = useGetUserInfo();
   const setValue = useAddInfoFormStore((state) => state.setValue);
   const setIsValid = useAddInfoFormStore((state) => state.setIsValid);
-
   // TODO: interests 항목을 db에 넣을지 아니면 localstorage에 넣을지 고민
-
   const userId = userInfo?.id;
 
   useEffect(() => {
@@ -90,7 +85,7 @@ export default function AddInfoForm() {
           >
             <FormTitle>회원 정보 입력</FormTitle>
             {Object.entries(inputOptions).map(([k, v]) => (
-              <InputField key={k} {...v} useStore={useAddInfoFormStore} />
+              <ValidateInput key={k} {...v} useStore={useAddInfoFormStore} />
             ))}
             <Select />
             <InterestChip />
