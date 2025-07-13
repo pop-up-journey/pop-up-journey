@@ -31,6 +31,7 @@ export default function WrapperProfile() {
       {/** TODO: 섹션 분리해야됨 mainpage 작업 이후에 진행할 예정*/}
       <div className="mx-auto max-w-6xl">
         <MyProfile userInfo={userInfo} />
+        {/* TODO: 내가 신청한 팝업 CRUD */}
         {/* 관심팝업 */}
         <section className="mx-auto mt-12">
           <h2 className="mb-4 text-2xl font-bold">나의 관심 팝업</h2>

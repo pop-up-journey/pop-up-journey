@@ -18,7 +18,6 @@ export default function EventMapPanel({ address, organizer }: KakaoMapProps) {
       {/* 지도 */}
       <MapContainer center={position!} />
       {/* 주최자 */}
-      {/* NOTE: 우선은 host-center로 연결해놨는데 주최자가 운영하고 있는/종료/예정인 팝업을 보여주는 페이지가 더 필요하지 않을까 싶음 */}
       <OrganizerInfo organizer={organizer} />
       {/* 신청 버튼*/}
       {/* TODO: 토스트 알림필요! */}

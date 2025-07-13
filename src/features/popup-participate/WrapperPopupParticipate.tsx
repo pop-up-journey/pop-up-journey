@@ -17,7 +17,7 @@ export default function WrapperPopupParticipate({ event }: Props) {
   const eventId = event.id;
   return (
     <>
-      <main className="">
+      <main>
         <FloatingBundle />
         <EventSummary event={event} />
         <ParticipateForm eventId={eventId} />

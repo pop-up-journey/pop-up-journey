@@ -4,7 +4,7 @@
    PAGE_SIZE를 `config`나 `shared/constants` 등으로 따로 빼야할듯
    config가 옛날부터 너무 애매했음..
 
-2. 무한스크롤 api 호출(XXX)
+2. 무한스크롤 api 호출(XXX) => 해결완료!!!
 
 ```tsx
 useEffect(() => {

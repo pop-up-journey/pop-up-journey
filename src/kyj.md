@@ -5,16 +5,15 @@
 
 2. PageProps나 Props interface 정의에 하나밖에 없는 경우 그냥 따로 안 빼기
 
-3. router.push -> Link로 대체
+3. router.push -> Link로 대체(웬만하면!!)
 
 ## 문제점
 
 1. 관심팝업 기능
 
 - 로그인/비로그인 서로 영향을 주면 안 됨.
-  빠르게 해결) 비로그인시 기능 비활성화
-  메인 => 하트 아이콘 hidden
-  상세 => 버튼 클릭시, '회원만 가능하다'는 문구 표시
+  빠르게 해결) 비로그인시 기능 회원가입유도[로그인모달]
+  상세, 메인 => 버튼 클릭시, '회원만 가능하다'는 문구 표시
 
 2. 이벤트 참가 신청 관련
 
@@ -25,6 +24,7 @@
 - 이벤트 등록) 안 받는 경우에 대한 처리 미흡
 - [폼]티켓수 validation 문구 영어 -> 한글 변경
 - [폼] 중복신청, 성공/실패/처리중 클라이언트측 알림 필요
+  (성공) 알림 + 이전페이지 이동
 
 3. 로그인/로그아웃/회원탈퇴
 
@@ -35,9 +35,8 @@
 
 4. 회원정보
 
-- [미구현] db: email verified 컬럼
 - [미구현] db: InterestChip
-- [미구현][PROFILE] 이미지 수정
+- [미구현][PROFILE] 프로필 수정은 모달 처리
 
 5. 이벤트 등록 관련
 
@@ -46,12 +45,15 @@
 - validation 필요함
 
 6. [HEADER] 검색기능 미구현
-7. [HEADER] 다크모드 없앴는지?
-8. [FOOTER] 모든 페이지에 공간차지 너무 많이함, 선택적 레이아웃 적용 필요
+7. [HEADER] 다크모드 설정(드롭다운)
+8. [FOOTER] 모든 페이지에 공간차지 너무 많이함
+   -> 각 src/app/\* layout추가해서 선택적 레이아웃 적용 할 것
 
 ## 비로그인/비회원 차단 페이지
 
 1. PROFILE, HOST-CENTER, POPUP-PARTICIPATE, ADD-INFO, REGISTER
+   -> middleware session 이용
+   --
 
 1. ADDINFO
    WrpperAddInfo :유저 정보 입력 페이지
@@ -61,10 +63,11 @@
   1. useGetUserInfo : 유저 정보 가져오기
   2. Inputstate는 zustand로 관리
   3. handleSubmit : 폼 제출 버튼 - null값관리 - updateUserInfo : 수정 업데이트 로직
+
   <form>
   <Form Title>
   그 안에 map으로 Input
-  <Select> 
+  <Select>
   <InterestChip> => 관심사 Chip인데 Selectable이랑 관련지을 수 있지 않나 싶음
   <Button>
   </form>
