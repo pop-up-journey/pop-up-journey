@@ -9,7 +9,6 @@ export default async function Page({ params }: { params: Promise<{ popupId: stri
   const { popupId } = await params;
   // 이벤트 조회
   const event = await getEventById(popupId);
-  console.log('event', event);
   if (!event) return notFound();
   // 호스트 조회
   const host = await getHostByEventId(event.hostId);
