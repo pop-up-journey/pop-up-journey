@@ -21,20 +21,25 @@ export default function PopupStatusCard({ icon, title, status, views, likes, par
             {title}
           </h2>
           <p className="text-xs text-gray-500">
-            <label>운영 상태 : </label>
-            {status}
+            <span className="font-medium">운영 상태:</span> {status}
           </p>
         </div>
       </section>
       <aside className="text-right text-sm text-gray-500">
-        <p>
-          <label>조회수: </label>
-          {views} | <label>관심등록수: </label>
-          {likes}
-          <br />
-          <label>참여자수: </label>
-          {participants}
-        </p>
+        <dl className="space-y-1">
+          <div className="flex justify-between gap-4">
+            <dt className="font-medium">조회수:</dt>
+            <dd>{views}</dd>
+          </div>
+          <div className="flex justify-between gap-4">
+            <dt className="font-medium">관심등록수:</dt>
+            <dd>{likes}</dd>
+          </div>
+          <div className="flex justify-between gap-4">
+            <dt className="font-medium">참여자수:</dt>
+            <dd>{participants}</dd>
+          </div>
+        </dl>
       </aside>
     </article>
   );
