@@ -1,0 +1,74 @@
+// components/profile/MySavedPopupList.tsx
+'use client';
+import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
+import { clientApi } from '@/libs/api';
+import { useSaveStore } from '@/store/useSaveStore';
+import type { EventData } from '@/types/event';
+import { useEffect, useState } from 'react';
+
+import Button from '@/components/common/button';
+import SavedPopupCard from './SavePopupCard';
+
+export default function MySavedPopupList({ userId }: { userId: string }) {
+  const savedStores = useSaveStore((s) => s.savedStores);
+  const setSavedStores = useSaveStore((s) => s.setSavedStores);
+  const [popups, setPopups] = useState<EventData[]>([]);
+
+  // 1) ID 초기화
+  useEffect(() => {
+    getSavedStoreIds(userId).then((ids) => {
+      if (Array.isArray(ids)) setSavedStores(ids);
+    });
+  }, [userId, setSavedStores]);
+
+  // 2) 상세 데이터 로드
+  useEffect(() => {
+    if (savedStores.length === 0) {
+      setPopups([]);
+      return;
+    }
+    (async () => {
+      const loaded = await Promise.all(
+        savedStores.map(async (id) => {
+          try {
+            return await clientApi<EventData>(`/api/events/${id}`, { method: 'GET' });
+          } catch {
+            return null;
+          }
+        })
+      );
+      setPopups(loaded.filter((x): x is EventData => !!x));
+    })();
+  }, [savedStores]);
+
+  // 전체 삭제
+  const clearAll = () => {
+    if (!confirm('관심 팝업을 전부 삭제하시겠습니까?')) return;
+    savedStores.forEach((id) => {
+      /* 서버 DELETE 로직 */
+    });
+    setSavedStores([]);
+  };
+
+  return (
+    <section className="mt-12">
+      <h2 className="mb-4 text-2xl font-bold">나의 관심 팝업</h2>
+
+      {popups.length > 0 && (
+        <div className="mb-4 text-right">
+          <Button size="sm" onPress={clearAll}>
+            전체 삭제
+          </Button>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {popups.map((popup) => (
+          <SavedPopupCard key={popup.id} popup={popup} userId={userId} />
+        ))}
+      </div>
+
+      {popups.length === 0 && <p className="text-center text-gray-500">아직 관심 팝업이 없습니다.</p>}
+    </section>
+  );
+}
