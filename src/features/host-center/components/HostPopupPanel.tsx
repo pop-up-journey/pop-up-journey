@@ -28,13 +28,15 @@ export default function HostPopupPanel({ hostEvents }: HostPopupPanelProps) {
   return (
     <>
       <HostPopupStats
+        selectedStatus={selectedStatus}
+        onStatusClick={setSelectedStatus}
         ongoing={eventsByStatus[POPUP_STATUS.Ongoing].length}
         ended={eventsByStatus[POPUP_STATUS.Ended].length}
         upcoming={eventsByStatus[POPUP_STATUS.Upcoming].length}
-        onStatusClick={setSelectedStatus}
       />
 
       <HostPopupList
+        selectedStatus={selectedStatus}
         popups={eventsByStatus[selectedStatus]}
         getEventIcon={(status) => POPUP_STATUS_ICON[status as PopupStatusType]}
         getStatusLabel={(status) => POPUP_STATUS_LABEL[status as PopupStatusType]}

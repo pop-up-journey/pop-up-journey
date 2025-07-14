@@ -1,19 +1,26 @@
-import type { PopupStatusType } from '@/types/popup';
+import { POPUP_STATUS, type PopupStatusType } from '@/types/popup';
 
 interface HostPopupStatsProps {
+  selectedStatus: PopupStatusType;
+  onStatusClick: (status: PopupStatusType) => void;
   ongoing: number;
   ended: number;
   upcoming: number;
-  onStatusClick: (status: PopupStatusType) => void;
 }
 
 const STATUS_LABELS: { status: PopupStatusType; label: string }[] = [
-  { status: 'ongoing', label: '운영중인 팝업' },
-  { status: 'ended', label: '종료된 팝업' },
-  { status: 'upcoming', label: '예정된 팝업' },
+  { status: POPUP_STATUS.Ongoing, label: '운영중인 팝업' },
+  { status: POPUP_STATUS.Ended, label: '종료된 팝업' },
+  { status: POPUP_STATUS.Upcoming, label: '예정된 팝업' },
 ];
 
-export default function HostPopupStats({ ongoing, ended, upcoming, onStatusClick }: HostPopupStatsProps) {
+export default function HostPopupStats({
+  selectedStatus,
+  onStatusClick,
+  ongoing,
+  ended,
+  upcoming,
+}: HostPopupStatsProps) {
   const stats = { ongoing, ended, upcoming };
 
   return (
@@ -21,7 +28,9 @@ export default function HostPopupStats({ ongoing, ended, upcoming, onStatusClick
       {STATUS_LABELS.map(({ status, label }) => (
         <div
           key={status}
-          className="group cursor-pointer rounded-lg bg-gray-50 p-4 hover:bg-[#ffc0d4] hover:text-black"
+          className={`group cursor-pointer rounded-lg p-4 hover:bg-[#ffc0d4] hover:text-black ${
+            selectedStatus === status ? 'bg-[#ffc0d4] text-black' : 'bg-gray-50'
+          }`}
           onClick={() => onStatusClick(status)}
         >
           <div className="mb-2 text-sm text-gray-500 group-hover:text-black">{label}</div>
