@@ -1,4 +1,4 @@
-interface EventStatusCardProps {
+interface PopupStatusCardProps {
   icon: string;
   title: string;
   status: string;
@@ -6,7 +6,7 @@ interface EventStatusCardProps {
   likes: number;
   participants: number;
 }
-export default function EventStatusCard({ icon, title, status, views, likes, participants }: EventStatusCardProps) {
+export default function PopupStatusCard({ icon, title, status, views, likes, participants }: PopupStatusCardProps) {
   return (
     <article
       className="flex items-center justify-between border border-gray-200 p-4"

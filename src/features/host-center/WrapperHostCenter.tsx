@@ -1,7 +1,7 @@
 'use client';
 
 import HeroSection from '@/components/common/hero-section';
-import HostEvents from '@/features/host-center/components/HostEvents';
+import HostPopupPanel from '@/features/host-center/components/HostPopupPanel';
 import HostProfile from '@/features/host-center/components/HostProfile';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { type EventData } from '@/types/event';
@@ -17,7 +17,7 @@ export default function WrapperHostCenter({ hostEvents }: WrapperHostCenterProps
     <main className="min-h-screen">
       <HeroSection title="팝업의 여정 호스트 센터" description="이벤트를 주최하고 관리할 수 있습니다." />
       <HostProfile userInfo={userInfo} />
-      <HostEvents hostEvents={hostEvents} />
+      <HostPopupPanel hostEvents={hostEvents} />
     </main>
   );
 }

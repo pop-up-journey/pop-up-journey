@@ -33,6 +33,7 @@ export default function HostProfile({ userInfo }: HostProfileProps) {
       </div>
       <div className="flex gap-3">
         <Button onClick={() => router.push('/register')}>새로운 이벤트 등록</Button>
+        {/* // TODO: 모달 처리 필요 */}
         <Button onClick={() => router.push('/add-info')}>프로필 수정</Button>
       </div>
     </section>

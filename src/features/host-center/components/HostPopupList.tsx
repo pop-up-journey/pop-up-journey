@@ -1,9 +1,9 @@
-import EventStatusCard from '@/features/host-center/components/EventStatusCard';
+import PopupStatusCard from '@/features/host-center/components/PopupStatusCard';
 import type { EventData } from '@/types/event';
 import { useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-haiku';
 
-interface Props {
+interface HostPopupListProps {
   events: EventData[];
   getEventIcon: (status: string) => string;
   getStatusLabel: (status: string) => string;
@@ -11,7 +11,7 @@ interface Props {
 
 const PAGE_SIZE = 6;
 
-export default function HostEventsList({ events, getEventIcon, getStatusLabel }: Props) {
+export default function HostPopupList({ events, getEventIcon, getStatusLabel }: HostPopupListProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const { observeRef, isVisible } = useIntersectionObserver({
@@ -29,7 +29,7 @@ export default function HostEventsList({ events, getEventIcon, getStatusLabel }:
       <ul className="space-y-6">
         {events.slice(0, visibleCount).map((event, idx) => (
           <li key={event.id}>
-            <EventStatusCard
+            <PopupStatusCard
               icon={getEventIcon(event.eventStatus)}
               title={event.title}
               status={getStatusLabel(event.eventStatus)}
