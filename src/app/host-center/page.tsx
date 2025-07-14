@@ -4,7 +4,7 @@ import { getUserSession } from '@/utils/getUserSession';
 
 export default async function Page() {
   const session = await getUserSession();
-  const hostEvents = await getHostPopup(session?.user?.id ?? '');
+  const hostPopups = await getHostPopup(session?.user?.id ?? '');
 
-  return <WrapperHostCenter hostEvents={hostEvents} />;
+  return <WrapperHostCenter hostPopups={hostPopups} />;
 }

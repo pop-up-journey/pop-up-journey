@@ -85,7 +85,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ hos
       .select({
         id: events.id,
         title: events.title,
-        description: events.description,
+        thumbnail: events.thumbnail,
         hostId: events.hostId,
         eventStart: events.eventStart,
         eventEnd: events.eventEnd,

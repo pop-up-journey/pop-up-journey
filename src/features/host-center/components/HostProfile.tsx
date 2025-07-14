@@ -1,5 +1,3 @@
-'use client';
-
 import Button from '@/components/common/button';
 import type { User } from '@/types/user';
 import Image from 'next/image';

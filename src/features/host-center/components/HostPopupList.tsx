@@ -1,26 +1,18 @@
 'use client';
 
 import CardComponent from '@/components/common/card';
-import { POPUP_STATUS, type Popup, type PopupStatusType } from '@/types/popup';
-import { ComponentType, useEffect, useState } from 'react';
+import { POPUP_STATUS_MSG, type PopupStatusType } from '@/features/host-center/services/popup-status';
+import { type Popup } from '@/types/popup';
+import { useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-haiku';
-
 interface HostPopupListProps {
   popups: Popup[];
   selectedStatus: PopupStatusType;
-  getEventIcon: (status: string) => ComponentType<{ className?: string }>;
-  getStatusLabel: (status: string) => string;
 }
 
 const PAGE_SIZE = 6;
 
-const POPUP_STATUS_MSG = {
-  [POPUP_STATUS.Ongoing]: '주최된 팝업이 없습니다.',
-  [POPUP_STATUS.Ended]: '종료된 팝업이 없습니다.',
-  [POPUP_STATUS.Upcoming]: '예정된 팝업이 없습니다.',
-} as const;
-
-export default function HostPopupList({ popups, selectedStatus, getEventIcon, getStatusLabel }: HostPopupListProps) {
+export default function HostPopupList({ popups, selectedStatus }: HostPopupListProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   console.log(popups);
 
@@ -40,7 +32,9 @@ export default function HostPopupList({ popups, selectedStatus, getEventIcon, ge
         {popups.length === 0 && <div className="text-white">{POPUP_STATUS_MSG[selectedStatus]}</div>}
         {popups.slice(0, visibleCount).map((popup, idx) => (
           <li key={popup.id}>
-            {/* <PopupStatusCard
+            {/* 
+            // TODO: 지우지 마시오 좋아요 수, 참여자 수, 조회수 추가 필요
+            <PopupStatusCard
               icon={getEventIcon(popup.eventStatus)}
               title={popup.title}
               status={getStatusLabel(popup.eventStatus)}
