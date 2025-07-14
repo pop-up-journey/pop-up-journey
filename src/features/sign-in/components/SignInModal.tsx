@@ -1,6 +1,6 @@
 'use client';
 import Button from '@/components/common/button';
-import { SignInButtonList } from '@/features/sign-in/components/SignInButton';
+import { SocialSignInButtonList } from '@/features/sign-in/components/SocialSignInButton';
 import useResizeUi from '@/hooks/useResizeUi';
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@heroui/react';
 
@@ -22,7 +22,7 @@ export default function SignInModal() {
               </ModalHeader>
               <h2 className="p-4 text-center">아래에서 로그인 또는 가입 하세요.</h2>
               <ModalBody>
-                <SignInButtonList />
+                <SocialSignInButtonList />
               </ModalBody>
               <ModalFooter></ModalFooter>
             </>

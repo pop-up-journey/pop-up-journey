@@ -1,15 +1,14 @@
-import CardComponent from '@/components/common/card';
 import type { EventData } from '@/types/event';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import PopupSlideCard from './PopupSlideCard';
 
 interface SwiperPopupListProps {
   events: EventData[];
   maxLimit?: number;
-  isSaved: (id: string) => boolean;
-  onToggleSave: (id: string) => void;
+  userId?: string;
 }
 
-export function SwiperPopupList({ events, maxLimit = 8, isSaved, onToggleSave }: SwiperPopupListProps) {
+export function SwiperPopupList({ events, maxLimit = 8, userId }: SwiperPopupListProps) {
   return (
     <Swiper
       spaceBetween={10}
@@ -23,7 +22,7 @@ export function SwiperPopupList({ events, maxLimit = 8, isSaved, onToggleSave }:
     >
       {events.slice(0, maxLimit).map((popup) => (
         <SwiperSlide key={popup.id} className="min-w-0">
-          <CardComponent {...popup} isSaved={isSaved(popup.id)} onToggleSave={onToggleSave} />
+          <PopupSlideCard popup={popup} userId={userId} />
         </SwiperSlide>
       ))}
     </Swiper>

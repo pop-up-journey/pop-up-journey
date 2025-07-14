@@ -1,8 +1,11 @@
 'use client';
 
-import CardComponent from '@/components/common/card';
+import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
 import { useSaveStore } from '@/store/useSaveStore';
 import type { EventData } from '@/types/event';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import EventCard from './EventCard';
 
 interface Props {
   events: EventData[];
@@ -10,7 +13,24 @@ interface Props {
 }
 
 export default function EventList({ events = [], userId }: Props) {
-  const { savedStores, toggleAndSyncSave } = useSaveStore();
+  const { data: session } = useSession();
+  userId = userId || session?.user?.id;
+  const setSavedStores = useSaveStore((s) => s.setSavedStores);
+
+  useEffect(() => {
+    let mounted = true;
+    if (userId) {
+      (async () => {
+        const ids = await getSavedStoreIds(userId);
+        if (mounted && Array.isArray(ids) && ids.length > 0) {
+          setSavedStores(ids);
+        }
+      })();
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [userId, setSavedStores]);
 
   if (events.length === 0) {
     return <p className="py-10 text-center text-gray-500">등록된 이벤트가 없습니다.</p>;
@@ -18,28 +38,9 @@ export default function EventList({ events = [], userId }: Props) {
 
   return (
     <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {events.map((evt) => {
-        const isSaved = savedStores.includes(evt.id);
-
-        const handleToggle = () => {
-          toggleAndSyncSave(evt.id, userId);
-        };
-        return (
-          <li key={evt.id} className="transform transition-transform hover:scale-105">
-            <CardComponent
-              id={evt.id}
-              title={evt.title}
-              thumbnail={evt.thumbnail}
-              // tags={evt.tags ?? []}
-              eventStart={evt.eventStart}
-              eventEnd={evt.eventEnd}
-              savedCount={evt.saveCount ?? 0}
-              isSaved={isSaved}
-              onToggleSave={handleToggle}
-            />
-          </li>
-        );
-      })}
+      {events.map((evt) => (
+        <EventCard key={evt.id} event={evt} userId={userId} />
+      ))}
     </ul>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import SignInModal from '@/features/sign-in/components/SignInModal';
+import SignInButton from '@/features/sign-in/components/SignInButton';
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, NavbarItem } from '@heroui/react';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -14,7 +14,7 @@ export default function Login() {
     <section aria-label="login">
       <NavbarItem>
         <If isTrue={!session?.user}>
-          <SignInModal />
+          <SignInButton />
         </If>
         <If isTrue={!!session?.user}>
           <Dropdown placement="bottom-end">
