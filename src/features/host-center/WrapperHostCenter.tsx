@@ -16,7 +16,7 @@ export default function WrapperHostCenter({ hostPopups }: WrapperHostCenterProps
   // console.log(hostPopups);
 
   return (
-    <main className="min-h-screen">
+    <main className="mb-10 min-h-screen">
       <HeroSection title="팝업의 여정 호스트 센터" description="이벤트를 주최하고 관리할 수 있습니다." />
       <HostProfile userInfo={userInfo} />
       <HostPopupPanel hostPopups={hostPopups} />
