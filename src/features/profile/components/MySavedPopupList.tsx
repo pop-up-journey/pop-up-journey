@@ -7,13 +7,11 @@ import type { EventData } from '@/types/event';
 import { useEffect, useState } from 'react';
 
 import Button from '@/components/common/button';
-import { toggleSavedPopup } from '../../../utils/toggleSavedPopup';
 import SavedPopupCard from './SavePopupCard';
 
 export default function MySavedPopupList({ userId }: { userId: string }) {
-  const savedStores = useSaveStore((s) => s.savedStores);
-  const setSavedStores = useSaveStore((s) => s.setSavedStores);
   const [popups, setPopups] = useState<EventData[]>([]);
+  const { savedStores, setSavedStores, toggleAndSyncSave } = useSaveStore();
 
   // 서버에서 저장된 ID 목록 초기화
   useEffect(() => {
@@ -44,15 +42,13 @@ export default function MySavedPopupList({ userId }: { userId: string }) {
 
   // 개별 삭제 핸들러
   const removeFavorite = (id: string) => {
-    setSavedStores(savedStores.filter((x) => x !== id));
-    toggleSavedPopup(id, userId, false);
+    toggleAndSyncSave(id, userId);
   };
 
   // 전체 삭제 핸들러
   const clearAll = () => {
     if (!confirm('관심 팝업을 전부 삭제하시겠습니까?')) return;
-    savedStores.forEach((id) => toggleSavedPopup(id, userId, false));
-    setSavedStores([]);
+    savedStores.forEach((id) => toggleAndSyncSave(id, userId));
   };
 
   return (

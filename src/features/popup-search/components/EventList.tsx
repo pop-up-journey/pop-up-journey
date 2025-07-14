@@ -3,7 +3,6 @@
 import CardComponent from '@/components/common/card';
 import { useSaveStore } from '@/store/useSaveStore';
 import type { EventData } from '@/types/event';
-import { toggleSavedPopup } from '@/utils/toggleSavedPopup';
 
 interface Props {
   events: EventData[];
@@ -11,7 +10,7 @@ interface Props {
 }
 
 export default function EventList({ events = [], userId }: Props) {
-  const { savedStores, toggleSaveStore } = useSaveStore();
+  const { savedStores, toggleAndSyncSave } = useSaveStore();
 
   if (events.length === 0) {
     return <p className="py-10 text-center text-gray-500">등록된 이벤트가 없습니다.</p>;
@@ -23,10 +22,7 @@ export default function EventList({ events = [], userId }: Props) {
         const isSaved = savedStores.includes(evt.id);
 
         const handleToggle = () => {
-          toggleSaveStore(evt.id);
-          if (userId) {
-            toggleSavedPopup(evt.id, userId, !isSaved);
-          }
+          toggleAndSyncSave(evt.id, userId);
         };
         return (
           <li key={evt.id} className="transform transition-transform hover:scale-105">
