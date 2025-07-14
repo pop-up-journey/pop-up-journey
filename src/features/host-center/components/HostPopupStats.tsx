@@ -19,8 +19,12 @@ export default function HostPopupStats({ ongoing, ended, upcoming, onStatusClick
   return (
     <section id="defaultSt" className="mx-auto mt-8 grid max-w-5xl grid-cols-3 gap-6">
       {STATUS_LABELS.map(({ status, label }) => (
-        <div key={status} className="cursor-pointer rounded-lg bg-gray-50 p-6" onClick={() => onStatusClick(status)}>
-          <div className="mb-2 text-sm text-gray-500">{label}</div>
+        <div
+          key={status}
+          className="group cursor-pointer rounded-lg bg-gray-50 p-4 hover:bg-[#ffc0d4] hover:text-black"
+          onClick={() => onStatusClick(status)}
+        >
+          <div className="mb-2 text-sm text-gray-500 group-hover:text-black">{label}</div>
           <div className="text-2xl font-bold">{stats[status]}</div>
         </div>
       ))}
