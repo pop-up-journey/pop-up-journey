@@ -1,7 +1,7 @@
 import { clientApi } from '@/libs/api';
 import { EventData } from '@/types/event';
 
-export async function getHostEvents(hostId: string): Promise<EventData[]> {
+export async function getHostPopup(hostId: string): Promise<EventData[]> {
   if (!hostId) return [];
   try {
     const res = await clientApi(`/api/host/${hostId}`, { method: 'GET' });

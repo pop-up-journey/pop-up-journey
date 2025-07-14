@@ -8,21 +8,21 @@ import { EVENT_STATUS } from '@/types/event';
 import { useMemo, useState } from 'react';
 
 interface HostEventsProps {
-  events: EventData[];
+  hostEvents: EventData[];
 }
 
-export default function HostEvents({ events }: HostEventsProps) {
+export default function HostEvents({ hostEvents }: HostEventsProps) {
   // 클릭한 이벤트 상태
   const [selectedStatus, setSelectedStatus] = useState<EventStatusType>(EVENT_STATUS.Ongoing);
 
   // 상태별 배열 캐싱
   const eventsByStatus = useMemo(
     () => ({
-      ongoing: events.filter((e) => e.eventStatus === EVENT_STATUS.Ongoing),
-      ended: events.filter((e) => e.eventStatus === EVENT_STATUS.Ended),
-      upcoming: events.filter((e) => e.eventStatus === EVENT_STATUS.Upcoming),
+      ongoing: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Ongoing),
+      ended: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Ended),
+      upcoming: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Upcoming),
     }),
-    [events]
+    [hostEvents]
   );
 
   return (
