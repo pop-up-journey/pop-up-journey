@@ -3,15 +3,13 @@
 import Button from '@/components/common/button';
 import type { User } from '@/types/user';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface HostProfileProps {
   userInfo: User | null;
 }
 
 export default function HostProfile({ userInfo }: HostProfileProps) {
-  const router = useRouter();
-
   if (!userInfo) {
     return <div className="flex h-20 items-center justify-center text-gray-400">프로필 정보를 불러오고 있습니다.</div>;
   }
@@ -35,10 +33,12 @@ export default function HostProfile({ userInfo }: HostProfileProps) {
         </div>
       </div>
       <div className="flex flex-col gap-4 md:flex-row">
-        <Button className="" onClick={() => router.push('/register')}>
-          새로운 이벤트 등록
-        </Button>
-        <Button onClick={() => router.push('/add-info')}>프로필 수정</Button>
+        <Link href="/register">
+          <Button className="">새로운 이벤트 등록</Button>
+        </Link>
+        <Link href="/add-info">
+          <Button>프로필 수정</Button>
+        </Link>
       </div>
     </section>
   );
