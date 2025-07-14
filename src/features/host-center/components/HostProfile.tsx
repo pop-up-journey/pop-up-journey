@@ -28,7 +28,6 @@ export default function HostProfile({ userInfo }: HostProfileProps) {
             <span className="mt-1 text-sm text-gray-500">Host: </span>
             <span className="text-xl font-bold">{userInfo.name}</span>
           </div>
-          {/* <div className="mt-2 flex items-center gap-2"> */}
           <div className="mt-4 flex flex-col gap-4 md:flex-row">
             {userInfo.email && <span className="rounded font-mono text-xs">{userInfo.email}</span>}
             {userInfo.phone && <span className="rounded font-mono text-xs">{userInfo.phone}</span>}
@@ -39,7 +38,6 @@ export default function HostProfile({ userInfo }: HostProfileProps) {
         <Button className="" onClick={() => router.push('/register')}>
           새로운 이벤트 등록
         </Button>
-        {/* // TODO: 모달 처리 필요 */}
         <Button onClick={() => router.push('/add-info')}>프로필 수정</Button>
       </div>
     </section>
