@@ -1,5 +1,5 @@
-// components/profile/MySavedPopupList.tsx
 'use client';
+
 import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
 import { clientApi } from '@/libs/api';
 import { useSaveStore } from '@/store/useSaveStore';
@@ -7,6 +7,7 @@ import type { EventData } from '@/types/event';
 import { useEffect, useState } from 'react';
 
 import Button from '@/components/common/button';
+import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
 import SavedPopupCard from './SavePopupCard';
 
 export default function MySavedPopupList({ userId }: { userId: string }) {
@@ -14,14 +15,14 @@ export default function MySavedPopupList({ userId }: { userId: string }) {
   const setSavedStores = useSaveStore((s) => s.setSavedStores);
   const [popups, setPopups] = useState<EventData[]>([]);
 
-  // 1) ID 초기화
+  // 서버에서 저장된 ID 목록 초기화
   useEffect(() => {
     getSavedStoreIds(userId).then((ids) => {
       if (Array.isArray(ids)) setSavedStores(ids);
     });
   }, [userId, setSavedStores]);
 
-  // 2) 상세 데이터 로드
+  // ID 목록이 바뀔 때마다 상세 데이터 로드
   useEffect(() => {
     if (savedStores.length === 0) {
       setPopups([]);
@@ -41,12 +42,16 @@ export default function MySavedPopupList({ userId }: { userId: string }) {
     })();
   }, [savedStores]);
 
-  // 전체 삭제
+  // 개별 삭제 핸들러
+  const removeFavorite = (id: string) => {
+    setSavedStores(savedStores.filter((x) => x !== id));
+    saveStoreDebounce(id, false, userId);
+  };
+
+  // 전체 삭제 핸들러
   const clearAll = () => {
     if (!confirm('관심 팝업을 전부 삭제하시겠습니까?')) return;
-    savedStores.forEach((id) => {
-      /* 서버 DELETE 로직 */
-    });
+    savedStores.forEach((id) => saveStoreDebounce(id, false, userId));
     setSavedStores([]);
   };
 
@@ -64,7 +69,12 @@ export default function MySavedPopupList({ userId }: { userId: string }) {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {popups.map((popup) => (
-          <SavedPopupCard key={popup.id} popup={popup} userId={userId} />
+          <SavedPopupCard
+            key={popup.id}
+            popup={popup}
+            userId={userId}
+            removeFavorite={() => removeFavorite(popup.id)}
+          />
         ))}
       </div>
 
