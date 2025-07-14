@@ -12,6 +12,7 @@ interface WrapperHostCenterProps {
 
 export default function WrapperHostCenter({ hostEvents }: WrapperHostCenterProps) {
   const { userInfo } = useGetUserInfo();
+  console.log(hostEvents);
 
   return (
     <main className="min-h-screen">
