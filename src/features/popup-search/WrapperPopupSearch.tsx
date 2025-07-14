@@ -8,7 +8,7 @@ import { regionGroups } from '@/configs/regions';
 import { PAGE_SIZE } from '@/features/popup-search/services/constants';
 import { fetchEvents } from '@/features/popup-search/services/fetchEvents';
 import { usePagination } from '@/hooks/usePagination';
-import { EventData } from '@/types/event';
+import { EventData } from '@/types/popup';
 import { Divider } from '@heroui/react';
 import { useEffect } from 'react';
 import { useIntersectionObserver } from 'react-haiku';

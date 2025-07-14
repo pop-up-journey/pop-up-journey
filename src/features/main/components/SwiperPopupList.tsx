@@ -1,5 +1,5 @@
 import CardComponent from '@/components/common/card';
-import type { EventData } from '@/types/event';
+import type { EventData } from '@/types/popup';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface SwiperPopupListProps {

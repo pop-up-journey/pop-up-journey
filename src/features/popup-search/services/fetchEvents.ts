@@ -1,8 +1,8 @@
 import { clientApi } from '@/libs/api';
-import type { EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 
 export interface EventsResponse {
-  events: EventData[];
+  events: Popup[];
   totalCount: number;
 }
 

@@ -1,15 +1,15 @@
-import { EVENT_STATUS } from '@/types/event';
+import { POPUP_STATUS } from '@/types/popup';
 
-export const EVENT_STATUS_LABEL = {
-  [EVENT_STATUS.Ongoing]: '진행중',
-  [EVENT_STATUS.Ended]: '종료',
-  [EVENT_STATUS.Upcoming]: '예정',
+export const POPUP_STATUS_LABEL = {
+  [POPUP_STATUS.Ongoing]: '진행중',
+  [POPUP_STATUS.Ended]: '종료',
+  [POPUP_STATUS.Upcoming]: '예정',
 };
 
 import { CalendarDaysIcon, CheckCircleIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 
-export const EVENT_STATUS_ICON = {
-  [EVENT_STATUS.Ongoing]: CalendarDaysIcon,
-  [EVENT_STATUS.Ended]: CheckCircleIcon,
-  [EVENT_STATUS.Upcoming]: RocketLaunchIcon,
+export const POPUP_STATUS_ICON = {
+  [POPUP_STATUS.Ongoing]: CalendarDaysIcon,
+  [POPUP_STATUS.Ended]: CheckCircleIcon,
+  [POPUP_STATUS.Upcoming]: RocketLaunchIcon,
 };

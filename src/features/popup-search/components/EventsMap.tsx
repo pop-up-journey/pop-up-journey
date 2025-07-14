@@ -1,7 +1,7 @@
 'use client';
 
 import useKakaoLoader from '@/hooks/useKakaoLoader';
-import type { EventData } from '@/types/event';
+import type { EventData } from '@/types/popup';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 

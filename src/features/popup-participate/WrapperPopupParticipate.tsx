@@ -1,6 +1,6 @@
 'use client';
 
-import type { EventData } from '@/types/event';
+import type { EventData } from '@/types/popup';
 
 import FloatingBundle from '@/components/common/floating/FloatingBundle';
 import EventSummary from '@/features/popup-participate/components/EventSummary';

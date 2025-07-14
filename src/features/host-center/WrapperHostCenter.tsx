@@ -4,10 +4,10 @@ import HeroSection from '@/components/common/hero-section';
 import HostPopupPanel from '@/features/host-center/components/HostPopupPanel';
 import HostProfile from '@/features/host-center/components/HostProfile';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
-import { type EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 
 interface WrapperHostCenterProps {
-  hostEvents: EventData[];
+  hostEvents: Popup[];
 }
 
 export default function WrapperHostCenter({ hostEvents }: WrapperHostCenterProps) {

@@ -1,5 +1,5 @@
 import { clientApi } from '@/libs/api';
-import type { EventData } from '@/types/event';
+import type { EventData } from '@/types/popup';
 
 export async function getEventById(id: string): Promise<EventData | null> {
   try {

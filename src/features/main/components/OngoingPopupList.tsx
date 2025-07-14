@@ -3,7 +3,7 @@
 import { SectionLayout } from '@/features/main/components/SectionLayout';
 import { SwiperPopupList } from '@/features/main/components/SwiperPopupList';
 import { useSaveStore } from '@/store/useSaveStore';
-import type { EventData } from '@/types/event';
+import type { EventData } from '@/types/popup';
 import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';

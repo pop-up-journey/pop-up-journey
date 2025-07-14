@@ -1,13 +1,13 @@
-import type { EventStatusType } from '@/types/event';
+import type { PopupStatusType } from '@/types/popup';
 
 interface HostPopupStatsProps {
   ongoing: number;
   ended: number;
   upcoming: number;
-  onStatusClick: (status: EventStatusType) => void;
+  onStatusClick: (status: PopupStatusType) => void;
 }
 
-const STATUS_LABELS: { status: EventStatusType; label: string }[] = [
+const STATUS_LABELS: { status: PopupStatusType; label: string }[] = [
   { status: 'ongoing', label: '운영중인 팝업' },
   { status: 'ended', label: '종료된 팝업' },
   { status: 'upcoming', label: '예정된 팝업' },

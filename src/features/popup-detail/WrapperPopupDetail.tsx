@@ -5,7 +5,7 @@ import EventInfoList from '@/features/popup-detail/components/EventInfoList';
 import EventMobileBar from '@/features/popup-detail/components/EventMobileBar';
 import EventPoster from '@/features/popup-detail/components/EventPoster';
 import EventTitle from '@/features/popup-detail/components/EventTitle';
-import type { EventData } from '@/types/event';
+import type { EventData } from '@/types/popup';
 import type { User } from '@/types/user';
 import { Divider } from '@heroui/react';
 

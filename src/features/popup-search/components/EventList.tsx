@@ -2,7 +2,7 @@
 
 import CardComponent from '@/components/common/card';
 import { useSaveStore } from '@/store/useSaveStore';
-import type { EventData } from '@/types/event';
+import type { EventData } from '@/types/popup';
 import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
 
 interface Props {

@@ -1,6 +1,6 @@
 import WrapperPopupParticipate from '@/features/popup-participate/WrapperPopupParticipate';
 import { clientApi } from '@/libs/api';
-import { EventData } from '@/types/event';
+import { EventData } from '@/types/popup';
 
 interface Props {
   params: Promise<{ popupId: string }>;
