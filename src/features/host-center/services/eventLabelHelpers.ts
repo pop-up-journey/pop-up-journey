@@ -6,8 +6,10 @@ export const EVENT_STATUS_LABEL = {
   [EVENT_STATUS.Upcoming]: '예정',
 };
 
+import { CalendarDaysIcon, CheckCircleIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+
 export const EVENT_STATUS_ICON = {
-  [EVENT_STATUS.Ongoing]: '📅',
-  [EVENT_STATUS.Ended]: '🎉',
-  [EVENT_STATUS.Upcoming]: '🚀',
+  [EVENT_STATUS.Ongoing]: CalendarDaysIcon,
+  [EVENT_STATUS.Ended]: CheckCircleIcon,
+  [EVENT_STATUS.Upcoming]: RocketLaunchIcon,
 };

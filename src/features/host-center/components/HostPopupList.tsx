@@ -1,11 +1,11 @@
 import PopupStatusCard from '@/features/host-center/components/PopupStatusCard';
 import type { EventData } from '@/types/event';
-import { useEffect, useState } from 'react';
+import { ComponentType, useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-haiku';
 
 interface HostPopupListProps {
   events: EventData[];
-  getEventIcon: (status: string) => string;
+  getEventIcon: (status: string) => ComponentType<{ className?: string }>;
   getStatusLabel: (status: string) => string;
 }
 

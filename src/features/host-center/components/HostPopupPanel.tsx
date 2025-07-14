@@ -18,9 +18,9 @@ export default function HostPopupPanel({ hostEvents }: HostPopupPanelProps) {
   // 상태별 배열 캐싱
   const eventsByStatus = useMemo(
     () => ({
-      ongoing: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Ongoing),
-      ended: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Ended),
-      upcoming: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Upcoming),
+      [EVENT_STATUS.Ongoing]: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Ongoing),
+      [EVENT_STATUS.Ended]: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Ended),
+      [EVENT_STATUS.Upcoming]: hostEvents.filter((e) => e.eventStatus === EVENT_STATUS.Upcoming),
     }),
     [hostEvents]
   );
@@ -28,9 +28,9 @@ export default function HostPopupPanel({ hostEvents }: HostPopupPanelProps) {
   return (
     <>
       <HostPopupStats
-        ongoing={eventsByStatus.ongoing.length}
-        ended={eventsByStatus.ended.length}
-        upcoming={eventsByStatus.upcoming.length}
+        ongoing={eventsByStatus[EVENT_STATUS.Ongoing].length}
+        ended={eventsByStatus[EVENT_STATUS.Ended].length}
+        upcoming={eventsByStatus[EVENT_STATUS.Upcoming].length}
         onStatusClick={setSelectedStatus}
       />
 

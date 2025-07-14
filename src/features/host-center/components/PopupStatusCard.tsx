@@ -1,20 +1,30 @@
+import { ComponentType } from 'react';
+
 interface PopupStatusCardProps {
-  icon: string;
+  icon: ComponentType<{ className?: string }>;
   title: string;
   status: string;
   views: number;
   likes: number;
   participants: number;
 }
-export default function PopupStatusCard({ icon, title, status, views, likes, participants }: PopupStatusCardProps) {
+
+export default function PopupStatusCard({
+  icon: Icon,
+  title,
+  status,
+  views,
+  likes,
+  participants,
+}: PopupStatusCardProps) {
   return (
     <article
       className="flex items-center justify-between border border-gray-200 p-4"
       aria-label={`Event card: ${title}`}
     >
       <section className="flex items-center gap-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-2xl" aria-hidden>
-          {icon}
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100" aria-hidden>
+          <Icon className="h-6 w-6 text-gray-600" />
         </div>
         <div>
           <h2 className="font-semibold" aria-label="Event title">
