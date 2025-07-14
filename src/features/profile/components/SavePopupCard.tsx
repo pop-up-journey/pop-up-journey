@@ -9,7 +9,7 @@ interface SavedPopupCardProps {
   removeFavorite: () => void;
 }
 
-export default function SavedPopupCard({ popup, userId, removeFavorite }: SavedPopupCardProps) {
+export default function SavedPopupCard({ popup, removeFavorite }: SavedPopupCardProps) {
   // compact 모드 + 프로필 전용 삭제 버튼만 활성화
   return (
     <CardComponent

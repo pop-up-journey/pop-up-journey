@@ -4,7 +4,7 @@ import { SectionLayout } from '@/features/main/components/SectionLayout';
 import { SwiperPopupList } from '@/features/main/components/SwiperPopupList';
 import { useSaveStore } from '@/store/useSaveStore';
 import type { EventData } from '@/types/event';
-import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
+import { toggleSavedPopup } from '@/utils/toggleSavedPopup';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
@@ -34,8 +34,12 @@ export default function OngoingPopupList({ events, likeEventIds, sectionTitle }:
     // zustand 반영 : 실시간 토글 UI
     toggleSaveStore(eventId);
     const isNowSaved = !saveStores.includes(eventId);
+    // 세션에서 userId 추출 (예시: session.user.id)
+    const userId = session?.user?.id;
     // 서버에 반영 : debounce적용->마지막 action 0.4초후 API호출
-    saveStoreDebounce(eventId, isNowSaved, session?.user?.id);
+    if (userId) {
+      toggleSavedPopup(eventId, userId, isNowSaved);
+    }
   };
 
   return (

@@ -3,7 +3,7 @@
 import CardComponent from '@/components/common/card';
 import { useSaveStore } from '@/store/useSaveStore';
 import type { EventData } from '@/types/event';
-import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
+import { toggleSavedPopup } from '@/utils/toggleSavedPopup';
 
 interface Props {
   events: EventData[];
@@ -24,7 +24,9 @@ export default function EventList({ events = [], userId }: Props) {
 
         const handleToggle = () => {
           toggleSaveStore(evt.id);
-          saveStoreDebounce(evt.id, !isSaved, userId);
+          if (userId) {
+            toggleSavedPopup(evt.id, userId, !isSaved);
+          }
         };
         return (
           <li key={evt.id} className="transform transition-transform hover:scale-105">

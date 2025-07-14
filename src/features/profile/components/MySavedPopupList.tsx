@@ -7,7 +7,7 @@ import type { EventData } from '@/types/event';
 import { useEffect, useState } from 'react';
 
 import Button from '@/components/common/button';
-import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
+import { toggleSavedPopup } from '../../../utils/toggleSavedPopup';
 import SavedPopupCard from './SavePopupCard';
 
 export default function MySavedPopupList({ userId }: { userId: string }) {
@@ -45,13 +45,13 @@ export default function MySavedPopupList({ userId }: { userId: string }) {
   // 개별 삭제 핸들러
   const removeFavorite = (id: string) => {
     setSavedStores(savedStores.filter((x) => x !== id));
-    saveStoreDebounce(id, false, userId);
+    toggleSavedPopup(id, userId, false);
   };
 
   // 전체 삭제 핸들러
   const clearAll = () => {
     if (!confirm('관심 팝업을 전부 삭제하시겠습니까?')) return;
-    savedStores.forEach((id) => saveStoreDebounce(id, false, userId));
+    savedStores.forEach((id) => toggleSavedPopup(id, userId, false));
     setSavedStores([]);
   };
 
