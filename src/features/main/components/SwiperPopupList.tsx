@@ -1,9 +1,9 @@
 import CardComponent from '@/components/common/card';
-import type { EventData } from '@/types/popup';
+import type { Popup } from '@/types/popup';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface SwiperPopupListProps {
-  events: EventData[];
+  events: Popup[];
   maxLimit?: number;
   isSaved: (id: string) => boolean;
   onToggleSave: (id: string) => void;

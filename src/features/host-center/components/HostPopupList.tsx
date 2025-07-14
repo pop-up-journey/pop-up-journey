@@ -1,4 +1,6 @@
-import PopupStatusCard from '@/features/host-center/components/PopupStatusCard';
+'use client';
+
+import CardComponent from '@/components/common/card';
 import { POPUP_STATUS, type Popup, type PopupStatusType } from '@/types/popup';
 import { ComponentType, useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-haiku';
@@ -33,18 +35,24 @@ export default function HostPopupList({ popups, selectedStatus, getEventIcon, ge
   }, [isVisible, visibleCount, popups.length]);
 
   return (
-    <section id="defaultSt" className="mx-auto mt-12 max-w-5xl">
-      <ul className="space-y-6">
+    <section id="defaultSt" className="mx-auto mt-12 flex max-w-5xl items-center justify-center">
+      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {popups.length === 0 && <div className="text-white">{POPUP_STATUS_MSG[selectedStatus]}</div>}
         {popups.slice(0, visibleCount).map((popup, idx) => (
           <li key={popup.id}>
-            <PopupStatusCard
+            {/* <PopupStatusCard
               icon={getEventIcon(popup.eventStatus)}
               title={popup.title}
               status={getStatusLabel(popup.eventStatus)}
               views={123}
               likes={popup.saveCount ?? 0}
               participants={456}
+            /> */}
+            <CardComponent
+              location={popup?.address?.split(',').map((s: any) => s.trim())[2] || ''}
+              savedCount={popup.saveCount}
+              {...popup}
+              variant="compact"
             />
             {idx === visibleCount - 1 && visibleCount < popups.length && (
               <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-[30px]" />
