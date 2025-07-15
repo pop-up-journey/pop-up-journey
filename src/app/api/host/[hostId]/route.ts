@@ -79,8 +79,6 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ hos
   const { hostId } = await params;
 
   try {
-    // const hostEvents = await db.select().from(events).where(eq(events.hostId, hostId));
-    // return NextResponse.json(hostEvents);
     const hostEvents = await db
       .select({
         id: events.id,
