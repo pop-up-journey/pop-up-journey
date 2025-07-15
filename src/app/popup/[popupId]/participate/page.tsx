@@ -8,7 +8,7 @@ interface Props {
 
 export default async function Page({ params }: Props) {
   const { popupId } = await params;
-  const event = await clientApi<Popup>(`/api/events/${popupId}`, { method: 'GET' });
+  const popup = await clientApi<Popup>(`/api/events/${popupId}`, { method: 'GET' });
 
-  return <WrapperPopupParticipate event={event} />;
+  return <WrapperPopupParticipate popup={popup} />;
 }

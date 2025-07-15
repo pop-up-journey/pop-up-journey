@@ -43,10 +43,10 @@ const inputOptions = {
 };
 
 interface ParticipateFormProps {
-  eventId: string;
+  popupId: string;
 }
 
-export default function ParticipateForm({ eventId }: ParticipateFormProps) {
+export default function ParticipateForm({ popupId }: ParticipateFormProps) {
   const { userInfo } = useGetUserInfo();
   const setValue = useEventParticipateFormStore((state) => state.setValue);
   const setIsValid = useEventParticipateFormStore((state) => state.setIsValid);
@@ -76,7 +76,7 @@ export default function ParticipateForm({ eventId }: ParticipateFormProps) {
     // participantStatus: 'pending',
     // tickets,
     // };
-    createParticipate({ name, email, phone, tickets }, eventId);
+    createParticipate({ name, email, phone, tickets }, popupId);
   };
 
   return (

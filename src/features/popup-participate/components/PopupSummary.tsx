@@ -4,18 +4,17 @@ import { CalendarIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Image } from '@heroui/react';
 import NextImage from 'next/image';
 
-interface EventSummaryProps {
-  event: Popup;
+interface PopupSummaryProps {
+  popup: Popup;
 }
 
-export default function EventSummary({ event }: EventSummaryProps) {
-  //TODO: 애도 수정해야함
-  const imgSrc = Array.isArray(event.thumbnail) ? event.thumbnail[0] : event.thumbnail;
-  const place = event?.address?.split(',').map((s: string) => s.trim())[1];
+export default function PopupSummary({ popup }: PopupSummaryProps) {
+  const imgSrc = popup.thumbnail ?? undefined;
+  const place = popup?.address?.split(',').map((s: string) => s.trim())[1];
 
   return (
     <section className="flex flex-col space-y-4">
-      <h1 className="text-center text-3xl font-bold">{event.title}</h1>
+      <h1 className="text-center text-3xl font-bold">{popup.title}</h1>
       <div className="relative mx-auto">
         <Image
           isZoomed
@@ -36,7 +35,7 @@ export default function EventSummary({ event }: EventSummaryProps) {
             <CalendarIcon className="h-5 w-5 text-gray-500" />
           </div>
           <p className="text-sm text-gray-500">
-            {formatDate(event.eventStart)} ~ {formatDate(event.eventEnd)}
+            {formatDate(popup.eventStart)} ~ {formatDate(popup.eventEnd)}
           </p>
         </div>
         {/* 장소 */}
