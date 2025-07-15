@@ -1,5 +1,3 @@
-'use client';
-
 import Button from '@/components/common/button';
 import { usePopupRegisterFormStore } from '@/store/popup-register/usePopupRegisterFormStore';
 import Script from 'next/script';
