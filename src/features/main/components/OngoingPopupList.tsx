@@ -2,9 +2,9 @@
 
 import { SectionLayout } from '@/features/main/components/SectionLayout';
 import { SwiperPopupList } from '@/features/main/components/SwiperPopupList';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useSaveStore } from '@/store/save/useSaveStore';
 import type { Popup } from '@/types/popup';
-import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
 interface OngoingPopupListProps {
@@ -14,8 +14,8 @@ interface OngoingPopupListProps {
 }
 
 export default function OngoingPopupList({ events, likeEventIds, sectionTitle }: OngoingPopupListProps) {
-  const { data: session } = useSession();
-  const userId = session?.user?.id;
+  const { userInfo } = useGetUserInfo();
+  const userId = userInfo?.id;
   const savedStores = useSaveStore((s) => s.savedStores);
   const setSavedStores = useSaveStore((s) => s.setSavedStores);
 

@@ -3,17 +3,17 @@
 import Button from '@/components/common/button';
 import ShareButton from '@/features/popup-detail/components/ShareButton';
 import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
 import useHandleSave from '@/hooks/useHandleSave';
 import { useSaveStore } from '@/store/save/useSaveStore';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function PopupActionButtons() {
   const { popupId } = useParams() as { popupId: string };
-  const { data: session } = useSession();
-  const userId = session?.user?.id;
+  const { userInfo } = useGetUserInfo();
+  const userId = userInfo?.id;
   const { isSaved, toggle } = useHandleSave(popupId, userId);
   const setSavedStores = useSaveStore((s) => s.setSavedStores);
   useEffect(() => {
