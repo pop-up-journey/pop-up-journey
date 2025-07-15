@@ -11,6 +11,7 @@ import { createParticipate } from '@/features/popup-participate/api/createPartic
 import { validateTickets } from '@/features/popup-participate/services/validateTickets';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useEventParticipateFormStore } from '@/store/event-participate/useEventParticipateFormStore';
+import { addToast } from '@heroui/react';
 import { useEffect } from 'react';
 
 const inputOptions = {
@@ -65,7 +66,10 @@ export default function ParticipateForm({ eventId }: ParticipateFormProps) {
     const { name, email, phone, tickets } = useEventParticipateFormStore.getState();
 
     if (!name || !email || !phone || !tickets) {
-      alert('모든 필드를 입력해주세요.'); // TODO: Toast
+      addToast({
+        title: '모든 필드를 입력해주세요.',
+        color: 'warning',
+      });
       return;
     }
     // const body: Pick<CreateEventParticipant, 'participantStatus' | 'tickets'> = {
