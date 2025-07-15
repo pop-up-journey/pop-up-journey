@@ -1,19 +1,29 @@
 'use client';
 
 import { useAuthStore } from '@/store/auth/useAuthStore';
+import { useSaveStore } from '@/store/useSaveStore';
+import type { User } from '@/types/user';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { User } from '../types/user';
+import { ReactNode, useEffect } from 'react';
 
-export function AuthSyncProvider({ children }: { children: React.ReactNode }) {
-  const { data: session } = useSession();
-  const setUser = useAuthStore((state) => state.setUser);
+interface Props {
+  children: ReactNode;
+}
+
+export function AuthSyncProvider({ children }: Props) {
+  const { data: session, status } = useSession();
+  const setUser = useAuthStore((s) => s.setUser);
+  const logout = useAuthStore((s) => s.logout);
+  const setSavedStores = useSaveStore((s) => s.setSavedStores);
 
   useEffect(() => {
-    if (session?.user) {
+    if (status === 'authenticated' && session?.user) {
       setUser(session.user as User);
+    } else if (status === 'unauthenticated') {
+      logout(); // authStore 초기화
+      setSavedStores([]); // 관심 팝업 초기화
     }
-  }, [session, setUser]);
+  }, [status, session, setUser, logout, setSavedStores]);
 
   return <>{children}</>;
 }
