@@ -20,6 +20,7 @@ interface PopupRegisterFormState {
   thumbnail: FileWithPreview[];
   uploadedThumbnail: string;
   tags: string[];
+  externalLink: string;
 }
 
 interface PopupRegisterFormActions {
@@ -45,6 +46,7 @@ export const usePopupRegisterFormStore = create<PopupRegisterFormState & PopupRe
   thumbnail: [],
   uploadedThumbnail: '',
   tags: [],
+  externalLink: '',
   setValue: (key, value) => set({ [key]: value }),
   setIsValid: (key, isValid) => set({ [`${key}Valid`]: isValid }),
   setThumbnail: (thumbnail: FileWithPreview[]) => set({ thumbnail }),

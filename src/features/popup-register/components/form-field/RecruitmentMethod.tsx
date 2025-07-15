@@ -1,9 +1,12 @@
+import Input from '@/components/common/input';
+import { LABELS } from '@/components/common/input/labels';
 import { usePopupRegisterFormStore } from '@/store/popup-register/usePopupRegisterFormStore';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 import { Radio, RadioGroup } from '@heroui/react';
 
 export default function RecruitmentMethod() {
   const recruitmentMethod = usePopupRegisterFormStore((state) => state.recruitmentMethod);
+  const externalLink = usePopupRegisterFormStore((state) => state.externalLink);
   const setValue = usePopupRegisterFormStore((state) => state.setValue);
 
   const radioClassNames = {
@@ -27,6 +30,16 @@ export default function RecruitmentMethod() {
           외부 신청 링크
         </Radio>
       </RadioGroup>
+      {recruitmentMethod === 'manual' && (
+        <Input
+          label={LABELS.LINK}
+          className="mt-2"
+          type="url"
+          placeholder="외부 신청 링크를 입력하세요"
+          value={externalLink}
+          onChange={(e) => setValue('externalLink', e.target.value)}
+        />
+      )}
     </div>
   );
 }
