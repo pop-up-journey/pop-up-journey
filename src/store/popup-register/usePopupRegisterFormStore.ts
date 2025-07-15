@@ -19,7 +19,8 @@ interface PopupRegisterFormState {
   extraAddress: string;
   thumbnail: FileWithPreview[];
   uploadedThumbnail: string;
-  tags: string[];
+
+  selectedTags: string[];
   externalLink: string;
 }
 
@@ -29,6 +30,7 @@ interface PopupRegisterFormActions {
   setThumbnail: (thumbnail: FileWithPreview[]) => void;
   setDate: (key: string, date: DateValue) => void;
   setExtraInfo: (info: string[]) => void;
+  setSelectedTags: (tags: string[]) => void;
 }
 
 export const usePopupRegisterFormStore = create<PopupRegisterFormState & PopupRegisterFormActions>((set) => ({
@@ -45,11 +47,13 @@ export const usePopupRegisterFormStore = create<PopupRegisterFormState & PopupRe
   extraAddress: '',
   thumbnail: [],
   uploadedThumbnail: '',
-  tags: [],
+
+  selectedTags: [],
   externalLink: '',
   setValue: (key, value) => set({ [key]: value }),
   setIsValid: (key, isValid) => set({ [`${key}Valid`]: isValid }),
   setThumbnail: (thumbnail: FileWithPreview[]) => set({ thumbnail }),
   setDate: (key, date: DateValue) => set({ [key]: date }),
   setExtraInfo: (info) => set({ extraInfo: info }),
+  setSelectedTags: (tags) => set({ selectedTags: tags }),
 }));

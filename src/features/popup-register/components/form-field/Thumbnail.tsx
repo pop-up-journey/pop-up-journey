@@ -6,14 +6,12 @@ import Image from 'next/image';
 
 export default function EventImageUpload() {
   const thumbnail = usePopupRegisterFormStore((state) => state.thumbnail);
-  const { getRootProps, getInputProps, isUploading } = useDragAndDropImg();
+  const { getRootProps, getInputProps } = useDragAndDropImg();
 
   return (
     <div
       {...getRootProps()}
-      className={`flex aspect-[4/5] w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-50 text-gray-400 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 ${
-        isUploading ? 'cursor-not-allowed opacity-50' : ''
-      }`}
+      className="flex aspect-[4/5] w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-50 text-gray-400 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
     >
       <input {...getInputProps()} />
       {thumbnail.length > 0 ? (
@@ -25,21 +23,11 @@ export default function EventImageUpload() {
             height={625}
             className="h-full w-full object-cover"
           />
-          {isUploading && (
-            <div className="bg-opacity-50 absolute inset-0 flex items-center justify-center bg-black text-white">
-              <div className="text-center">
-                <div className="mb-2">업로드 중...</div>
-                <div className="h-2 w-16 rounded-full bg-gray-300">
-                  <div className="h-2 w-8 animate-pulse rounded-full bg-white"></div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       ) : (
         <>
           <FolderPlusIcon className="h-16 w-16" />
-          <p className="mt-2">{isUploading ? '업로드 중...' : '클릭하여 이미지 업로드 또는 드래그 앤 드롭'}</p>
+          <p className="mt-2">클릭하여 이미지 업로드 또는 드래그 앤 드롭</p>
         </>
       )}
     </div>
