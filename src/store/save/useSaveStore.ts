@@ -1,7 +1,7 @@
+import { toggleSavedPopup } from '@/utils/toggleSavedPopup';
 import debounce from 'lodash.debounce';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { toggleSavedPopup } from '../utils/toggleSavedPopup';
 
 const syncSave = debounce(toggleSavedPopup, 400);
 interface SavedStoreState {

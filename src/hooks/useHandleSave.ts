@@ -1,5 +1,5 @@
 import { useSignInModal } from '@/features/sign-in/SignInModalContext';
-import { useSaveStore } from '@/store/useSaveStore';
+import { useSaveStore } from '@/store/save/useSaveStore';
 
 export default function useHandleSave(eventId: string, userId?: string) {
   const { open: openSignInModal } = useSignInModal();

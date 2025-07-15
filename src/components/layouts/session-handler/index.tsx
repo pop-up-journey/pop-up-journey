@@ -1,6 +1,6 @@
 'use client';
 
-import { useSaveStore } from '@/store/useSaveStore';
+import { useSaveStore } from '@/store/save/useSaveStore';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 

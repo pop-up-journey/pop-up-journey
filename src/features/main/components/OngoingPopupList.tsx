@@ -2,7 +2,7 @@
 
 import { SectionLayout } from '@/features/main/components/SectionLayout';
 import { SwiperPopupList } from '@/features/main/components/SwiperPopupList';
-import { useSaveStore } from '@/store/useSaveStore';
+import { useSaveStore } from '@/store/save/useSaveStore';
 import type { EventData } from '@/types/event';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';

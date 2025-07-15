@@ -4,7 +4,7 @@ import Button from '@/components/common/button';
 import ShareButton from '@/features/popup-detail/components/ShareButton';
 import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
 import useHandleSave from '@/hooks/useHandleSave';
-import { useSaveStore } from '@/store/useSaveStore';
+import { useSaveStore } from '@/store/save/useSaveStore';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';

@@ -2,7 +2,7 @@
 
 import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
 import { clientApi } from '@/libs/api';
-import { useSaveStore } from '@/store/useSaveStore';
+import { useSaveStore } from '@/store/save/useSaveStore';
 import type { EventData } from '@/types/event';
 import { useEffect, useState } from 'react';
 

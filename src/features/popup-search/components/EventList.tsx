@@ -1,7 +1,7 @@
 'use client';
 
 import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
-import { useSaveStore } from '@/store/useSaveStore';
+import { useSaveStore } from '@/store/save/useSaveStore';
 import type { EventData } from '@/types/event';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
