@@ -26,6 +26,7 @@ export default function EventList({ events = [], userId }: Props) {
           toggleSaveStore(evt.id);
           saveStoreDebounce(evt.id, !isSaved, userId);
         };
+        // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함
         return (
           <li key={evt.id} className="transform transition-transform hover:scale-105">
             <CardComponent
@@ -35,7 +36,7 @@ export default function EventList({ events = [], userId }: Props) {
               // tags={evt.tags ?? []}
               eventStart={evt.eventStart}
               eventEnd={evt.eventEnd}
-              savedCount={evt.saveCount ?? 0}
+              // savedCount={evt.saveCount ?? 0}
               isSaved={isSaved}
               onToggleSave={handleToggle}
             />

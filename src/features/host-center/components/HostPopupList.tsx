@@ -42,9 +42,10 @@ export default function HostPopupList({ popups, selectedStatus }: HostPopupListP
               likes={popup.saveCount ?? 0}
               participants={456}
             /> */}
+            {/* // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함 */}
             <CardComponent
               location={popup?.address?.split(',').map((s: any) => s.trim())[2] || ''}
-              savedCount={popup.saveCount}
+              // savedCount={popup.saveCount}
               {...popup}
               variant="compact"
             />

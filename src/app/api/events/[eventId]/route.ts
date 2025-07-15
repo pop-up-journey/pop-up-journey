@@ -1,4 +1,4 @@
-import { events, users } from '@/db/schema';
+import { events, eventTags, users } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextResponse } from 'next/server';
@@ -24,7 +24,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ eventId
         extraInfo: events.extraInfo,
         eventStart: events.eventStart,
         eventEnd: events.eventEnd,
-        saveCount: events.saveCount,
+        tags: eventTags.tagId,
         createdAt: events.createdAt,
         updatedAt: events.updatedAt,
         hostName: users.name,
