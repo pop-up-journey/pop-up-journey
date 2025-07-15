@@ -1,26 +1,19 @@
-import { uploadImageToStorage, type UploadedImage } from '@/utils/imageUpload';
+import { usePopupRegisterFormStore } from '@/store/popup-register/usePopupRegisterFormStore';
+// import { type UploadedImage } from '@/utils/imgUploader.supabase';
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-interface FileWithPreview extends File {
-  preview: string;
-}
-
-interface UseDragAndDropImgResult {
-  thumbnail: FileWithPreview[];
-  uploadedImage: UploadedImage | null;
-  isUploading: boolean;
-  getRootProps: any;
-  getInputProps: any;
-}
-
-export default function useDragAndDropImg(): UseDragAndDropImgResult {
+export default function useDragAndDropImg() {
   // 썸네일 - 로컬 미리보기용
-  const [thumbnail, setThumbnail] = useState<FileWithPreview[]>([]);
-  // 업로드된 이미지 정보
-  const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null);
-  // 업로드 상태
+  // const [thumbnail, setThumbnail] = useState<FileWithPreview[]>([]);
+  const thumbnail = usePopupRegisterFormStore((state) => state.thumbnail);
+  const setThumbnail = usePopupRegisterFormStore((state) => state.setThumbnail);
+
   const [isUploading, setIsUploading] = useState(false);
+  console.log('thumbnail', thumbnail);
+  // 업로드된 이미지 정보 : 이거 useRegisterFormStore에 넣어야 함
+  // const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null);
+  // 업로드 상태
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
@@ -34,12 +27,12 @@ export default function useDragAndDropImg(): UseDragAndDropImgResult {
       }),
     ]);
 
-    // Supabase Storage에 업로드
+    // Supabase Storage에 업로드 이거 여기 있으면 안되겠네.
     setIsUploading(true);
     try {
-      const uploadedImageData = await uploadImageToStorage(file);
-      setUploadedImage(uploadedImageData);
-      console.log('Image uploaded successfully:', uploadedImageData);
+      // const uploadedImageData = await uploadImageToStorage(file);
+      // setUploadedImage(uploadedImageData);
+      console.log('Image uploaded successfully:', file);
     } catch (error) {
       console.error('Failed to upload image:', error);
       alert('이미지 업로드에 실패했습니다. 다시 시도해주세요.');
@@ -63,5 +56,5 @@ export default function useDragAndDropImg(): UseDragAndDropImgResult {
     disabled: isUploading,
   });
 
-  return { thumbnail, uploadedImage, isUploading, getRootProps, getInputProps };
+  return { getRootProps, getInputProps, isUploading };
 }

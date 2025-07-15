@@ -1,24 +1,13 @@
 'use client';
+import useDragAndDropImg from '@/features/popup-register/hooks/useDragAndDropImg';
+import { usePopupRegisterFormStore } from '@/store/popup-register/usePopupRegisterFormStore';
 import { FolderPlusIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 
-interface FileWithPreview extends File {
-  preview: string;
-}
+export default function EventImageUpload() {
+  const thumbnail = usePopupRegisterFormStore((state) => state.thumbnail);
+  const { getRootProps, getInputProps, isUploading } = useDragAndDropImg();
 
-interface EventImageUploadProps {
-  thumbnail: FileWithPreview[];
-  isUploading: boolean;
-  getRootProps: () => any;
-  getInputProps: () => any;
-}
-
-export default function EventImageUpload({
-  thumbnail,
-  isUploading,
-  getRootProps,
-  getInputProps,
-}: EventImageUploadProps) {
   return (
     <div
       {...getRootProps()}
