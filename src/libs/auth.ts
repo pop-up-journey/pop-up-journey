@@ -7,6 +7,8 @@ import db from '../db';
 import { accounts, sessions, users, verificationTokens } from '../db/schema';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  secret: process.env.NEXT_AUTH_SECRET,
+
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID!,

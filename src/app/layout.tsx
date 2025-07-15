@@ -1,6 +1,5 @@
 import Footer from '@/components/layouts/footer';
 import Header from '@/components/layouts/header';
-import SessionHandler from '@/components/layouts/session-handler';
 import { Providers } from '@/providers/providers';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -31,9 +30,8 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className={` ${pretendard.variable} antialiased`}>
         <Providers>
-          <SessionHandler />
           <Header />
-          <div className="min-h-screen">{children}</div>
+          <div className="min-h-screen"> {children}</div>
           <Footer />
         </Providers>
       </body>
