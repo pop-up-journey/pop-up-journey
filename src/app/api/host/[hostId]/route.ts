@@ -1,5 +1,12 @@
-import { createEventSchema, events, insertEventSchema, validateEventDates } from '@/db/schema';
-import { eq } from 'drizzle-orm';
+import {
+  createEventSchema,
+  eventParticipants,
+  events,
+  eventSave,
+  insertEventSchema,
+  validateEventDates,
+} from '@/db/schema';
+import { eq, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -72,7 +79,38 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ hos
   const { hostId } = await params;
 
   try {
-    const hostEvents = await db.select().from(events).where(eq(events.hostId, hostId));
+    const hostEvents = await db
+      .select({
+        id: events.id,
+        title: events.title,
+        thumbnail: events.thumbnail,
+        hostId: events.hostId,
+        eventStart: events.eventStart,
+        eventEnd: events.eventEnd,
+        address: events.address,
+        eventStatus: events.eventStatus,
+        createdAt: events.createdAt,
+        updatedAt: events.updatedAt,
+        participantCount: sql<number>`COUNT(DISTINCT ${eventParticipants.id})`.as('participantCount'),
+        saveCount: sql<number>`COUNT(DISTINCT ${eventSave.id})`.as('saveCount'),
+      })
+      .from(events)
+      .where(eq(events.hostId, hostId))
+      .leftJoin(eventParticipants, eq(events.id, eventParticipants.eventId))
+      .leftJoin(eventSave, eq(events.id, eventSave.eventId))
+      .groupBy(
+        events.id,
+        events.title,
+        events.description,
+        events.hostId,
+        events.eventStart,
+        events.eventEnd,
+        events.address,
+        events.eventStatus,
+        events.createdAt,
+        events.updatedAt
+      );
+
     return NextResponse.json(hostEvents);
   } catch (error) {
     console.error('Error fetching events:', error);

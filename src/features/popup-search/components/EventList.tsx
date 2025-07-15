@@ -2,13 +2,13 @@
 
 import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
 import { useSaveStore } from '@/store/save/useSaveStore';
-import type { EventData } from '@/types/event';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import EventCard from './EventCard';
+import type { Popup } from '@/types/popup';
 
 interface Props {
-  events: EventData[];
+  events: Popup[];
   userId?: string;
 }
 

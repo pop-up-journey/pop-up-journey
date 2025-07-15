@@ -1,9 +1,9 @@
-import type { EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import PopupSlideCard from './PopupSlideCard';
 
 interface SwiperPopupListProps {
-  events: EventData[];
+  events: Popup[];
   maxLimit?: number;
   userId?: string;
 }

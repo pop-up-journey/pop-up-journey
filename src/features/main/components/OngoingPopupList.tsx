@@ -3,12 +3,12 @@
 import { SectionLayout } from '@/features/main/components/SectionLayout';
 import { SwiperPopupList } from '@/features/main/components/SwiperPopupList';
 import { useSaveStore } from '@/store/save/useSaveStore';
-import type { EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
 interface OngoingPopupListProps {
-  events: EventData[];
+  events: Popup[];
   likeEventIds: string[];
   sectionTitle: string;
 }
