@@ -1,9 +1,9 @@
 import { clientApi } from '@/libs/api';
-import type { EventData } from '@/types/popup';
+import type { Popup } from '@/types/popup';
 
-export async function getEventById(id: string): Promise<EventData | null> {
+export async function getEventById(id: string): Promise<Popup | null> {
   try {
-    const data = await clientApi<EventData>(`/api/events/${id}`, { method: 'GET' });
+    const data = await clientApi<Popup>(`/api/events/${id}`, { method: 'GET' });
     return data ?? null;
   } catch {
     // TODO: 에러 처리 필요

@@ -1,12 +1,12 @@
 'use client';
 
 import useKakaoLoader from '@/hooks/useKakaoLoader';
-import type { EventData } from '@/types/popup';
+import type { Popup } from '@/types/popup';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 interface Props {
-  events: EventData[];
+  events: Popup[];
 }
 // NOTE: 선택한 지역 권역에 따라 중심좌표를 이동하게 할까
 export default function EventsMap({ events }: Props) {

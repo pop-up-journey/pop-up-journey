@@ -1,11 +1,11 @@
-import type { EventData } from '@/types/popup';
+import type { Popup } from '@/types/popup';
 import { formatDate } from '@/utils/dateformatter';
 import { CalendarIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Image } from '@heroui/react';
 import NextImage from 'next/image';
 
 interface EventSummaryProps {
-  event: EventData;
+  event: Popup;
 }
 
 export default function EventSummary({ event }: EventSummaryProps) {
