@@ -2,16 +2,33 @@
 
 import Button from '@/components/common/button';
 import ShareButton from '@/features/popup-detail/components/ShareButton';
+import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
 import useHandleSave from '@/hooks/useHandleSave';
+import { useSaveStore } from '@/store/save/useSaveStore';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function EventActionButtons() {
   const { popupId } = useParams() as { popupId: string };
   const { data: session } = useSession();
   const userId = session?.user?.id;
   const { isSaved, toggle } = useHandleSave(popupId, userId);
+  const setSavedStores = useSaveStore((s) => s.setSavedStores);
+  useEffect(() => {
+    let mounted = true;
+    if (userId) {
+      getSavedStoreIds(userId).then((ids = []) => {
+        if (mounted && Array.isArray(ids)) {
+          setSavedStores(ids);
+        }
+      });
+    }
+    return () => {
+      mounted = false;
+    };
+  }, [userId, setSavedStores]);
 
   {
     /* HACK : 관심팝업 등록이 되어 있는 상태에서 새로고침을 하면

@@ -1,5 +1,5 @@
 import { getEvents } from '@/features/main/api/getEvents';
-import { getSavedStoreIds } from '@/features/main/api/getSavedStoreIds';
+import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
 
 // 일단 스킵
 export async function getMainPageData(userId?: string) {
