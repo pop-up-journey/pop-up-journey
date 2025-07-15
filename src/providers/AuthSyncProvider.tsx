@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuthStore } from '@/store/auth/useAuthStore';
-import { useSaveStore } from '@/store/useSaveStore';
+import { useSaveStore } from '@/store/save/useSaveStore';
 import type { User } from '@/types/user';
 import { useSession } from 'next-auth/react';
 import { ReactNode, useEffect } from 'react';
