@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-export default function EventActionButtons() {
+export default function PopupActionButtons() {
   const { popupId } = useParams() as { popupId: string };
   const { data: session } = useSession();
   const userId = session?.user?.id;
@@ -36,11 +36,11 @@ export default function EventActionButtons() {
   }
 
   return (
-    <section className="mt-4 flex flex-col gap-2">
+    <section className="mt-4 flex flex-col gap-3">
       <Link href={`/popup/${popupId}/participate`}>
         <Button fullWidth>신청하기</Button>
       </Link>
-      <div className="flex flex-row items-center gap-6">
+      <div className="flex flex-row items-center gap-3">
         <Button fullWidth onPress={toggle}>
           {/* NOTE: 뭔가 심심함.. */}
           {isSaved ? '관심 행사 취소' : '관심 행사 등록'}
