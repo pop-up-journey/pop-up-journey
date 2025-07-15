@@ -68,17 +68,19 @@ export default function CardComponent({
             </span>
           </CardHeader>
           <CardBody className="overflow-x-auto p-0">
-            <Image
-              isZoomed
-              as={NextImage}
-              alt="Card background"
-              className="z-0 aspect-[4/5] w-full object-cover"
-              src={typeof thumbnail === 'string' ? thumbnail : thumbnail?.src}
-              radius="none"
-              width={240}
-              height={300}
-              loading="eager"
-            />
+            <div className="relative aspect-[4/5] w-full">
+              <Image
+                isZoomed
+                as={NextImage}
+                alt="Card background"
+                className="z-0 h-full w-full object-cover"
+                src={typeof thumbnail === 'string' ? thumbnail : thumbnail?.src}
+                radius="none"
+                width={240}
+                height={300}
+                loading="eager"
+              />
+            </div>
           </CardBody>
           <CardFooter className="absolute bottom-0 z-10 flex-col items-start bg-gradient-to-t from-black/60 via-black/20 to-transparent">
             <h4 className="mb-1 font-bold text-white">{title}</h4>

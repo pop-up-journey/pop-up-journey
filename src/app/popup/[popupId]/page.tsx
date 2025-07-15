@@ -5,10 +5,10 @@ import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: Promise<{ popupId: string }> }) {
   const { popupId } = await params;
-  const event = await getEventById(popupId);
-  if (!event) notFound();
-  const host = await getHostByEventId(event.hostId);
+  const popups = await getEventById(popupId);
+  if (!popups) notFound();
+  const host = await getHostByEventId(popups.hostId);
   if (!host) notFound();
 
-  return <WrapperPopupDetail event={event} host={host} />;
+  return <WrapperPopupDetail popups={popups} host={host} />;
 }

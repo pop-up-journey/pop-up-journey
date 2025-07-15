@@ -4,10 +4,10 @@ import CardComponent from '@/components/common/card';
 import { getEvents } from '@/features/main/api/getEvents';
 import { SectionLayout } from '@/features/main/components/SectionLayout';
 import { usePagination } from '@/hooks/usePagination';
-import type { EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 
 interface UpcomingPopupListProps {
-  initialEvents: EventData[];
+  initialEvents: Popup[];
   sectionTitle: string;
   initialCount?: number;
 }
@@ -19,7 +19,7 @@ export default function UpcomingPopupList({ sectionTitle, initialCount, initialE
     loadMore,
     loading,
     isEnd,
-  } = usePagination<EventData>(
+  } = usePagination<Popup>(
     ({ page, pageSize }) =>
       getEvents({ status: 'upcoming', page, pageSize }).then((res) => ({
         items: res?.events ?? [],

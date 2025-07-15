@@ -1,6 +1,6 @@
 'use client';
 
-import type { EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 
 import FloatingBundle from '@/components/common/floating/FloatingBundle';
 import EventSummary from '@/features/popup-participate/components/EventSummary';
@@ -10,7 +10,7 @@ import ParticipateForm from '@/features/popup-participate/components/Participate
 // 추후 유정님 작업하신거 끝나면 interface 삭제해도 될 듯
 
 interface Props {
-  event: EventData;
+  event: Popup;
 }
 
 export default function WrapperPopupParticipate({ event }: Props) {
