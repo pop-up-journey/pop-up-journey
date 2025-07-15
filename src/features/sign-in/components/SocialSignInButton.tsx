@@ -2,6 +2,7 @@
 
 // TODO: signIn : 서버컴포넌트에서 사용하는 방법 없나?
 import { signIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 import { ProviderLogo } from './ProviderLogo';
 
 interface SocialSignInButtonProps {
@@ -9,6 +10,8 @@ interface SocialSignInButtonProps {
 }
 
 export function SocialSignInButton({ provider }: SocialSignInButtonProps) {
+  const params = useSearchParams();
+  const callbackUrl = params.get('callbackUrl') ?? '/';
   const bgColor = {
     google: 'bg-white text-black border border-gray-300 hover:bg-white/90',
     naver: 'bg-[#02C73D] text-white hover:bg-[#02b152]/90',
@@ -16,7 +19,7 @@ export function SocialSignInButton({ provider }: SocialSignInButtonProps) {
   }[provider];
 
   const handleSignIn = () => {
-    signIn(provider, { redirectTo: '/' });
+    signIn(provider, { redirectTo: callbackUrl });
   };
 
   return (

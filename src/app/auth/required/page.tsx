@@ -1,9 +1,9 @@
 'use client';
 
 import FloatingBundle from '@/components/common/floating/FloatingBundle';
+import { useSignInModal } from '@/features/sign-in/SignInModalContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useSignInModal } from '../../../features/sign-in/SignInModalContext';
 
 export default function AuthRequiredPage() {
   const router = useRouter();
