@@ -1,6 +1,6 @@
 'use client';
 
-import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
+import { getSavedPopupIds } from '@/hooks/getSavedPopupIds';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useSaveStore } from '@/store/save/useSaveStore';
 import type { Popup } from '@/types/popup';
@@ -21,7 +21,7 @@ export default function EventList({ events = [], userId }: Props) {
     let mounted = true;
     if (userId) {
       (async () => {
-        const ids = await getSavedStoreIds(userId);
+        const ids = await getSavedPopupIds(userId);
         if (mounted && Array.isArray(ids) && ids.length > 0) {
           setSavedStores(ids);
         }

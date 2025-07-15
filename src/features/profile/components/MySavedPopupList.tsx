@@ -1,21 +1,21 @@
 'use client';
 
-import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
+import { getSavedPopupIds } from '@/hooks/getSavedPopupIds';
 import { clientApi } from '@/libs/api';
 import { useSaveStore } from '@/store/save/useSaveStore';
-import type { EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 import { useEffect, useState } from 'react';
 
 import Button from '@/components/common/button';
 import SavedPopupCard from './SavePopupCard';
 
 export default function MySavedPopupList({ userId }: { userId: string }) {
-  const [popups, setPopups] = useState<EventData[]>([]);
+  const [popups, setPopups] = useState<Popup[]>([]);
   const { savedStores, setSavedStores, toggleAndSyncSave } = useSaveStore();
 
   // 서버에서 저장된 ID 목록 초기화
   useEffect(() => {
-    getSavedStoreIds(userId).then((ids) => {
+    getSavedPopupIds(userId).then((ids) => {
       if (Array.isArray(ids)) setSavedStores(ids);
     });
   }, [userId, setSavedStores]);
@@ -30,13 +30,13 @@ export default function MySavedPopupList({ userId }: { userId: string }) {
       const loaded = await Promise.all(
         savedStores.map(async (id) => {
           try {
-            return await clientApi<EventData>(`/api/events/${id}`, { method: 'GET' });
+            return await clientApi<Popup>(`/api/events/${id}`, { method: 'GET' });
           } catch {
             return null;
           }
         })
       );
-      setPopups(loaded.filter((x): x is EventData => !!x));
+      setPopups(loaded.filter((x): x is Popup => !!x));
     })();
   }, [savedStores]);
 

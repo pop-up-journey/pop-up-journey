@@ -2,7 +2,7 @@
 
 import Button from '@/components/common/button';
 import ShareButton from '@/features/popup-detail/components/ShareButton';
-import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
+import { getSavedPopupIds } from '@/hooks/getSavedPopupIds';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import useHandleSave from '@/hooks/useHandleSave';
 import { useSaveStore } from '@/store/save/useSaveStore';
@@ -19,7 +19,7 @@ export default function PopupActionButtons() {
   useEffect(() => {
     let mounted = true;
     if (userId) {
-      getSavedStoreIds(userId).then((ids = []) => {
+      getSavedPopupIds(userId).then((ids = []) => {
         if (mounted && Array.isArray(ids)) {
           setSavedStores(ids);
         }
