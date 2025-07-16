@@ -1,7 +1,7 @@
 'use client';
 import Chip from '@/components/common/chip';
 import { formatDate } from '@/utils/dateformatter';
-import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartIconOutline, TrashIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Card, CardBody, CardFooter, CardHeader, Image } from '@heroui/react';
 import NextImage, { StaticImageData } from 'next/image';
@@ -19,7 +19,9 @@ interface CardProps {
   variant?: 'default' | 'compact';
   savedCount?: number | null;
   isSaved?: boolean;
+
   onToggleSave?: (id: string) => void;
+  onRemoveFavorite?: () => void;
 }
 
 export default function CardComponent({
@@ -34,6 +36,7 @@ export default function CardComponent({
   savedCount,
   isSaved,
   onToggleSave,
+  onRemoveFavorite,
 }: CardProps) {
   const isCompact = variant === 'compact';
   const router = useRouter();
@@ -44,14 +47,20 @@ export default function CardComponent({
     }
   };
 
+  const handleRemove = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onRemoveFavorite?.();
+  };
+
   return (
     <>
+      {/* ───── Default variant ───── */}
       <If isTrue={!isCompact}>
         <Card
           isPressable
           className="relative flex max-w-[240px] cursor-pointer flex-col overflow-hidden shadow-sm"
           radius="sm"
-          onPress={() => router.push(`/event/${id}`)}
+          onPress={() => router.push(`/popup/${id}`)}
         >
           <CardHeader className="absolute top-1 z-10 flex-col items-end">
             <span
@@ -68,17 +77,19 @@ export default function CardComponent({
             </span>
           </CardHeader>
           <CardBody className="overflow-x-auto p-0">
-            <Image
-              isZoomed
-              as={NextImage}
-              alt="Card background"
-              className="z-0 aspect-[4/5] w-full object-cover"
-              src={typeof thumbnail === 'string' ? thumbnail : thumbnail?.src}
-              radius="none"
-              width={240}
-              height={300}
-              loading="eager"
-            />
+            <div className="relative aspect-[4/5] w-full">
+              <Image
+                isZoomed
+                as={NextImage}
+                alt="Card background"
+                className="z-0 h-full w-full object-cover"
+                src={typeof thumbnail === 'string' ? thumbnail : thumbnail?.src}
+                radius="none"
+                width={240}
+                height={300}
+                loading="eager"
+              />
+            </div>
           </CardBody>
           <CardFooter className="absolute bottom-0 z-10 flex-col items-start bg-gradient-to-t from-black/60 via-black/20 to-transparent">
             <h4 className="mb-1 font-bold text-white">{title}</h4>
@@ -89,13 +100,14 @@ export default function CardComponent({
           </CardFooter>
         </Card>
       </If>
+      {/* ───── Compact variant ───── */}
       <If isTrue={isCompact}>
         <Card
           isPressable
           className="bg-bgcolor rounded-3xl border border-white/20 bg-white/10 p-10 py-4 shadow-2xl backdrop-blur-2xl"
           shadow="none"
           radius="sm"
-          onPress={() => router.push(`/event/${id}`)}
+          onPress={() => router.push(`/popup/${id}`)}
         >
           <CardBody className="relative grid grid-cols-6 gap-6 px-0 md:grid-cols-12 md:gap-4">
             <div className="relative col-span-6 md:col-span-4">
@@ -109,13 +121,25 @@ export default function CardComponent({
             </div>
             <div className="relative col-span-6 flex cursor-pointer flex-col justify-end gap-2 md:col-span-8">
               {/* 좋아요/조회수 아이콘 (compact) */}
-              {/* TODO: 조회수 렌더링 필요 */}
-              <div className="text-default-400 absolute top-0 right-0 p-2 text-sm">
-                ❤️ {isSaved ? '' : `${savedCount}`}
+              <div className="text-default-400 absolute top-0 right-0 flex items-center gap-3 text-xs">
+                {/* TODO: 조회수 렌더링 필요 */}
+                <div className="p-2 text-sm">👁️ 123</div>
+                <div className="p-2 text-sm">❤️ {isSaved ? '' : `${savedCount}`}</div>
+                {/* 좋아요·조회수·삭제 버튼 (호버 시 삭제만 나타남) */}
+                {onRemoveFavorite && (
+                  <button
+                    onClick={handleRemove}
+                    className="rounded-full p-1 opacity-100 hover:bg-white/20"
+                    aria-label="관심 팝업 삭제"
+                  >
+                    <TrashIcon className="text-default-400 h-4 w-4 cursor-pointer hover:text-red-500" />
+                  </button>
+                )}
               </div>
-              <div className="text-default-400 absolute top-0 right-15 p-2 text-sm">👁️ 123</div>
+
               <div className="flex flex-col gap-1">
                 <h4 className="text-foreground text-base font-bold">{title}</h4>
+
                 <p className="text-default-500 text-sm">📍 {location}</p>
                 <p className="text-default-400 text-sm">
                   {eventStart && `${formatDate(eventStart)}`} {eventEnd && `~ ${formatDate(eventEnd)}`}
@@ -123,6 +147,9 @@ export default function CardComponent({
               </div>
             </div>
           </CardBody>
+          {/* {savedCount != null && <span>❤️ {savedCount}</span>}
+            {/* HACK: {viewCount != null && <span>👁️ {viewCount}</span>} */}
+          {/* <span>👁️ 123</span>  */}
         </Card>
       </If>
     </>

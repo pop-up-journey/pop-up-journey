@@ -2,12 +2,12 @@
 import Button from '@/components/common/button';
 import CardComponent from '@/components/common/card';
 import { SectionLayout } from '@/features/main/components/SectionLayout';
-import { getEvents } from '@/features/main/services/getEvents';
 import { usePagination } from '@/hooks/usePagination';
-import type { EventData } from '@/types/event';
+import { getEvents } from '@/services/getEvents';
+import type { Popup } from '@/types/popup';
 
 interface UpcomingPopupListProps {
-  initialEvents: EventData[];
+  initialEvents: Popup[];
   sectionTitle: string;
   initialCount?: number;
 }
@@ -19,11 +19,11 @@ export default function UpcomingPopupList({ sectionTitle, initialCount, initialE
     loadMore,
     loading,
     isEnd,
-  } = usePagination<EventData>(
+  } = usePagination<Popup>(
     ({ page, pageSize }) =>
-      getEvents({ status: 'upcoming', page, pageSize }).then((res) => ({
-        items: res?.events ?? [],
-        totalCount: res?.totalCount ?? 0,
+      getEvents({ status: 'upcoming', page, pageSize }).then(({ events, totalCount }) => ({
+        items: events,
+        totalCount: totalCount,
       })),
     initialEvents,
     initialCount ?? 0,
@@ -34,10 +34,11 @@ export default function UpcomingPopupList({ sectionTitle, initialCount, initialE
     <SectionLayout title={sectionTitle} isEmpty={!events || events.length === 0}>
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-x-15 lg:gap-y-12">
         {events.map((popup) => (
+          // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함
           <CardComponent
             key={popup.id}
             location={popup?.address?.split(',').map((s: any) => s.trim())[2] || ''}
-            savedCount={popup.saveCount}
+            // savedCount={popup.saveCount}
             {...popup}
             variant="compact"
           />

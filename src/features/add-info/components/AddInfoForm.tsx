@@ -1,17 +1,18 @@
 'use client';
 
 import Button from '@/components/common/button';
+import FormTitle from '@/components/common/form/FormTitle';
+import ValidateInput from '@/components/common/form/ValidateInput';
 import { LABELS } from '@/components/common/input/labels';
+import Select from '@/components/common/select';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useAddInfoFormStore } from '@/store/add-info/useAddInfoFormStore';
+import { addToast } from '@heroui/react';
 import { useEffect } from 'react';
+import { updateUserInfo } from '../api/updateUserInfo';
 import { validateName } from '../services/nameValidation';
 import { validatePhone } from '../services/phoneValidation';
-import { updateUserInfo } from '../services/updateUserInfo';
-import FormTitle from './FormTitle';
-import InputField from './InputField';
 import InterestChip from './InterestChip';
-import Select from './Select';
 
 const inputOptions = {
   name: {
@@ -42,9 +43,7 @@ export default function AddInfoForm() {
   const { userInfo } = useGetUserInfo();
   const setValue = useAddInfoFormStore((state) => state.setValue);
   const setIsValid = useAddInfoFormStore((state) => state.setIsValid);
-
   // TODO: interests 항목을 db에 넣을지 아니면 localstorage에 넣을지 고민
-
   const userId = userInfo?.id;
 
   useEffect(() => {
@@ -61,19 +60,30 @@ export default function AddInfoForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { name, email, phone, role, nameValid, emailValid, phoneValid } = useAddInfoFormStore.getState(); // NOTE: interest 어떻게
-    if (!name || !email || !phone || !role) {
-      alert('모든 필드를 입력해주세요.'); // TODO: Toast
-      return;
-    }
+    const requiredFields = [name, email, phone, role];
+    const validityFlags = [nameValid, emailValid, phoneValid];
 
-    if (!nameValid || !emailValid || !phoneValid) {
-      alert('모든 필드를 입력해주세요.'); // TODO: Toast
+    if (requiredFields.some((field) => !field) || validityFlags.some((flag) => !flag)) {
+      addToast({
+        title: '모든 필드를 입력해주세요.',
+        color: 'warning',
+      });
       return;
     }
 
     if (userId) {
-      updateUserInfo({ name, email, phone, role }, userId);
-      return;
+      try {
+        await updateUserInfo({ name, email, phone, role }, userId);
+        addToast({ title: '업데이트 완료', color: 'success' });
+        // 필요하면 폼 초기화나 페이지 이동 추가
+      } catch (error) {
+        console.error(error);
+        addToast({
+          title: '업데이트 실패',
+          description: '다시 시도해주세요.',
+          color: 'danger',
+        });
+      }
     }
   };
 
@@ -87,7 +97,7 @@ export default function AddInfoForm() {
           >
             <FormTitle>회원 정보 입력</FormTitle>
             {Object.entries(inputOptions).map(([k, v]) => (
-              <InputField key={k} {...v} useStore={useAddInfoFormStore} />
+              <ValidateInput key={k} {...v} useStore={useAddInfoFormStore} />
             ))}
             <Select />
             <InterestChip />

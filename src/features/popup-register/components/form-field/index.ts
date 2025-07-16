@@ -1,0 +1,10 @@
+export { default as Capacity } from './Capacity';
+export { default as DateCalendar } from './DateCalendar';
+export { default as Description } from './Description';
+export { default as Email } from './Email';
+export { default as ExtraInfo } from './ExtraInfo';
+export { default as Location } from './Location';
+export { default as RecruitmentMethod } from './RecruitmentMethod';
+export { default as Tag } from './Tag';
+export { default as Thumbnail } from './Thumbnail';
+export { default as Title } from './Title';

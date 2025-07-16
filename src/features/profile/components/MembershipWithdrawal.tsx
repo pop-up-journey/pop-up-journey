@@ -1,8 +1,17 @@
 import Button from '@/components/common/button';
 import type { User } from '@/types/user';
-import { Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@heroui/react';
+import {
+  addToast,
+  Divider,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from '@heroui/react';
 import { signOut } from 'next-auth/react';
-import { deleteUser } from '../services/deleteUser';
+import { deleteUser } from '../api/deleteUser';
 
 interface MembershipWithdrawalProps {
   userInfo: User;
@@ -13,11 +22,16 @@ export default function MembershipWithdrawal({ userInfo }: MembershipWithdrawalP
   const handleDeleteUser = async () => {
     const { success } = await deleteUser(userInfo.id);
     if (success) {
-      // TODO: toast(토스트) 작업 필요
-      alert('회원 탈퇴가 완료되었습니다.');
+      addToast({
+        title: '회원 탈퇴가 완료되었습니다.',
+        color: 'success',
+      });
       await signOut({ callbackUrl: '/' });
     } else {
-      alert('탈퇴 중 오류가 발생했습니다. 다시 시도해주세요.');
+      addToast({
+        title: '탈퇴 중 오류가 발생했습니다. 다시 시도해주세요.',
+        color: 'danger',
+      });
     }
   };
 

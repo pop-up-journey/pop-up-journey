@@ -1,20 +1,21 @@
-'use client';
-
-import { useSaveStore } from '@/store/useSaveStore';
-import { saveStoreDebounce } from '@/utils/saveStoreDebounce';
+import { useSignInModal } from '@/features/sign-in/SignInModalContext';
+import { useSaveStore } from '@/store/save/useSaveStore';
 
 export default function useHandleSave(eventId: string, userId?: string) {
-  // Zustand에서 가져오기
-  const savedStores = useSaveStore((s) => s.savedStores);
-  const toggleSaveStore = useSaveStore((s) => s.toggleSaveStore);
+  const { open: openSignInModal } = useSignInModal();
 
-  // 현재 저장 여부
+  const savedStores = useSaveStore((s) => s.savedStores);
+  const toggleAndSync = useSaveStore((s) => s.toggleAndSyncSave);
   const isSaved = savedStores.includes(eventId);
 
-  // 토글 핸들러
   const toggle = () => {
-    toggleSaveStore(eventId);
-    saveStoreDebounce(eventId, !isSaved, userId);
+    if (!userId) {
+      // 비로그인 → 모달 열기
+      openSignInModal();
+    } else {
+      // 로그인 → 저장/해제 + 서버 동기화
+      toggleAndSync(eventId, userId);
+    }
   };
 
   return { isSaved, toggle };

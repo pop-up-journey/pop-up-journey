@@ -1,5 +1,10 @@
-import HostCenterPage from '@/_pages/HostCenterPage';
+import { getHostPopup } from '@/features/host-center/api/getHostPopup';
+import WrapperHostCenter from '@/features/host-center/WrapperHostCenter';
+import { getUserSession } from '@/services/getUserSession';
 
-export default function WrapperHostCenterPage() {
-  return <HostCenterPage />;
+export default async function Page() {
+  const session = await getUserSession();
+  const hostPopups = await getHostPopup(session?.user?.id ?? '');
+
+  return <WrapperHostCenter hostPopups={hostPopups} />;
 }

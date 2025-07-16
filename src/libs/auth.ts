@@ -1,12 +1,14 @@
+import db from '@/db';
+import { accounts, sessions, users, verificationTokens } from '@/db/schema';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
 import Kakao from 'next-auth/providers/kakao';
 import Naver from 'next-auth/providers/naver';
-import db from '../db';
-import { accounts, sessions, users, verificationTokens } from '../db/schema';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  secret: process.env.NEXT_AUTH_SECRET,
+
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID!,

@@ -9,6 +9,7 @@ export const events = pgTable('events', {
   hostId: uuid('host_id')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
+  hostName: text('host_name'),
   title: text('title').notNull(),
   thumbnail: text('thumbnail'),
   email: text('email'),
@@ -20,7 +21,7 @@ export const events = pgTable('events', {
   extraInfo: text('extra_info'),
   eventStart: timestamp('event_start').notNull(),
   eventEnd: timestamp('event_end').notNull(),
-  saveCount: integer('save_count').default(0),
+  externalLink: text('external_link'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

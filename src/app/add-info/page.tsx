@@ -1,5 +1,5 @@
-import AddInfoPage from '@/_pages/AddInfoPage';
+import WrapperAddInfo from '@/features/add-info/WrapperAddInfo';
 
-export default function WrapperAddInfoPage() {
-  return <AddInfoPage />;
+export default function Page() {
+  return <WrapperAddInfo />;
 }
