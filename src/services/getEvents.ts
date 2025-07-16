@@ -1,3 +1,4 @@
+import { PAGE_SIZE } from '@/configs/constants';
 import { clientApi } from '@/libs/api';
 import type { Popup } from '@/types/popup';
 
@@ -13,7 +14,12 @@ export interface GetEventsParams {
   pageSize?: number;
 }
 
-export async function getEvents({ status, zone, page = 1, pageSize = 6 }: GetEventsParams): Promise<EventsResponse> {
+export async function getEvents({
+  status,
+  zone,
+  page = 1,
+  pageSize = PAGE_SIZE,
+}: GetEventsParams): Promise<EventsResponse> {
   // 쿼리 문자열 조립
   const qs = new URLSearchParams({
     page: String(page),

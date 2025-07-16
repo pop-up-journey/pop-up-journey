@@ -1,5 +1,5 @@
-import { getSavedPopupIds } from '@/hooks/getSavedPopupIds';
 import { getEvents } from '@/services/getEvents';
+import { getSavedPopupIds } from '@/services/getSavedPopupIds';
 
 // 일단 스킵
 export async function getMainPageData(userId?: string) {

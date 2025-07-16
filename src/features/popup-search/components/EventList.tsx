@@ -1,7 +1,7 @@
 'use client';
 
-import { getSavedPopupIds } from '@/hooks/getSavedPopupIds';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
+import { getSavedPopupIds } from '@/services/getSavedPopupIds';
 import { useSaveStore } from '@/store/save/useSaveStore';
 import type { Popup } from '@/types/popup';
 import { useEffect } from 'react';

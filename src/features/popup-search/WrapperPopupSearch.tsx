@@ -4,8 +4,8 @@ import EventsFilter from '@/features/popup-search/components/EventFilter';
 import EventList from '@/features/popup-search/components/EventList';
 import EventsMap from '@/features/popup-search/components/EventsMap';
 
+import { PAGE_SIZE } from '@/configs/constants';
 import { regionGroups } from '@/configs/regions';
-import { PAGE_SIZE } from '@/features/popup-search/services/constants';
 import { usePagination } from '@/hooks/usePagination';
 import { getEvents, GetEventsParams } from '@/services/getEvents';
 import { Popup } from '@/types/popup';

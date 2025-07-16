@@ -2,9 +2,9 @@
 
 import Button from '@/components/common/button';
 import ShareButton from '@/features/popup-detail/components/ShareButton';
-import { getSavedPopupIds } from '@/hooks/getSavedPopupIds';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import useHandleSave from '@/hooks/useHandleSave';
+import { getSavedPopupIds } from '@/services/getSavedPopupIds';
 import { useSaveStore } from '@/store/save/useSaveStore';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';

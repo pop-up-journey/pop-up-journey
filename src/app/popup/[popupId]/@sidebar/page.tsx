@@ -1,7 +1,7 @@
 import { getEventById } from '@/features/popup-detail/api/getEventById';
 import { getHostByEventId } from '@/features/popup-detail/api/getHostByEventId';
 import WrapperSidebar from '@/features/popup-detail/components/sidebar/WrapperSidebar';
-import { getAddressPart } from '@/utils/adress';
+import { getAddressPart } from '@/utils/address';
 import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: Promise<{ popupId: string }> }) {
