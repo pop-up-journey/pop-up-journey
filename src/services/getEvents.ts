@@ -1,0 +1,40 @@
+import { PAGE_SIZE } from '@/configs/constants';
+import { clientApi } from '@/libs/api';
+import type { Popup } from '@/types/popup';
+
+export interface EventsResponse {
+  events: Popup[];
+  totalCount: number;
+}
+
+export interface GetEventsParams {
+  status?: string;
+  zone?: string | null;
+  page?: number;
+  pageSize?: number;
+}
+
+export async function getEvents({
+  status,
+  zone,
+  page = 1,
+  pageSize = PAGE_SIZE,
+}: GetEventsParams): Promise<EventsResponse> {
+  // 쿼리 문자열 조립
+  const qs = new URLSearchParams({
+    page: String(page),
+    pageSize: String(pageSize),
+    ...(status ? { status } : {}),
+    ...(zone ? { zone } : {}),
+  }).toString();
+
+  try {
+    // clientApi 호출
+    const res = await clientApi(`/api/events?${qs}`, { method: 'GET' });
+    return res as EventsResponse;
+  } catch (error) {
+    console.error('Failed to fetch events', error);
+    // 에러 시 기본값 리턴
+    return { events: [], totalCount: 0 };
+  }
+}

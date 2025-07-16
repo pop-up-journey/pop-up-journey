@@ -1,9 +1,9 @@
 import Button from '@/components/common/button';
 import ShareButton from '@/features/popup-detail/components/ShareButton';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
 import useHandleSave from '@/hooks/useHandleSave';
 import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 interface EventMobileBarProps {
@@ -12,8 +12,8 @@ interface EventMobileBarProps {
 }
 
 export default function EventMobileBar({ priceLabel, eventId }: EventMobileBarProps) {
-  const { data: session } = useSession();
-  const userId = session?.user?.id;
+  const { userInfo } = useGetUserInfo();
+  const userId = userInfo?.id;
   const { isSaved, toggle } = useHandleSave(eventId, userId);
 
   return (

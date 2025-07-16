@@ -1,9 +1,9 @@
 'use client';
 
-import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
+import { getSavedPopupIds } from '@/services/getSavedPopupIds';
 import { useSaveStore } from '@/store/save/useSaveStore';
 import type { Popup } from '@/types/popup';
-import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import EventCard from './EventCard';
 
@@ -13,15 +13,15 @@ interface Props {
 }
 
 export default function EventList({ events = [], userId }: Props) {
-  const { data: session } = useSession();
-  userId = userId || session?.user?.id;
+  const { userInfo } = useGetUserInfo();
+  userId = userId || userInfo?.id;
   const setSavedStores = useSaveStore((s) => s.setSavedStores);
 
   useEffect(() => {
     let mounted = true;
     if (userId) {
       (async () => {
-        const ids = await getSavedStoreIds(userId);
+        const ids = await getSavedPopupIds(userId);
         if (mounted && Array.isArray(ids) && ids.length > 0) {
           setSavedStores(ids);
         }

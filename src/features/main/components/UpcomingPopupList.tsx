@@ -1,9 +1,9 @@
 'use client';
 import Button from '@/components/common/button';
 import CardComponent from '@/components/common/card';
-import { getEvents } from '@/features/main/api/getEvents';
 import { SectionLayout } from '@/features/main/components/SectionLayout';
 import { usePagination } from '@/hooks/usePagination';
+import { getEvents } from '@/services/getEvents';
 import type { Popup } from '@/types/popup';
 
 interface UpcomingPopupListProps {
@@ -21,9 +21,9 @@ export default function UpcomingPopupList({ sectionTitle, initialCount, initialE
     isEnd,
   } = usePagination<Popup>(
     ({ page, pageSize }) =>
-      getEvents({ status: 'upcoming', page, pageSize }).then((res) => ({
-        items: res?.events ?? [],
-        totalCount: res?.totalCount ?? 0,
+      getEvents({ status: 'upcoming', page, pageSize }).then(({ events, totalCount }) => ({
+        items: events,
+        totalCount: totalCount,
       })),
     initialEvents,
     initialCount ?? 0,

@@ -1,5 +1,5 @@
-import { events, eventTags, users } from '@/db/schema';
-import { eq } from 'drizzle-orm';
+import { events, eventSave, eventTags, users } from '@/db/schema';
+import { eq, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextResponse } from 'next/server';
 
@@ -25,13 +25,33 @@ export async function GET(_req: Request, { params }: { params: Promise<{ eventId
         eventStart: events.eventStart,
         eventEnd: events.eventEnd,
         tags: eventTags.tagId,
+        saveCount: sql<number>`COUNT(DISTINCT ${eventSave.id})`.as('saveCount'),
         createdAt: events.createdAt,
         updatedAt: events.updatedAt,
         hostName: users.name,
       })
       .from(events)
       .leftJoin(users, eq(events.hostId, users.id))
+      .leftJoin(eventSave, eq(events.id, eventSave.eventId))
       .where(eq(events.id, eventId))
+      .groupBy(
+        events.id,
+        events.hostId,
+        events.title,
+        events.thumbnail,
+        events.email,
+        events.description,
+        events.address,
+        events.capacity,
+        events.eventStatus,
+        events.participationMode,
+        events.extraInfo,
+        events.eventStart,
+        events.eventEnd,
+        events.createdAt,
+        events.updatedAt,
+        users.name
+      )
       .limit(1);
 
     const event = result[0];

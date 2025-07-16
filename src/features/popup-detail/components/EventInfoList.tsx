@@ -2,7 +2,7 @@
 import Chip from '@/components/common/chip';
 import { EXTRA_INFO_MAP } from '@/configs/extraInfoLabelHelper';
 import EventInfoItem from '@/features/popup-detail/components/EventInfoItem';
-import { getAddressPart } from '@/utils/adress';
+import { getAddressPart } from '@/utils/address';
 import { formatDate } from '@/utils/dateformatter';
 import { BanknotesIcon, InformationCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
