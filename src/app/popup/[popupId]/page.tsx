@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 export default async function Page({ params }: { params: Promise<{ popupId: string }> }) {
   const { popupId } = await params;
   const popup = await getEventById(popupId);
+
   if (!popup) notFound();
   const host = await getHostByEventId(popup.hostId);
   if (!host) notFound();

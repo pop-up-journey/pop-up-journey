@@ -1,4 +1,4 @@
-import { events, eventSave, eventTags, users } from '@/db/schema';
+import { events, eventSave, eventTags, tags, users } from '@/db/schema';
 import { eq, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextResponse } from 'next/server';
@@ -9,7 +9,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ eventId
   const { eventId } = await params;
 
   try {
-    const result = await db
+    // 먼저 이벤트 기본 정보를 가져옴
+    const eventResult = await db
       .select({
         id: events.id,
         hostId: events.hostId,
@@ -24,7 +25,6 @@ export async function GET(_req: Request, { params }: { params: Promise<{ eventId
         extraInfo: events.extraInfo,
         eventStart: events.eventStart,
         eventEnd: events.eventEnd,
-        tags: eventTags.tagId,
         saveCount: sql<number>`COUNT(DISTINCT ${eventSave.id})`.as('saveCount'),
         createdAt: events.createdAt,
         updatedAt: events.updatedAt,
@@ -54,8 +54,30 @@ export async function GET(_req: Request, { params }: { params: Promise<{ eventId
       )
       .limit(1);
 
-    const event = result[0];
-    return NextResponse.json(event);
+    const event = eventResult[0];
+    if (!event) {
+      return NextResponse.json({ error: 'Event not found' }, { status: 404 });
+    }
+
+    // 태그 정보를 별도로 가져옴
+    const tagsResult = await db
+      .select({
+        tagId: tags.id,
+        tagName: tags.name,
+      })
+      .from(eventTags)
+      .innerJoin(tags, eq(eventTags.tagId, tags.id))
+      .where(eq(eventTags.eventId, eventId));
+
+    const eventWithTags = {
+      ...event,
+      tags: tagsResult.map((tag) => ({
+        id: tag.tagId,
+        name: tag.tagName,
+      })),
+    };
+
+    return NextResponse.json(eventWithTags);
   } catch (error) {
     console.error('Error fetching events:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
