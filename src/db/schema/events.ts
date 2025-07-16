@@ -20,7 +20,7 @@ export const events = pgTable('events', {
   extraInfo: text('extra_info'),
   eventStart: timestamp('event_start').notNull(),
   eventEnd: timestamp('event_end').notNull(),
-  saveCount: integer('save_count').default(0),
+  externalLink: text('external_link'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

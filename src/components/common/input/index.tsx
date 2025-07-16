@@ -30,20 +30,10 @@ interface InputProps {
   // 스타일 관련
   className?: string;
   variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
+  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'default';
+  inputStyleProps?: string;
 }
 // NOTE: 필요시 스타일링은 여기서 작성 할 것
-const styles = {
-  label: ['text-black/50 dark:text-white/90'],
-  // inputWrapper: []
-  // innerWrapper: []
-  // mainWrapper: []
-  input: ['text-black/50 dark:text-white/90'],
-  // clearButton: []
-  // helperWrapper: []
-  description: ['text-black/50 dark:text-white/90'],
-  // errorMessage: []
-  // helperWrapper: []
-};
 
 export default function Input({
   name,
@@ -62,9 +52,24 @@ export default function Input({
   variant = 'underlined',
   max,
   min,
+  color = 'primary',
+  inputStyleProps,
 }: InputProps) {
   const isLabelEnum = label && Object.values(LABELS).includes(label as Label);
   const Icon: FC<SVGProps<SVGSVGElement>> | null = isLabelEnum ? LabelIconMapper(label as Label) : null;
+
+  const styles = {
+    label: ['text-black/50 dark:text-white/90'],
+    // inputWrapper: []
+    // innerWrapper: []
+    // mainWrapper: []
+    input: ['text-black/50 dark:text-white/90', inputStyleProps],
+    // clearButton: []
+    // helperWrapper: []
+    description: ['text-black/50 dark:text-white/90'],
+    // errorMessage: []
+    // helperWrapper: []
+  };
 
   return (
     <HerouiInput
@@ -74,7 +79,7 @@ export default function Input({
       fullWidth={true}
       label={label}
       type={type}
-      color="primary"
+      color={color}
       value={value}
       onChange={onChange}
       isReadOnly={isReadOnly}
@@ -85,9 +90,9 @@ export default function Input({
       description={description}
       placeholder={placeholder}
       className={className}
-      classNames={{ ...styles }}
       max={max}
       min={min}
+      classNames={{ ...styles }}
       startContent={
         Icon && (
           <Icon className="pointer-events-none flex-shrink-0 text-black/50 dark:text-white/90" width={20} height={20} />

@@ -1,4 +1,4 @@
-export const OTHER_INFO_OPTIONS = [
+export const EXTRA_INFO_OPTIONS = [
   { id: 'parking_available', label: '주차가능' },
   { id: 'no_parking', label: '주차불가' },
   { id: 'kids_zone', label: '웰컴 키즈존' },
@@ -11,6 +11,6 @@ export const OTHER_INFO_OPTIONS = [
   { id: 'photography_allowed', label: '사진촬영 가능' },
 ];
 
-export const OTHER_INFO_MAP: Record<string, string> = Object.fromEntries(
-  OTHER_INFO_OPTIONS.map(({ id, label }) => [id, label])
+export const EXTRA_INFO_MAP: Record<string, string> = Object.fromEntries(
+  EXTRA_INFO_OPTIONS.map(({ id, label }) => [id, label])
 );

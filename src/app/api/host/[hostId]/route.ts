@@ -3,14 +3,17 @@ import {
   eventParticipants,
   events,
   eventSave,
+  eventTags,
   insertEventSchema,
+  tags,
   validateEventDates,
 } from '@/db/schema';
-import { eq, sql } from 'drizzle-orm';
+import { eq, inArray, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextRequest, NextResponse } from 'next/server';
 
 const db = drizzle(process.env.DATABASE_URL!);
+
 /**
  * @swagger
  * /api/host/{hostId}:
@@ -140,9 +143,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
 
   try {
     const rawData = await req.json();
-    // NOTE: 디버깅용으로 남겨둠
-    // console.log('클라이언트에서 받은 데이터:', data);
-    // console.log('data.title', data.title);
 
     const eventStart = parseDate(rawData.eventStart) ?? new Date();
     const eventEnd = parseDate(rawData.eventEnd) ?? new Date();
@@ -173,8 +173,31 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ hos
     // 검증된 데이터 삽입
     const insertData = insertEventSchema.parse(validatedData);
 
-    const result = await db.insert(events).values(insertData).returning();
-    return NextResponse.json({ success: true, event: result[0] }, { status: 201 });
+    // 트랜잭션으로 이벤트와 태그를 함께 처리
+    const result = await db.transaction(async (tx) => {
+      // 1. 이벤트 생성
+      const [newEvent] = await tx.insert(events).values(insertData).returning();
+
+      // 2. 태그 처리 (선택된 태그가 있는 경우)
+      if (rawData.selectedTags && Array.isArray(rawData.selectedTags) && rawData.selectedTags.length > 0) {
+        // 선택된 태그명으로 태그 ID 조회
+        const tagIds = await tx.select({ id: tags.id }).from(tags).where(inArray(tags.name, rawData.selectedTags));
+
+        // 이벤트-태그 연결 생성
+        if (tagIds.length > 0) {
+          const eventTagData = tagIds.map((tag) => ({
+            eventId: newEvent.id,
+            tagId: tag.id,
+          }));
+
+          await tx.insert(eventTags).values(eventTagData);
+        }
+      }
+
+      return newEvent;
+    });
+
+    return NextResponse.json({ success: true, event: result }, { status: 201 });
   } catch (error) {
     console.error('Error inserting event:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

@@ -8,6 +8,7 @@ export const LABELS = {
   PEOPLE: '인원',
   LOCATION: '위치',
   TICKETS: '티켓수',
+  LINK: '링크',
 } as const;
 
 export type Label = (typeof LABELS)[keyof typeof LABELS];
