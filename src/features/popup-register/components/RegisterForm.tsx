@@ -1,19 +1,21 @@
 'use client';
 
 import Button from '@/components/common/button';
-import Capacity from '@/features/popup-register/components/form-field/Capacity';
-import DateCalendar from '@/features/popup-register/components/form-field/DateCalendar';
-import Description from '@/features/popup-register/components/form-field/Description';
-import Email from '@/features/popup-register/components/form-field/Email';
-import ExtraInfo from '@/features/popup-register/components/form-field/ExtraInfo';
-import Location from '@/features/popup-register/components/form-field/Location';
-import RecruitmentMethod from '@/features/popup-register/components/form-field/RecruitmentMethod';
-import Tag from '@/features/popup-register/components/form-field/Tag';
-import Thumbnail from '@/features/popup-register/components/form-field/Thumbnail';
-import Title from '@/features/popup-register/components/form-field/Title';
+import {
+  Capacity,
+  DateCalendar,
+  Description,
+  Email,
+  ExtraInfo,
+  Location,
+  RecruitmentMethod,
+  Tag,
+  Thumbnail,
+  Title,
+} from '@/features/popup-register/components/form-field';
 import { clientApi } from '@/libs/api';
 import { usePopupRegisterFormStore } from '@/store/popup-register/usePopupRegisterFormStore';
-import { uploadImageToStorage } from '@/utils/imgUploader.supabase';
+import { uploadImageToStorage } from '@/utils/supabaseImgUploader';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 

@@ -1,1 +1,1 @@
-export * from './imgUploader.supabase';
+export * from './supabaseImgUploader';
