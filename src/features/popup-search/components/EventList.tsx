@@ -2,10 +2,10 @@
 
 import { getSavedStoreIds } from '@/hooks/getSavedStoreIds';
 import { useSaveStore } from '@/store/save/useSaveStore';
+import type { Popup } from '@/types/popup';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import EventCard from './EventCard';
-import type { Popup } from '@/types/popup';
 
 interface Props {
   events: Popup[];
@@ -38,12 +38,10 @@ export default function EventList({ events = [], userId }: Props) {
 
   return (
     <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
-      {* // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함 *}
+      {/* // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함 */}
       {events.map((evt) => (
         <EventCard key={evt.id} event={evt} userId={userId} />
       ))}
-
     </ul>
   );
 }
