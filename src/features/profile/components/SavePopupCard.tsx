@@ -1,10 +1,10 @@
 'use client';
 
 import CardComponent from '@/components/common/card';
-import type { EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 
 interface SavedPopupCardProps {
-  popup: EventData;
+  popup: Popup;
   userId: string;
   removeFavorite: () => void;
 }
@@ -20,7 +20,7 @@ export default function SavedPopupCard({ popup, removeFavorite }: SavedPopupCard
       eventStart={popup.eventStart}
       eventEnd={popup.eventEnd}
       variant="compact"
-      savedCount={popup.saveCount}
+      // savedCount={popup.saveCount}
       onRemoveFavorite={removeFavorite}
     />
   );

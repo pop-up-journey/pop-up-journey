@@ -2,10 +2,10 @@
 
 import CardComponent from '@/components/common/card';
 import useHandleSave from '@/hooks/useHandleSave';
-import type { EventData } from '@/types/event';
+import type { Popup } from '@/types/popup';
 
 interface PopupSlideCardProps {
-  popup: EventData;
+  popup: Popup;
   userId?: string;
 }
 
