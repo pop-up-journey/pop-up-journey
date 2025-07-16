@@ -1,5 +1,6 @@
 'use client';
 
+import { SignInModalProvider } from '@/features/sign-in/SignInModalContext';
 import { HeroUIProvider } from '@heroui/react';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
@@ -10,7 +11,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <HeroUIProvider>
       <NextThemesProvider attribute="class" defaultTheme="dark">
         <SessionProvider>
-          <AuthSyncProvider>{children}</AuthSyncProvider>
+          <AuthSyncProvider>
+            <SignInModalProvider>{children}</SignInModalProvider>
+          </AuthSyncProvider>
         </SessionProvider>
       </NextThemesProvider>
     </HeroUIProvider>
