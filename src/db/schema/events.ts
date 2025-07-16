@@ -9,6 +9,7 @@ export const events = pgTable('events', {
   hostId: uuid('host_id')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
+  hostName: text('host_name'),
   title: text('title').notNull(),
   thumbnail: text('thumbnail'),
   email: text('email'),
