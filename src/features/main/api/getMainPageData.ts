@@ -1,5 +1,5 @@
-import { getEvents } from '@/features/main/api/getEvents';
 import { getSavedPopupIds } from '@/hooks/getSavedPopupIds';
+import { getEvents } from '@/services/getEvents';
 
 // 일단 스킵
 export async function getMainPageData(userId?: string) {
@@ -12,6 +12,10 @@ export async function getMainPageData(userId?: string) {
     return { ongoingEvents, upcomingEvents, likedEventIds };
   } catch (error) {
     console.error('Failed to get main page data', error);
-    return { ongoingEvents: [], upcomingEvents: { events: [], totalCount: 0 }, likedEventIds: [] };
+    return {
+      ongoingEvents: { events: [], totalCount: 0 },
+      upcomingEvents: { events: [], totalCount: 0 },
+      likedEventIds: [],
+    };
   }
 }

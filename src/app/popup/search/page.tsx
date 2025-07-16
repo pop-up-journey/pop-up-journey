@@ -1,6 +1,6 @@
 import { PAGE_SIZE } from '@/features/popup-search/services/constants';
-import { fetchEvents } from '@/features/popup-search/services/fetchEvents';
 import WrapperPopupSearch from '@/features/popup-search/WrapperPopupSearch';
+import { getEvents, GetEventsParams } from '@/services/getEvents';
 
 interface PageProps {
   searchParams: Promise<{ zone?: string }>;
@@ -8,17 +8,23 @@ interface PageProps {
 
 export default async function Page({ searchParams }: PageProps) {
   const { zone } = await searchParams;
-  const { events, totalCount } = await fetchEvents({
-    zone,
+
+  // 초기접속시 보여줄 이벤트 목록
+  const { events, totalCount } = await getEvents({
+    zone: zone ?? null,
     page: 1,
     pageSize: PAGE_SIZE,
-  });
-
-  const { events: fullEvents } = await fetchEvents({
-    zone,
+  } as GetEventsParams);
+  // 전체 이벤트(전체 조회, 맵에 표시하기 위함)
+  const { events: fullEvents } = await getEvents({
+    zone: zone ?? null,
     page: 1,
-    pageSize: totalCount, // totalCount만큼 다 가져옴
-  });
+    pageSize: totalCount,
+  } as GetEventsParams);
+  console.log(
+    events.map((e) => e.id),
+    fullEvents.map((e) => e.id)
+  );
 
   return (
     <WrapperPopupSearch

@@ -41,8 +41,8 @@ export default function EventsMap({ events }: Props) {
         level={8}
         className="h-[500px] w-full rounded-lg shadow"
       >
-        {positions.map((pos) => (
-          <MapMarker key={pos.id} position={{ lat: pos.lat, lng: pos.lng }} title={pos.title} />
+        {positions.map((pos, idx) => (
+          <MapMarker key={`${pos.id}-${idx}`} position={{ lat: pos.lat, lng: pos.lng }} title={pos.title} />
         ))}
       </Map>
     </div>
