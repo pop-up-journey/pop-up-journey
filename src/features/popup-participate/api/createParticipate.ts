@@ -1,4 +1,5 @@
 import { clientApi } from '@/libs/api';
+import { addToast } from '@heroui/react';
 
 interface ParticipateDTO {
   name: string;
@@ -23,10 +24,16 @@ export const createParticipate = async ({ name, email, phone, tickets }: Partici
     });
 
     if (res.ok) {
-      console.log('참가자 생성 결과:', res);
-      alert('참여 신청이 완료되었습니다!');
+      addToast({
+        title: '참여 신청이 완료되었습니다!',
+        color: 'success',
+      });
     }
   } catch (err) {
     console.error('신청 중 오류:', err);
+    addToast({
+      title: '참여 신청에 실패했습니다. 다시 시도해주세요.',
+      color: 'danger',
+    });
   }
 };
