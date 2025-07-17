@@ -1,6 +1,8 @@
 import { getEventById } from '@/features/popup-detail/api/getEventById';
 import { getHostByEventId } from '@/features/popup-detail/api/getHostByEventId';
+import { createPopupView } from '@/features/popup-detail/api/popupViewHandler';
 import WrapperPopupDetail from '@/features/popup-detail/WrapperPopupDetail';
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: Promise<{ popupId: string }> }) {
@@ -8,8 +10,20 @@ export default async function Page({ params }: { params: Promise<{ popupId: stri
   const popup = await getEventById(popupId);
 
   if (!popup) notFound();
+
   const host = await getHostByEventId(popup.hostId);
   if (!host) notFound();
+
+  // 조회수 기록 (비동기로 처리하여 페이지 로딩을 지연시키지 않음)
+  const cookieStore = await cookies();
+  const visitorId = cookieStore.get('popup_journey_visitor')?.value;
+
+  if (visitorId) {
+    // 조회수 기록을 백그라운드에서 처리
+    createPopupView(popupId, visitorId).catch((error: unknown) => {
+      console.error('Failed to record popup view:', error);
+    });
+  }
 
   return <WrapperPopupDetail popup={popup} host={host} />;
 }
