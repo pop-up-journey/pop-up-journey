@@ -4,7 +4,7 @@ import { EXTRA_INFO_MAP } from '@/configs/extraInfoLabelHelper';
 import EventInfoItem from '@/features/popup-detail/components/EventInfoItem';
 import { getAddressPart } from '@/utils/address';
 import { formatDate } from '@/utils/dateformatter';
-import { BanknotesIcon, InformationCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { InformationCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
@@ -55,9 +55,6 @@ export default function EventInfoList({ eventStart, eventEnd, address, extraInfo
         href={`http://map.kakao.com/link/search/${place}`}
         external
       />
-
-      {/* 비용 */}
-      <EventInfoItem icon={<BanknotesIcon className="h-5 w-5 text-gray-500" />} label="무료" />
 
       {/* 기타 안내 */}
       <EventInfoItem

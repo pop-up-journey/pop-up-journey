@@ -7,26 +7,20 @@ import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 
 interface EventMobileBarProps {
-  priceLabel: string;
   eventId: string;
 }
 
-export default function EventMobileBar({ priceLabel, eventId }: EventMobileBarProps) {
+export default function EventMobileBar({ eventId }: EventMobileBarProps) {
   const { userInfo } = useGetUserInfo();
   const userId = userInfo?.id;
   const { isSaved, toggle } = useHandleSave(eventId, userId);
 
   return (
-    <div className="fixed inset-x-4 bottom-4 z-50 flex items-center justify-center rounded-2xl bg-white/20 p-4 shadow-xl backdrop-blur-lg lg:hidden">
-      {/* 가격 정보 */}
-      <div className="flex-1 flex-shrink-0 flex-col items-center justify-center">
-        <p className="text-xs text-gray-500">티켓 가격</p>
-        <p className="text-lg font-semibold text-gray-800">{priceLabel}</p>
-      </div>
+    <div className="fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 rounded-3xl bg-black/50 px-5 py-3 font-medium text-white shadow-md backdrop-blur-md transition-all duration-300 ease-in-out md:right-8 md:left-auto md:translate-x-0 lg:hidden">
       {/* 버튼 그룹  */}
       <div className="flex items-center space-x-3">
         {/* 관심 팝업(하트) */}
-        <Button isIconOnly onPress={toggle}>
+        <Button isIconOnly onPress={toggle} variant="light" className="hover:scale-105">
           {isSaved ? (
             <HeartSolid className="h-5 w-5 text-red-500" />
           ) : (
