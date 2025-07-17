@@ -3,10 +3,7 @@
 import { Link, Navbar, NavbarBrand, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/react';
 import { useEffect, useState } from 'react';
 import { useScrollPosition } from 'react-haiku';
-import CategoryTab, { categories } from './components/CategoryTab';
-import Login from './components/Login';
-import Logo from './components/Logo';
-import NavInput from './components/NavInput';
+import { CategoryTab, Login, Logo, NAV_CATEGORIES, Searchbar } from './components';
 
 export default function Header() {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -33,16 +30,16 @@ export default function Header() {
             <Logo />
           </NavbarBrand>
         </NavbarContent>
-
+        {/* 서치바 */}
         <NavbarContent className="flex-[3] gap-4 sm:flex" justify="center">
-          <NavInput />
+          <Searchbar />
         </NavbarContent>
 
         <NavbarContent justify="end" className="flex-1">
           <Login />
         </NavbarContent>
         <NavbarMenu>
-          {categories.map((item, index) => (
+          {NAV_CATEGORIES.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link className="w-full" color="foreground" href={item.href} size="md">
                 {item.name}
