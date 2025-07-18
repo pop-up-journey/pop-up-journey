@@ -1,5 +1,6 @@
 import Button from '@/components/common/button';
 import { usePopupRegisterFormStore } from '@/store/popup-register/usePopupRegisterFormStore';
+import { addToast } from '@heroui/react';
 import Script from 'next/script';
 
 declare global {
@@ -12,7 +13,10 @@ export default function PostCode() {
   const { setValue } = usePopupRegisterFormStore.getState();
   const handleOpenPostcode = () => {
     if (typeof window.daum === 'undefined' || typeof window.daum.Postcode === 'undefined') {
-      alert('Daum Postcode 서비스가 로드되지 않았습니다.');
+      addToast({
+        title: '주소 검색 서비스가 로드되지 않았습니다.',
+        color: 'danger',
+      });
       return;
     }
     new window.daum.Postcode({

@@ -11,7 +11,7 @@ import { createParticipate } from '@/features/popup-participate/api/createPartic
 import { validateTickets } from '@/features/popup-participate/services/validateTickets';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useEventParticipateFormStore } from '@/store/event-participate/useEventParticipateFormStore';
-import { addToast } from '@heroui/react';
+import { addToast } from '@heroui/toast';
 import { useEffect } from 'react';
 
 const inputOptions = {
@@ -76,7 +76,24 @@ export default function ParticipateForm({ popupId }: ParticipateFormProps) {
     // participantStatus: 'pending',
     // tickets,
     // };
-    createParticipate({ name, email, phone, tickets }, popupId);
+    try {
+      const res = await createParticipate({ name, email, phone, tickets }, popupId);
+
+      //HACK: 서버에서 이미 신청한 팝업이면 res.error를 반환함. 좀 더 정교한 로직이 필요
+      if (res.error) {
+        addToast({
+          title: '이미 신청을 완료한 팝업입니다.',
+          color: 'warning',
+        });
+        return;
+      }
+      addToast({ title: '참여 신청이 완료되었습니다!', color: 'success' });
+    } catch {
+      addToast({
+        title: '참여 신청에 실패했습니다. 다시 시도해주세요.',
+        color: 'danger',
+      });
+    }
   };
 
   return (
