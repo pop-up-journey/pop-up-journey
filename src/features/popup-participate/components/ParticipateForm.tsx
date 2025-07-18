@@ -12,6 +12,7 @@ import { validateTickets } from '@/features/popup-participate/services/validateT
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useEventParticipateFormStore } from '@/store/event-participate/useEventParticipateFormStore';
 import { addToast } from '@heroui/toast';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const inputOptions = {
@@ -47,6 +48,7 @@ interface ParticipateFormProps {
 }
 
 export default function ParticipateForm({ popupId }: ParticipateFormProps) {
+  const router = useRouter();
   const { userInfo } = useGetUserInfo();
   const setValue = useEventParticipateFormStore((state) => state.setValue);
   const setIsValid = useEventParticipateFormStore((state) => state.setIsValid);
@@ -88,6 +90,7 @@ export default function ParticipateForm({ popupId }: ParticipateFormProps) {
         return;
       }
       addToast({ title: '참여 신청이 완료되었습니다!', color: 'success' });
+      router.push('/profile');
     } catch {
       addToast({
         title: '참여 신청에 실패했습니다. 다시 시도해주세요.',
