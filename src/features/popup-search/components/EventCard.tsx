@@ -12,9 +12,5 @@ interface EventCardProps {
 export default function EventCard({ event, userId }: EventCardProps) {
   const { isSaved, toggle } = useHandleSave(event.id, userId);
 
-  return (
-    <li className="transform transition-transform hover:scale-105">
-      <CardComponent {...event} isSaved={isSaved} onToggleSave={toggle} />
-    </li>
-  );
+  return <CardComponent {...event} isSaved={isSaved} onToggleSave={toggle} />;
 }

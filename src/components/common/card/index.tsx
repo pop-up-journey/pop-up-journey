@@ -58,7 +58,7 @@ export default function CardComponent({
       <If isTrue={!isCompact}>
         <Card
           isPressable
-          className="relative flex max-w-[240px] cursor-pointer flex-col overflow-hidden shadow-sm"
+          className="relative flex w-[240px] cursor-pointer flex-col overflow-hidden shadow-sm"
           radius="sm"
           onPress={() => router.push(`/popup/${id}`)}
         >
