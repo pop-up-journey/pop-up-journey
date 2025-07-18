@@ -1,5 +1,6 @@
 'use client';
 
+import { THIRTY_MINUTES } from '@/configs/time';
 import { useEffect } from 'react';
 
 function generateUUID() {
@@ -13,7 +14,7 @@ export default function VisitorCookieProvider({ children }: { children: React.Re
     const existing = document.cookie.split('; ').find((row) => row.startsWith(cookieName + '='));
     if (!existing) {
       const uuid = generateUUID();
-      const expires = new Date(Date.now() + 30 * 60 * 1000).toUTCString(); // 30분
+      const expires = new Date(Date.now() + THIRTY_MINUTES).toUTCString();
       document.cookie = `${cookieName}=${uuid}; path=/; expires=${expires}; SameSite=Lax`;
     }
   }, []);
