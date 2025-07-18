@@ -1,4 +1,4 @@
-import Footer from '@/components/layouts/footer';
+import ConditionalFooter from '@/components/layouts/conditional-footer';
 import Header from '@/components/layouts/header';
 import { Providers } from '@/providers/providers';
 import type { Metadata } from 'next';
@@ -32,7 +32,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <div className="min-h-screen"> {children}</div>
-          <Footer />
+          <ConditionalFooter />
         </Providers>
       </body>
     </html>
