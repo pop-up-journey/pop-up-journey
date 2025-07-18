@@ -10,6 +10,7 @@ export interface EventsResponse {
 export interface GetEventsParams {
   status?: string;
   zone?: string | null;
+  tags?: string[];
   page?: number;
   pageSize?: number;
 }
@@ -17,6 +18,7 @@ export interface GetEventsParams {
 export async function getEvents({
   status,
   zone,
+  tags,
   page = 1,
   pageSize = PAGE_SIZE,
 }: GetEventsParams): Promise<EventsResponse> {
@@ -26,6 +28,7 @@ export async function getEvents({
     pageSize: String(pageSize),
     ...(status ? { status } : {}),
     ...(zone ? { zone } : {}),
+    ...(tags && tags.length > 0 ? { tags: tags.join(',') } : {}),
   }).toString();
 
   try {

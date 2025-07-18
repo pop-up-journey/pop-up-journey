@@ -16,16 +16,26 @@ interface Props {
   initialItems: Popup[];
   initialTotalCount: number;
   selectedZone: string | null;
+  selectedTags: string[];
+
   fullEvents: Popup[];
 }
 
-export default function WrapperPopupSearch({ initialItems, initialTotalCount, selectedZone, fullEvents }: Props) {
+export default function WrapperPopupSearch({
+  initialItems,
+  initialTotalCount,
+  selectedZone,
+  selectedTags,
+  fullEvents,
+}: Props) {
   //NOTE: UseCallback, 페이지네이션: 6개씩 추가 렌더링
   const fetchFn = ({ page, pageSize }: { page: number; pageSize: number }) =>
-    getEvents({ zone: selectedZone, page, pageSize } as GetEventsParams).then(({ events, totalCount }) => ({
-      items: events,
-      totalCount,
-    }));
+    getEvents({ zone: selectedZone, tags: selectedTags, page, pageSize } as GetEventsParams).then(
+      ({ events, totalCount }) => ({
+        items: events,
+        totalCount,
+      })
+    );
 
   const { items, loading, isEnd, loadMore } = usePagination<Popup>(fetchFn, initialItems, initialTotalCount, PAGE_SIZE);
 
@@ -53,7 +63,7 @@ export default function WrapperPopupSearch({ initialItems, initialTotalCount, se
 
   return (
     <section className="mx-auto my-3 min-h-screen max-w-6xl overflow-hidden px-4">
-      <EventsFilter selectedZone={selectedZone} />
+      <EventsFilter selectedZone={selectedZone} selectedTags={selectedTags} />
       <Divider />
       <EventsMap events={mapEvents} />
       <EventList events={filtered} />
