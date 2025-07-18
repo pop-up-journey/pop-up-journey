@@ -12,6 +12,7 @@ import { Popup } from '@/types/popup';
 import { Divider } from '@heroui/react';
 import { useEffect } from 'react';
 import { useIntersectionObserver } from 'react-haiku';
+import HeroSection from '../../components/common/hero-section';
 interface Props {
   initialItems: Popup[];
   initialTotalCount: number;
@@ -63,9 +64,10 @@ export default function WrapperPopupSearch({
 
   return (
     <section className="mx-auto my-3 min-h-screen max-w-6xl overflow-hidden px-4">
+      <HeroSection title="팝업의 여정 이벤트 탐색" description="지역과 관심 태그로 이벤트를 손쉽게 찾아보세요!" />
+      <EventsMap events={mapEvents} />
       <EventsFilter selectedZone={selectedZone} selectedTags={selectedTags} />
       <Divider />
-      <EventsMap events={mapEvents} />
       <EventList events={filtered} />
       <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-1" />
     </section>
