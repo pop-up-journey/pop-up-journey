@@ -4,13 +4,10 @@ import Button from '@/components/common/button';
 import FormTitle from '@/components/common/form/FormTitle';
 import InputField from '@/components/common/form/ValidateInput';
 import { LABELS } from '@/components/common/input/labels';
-// validate는 따로 공통 utils로 빼기
-import { validateName } from '@/features/add-info/services/nameValidation';
-import { validatePhone } from '@/features/add-info/services/phoneValidation';
 import { createParticipate } from '@/features/popup-participate/api/createParticipate';
-import { validateTickets } from '@/features/popup-participate/services/validateTickets';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useEventParticipateFormStore } from '@/store/event-participate/useEventParticipateFormStore';
+import { validateName, validatePhone, validateTickets } from '@/utils/form-validation';
 import { addToast } from '@heroui/react';
 import { useEffect } from 'react';
 
@@ -72,20 +69,12 @@ export default function ParticipateForm({ popupId }: ParticipateFormProps) {
       });
       return;
     }
-    // const body: Pick<CreateEventParticipant, 'participantStatus' | 'tickets'> = {
-    // participantStatus: 'pending',
-    // tickets,
-    // };
     createParticipate({ name, email, phone, tickets }, popupId);
   };
 
   return (
     <section aria-label="participate-form">
-      <form
-        id="defaultSt"
-        // className="grid grid-cols-1 gap-y-8 px-6 sm:px-8 md:grid-cols-2 md:gap-x-6 md:px-10 lg:px-16"
-        onSubmit={handleSubmit}
-      >
+      <form id="defaultSt" onSubmit={handleSubmit}>
         <FormTitle>신청자 정보 입력</FormTitle>
         <div className="flex flex-col justify-evenly space-y-6">
           {Object.entries(inputOptions).map(([k, v]) => (
