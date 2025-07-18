@@ -35,8 +35,7 @@ export default function WrapperPopupDetail({ popup, host }: EventDetailProps) {
       {/* 본문 */}
       <EventDescription description={popup.description} />
       {/* 1024px 미만 반응형: 하단 바 */}
-      {/* TODO: 관심토글 기능 구현해야함 */}
-      <EventMobileBar priceLabel="무료" eventId={popup.id} />
+      <EventMobileBar eventId={popup.id} />
     </main>
   );
 }
