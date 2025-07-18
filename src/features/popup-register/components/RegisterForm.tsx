@@ -16,6 +16,7 @@ import {
 import { clientApi } from '@/libs/api';
 import { usePopupRegisterFormStore } from '@/store/popup-register/usePopupRegisterFormStore';
 import { uploadImageToStorage } from '@/utils/supabaseImgUploader';
+import { addToast } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -50,9 +51,13 @@ export default function RegisterForm({ hostId }: RegisterFormProps) {
         extraInfo,
       } = usePopupRegisterFormStore.getState();
 
-      // 필수 필드 검증 (TODO: toast 적용 필요)
+      // 필수 필드 검증
       if (!title || !description || !email || !capacity || !eventStart || !eventEnd || !address) {
-        alert('필수 필드를 모두 입력해주세요.');
+        addToast({
+          title: '필수 필드를 모두 입력해주세요.',
+          color: 'warning',
+        });
+        setIsSubmitting(false);
         return;
       }
 
@@ -65,7 +70,10 @@ export default function RegisterForm({ hostId }: RegisterFormProps) {
           console.log('Image uploaded successfully:', uploadedImage.url);
         } catch (uploadError) {
           console.error('Image upload failed:', uploadError);
-          alert('이미지 업로드에 실패했습니다. 다시 시도해주세요.');
+          addToast({
+            title: '이미지 업로드에 실패했습니다. 다시 시도해주세요.',
+            color: 'danger',
+          });
           return;
         }
       }
@@ -96,14 +104,23 @@ export default function RegisterForm({ hostId }: RegisterFormProps) {
       });
 
       if (response.success) {
-        alert('이벤트가 성공적으로 등록되었습니다!');
+        addToast({
+          title: '이벤트가 성공적으로 등록되었습니다!',
+          color: 'success',
+        });
         router.push('/host-center'); // 호스트 센터로 이동
       } else {
-        alert('이벤트 등록에 실패했습니다. 다시 시도해주세요.');
+        addToast({
+          title: '이벤트 등록에 실패했습니다. 다시 시도해주세요.',
+          color: 'danger',
+        });
       }
     } catch (error) {
       console.error('Event registration error:', error);
-      alert('이벤트 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
+      addToast({
+        title: '이벤트 등록 중 오류가 발생했습니다. 다시 시도해주세요.',
+        color: 'danger',
+      });
     } finally {
       setIsSubmitting(false);
     }

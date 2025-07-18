@@ -1,4 +1,4 @@
-import { events, eventSave, eventTags, tags, users } from '@/db/schema';
+import { events, eventSave, eventTags, eventViewCounts, tags, users } from '@/db/schema';
 import { eq, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextResponse } from 'next/server';
@@ -69,12 +69,22 @@ export async function GET(_req: Request, { params }: { params: Promise<{ eventId
       .innerJoin(tags, eq(eventTags.tagId, tags.id))
       .where(eq(eventTags.eventId, eventId));
 
+    // 조회수 정보를 별도로 가져옴
+    const viewCountResult = await db
+      .select({
+        viewCount: eventViewCounts.viewCount,
+      })
+      .from(eventViewCounts)
+      .where(eq(eventViewCounts.eventId, eventId))
+      .limit(1);
+
     const eventWithTags = {
       ...event,
       tags: tagsResult.map((tag) => ({
         id: tag.tagId,
         name: tag.tagName,
       })),
+      viewCount: viewCountResult[0]?.viewCount || 0,
     };
 
     return NextResponse.json(eventWithTags);
