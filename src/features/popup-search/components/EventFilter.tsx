@@ -16,7 +16,7 @@ export default function EventsFilter({ selectedZone }: Props) {
     const qp = new URLSearchParams(params.toString());
     if (zone) qp.set('zone', zone);
     else qp.delete('zone');
-    router.push(`/events?${qp.toString()}`);
+    router.push(`/popup/search?${qp.toString()}`);
   };
 
   return (
