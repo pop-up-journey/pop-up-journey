@@ -6,7 +6,11 @@ import { useEffect, useState } from 'react';
 import { useScrollPosition } from 'react-haiku';
 import { CategoryTab, Login, Logo, Searchbar } from './components';
 
-export default function Header() {
+interface HeaderProps {
+  hideCategoryTab?: boolean;
+}
+
+export default function Header({ hideCategoryTab = false }: HeaderProps) {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scroll, _] = useScrollPosition() as [{ x: number; y: number }, unknown];
@@ -54,7 +58,7 @@ export default function Header() {
           ))}
         </NavbarMenu>
       </Navbar>
-      <CategoryTab hasScrolled={hasScrolled} />
+      {!hideCategoryTab && <CategoryTab hasScrolled={hasScrolled} />}
     </div>
   );
 }
