@@ -51,3 +51,25 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ eve
   const result = selectEventParticipantSchema.parse(created);
   return NextResponse.json(result, { status: 201 });
 }
+
+// 참여 취소
+export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ eventId: string }> }) {
+  const { eventId } = await params;
+  console.log(eventId);
+  const session = await auth();
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  const userId = session.user.id;
+
+  try {
+    await db
+      .delete(eventParticipants)
+      .where(and(eq(eventParticipants.userId, userId), eq(eventParticipants.eventId, eventId)));
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting participant:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}

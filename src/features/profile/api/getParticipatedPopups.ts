@@ -3,6 +3,7 @@ import type { Popup } from '@/types/popup';
 
 export interface ParticipatedPopup extends Popup {
   participantId: string;
+  eventId: string;
   participantStatus: string;
   tickets: number;
 }
