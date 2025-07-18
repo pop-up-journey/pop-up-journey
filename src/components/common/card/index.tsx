@@ -129,7 +129,14 @@ export default function CardComponent({
                   <EyeIcon className="size-5" />
                   <span>{viewCount ?? 0}</span>
                 </div>
-                <div className="flex items-center gap-1 p-2 text-sm">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('fav click');
+                    handleFavClick();
+                  }}
+                  className="flex items-center gap-1 p-2 text-sm"
+                >
                   {isSaved ? (
                     <HeartIconSolid className="size-5 cursor-pointer text-red-500 transition-all duration-300 hover:scale-130" />
                   ) : (
