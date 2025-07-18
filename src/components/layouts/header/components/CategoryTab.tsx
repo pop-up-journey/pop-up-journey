@@ -13,8 +13,8 @@ export default function CategoryTab({ hasScrolled }: CategoryTabProps) {
         hasScrolled ? 'max-h-0 overflow-hidden opacity-0' : 'max-h-16 bg-transparent'
       } hidden sm:block`}
     >
-      <div className="container mx-auto flex overflow-x-auto">
-        <nav className="flex items-center justify-center gap-6 px-4 py-2">
+      <div className="container mx-auto flex items-center justify-center overflow-x-auto">
+        <nav className="flex gap-8 px-2 pb-2 lg:gap-10">
           {categories.map((category) => (
             <Link
               key={category}

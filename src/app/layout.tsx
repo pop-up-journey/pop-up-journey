@@ -1,5 +1,5 @@
-import ConditionalFooter from '@/components/layouts/conditional-footer';
-import Header from '@/components/layouts/header';
+import ConditionalFooter from '@/components/layouts/footer';
+import ConditionalHeader from '@/components/layouts/header';
 import { Providers } from '@/providers/providers';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className={` ${pretendard.variable} antialiased`}>
         <Providers>
-          <Header />
+          <ConditionalHeader />
           <div className="min-h-screen"> {children}</div>
           <ConditionalFooter />
         </Providers>
