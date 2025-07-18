@@ -132,7 +132,6 @@ export default function CardComponent({
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
-                    console.log('fav click');
                     handleFavClick();
                   }}
                   className="flex items-center gap-1 p-2 text-sm"

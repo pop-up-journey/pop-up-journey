@@ -9,7 +9,6 @@ interface ParticipateDTO {
 }
 
 export const createParticipate = async ({ name, email, phone, tickets }: ParticipateDTO, eventId: string) => {
-  console.log('createParticipate', name, email, phone, tickets, eventId);
   try {
     const res = await clientApi(`/api/events/${eventId}/participate`, {
       method: 'POST',

@@ -14,7 +14,6 @@ const PAGE_SIZE = 6;
 
 export default function HostPopupList({ popups, selectedStatus }: HostPopupListProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  console.log(popups);
 
   const { observeRef, isVisible } = useIntersectionObserver({
     options: { threshold: 0.2 },

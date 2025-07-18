@@ -5,6 +5,6 @@ import type { Session } from 'next-auth';
 // user의 id가 필요한 경우 사용하기
 export const getUserSession = async (): Promise<Session | null> => {
   const session = await auth();
-  console.log('session', session);
+
   return session;
 };

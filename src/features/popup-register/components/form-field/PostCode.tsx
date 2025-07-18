@@ -18,7 +18,6 @@ export default function PostCode() {
     new window.daum.Postcode({
       onComplete: function (data: any) {
         let fullAddress = data.address;
-        console.log(data);
         let extraAddress = '';
 
         if (data.addressType === 'R') {
