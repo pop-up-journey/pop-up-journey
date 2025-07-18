@@ -5,8 +5,8 @@ import useGetUserInfo from '@/hooks/useGetUserInfo';
 
 import MembershipWithdrawal from '@/features/profile/components/MembershipWithdrawal';
 import MyProfile from '@/features/profile/components/MyProfile';
+import MyParticipatedPopupList from './components/MyParticipatedPopupList';
 import MySavedPopupList from './components/MySavedPopupList';
-// import { upcomingPopupList } from '../../mock/mockdata';
 
 export default function WrapperProfile() {
   const { userInfo } = useGetUserInfo();
@@ -30,6 +30,7 @@ export default function WrapperProfile() {
       <div className="mx-auto max-w-6xl">
         <MyProfile userInfo={userInfo} />
         {/* TODO: 내가 신청한 팝업 CRUD */}
+        <MyParticipatedPopupList userId={userInfo.id} />
         {/* 관심팝업 */}
 
         <MySavedPopupList userId={userInfo.id} />

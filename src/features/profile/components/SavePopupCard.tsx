@@ -21,7 +21,7 @@ export default function SavedPopupCard({ popup, removeFavorite }: SavedPopupCard
       eventEnd={popup.eventEnd}
       variant="compact"
       // savedCount={popup.saveCount}
-      onRemoveFavorite={removeFavorite}
+      onRemoveAction={removeFavorite}
     />
   );
 }
