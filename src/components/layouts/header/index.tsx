@@ -1,9 +1,10 @@
 'use client';
 
+import { categories } from '@/configs/category';
 import { Link, Navbar, NavbarBrand, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/react';
 import { useEffect, useState } from 'react';
 import { useScrollPosition } from 'react-haiku';
-import { CategoryTab, Login, Logo, NAV_CATEGORIES, Searchbar } from './components';
+import { CategoryTab, Login, Logo, Searchbar } from './components';
 
 export default function Header() {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -39,10 +40,15 @@ export default function Header() {
           <Login />
         </NavbarContent>
         <NavbarMenu>
-          {NAV_CATEGORIES.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link className="w-full" color="foreground" href={item.href} size="md">
-                {item.name}
+          {categories.map((category, index) => (
+            <NavbarMenuItem key={`${category}-${index}`}>
+              <Link
+                className="w-full"
+                color="foreground"
+                href={`/popup/search?tags=${encodeURIComponent(category)}`}
+                size="md"
+              >
+                {category}
               </Link>
             </NavbarMenuItem>
           ))}
