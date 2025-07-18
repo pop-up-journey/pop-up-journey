@@ -1,9 +1,9 @@
 import { PAGE_SIZE } from '@/configs/constants';
 import { clientApi } from '@/libs/api';
-import type { Popup } from '@/types/popup';
+import type { PopupWithTags } from '@/types/popup';
 
 export interface EventsResponse {
-  events: Popup[];
+  events: PopupWithTags[];
   totalCount: number;
 }
 

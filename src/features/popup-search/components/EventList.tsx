@@ -3,12 +3,12 @@
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { getSavedPopupIds } from '@/services/getSavedPopupIds';
 import { useSaveStore } from '@/store/save/useSaveStore';
-import type { Popup } from '@/types/popup';
+import type { PopupWithTags } from '@/types/popup';
 import { useEffect } from 'react';
 import EventCard from './EventCard';
 
 interface Props {
-  events: Popup[];
+  events: PopupWithTags[];
   userId?: string;
 }
 
@@ -38,7 +38,7 @@ export default function EventList({ events = [], userId }: Props) {
 
   return (
     <ul className="mt-10 flex flex-wrap justify-between space-y-10">
-      {/* // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함 */}
+      {/* // TODO: savedCount도 따로 route 수정해야함 */}
       {events.map((evt) => (
         <li key={evt.id} className="transform overflow-hidden transition-transform hover:scale-105">
           <EventCard key={evt.id} event={evt} userId={userId} />

@@ -91,12 +91,19 @@ export default function CardComponent({
               />
             </div>
           </CardBody>
-          <CardFooter className="absolute bottom-0 z-10 flex-col items-start bg-gradient-to-t from-black/60 via-black/20 to-transparent">
+          <CardFooter className="absolute bottom-0 z-10 flex-col items-start bg-gradient-to-t from-black/70 via-black/30 to-transparent">
             <h4 className="mb-1 font-bold text-white">{title}</h4>
-            <small className="text-default-400">
+            <small className="text-default-600 mb-1">
               {formatDate(eventStart ?? '')} ~ {formatDate(eventEnd ?? '')}
             </small>
-            <div className="flex gap-1">{tags && tags.map((tag, idx) => <Chip key={idx}>{tag}</Chip>)}</div>
+            <div className="flex gap-1">
+              {tags &&
+                tags.map((tag, idx) => (
+                  <Chip key={idx} variant="solid">
+                    {tag}
+                  </Chip>
+                ))}
+            </div>
           </CardFooter>
         </Card>
       </If>

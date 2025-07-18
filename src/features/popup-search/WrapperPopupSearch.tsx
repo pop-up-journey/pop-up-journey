@@ -8,18 +8,17 @@ import { PAGE_SIZE } from '@/configs/constants';
 import { regionGroups } from '@/configs/regions';
 import { usePagination } from '@/hooks/usePagination';
 import { getEvents, GetEventsParams } from '@/services/getEvents';
-import { Popup } from '@/types/popup';
+import { PopupWithTags } from '@/types/popup';
 import { Divider } from '@heroui/react';
 import { useEffect } from 'react';
 import { useIntersectionObserver } from 'react-haiku';
 import HeroSection from '../../components/common/hero-section';
 interface Props {
-  initialItems: Popup[];
+  initialItems: PopupWithTags[];
   initialTotalCount: number;
   selectedZone: string | null;
   selectedTags: string[];
-
-  fullEvents: Popup[];
+  fullEvents: PopupWithTags[];
 }
 
 export default function WrapperPopupSearch({
@@ -38,7 +37,12 @@ export default function WrapperPopupSearch({
       })
     );
 
-  const { items, loading, isEnd, loadMore } = usePagination<Popup>(fetchFn, initialItems, initialTotalCount, PAGE_SIZE);
+  const { items, loading, isEnd, loadMore } = usePagination<PopupWithTags>(
+    fetchFn,
+    initialItems,
+    initialTotalCount,
+    PAGE_SIZE
+  );
 
   const { observeRef, isVisible } = useIntersectionObserver({
     options: {

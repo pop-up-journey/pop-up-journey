@@ -48,10 +48,30 @@ export async function GET(req: NextRequest) {
     const offset = (page - 1) * pageSize;
     const paginatedQuery = baseQuery.limit(pageSize).offset(offset);
 
-    const result = await paginatedQuery.execute();
+    let eventsResult = await paginatedQuery.execute();
 
+    // 각 이벤트의 태그 정보 조회
+    if (eventsResult.length > 0) {
+      const ids = eventsResult.map((e) => e.id);
+      const tagRows = await db
+        .select({ eventId: eventTags.eventId, tagName: tags.name })
+        .from(eventTags)
+        .innerJoin(tags, eq(eventTags.tagId, tags.id))
+        .where(inArray(eventTags.eventId, ids));
+
+      const tagMap: Record<string, string[]> = {};
+      for (const row of tagRows) {
+        if (!tagMap[row.eventId]) tagMap[row.eventId] = [];
+        tagMap[row.eventId].push(row.tagName);
+      }
+
+      eventsResult = eventsResult.map((evt) => ({
+        ...evt,
+        tags: tagMap[evt.id] ?? [],
+      }));
+    }
     return NextResponse.json({
-      events: result,
+      events: eventsResult,
       totalCount,
     });
   } catch (error) {
