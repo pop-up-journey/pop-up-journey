@@ -7,11 +7,10 @@ import { LABELS } from '@/components/common/input/labels';
 import Select from '@/components/common/select';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useAddInfoFormStore } from '@/store/add-info/useAddInfoFormStore';
+import { validateName, validatePhone } from '@/utils/form-validation';
 import { addToast } from '@heroui/react';
 import { useEffect } from 'react';
 import { updateUserInfo } from '../api/updateUserInfo';
-import { validateName } from '../services/nameValidation';
-import { validatePhone } from '../services/phoneValidation';
 import InterestChip from './InterestChip';
 
 const inputOptions = {
