@@ -11,10 +11,9 @@ interface HostPopupPanelProps {
 }
 
 export default function HostPopupPanel({ hostPopups }: HostPopupPanelProps) {
-  // 클릭한 이벤트 상태
   const [selectedStatus, setSelectedStatus] = useState<PopupStatusType>(POPUP_STATUS.Ongoing);
 
-  // 상태별 배열 캐싱
+  // 상태별 배열
   const popupsByStatus = useMemo(
     () => ({
       [POPUP_STATUS.Ongoing]: hostPopups.filter((e) => e.eventStatus === POPUP_STATUS.Ongoing),

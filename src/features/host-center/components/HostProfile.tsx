@@ -1,13 +1,13 @@
+'use client';
+
 import Button from '@/components/common/button';
-import type { User } from '@/types/user';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface HostProfileProps {
-  userInfo: User | null;
-}
+export default function HostProfile() {
+  const { userInfo } = useGetUserInfo();
 
-export default function HostProfile({ userInfo }: HostProfileProps) {
   if (!userInfo) {
     return <div className="flex h-20 items-center justify-center text-gray-400">프로필 정보를 불러오고 있습니다.</div>;
   }

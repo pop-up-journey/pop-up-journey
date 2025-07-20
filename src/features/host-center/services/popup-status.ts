@@ -4,16 +4,22 @@ export const POPUP_STATUS = {
   Upcoming: 'upcoming',
 } as const;
 
-export const POPUP_STATUS_MSG = {
-  [POPUP_STATUS.Ongoing]: '주최된 팝업이 없습니다.',
-  [POPUP_STATUS.Ended]: '종료된 팝업이 없습니다.',
-  [POPUP_STATUS.Upcoming]: '예정된 팝업이 없습니다.',
-} as const;
-
-export const POPUP_STATUS_LABEL = {
-  [POPUP_STATUS.Ongoing]: '진행중',
-  [POPUP_STATUS.Ended]: '종료',
-  [POPUP_STATUS.Upcoming]: '예정',
+export const POPUP_STATUS_INFO = {
+  [POPUP_STATUS.Ongoing]: {
+    status: 'ongoing',
+    message: '진행중인 팝업이 없습니다.',
+    label: '진행중인 팝업',
+  },
+  [POPUP_STATUS.Ended]: {
+    status: 'ended',
+    message: '종료된 팝업이 없습니다.',
+    label: '종료된 팝업',
+  },
+  [POPUP_STATUS.Upcoming]: {
+    status: 'upcoming',
+    message: '예정된 팝업이 없습니다.',
+    label: '예정된 팝업',
+  },
 };
 
 export type PopupStatusType = (typeof POPUP_STATUS)[keyof typeof POPUP_STATUS];
