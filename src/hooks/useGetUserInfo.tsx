@@ -11,7 +11,6 @@ export default function useGetUserInfo() {
 
   // NOTE: 유저 정보 가져오기 client component에서 사용
   const getUserInfo = useCallback(async () => {
-    console.log('function called');
     try {
       if (status === 'authenticated' && session?.user?.id) {
         const res: User = await clientApi(`/api/users/${session?.user?.id}`, { method: 'GET' });
