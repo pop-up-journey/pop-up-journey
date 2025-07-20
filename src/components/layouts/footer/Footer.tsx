@@ -1,19 +1,22 @@
+'use client';
+
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { Divider } from '@heroui/react';
 import Link from 'next/link';
 
-export default function Footer() {
+export default function Footer({ className = '' }: { className?: string } = {}) {
   return (
     <footer className="bg-[#fff3f6]/10 text-gray-400 backdrop-blur-md">
       <Divider />
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between px-4 pt-5 pb-25 md:flex-row">
+      <div
+        className={`mx-auto flex max-w-6xl flex-col items-center justify-between px-4 py-5 md:flex-row ${className}`.trim()}
+      >
         <div className="mb-2 text-center md:mb-0 md:text-left">
           <h3 className="relative mb-2 overflow-hidden bg-gradient-to-r from-purple-500 via-indigo-400 to-pink-500 bg-clip-text text-lg font-semibold text-transparent drop-shadow-[0_0_6px_rgba(255,150,200,0.5)]">
             <span>Project by Hunter Joe & Yujeong Kim</span>
           </h3>
           <p className="mt-2 text-sm font-extralight">© 2025 Hunter Joe & Yujeong Kim. All rights reserved.</p>
         </div>
-
         <div className="flex items-start gap-6 space-y-8 md:flex-row md:gap-0 md:space-y-0 md:space-x-12">
           <div className="md:text-left lg:block">
             <h3 className="mb-2 font-semibold">Contact.</h3>
