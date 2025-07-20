@@ -22,7 +22,7 @@ interface CardProps {
   viewCount?: number | null;
 
   onToggleSave?: (id: string) => void;
-  onRemoveFavorite?: () => void;
+  onRemoveAction?: () => void;
 }
 
 export default function CardComponent({
@@ -38,7 +38,7 @@ export default function CardComponent({
   isSaved,
   viewCount,
   onToggleSave,
-  onRemoveFavorite,
+  onRemoveAction,
 }: CardProps) {
   const isCompact = variant === 'compact';
   const router = useRouter();
@@ -51,7 +51,7 @@ export default function CardComponent({
 
   const handleRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onRemoveFavorite?.();
+    onRemoveAction?.();
   };
 
   return (
@@ -144,7 +144,7 @@ export default function CardComponent({
                   <span>{savedCount ?? 0}</span>
                 </div>
                 {/* 좋아요·조회수·삭제 버튼 (호버 시 삭제만 나타남) */}
-                {onRemoveFavorite && (
+                {onRemoveAction && (
                   <button
                     onClick={handleRemove}
                     className="rounded-full p-1 opacity-100 hover:bg-white/20"
