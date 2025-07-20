@@ -6,7 +6,6 @@ import { EXTRA_INFO_OPTIONS } from '../../../../configs/extraInfoLabelHelper';
 export default function ExtraInfo() {
   const extraInfo = usePopupRegisterFormStore((state) => state.extraInfo);
   const setExtraInfo = usePopupRegisterFormStore((state) => state.setExtraInfo);
-  console.log(extraInfo);
 
   const handleToggle = (infoId: string) => {
     if (extraInfo.includes(infoId)) {

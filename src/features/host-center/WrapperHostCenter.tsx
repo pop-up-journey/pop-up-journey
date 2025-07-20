@@ -12,8 +12,6 @@ interface WrapperHostCenterProps {
 
 export default function WrapperHostCenter({ hostPopups }: WrapperHostCenterProps) {
   const { userInfo } = useGetUserInfo();
-  // TODO: 렌더링 최적화 필요
-  // console.log(hostPopups);
 
   return (
     <main className="mb-10 min-h-screen">

@@ -1,7 +1,7 @@
 'use client';
 import Chip from '@/components/common/chip';
 import { formatDate } from '@/utils/dateformatter';
-import { HeartIcon as HeartIconOutline, TrashIcon } from '@heroicons/react/24/outline';
+import { EyeIcon, HeartIcon as HeartIconOutline, MapPinIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Card, CardBody, CardFooter, CardHeader, Image } from '@heroui/react';
 import NextImage, { StaticImageData } from 'next/image';
@@ -19,6 +19,7 @@ interface CardProps {
   variant?: 'default' | 'compact';
   savedCount?: number | null;
   isSaved?: boolean;
+  viewCount?: number | null;
 
   onToggleSave?: (id: string) => void;
   onRemoveAction?: () => void;
@@ -35,6 +36,7 @@ export default function CardComponent({
   variant = 'default',
   savedCount,
   isSaved,
+  viewCount,
   onToggleSave,
   onRemoveAction,
 }: CardProps) {
@@ -123,8 +125,24 @@ export default function CardComponent({
               {/* 좋아요/조회수 아이콘 (compact) */}
               <div className="text-default-400 absolute top-0 right-0 flex items-center gap-3 text-xs">
                 {/* TODO: 조회수 렌더링 필요 */}
-                <div className="p-2 text-sm">👁️ 123</div>
-                <div className="p-2 text-sm">❤️ {isSaved ? '' : `${savedCount}`}</div>
+                <div className="flex items-center gap-1 p-2 text-sm">
+                  <EyeIcon className="size-5" />
+                  <span>{viewCount ?? 0}</span>
+                </div>
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleFavClick();
+                  }}
+                  className="flex items-center gap-1 p-2 text-sm"
+                >
+                  {isSaved ? (
+                    <HeartIconSolid className="size-5 cursor-pointer text-red-500 transition-all duration-300 hover:scale-130" />
+                  ) : (
+                    <HeartIconOutline className="size-5 cursor-pointer text-[#ffc0d4] transition-all duration-300 hover:scale-130" />
+                  )}
+                  <span>{savedCount ?? 0}</span>
+                </div>
                 {/* 좋아요·조회수·삭제 버튼 (호버 시 삭제만 나타남) */}
                 {onRemoveAction && (
                   <button
@@ -140,16 +158,15 @@ export default function CardComponent({
               <div className="flex flex-col gap-1">
                 <h4 className="text-foreground text-base font-bold">{title}</h4>
 
-                <p className="text-default-500 text-sm">📍 {location}</p>
+                <p className="text-default-500 flex items-center gap-1 text-sm">
+                  <MapPinIcon className="size-5" /> {location}
+                </p>
                 <p className="text-default-400 text-sm">
                   {eventStart && `${formatDate(eventStart)}`} {eventEnd && `~ ${formatDate(eventEnd)}`}
                 </p>
               </div>
             </div>
           </CardBody>
-          {/* {savedCount != null && <span>❤️ {savedCount}</span>}
-            {/* HACK: {viewCount != null && <span>👁️ {viewCount}</span>} */}
-          {/* <span>👁️ 123</span>  */}
         </Card>
       </If>
     </>

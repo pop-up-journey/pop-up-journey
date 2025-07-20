@@ -13,7 +13,6 @@ export const usePopupSummaryDataStore = create<PopupSummaryDataState & PopupSumm
   fetchPopupSummaryData: async () => {
     const response = await fetch('/api/events/all');
     const data = await response.json();
-    console.log(data);
     set({ popupSummaryData: data });
   },
 }));
