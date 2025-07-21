@@ -3,7 +3,7 @@ import OngoingPopupList from '@/features/main/components/OngoingPopupList';
 import UpcomingPopupList from '@/features/main/components/UpcomingPopupList';
 import { PopupsResponse } from '@/services/getPopups';
 
-export default async function WrapperMain({
+export default function WrapperMain({
   ongoingEvents,
   upcomingEvents,
   likedEventIds,
