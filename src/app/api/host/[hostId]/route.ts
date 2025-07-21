@@ -121,6 +121,47 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ hos
   }
 }
 
+/**
+ * @swagger
+ * /api/host/{hostId}:
+ *   post:
+ *     tags:
+ *       - host
+ *     summary: 이벤트 생성
+ *     description: 특정 호스트가 새 이벤트를 등록합니다.
+ *     parameters:
+ *       - in: path
+ *         name: hostId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: 호스트 ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               eventStart:
+ *                 type: string
+ *                 format: date-time
+ *               eventEnd:
+ *                 type: string
+ *                 format: date-time
+ *     responses:
+ *       201:
+ *         description: 이벤트 생성 성공
+ *       400:
+ *         description: 잘못된 요청
+ *       500:
+ *         description: 서버 에러
+ */
+
 export async function POST(req: NextRequest, { params }: { params: Promise<{ hostId: string }> }) {
   const { hostId } = await params;
 
