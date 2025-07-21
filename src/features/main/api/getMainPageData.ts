@@ -1,12 +1,12 @@
-import { getEvents } from '@/services/getEvents';
+import { getPopups } from '@/services/getPopups';
 import { getSavedPopupIds } from '@/services/getSavedPopupIds';
 
 // 일단 스킵
 export async function getMainPageData(userId?: string) {
   try {
     const [ongoingEvents, upcomingEvents, likedEventIds] = await Promise.all([
-      getEvents({ status: 'ongoing' }),
-      getEvents({ status: 'upcoming', page: 1, pageSize: 4 }),
+      getPopups({ status: 'ongoing' }),
+      getPopups({ status: 'upcoming', page: 1, pageSize: 4 }),
       userId ? getSavedPopupIds(userId) : Promise.resolve([]),
     ]);
     return { ongoingEvents, upcomingEvents, likedEventIds };

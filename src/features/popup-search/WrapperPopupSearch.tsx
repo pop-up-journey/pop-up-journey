@@ -7,7 +7,7 @@ import EventsMap from '@/features/popup-search/components/EventsMap';
 import { PAGE_SIZE } from '@/configs/constants';
 import { regionGroups } from '@/configs/regions';
 import { usePagination } from '@/hooks/usePagination';
-import { getEvents, GetEventsParams } from '@/services/getEvents';
+import { GetEventsParams, getPopups } from '@/services/getPopups';
 import { PopupWithTags } from '@/types/popup';
 import { Divider } from '@heroui/react';
 import { useEffect } from 'react';
@@ -30,7 +30,7 @@ export default function WrapperPopupSearch({
 }: Props) {
   //NOTE: UseCallback, 페이지네이션: 6개씩 추가 렌더링
   const fetchFn = ({ page, pageSize }: { page: number; pageSize: number }) =>
-    getEvents({ zone: selectedZone, tags: selectedTags, page, pageSize } as GetEventsParams).then(
+    getPopups({ zone: selectedZone, tags: selectedTags, page, pageSize } as GetEventsParams).then(
       ({ events, totalCount }) => ({
         items: events,
         totalCount,

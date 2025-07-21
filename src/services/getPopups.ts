@@ -15,7 +15,7 @@ export interface GetEventsParams {
   pageSize?: number;
 }
 
-export async function getEvents({
+export async function getPopups({
   status,
   zone,
   tags,
