@@ -1,13 +1,18 @@
-import { getMainPageData } from '@/features/main/api/getMainPageData';
 import MainBanner from '@/features/main/components/MainBanner';
 import OngoingPopupList from '@/features/main/components/OngoingPopupList';
 import UpcomingPopupList from '@/features/main/components/UpcomingPopupList';
-import { auth } from '@/libs/auth';
+import { PopupsResponse } from '@/services/getPopups';
+// import { Popup } from '@/types/popup';
 
-export default async function WrapperMain() {
-  const session = await auth();
-  const { ongoingEvents, upcomingEvents, likedEventIds } = await getMainPageData(session?.user?.id);
-
+export default async function WrapperMain({
+  ongoingEvents,
+  upcomingEvents,
+  likedEventIds,
+}: {
+  ongoingEvents: PopupsResponse;
+  upcomingEvents: PopupsResponse;
+  likedEventIds: string[];
+}) {
   return (
     <main className="overflow-hidden">
       <MainBanner />
