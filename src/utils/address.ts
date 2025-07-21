@@ -1,5 +1,6 @@
 /**
  * 쉼표로 구분된 주소 문자열을 배열로 반환
+ * //TODO: address 대신 Location Formatter 사용
  */
 export function getAddressParts(address: string): string[] {
   return address
@@ -21,3 +22,4 @@ export function getAddressPart(address: string, partIndex: number, fallbackIndex
   if (parts[fallbackIndex] != null) return parts[fallbackIndex]!;
   return '';
 }
+//
