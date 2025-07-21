@@ -1,4 +1,5 @@
 'use client';
+
 import Chip from '@/components/common/chip';
 import { formatDate } from '@/utils/dateformatter';
 import { EyeIcon, HeartIcon as HeartIconOutline, MapPinIcon, TrashIcon } from '@heroicons/react/24/outline';
@@ -6,6 +7,7 @@ import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Card, CardBody, CardFooter, CardHeader, Image } from '@heroui/react';
 import NextImage, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
+import { memo } from 'react';
 import { If } from 'react-haiku';
 
 interface CardProps {
@@ -25,7 +27,7 @@ interface CardProps {
   onRemoveAction?: () => void;
 }
 
-export default function CardComponent({
+function CardComponent({
   id,
   title,
   thumbnail,
@@ -148,7 +150,7 @@ export default function CardComponent({
                   ) : (
                     <HeartIconOutline className="size-5 cursor-pointer text-[#ffc0d4] transition-all duration-300 hover:scale-130" />
                   )}
-                  <span>{savedCount ?? 0}</span>
+                  <span>{savedCount ?? ''}</span>
                 </div>
                 {/* 좋아요·조회수·삭제 버튼 (호버 시 삭제만 나타남) */}
                 {onRemoveAction && (
@@ -179,3 +181,5 @@ export default function CardComponent({
     </>
   );
 }
+
+export default memo(CardComponent);
