@@ -1,10 +1,10 @@
 'use client';
 
-import EventDescription from '@/features/popup-detail/components/EventDescription';
-import EventInfoList from '@/features/popup-detail/components/EventInfoList';
-import EventMobileBar from '@/features/popup-detail/components/EventMobileBar';
-import EventPoster from '@/features/popup-detail/components/EventPoster';
-import EventTitle from '@/features/popup-detail/components/EventTitle';
+import PopupDescription from '@/features/popup-detail/components/PopupDescription';
+import PopupInfoList from '@/features/popup-detail/components/PopupInfoList';
+import PopupMobileBar from '@/features/popup-detail/components/PopupMobileBar';
+import PopupPoster from '@/features/popup-detail/components/PopupPoster';
+import PopupTitle from '@/features/popup-detail/components/PopupTitle';
 import type { Popup } from '@/types/popup';
 import type { User } from '@/types/user';
 import { Divider } from '@heroui/react';
@@ -20,12 +20,12 @@ export default function WrapperPopupDetail({ popup, host }: EventDetailProps) {
   return (
     <main>
       {/* 이미지 포스터(썸네일) */}
-      <EventPoster src={imgSrc} alt={popup.title} />
+      <PopupPoster src={imgSrc} alt={popup.title} />
       {/* 타이틀 */}
-      <EventTitle title={popup.title} hostName={host.name} hostLink="/host-center" />
+      <PopupTitle title={popup.title} hostName={host.name} hostLink="/host-center" />
       <Divider className="my-4" />
       {/* 이벤트 정보 */}
-      <EventInfoList
+      <PopupInfoList
         eventStart={popup.eventStart}
         eventEnd={popup.eventEnd}
         address={popup.address}
@@ -33,9 +33,9 @@ export default function WrapperPopupDetail({ popup, host }: EventDetailProps) {
       />
       <Divider className="my-4" />
       {/* 본문 */}
-      <EventDescription description={popup.description} />
+      <PopupDescription description={popup.description} />
       {/* 1024px 미만 반응형: 하단 바 */}
-      <EventMobileBar eventId={popup.id} />
+      <PopupMobileBar eventId={popup.id} />
     </main>
   );
 }

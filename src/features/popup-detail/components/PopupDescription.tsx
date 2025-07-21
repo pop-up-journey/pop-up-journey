@@ -1,10 +1,10 @@
 'use client';
 
-interface DescriptionProps {
+interface PopupDescriptionProps {
   description?: string | null;
 }
 
-export default function EventDescription({ description }: DescriptionProps) {
+export default function PopupDescription({ description }: PopupDescriptionProps) {
   return (
     <section className="mb-14">
       <h2 className="mb-2 text-lg font-semibold">이벤트 소개</h2>

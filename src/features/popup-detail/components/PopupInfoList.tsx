@@ -1,22 +1,21 @@
 'use client';
 import Chip from '@/components/common/chip';
 import { EXTRA_INFO_MAP } from '@/configs/extraInfoLabelHelper';
-import EventInfoItem from '@/features/popup-detail/components/EventInfoItem';
+import EventInfoItem from '@/features/popup-detail/components/PopupInfoItem';
 import { extractCity } from '@/utils/addressFormatter';
 import { formatDate } from '@/utils/dateformatter';
 import { InformationCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
-interface EventInfoListProps {
+interface PopupInfoListProps {
   eventStart: string | Date;
   eventEnd: string | Date;
   address?: string | null;
   extraInfo?: string[] | string | null;
 }
 
-export default function EventInfoList({ eventStart, eventEnd, address, extraInfo }: EventInfoListProps) {
-  // 날짜 파싱
+export default function PopupInfoList({ eventStart, eventEnd, address, extraInfo }: PopupInfoListProps) {
   const start = new Date(eventStart);
   const month = format(start, 'M', { locale: ko });
   const day = format(start, 'd', { locale: ko });

@@ -6,11 +6,11 @@ import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 
-interface EventMobileBarProps {
+interface PopupMobileBarProps {
   eventId: string;
 }
 
-export default function EventMobileBar({ eventId }: EventMobileBarProps) {
+export default function PopupMobileBar({ eventId }: PopupMobileBarProps) {
   const { userInfo } = useGetUserInfo();
   const userId = userInfo?.id;
   const { isSaved, toggle } = useHandleSave(eventId, userId);
