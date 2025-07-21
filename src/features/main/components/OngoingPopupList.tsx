@@ -1,7 +1,7 @@
 'use client';
 
+import { PopupSwiper } from '@/features/main/components/PopupSwiper';
 import { SectionLayout } from '@/features/main/components/SectionLayout';
-import { SwiperPopupList } from '@/features/main/components/SwiperPopupList';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useSaveStore } from '@/store/save/useSaveStore';
 import type { Popup } from '@/types/popup';
@@ -27,7 +27,7 @@ export default function OngoingPopupList({ events, likeEventIds, sectionTitle }:
 
   return (
     <SectionLayout title={sectionTitle} isEmpty={events.length === 0} rightSlot="더 많은 이벤트 보기">
-      <SwiperPopupList events={events} userId={userId} />
+      <PopupSwiper events={events} userId={userId} />
     </SectionLayout>
   );
 }
