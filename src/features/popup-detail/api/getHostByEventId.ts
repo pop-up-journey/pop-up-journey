@@ -5,7 +5,8 @@ export async function getHostByEventId(id: string): Promise<User | null> {
   try {
     const host = await clientApi<User[]>(`/api/users/${id}`, { method: 'GET' });
     return host ?? null;
-  } catch {
+  } catch (error) {
+    console.error('getHostByEventId error', error);
     return null;
   }
 }
