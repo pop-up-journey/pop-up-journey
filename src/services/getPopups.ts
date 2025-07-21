@@ -2,12 +2,12 @@ import { PAGE_SIZE_EIGHT } from '@/configs/pageSize';
 import { clientApi } from '@/libs/api';
 import type { PopupWithTags } from '@/types/popup';
 
-export interface EventsResponse {
+export interface PopupsResponse {
   events: PopupWithTags[];
   totalCount: number;
 }
 
-export interface GetEventsParams {
+export interface GetPopupsParams {
   status?: string;
   zone?: string | null;
   tags?: string[];
@@ -21,7 +21,7 @@ export async function getPopups({
   tags,
   page = 1,
   pageSize = PAGE_SIZE_EIGHT,
-}: GetEventsParams): Promise<EventsResponse> {
+}: GetPopupsParams): Promise<PopupsResponse> {
   // 쿼리 문자열 조립
   const qs = new URLSearchParams({
     page: String(page),
@@ -34,7 +34,7 @@ export async function getPopups({
   try {
     // clientApi 호출
     const res = await clientApi(`/api/events?${qs}`, { method: 'GET' });
-    return res as EventsResponse;
+    return res as PopupsResponse;
   } catch (error) {
     console.error('Failed to fetch events', error);
     // 에러 시 기본값 리턴

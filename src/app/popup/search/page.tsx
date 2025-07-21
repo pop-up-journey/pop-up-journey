@@ -1,5 +1,5 @@
 import WrapperPopupSearch from '@/features/popup-search/WrapperPopupSearch';
-import { GetEventsParams, getPopups } from '@/services/getPopups';
+import { GetPopupsParams, getPopups } from '@/services/getPopups';
 
 interface PageProps {
   searchParams: Promise<{ zone?: string; tags?: string }>;
@@ -13,7 +13,7 @@ export default async function Page({ searchParams }: PageProps) {
   const { events, totalCount } = await getPopups({
     zone: zone ?? null,
     tags: selectedTags,
-  } as GetEventsParams);
+  } as GetPopupsParams);
 
   // 전체 이벤트(전체 조회, 맵에 표시하기 위함)
   const { events: fullEvents } = await getPopups({
@@ -21,7 +21,7 @@ export default async function Page({ searchParams }: PageProps) {
     tags: selectedTags,
 
     pageSize: totalCount,
-  } as GetEventsParams);
+  } as GetPopupsParams);
 
   return (
     <WrapperPopupSearch
