@@ -23,7 +23,7 @@ export default function LabelIconMapper(label: Label): FC<SVGProps<SVGSVGElement
       return TagIcon;
     case LABELS.PEOPLE:
       return UserGroupIcon;
-    case LABELS.LOCATION:
+    case LABELS.ADDRESS:
       return MapPinIcon;
     case LABELS.TICKETS:
       return TicketIcon;

@@ -1,6 +1,7 @@
 'use client';
 
 import CardComponent from '@/components/common/card';
+import { extractDistrict } from '@/utils/addressFormatter';
 import { addToast } from '@heroui/react';
 import { useEffect, useState } from 'react';
 import { deleteParticipation } from '../api/deleteParticipation';
@@ -35,7 +36,7 @@ export default function MyParticipatedPopupList({ userId }: { userId: string }) 
               id={popup.eventId}
               title={popup.title}
               thumbnail={popup.thumbnail}
-              location={popup.address?.split(',').map((s) => s.trim())[2] ?? ''}
+              address={extractDistrict(popup.address)}
               eventStart={popup.eventStart}
               eventEnd={popup.eventEnd}
               variant="compact"

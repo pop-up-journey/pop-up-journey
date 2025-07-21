@@ -4,7 +4,7 @@ import CardComponent from '@/components/common/card';
 import { PAGE_SIZE_SIX } from '@/configs/pageSize';
 import { POPUP_STATUS_INFO, type PopupStatusType } from '@/features/host-center/services/popupStatus';
 import type { Popup } from '@/types/popup';
-import { extractDistrict } from '@/utils/formatLocation';
+import { extractDistrict } from '@/utils/addressFormatter';
 import { useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-haiku';
 interface HostPopupListProps {
@@ -35,9 +35,9 @@ export default function HostPopupList({ popups, selectedStatus }: HostPopupListP
             // TODO: 지우지 마시오 좋아요 수, 참여자 수, 조회수 추가 필요
             {/* // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함 */}
             <CardComponent
-              location={extractDistrict(popup?.address)}
-              // savedCount={popup.saveCount}
               {...popup}
+              address={extractDistrict(popup?.address)}
+              // savedCount={popup.saveCount}
               variant="compact"
             />
             {idx === visibleCount - 1 && visibleCount < popups.length && (

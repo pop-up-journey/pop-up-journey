@@ -15,7 +15,7 @@ interface CardProps {
   title?: string;
   thumbnail?: string | StaticImageData | null;
   tags?: string[];
-  location?: string;
+  address?: string;
   eventStart?: string | Date;
   eventEnd?: string | Date;
   variant?: 'default' | 'compact';
@@ -32,7 +32,7 @@ function CardComponent({
   title,
   thumbnail,
   tags,
-  location,
+  address,
   eventStart,
   eventEnd,
   variant = 'default',
@@ -168,7 +168,7 @@ function CardComponent({
                 <h4 className="text-foreground text-base font-bold">{title}</h4>
 
                 <p className="text-default-500 flex items-center gap-1 text-sm">
-                  <MapPinIcon className="size-5" /> {location}
+                  <MapPinIcon className="size-5" /> {address}
                 </p>
                 <p className="text-default-400 text-sm">
                   {eventStart && `${formatDate(eventStart)}`} {eventEnd && `~ ${formatDate(eventEnd)}`}

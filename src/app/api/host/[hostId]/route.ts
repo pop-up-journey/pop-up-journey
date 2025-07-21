@@ -59,7 +59,7 @@ const db = drizzle(process.env.DATABASE_URL!);
  *                     type: string
  *                     format: date-time
  *                     description: 이벤트 종료일
- *                   location:
+ *                   address:
  *                     type: string
  *                     description: 이벤트 장소
  *                   status:

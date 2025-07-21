@@ -2,7 +2,7 @@
 import Chip from '@/components/common/chip';
 import { EXTRA_INFO_MAP } from '@/configs/extraInfoLabelHelper';
 import EventInfoItem from '@/features/popup-detail/components/EventInfoItem';
-import { getAddressPart } from '@/utils/address';
+import { extractCity } from '@/utils/addressFormatter';
 import { formatDate } from '@/utils/dateformatter';
 import { InformationCircleIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { format } from 'date-fns';
@@ -20,9 +20,7 @@ export default function EventInfoList({ eventStart, eventEnd, address, extraInfo
   const start = new Date(eventStart);
   const month = format(start, 'M', { locale: ko });
   const day = format(start, 'd', { locale: ko });
-
-  // 장소
-  const place = getAddressPart(address!, 1);
+  const city = extractCity(address);
 
   // 기타 정보
   const extraInfos =
@@ -51,8 +49,8 @@ export default function EventInfoList({ eventStart, eventEnd, address, extraInfo
       {/* 장소 */}
       <EventInfoItem
         icon={<MapPinIcon className="h-5 w-5 text-gray-500" />}
-        label={place}
-        href={`http://map.kakao.com/link/search/${place}`}
+        label={city}
+        href={`http://map.kakao.com/link/search/${city}`}
         external
       />
 

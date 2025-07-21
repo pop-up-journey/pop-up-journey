@@ -2,12 +2,12 @@
 
 import Button from '@/components/common/button';
 import {
+  Address,
   Capacity,
   DateCalendar,
   Description,
   Email,
   ExtraInfo,
-  Location,
   RecruitmentMethod,
   Tag,
   Thumbnail,
@@ -136,7 +136,7 @@ export default function RegisterForm({ hostId }: RegisterFormProps) {
         <Description />
         <Capacity />
         <DateCalendar />
-        <Location />
+        <Address />
         <RecruitmentMethod />
         <ExtraInfo />
         <Tag />
