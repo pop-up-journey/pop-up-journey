@@ -2,7 +2,6 @@ import MainBanner from '@/features/main/components/MainBanner';
 import OngoingPopupList from '@/features/main/components/OngoingPopupList';
 import UpcomingPopupList from '@/features/main/components/UpcomingPopupList';
 import { PopupsResponse } from '@/services/getPopups';
-// import { Popup } from '@/types/popup';
 
 export default async function WrapperMain({
   ongoingEvents,
