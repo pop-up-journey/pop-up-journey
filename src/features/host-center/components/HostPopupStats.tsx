@@ -1,4 +1,4 @@
-import { POPUP_STATUS_INFO, type PopupStatusType } from '@/features/host-center/services/popup-status';
+import { POPUP_STATUS_INFO, type PopupStatusType } from '@/features/host-center/services/popupStatus';
 
 interface HostPopupStatsProps {
   selectedStatus: PopupStatusType;

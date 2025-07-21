@@ -2,7 +2,7 @@
 
 import CardComponent from '@/components/common/card';
 import { PAGE_SIZE_SIX } from '@/configs/constants';
-import { POPUP_STATUS_INFO, type PopupStatusType } from '@/features/host-center/services/popup-status';
+import { POPUP_STATUS_INFO, type PopupStatusType } from '@/features/host-center/services/popupStatus';
 import type { Popup } from '@/types/popup';
 import { useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-haiku';

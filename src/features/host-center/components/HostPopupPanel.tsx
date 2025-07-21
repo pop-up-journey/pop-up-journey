@@ -2,7 +2,7 @@
 
 import HostPopupList from '@/features/host-center/components/HostPopupList';
 import HostPopupStats from '@/features/host-center/components/HostPopupStats';
-import { POPUP_STATUS, type PopupStatusType } from '@/features/host-center/services/popup-status';
+import { POPUP_STATUS, type PopupStatusType } from '@/features/host-center/services/popupStatus';
 import type { Popup } from '@/types/popup';
 import { useMemo, useState } from 'react';
 
