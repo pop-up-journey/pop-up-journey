@@ -1,19 +1,19 @@
 'use client';
 
 import CardComponent from '@/components/common/card';
+import { PAGE_SIZE_SIX } from '@/configs/constants';
 import { POPUP_STATUS_INFO, type PopupStatusType } from '@/features/host-center/services/popup-status';
 import type { Popup } from '@/types/popup';
 import { useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-haiku';
+import { extractDistrict } from '../services/formatLocation';
 interface HostPopupListProps {
   popups: Popup[];
   selectedStatus: PopupStatusType;
 }
 
-const PAGE_SIZE = 6;
-
 export default function HostPopupList({ popups, selectedStatus }: HostPopupListProps) {
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE_SIX);
 
   const { observeRef, isVisible } = useIntersectionObserver({
     options: { threshold: 0.2 },
@@ -21,7 +21,7 @@ export default function HostPopupList({ popups, selectedStatus }: HostPopupListP
 
   useEffect(() => {
     if (isVisible && visibleCount < popups.length) {
-      setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, popups.length));
+      setVisibleCount((prev) => Math.min(prev + PAGE_SIZE_SIX, popups.length));
     }
   }, [isVisible, visibleCount, popups.length]);
 
@@ -35,7 +35,7 @@ export default function HostPopupList({ popups, selectedStatus }: HostPopupListP
             // TODO: 지우지 마시오 좋아요 수, 참여자 수, 조회수 추가 필요
             {/* // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함 */}
             <CardComponent
-              location={popup?.address?.split(',').map((s: any) => s.trim())[2] || ''}
+              location={extractDistrict(popup?.address)}
               // savedCount={popup.saveCount}
               {...popup}
               variant="compact"
