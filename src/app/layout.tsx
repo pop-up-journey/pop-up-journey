@@ -19,6 +19,9 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: '팝업의 여정 ',
   description: '팝업의 여정',
+  icons: {
+    icon: '/favicon.ico',
+  },
   metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL_DEV ?? 'http://localhost:3000'),
   openGraph: {
     title: '팝업의 여정',
