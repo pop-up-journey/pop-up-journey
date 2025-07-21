@@ -3,6 +3,34 @@ import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * @swagger
+ * /api/users/{userId}/event-saves:
+ *   get:
+ *     tags:
+ *       - users
+ *     summary: 사용자의 저장한 이벤트 조회
+ *     description: userId가 저장한 이벤트 ID 목록을 반환합니다.
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: 사용자 ID
+ *     responses:
+ *       200:
+ *         description: 조회 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: string
+ *       500:
+ *         description: 서버 에러
+ */
+
 const db = drizzle(process.env.DATABASE_URL!);
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ userId: string }> }) {
