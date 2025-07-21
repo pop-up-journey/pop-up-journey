@@ -7,9 +7,9 @@ import { LABELS } from '@/components/common/input/labels';
 import { createParticipate } from '@/features/popup-participate/api/createParticipate';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { useEventParticipateFormStore } from '@/store/event-participate/useEventParticipateFormStore';
+import { validateName, validatePhone, validateTickets } from '@/utils/form-validation';
 import { addToast } from '@heroui/toast';
 import { useRouter } from 'next/navigation';
-import { validateName, validatePhone, validateTickets } from '@/utils/form-validation';
 import { useEffect } from 'react';
 
 const inputOptions = {
@@ -76,7 +76,7 @@ export default function ParticipateForm({ popupId }: ParticipateFormProps) {
     try {
       const res = await createParticipate({ name, email, phone, tickets }, popupId);
 
-      //HACK: 서버에서 이미 신청한 팝업이면 res.error를 반환함. 좀 더 정교한 로직이 필요
+      //TODO: 서버에서 이미 신청한 팝업이면 res.error를 반환함. 좀 더 정교한 로직이 필요
       if (res.error) {
         addToast({
           title: '이미 신청을 완료한 팝업입니다.',
