@@ -4,7 +4,7 @@ import EventsFilter from '@/features/popup-search/components/EventFilter';
 import EventList from '@/features/popup-search/components/EventList';
 import EventsMap from '@/features/popup-search/components/EventsMap';
 
-import { PAGE_SIZE } from '@/configs/constants';
+import { PAGE_SIZE_EIGHT } from '@/configs/pageSize';
 import { regionGroups } from '@/configs/regions';
 import { usePagination } from '@/hooks/usePagination';
 import { GetEventsParams, getPopups } from '@/services/getPopups';
@@ -41,7 +41,7 @@ export default function WrapperPopupSearch({
     fetchFn,
     initialItems,
     initialTotalCount,
-    PAGE_SIZE
+    PAGE_SIZE_EIGHT
   );
 
   const { observeRef, isVisible } = useIntersectionObserver({

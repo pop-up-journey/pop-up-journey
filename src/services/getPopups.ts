@@ -1,4 +1,4 @@
-import { PAGE_SIZE } from '@/configs/constants';
+import { PAGE_SIZE_EIGHT } from '@/configs/pageSize';
 import { clientApi } from '@/libs/api';
 import type { PopupWithTags } from '@/types/popup';
 
@@ -20,7 +20,7 @@ export async function getPopups({
   zone,
   tags,
   page = 1,
-  pageSize = PAGE_SIZE,
+  pageSize = PAGE_SIZE_EIGHT,
 }: GetEventsParams): Promise<EventsResponse> {
   // 쿼리 문자열 조립
   const qs = new URLSearchParams({
