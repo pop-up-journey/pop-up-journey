@@ -7,7 +7,6 @@ import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Card, CardBody, CardFooter, CardHeader, Image } from '@heroui/react';
 import NextImage, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
-import { memo } from 'react';
 import { If } from 'react-haiku';
 
 interface CardProps {
@@ -42,7 +41,6 @@ function CardComponent({
   onToggleSave,
   onRemoveAction,
 }: CardProps) {
-  console.log('card rendered');
   const isCompact = variant === 'compact';
   const router = useRouter();
 
@@ -183,4 +181,4 @@ function CardComponent({
   );
 }
 
-export default memo(CardComponent);
+export default CardComponent;
