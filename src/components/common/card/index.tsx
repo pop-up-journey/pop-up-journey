@@ -116,8 +116,8 @@ function CardComponent({
           radius="sm"
           onPress={() => router.push(`/popup/${id}`)}
         >
-          <CardBody className="relative grid grid-cols-6 gap-6 px-0 md:grid-cols-12 md:gap-4">
-            <div className="relative col-span-6 aspect-[4/5] w-full overflow-hidden md:col-span-4">
+          <CardBody className="relative grid grid-cols-4 gap-6 px-0 sm:grid-cols-10 md:grid-cols-12">
+            <div className="relative col-span-4 aspect-[4/5] w-full overflow-hidden">
               <Image
                 alt="썸네일"
                 src={typeof thumbnail === 'string' ? thumbnail : (thumbnail?.src ?? '/default-image.png')}
