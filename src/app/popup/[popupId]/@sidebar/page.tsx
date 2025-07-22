@@ -11,5 +11,5 @@ export default async function Page({ params }: { params: Promise<{ popupId: stri
   const host = event && (await getHostIdByPopupId(event.hostId));
   if (!event || !host) return notFound();
 
-  return <WrapperSidebar address={extractCity(event.address)} organizer={host.name} />;
+  return <WrapperSidebar address={extractCity(event.address)} organizer={host.name} avatarSrc={host.image ?? ''} />;
 }

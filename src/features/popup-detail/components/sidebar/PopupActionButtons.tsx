@@ -42,7 +42,6 @@ export default function PopupActionButtons() {
       </Link>
       <div className="flex flex-row items-center gap-3">
         <Button fullWidth onPress={toggle}>
-          {/* NOTE: 뭔가 심심함.. */}
           {isSaved ? '관심 행사 취소' : '관심 행사 등록'}
         </Button>
         <ShareButton />

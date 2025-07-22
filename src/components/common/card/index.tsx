@@ -42,6 +42,7 @@ function CardComponent({
   onToggleSave,
   onRemoveAction,
 }: CardProps) {
+  console.log('card rendered');
   const isCompact = variant === 'compact';
   const router = useRouter();
 
@@ -154,13 +155,13 @@ function CardComponent({
                 </div>
                 {/* 좋아요·조회수·삭제 버튼 (호버 시 삭제만 나타남) */}
                 {onRemoveAction && (
-                  <button
+                  <span
                     onClick={handleRemove}
                     className="rounded-full p-1 opacity-100 hover:bg-white/20"
                     aria-label="관심 팝업 삭제"
                   >
                     <TrashIcon className="text-default-400 h-4 w-4 cursor-pointer hover:text-red-500" />
-                  </button>
+                  </span>
                 )}
               </div>
 
