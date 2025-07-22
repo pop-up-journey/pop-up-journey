@@ -4,12 +4,23 @@ import postgres from 'postgres';
 
 const connectionString = process.env.DATABASE_URL!;
 
-// NOTE:"트랜잭션" 풀 모드에서는 사전 페치가 지원되지 않으므로 사전 페치를 비활성화합니다.
-// const client = postgres(connectionString, {
-//   max: 10,  // 적절한 연결 풀 크기
-//   prepare: true  // prepared statements 활성화
-// });
-const client = postgres(connectionString, { prepare: false });
-const db = drizzle(client);
+const globalForDb = globalThis as unknown as {
+  postgresClient?: ReturnType<typeof postgres>;
+  db?: ReturnType<typeof drizzle>;
+};
+
+const client =
+  globalForDb.postgresClient ??
+  postgres(connectionString, {
+    prepare: false,
+    max: 10, // Supabase 기본 Pool Size는 15이므로 적절히 낮게 유지
+  });
+
+const db = globalForDb.db ?? drizzle(client);
+
+if (process.env.NODE_ENV !== 'production') {
+  globalForDb.postgresClient = client;
+  globalForDb.db = db;
+}
 
 export default db;
