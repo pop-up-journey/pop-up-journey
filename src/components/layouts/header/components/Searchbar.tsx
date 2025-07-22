@@ -5,13 +5,19 @@ import { usePopupSummaryDataStore } from '@/store/popup-summary-data/usePopupSum
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Input } from '@heroui/react';
 import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function Searchbar() {
   const [text, setText] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const { isMdUp } = useResizeUi();
-  const { popupSummaryData } = usePopupSummaryDataStore();
+  const popupSummaryData = usePopupSummaryDataStore((s) => s.popupSummaryData);
+  const fetchPopupSummaryData = usePopupSummaryDataStore((s) => s.fetchPopupSummaryData);
+
+  useEffect(() => {
+    fetchPopupSummaryData();
+  }, [fetchPopupSummaryData]);
+
   const router = useRouter();
 
   // 검색 결과 필터링

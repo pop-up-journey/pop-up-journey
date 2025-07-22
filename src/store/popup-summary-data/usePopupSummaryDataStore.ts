@@ -1,3 +1,4 @@
+import { clientApi } from '@/libs/api';
 import { create } from 'zustand';
 
 interface PopupSummaryDataState {
@@ -11,10 +12,7 @@ interface PopupSummaryDataAction {
 export const usePopupSummaryDataStore = create<PopupSummaryDataState & PopupSummaryDataAction>((set) => ({
   popupSummaryData: [],
   fetchPopupSummaryData: async () => {
-    const response = await fetch('/api/search');
-    const data = await response.json();
+    const data = await clientApi<undefined>('/api/search', { method: 'GET' });
     set({ popupSummaryData: data });
   },
 }));
-
-usePopupSummaryDataStore.getState().fetchPopupSummaryData();
