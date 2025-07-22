@@ -1,8 +1,8 @@
 'use client';
 
-import EventsFilter from '@/features/popup-search/components/EventFilter';
-import EventList from '@/features/popup-search/components/EventList';
-import EventsMap from '@/features/popup-search/components/EventsMap';
+import PopupFilter from '@/features/popup-search/components/PopupFilter';
+import PopupList from '@/features/popup-search/components/PopupList';
+import PopupMap from '@/features/popup-search/components/PopupMap';
 
 import { PAGE_SIZE_EIGHT } from '@/configs/pageSize';
 import { regionGroups } from '@/configs/regions';
@@ -74,10 +74,10 @@ export default function WrapperPopupSearch({
   return (
     <section className="mx-auto my-3 min-h-screen max-w-6xl overflow-hidden px-4">
       <HeroSection title="팝업의 여정 이벤트 탐색" description="지역과 관심 태그로 이벤트를 손쉽게 찾아보세요!" />
-      <EventsMap events={uniqueMapEvents} />
-      <EventsFilter selectedZone={selectedZone} selectedTags={selectedTags} />
+      <PopupMap events={uniqueMapEvents} />
+      <PopupFilter selectedZone={selectedZone} selectedTags={selectedTags} />
       <Divider />
-      <EventList events={uniqueFiltered} />
+      <PopupList events={uniqueFiltered} />
       <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-1" />
     </section>
   );

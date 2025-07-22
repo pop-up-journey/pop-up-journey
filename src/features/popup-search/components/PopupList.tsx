@@ -5,14 +5,14 @@ import { getSavedPopupIds } from '@/services/getSavedPopupIds';
 import { useSaveStore } from '@/store/save/useSaveStore';
 import type { PopupWithTags } from '@/types/popup';
 import { useEffect } from 'react';
-import EventCard from './EventCard';
+import PopupCard from './PopupCard';
 
-interface Props {
+interface PopupListProps {
   events: PopupWithTags[];
   userId?: string;
 }
 
-export default function EventList({ events = [], userId }: Props) {
+export default function PopupList({ events = [], userId }: PopupListProps) {
   const { userInfo } = useGetUserInfo();
   userId = userId || userInfo?.id;
   const setSavedStores = useSaveStore((s) => s.setSavedStores);
@@ -41,7 +41,7 @@ export default function EventList({ events = [], userId }: Props) {
       {/* // TODO: savedCount도 따로 route 수정해야함 */}
       {events.map((evt) => (
         <li key={evt.id} className="transform overflow-hidden transition-transform hover:scale-105">
-          <EventCard key={evt.id} event={evt} userId={userId} />
+          <PopupCard key={evt.id} event={evt} userId={userId} />
         </li>
       ))}
     </ul>

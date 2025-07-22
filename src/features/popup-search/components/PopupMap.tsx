@@ -5,11 +5,11 @@ import type { Popup } from '@/types/popup';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-interface Props {
+interface PopupMapProps {
   events: Popup[];
 }
 // NOTE: 선택한 지역 권역에 따라 중심좌표를 이동하게 할까
-export default function EventsMap({ events }: Props) {
+export default function PopupMap({ events }: PopupMapProps) {
   const { isLoaded } = useKakaoLoader();
   const [positions, setPositions] = useState<{ id: string; lat: number; lng: number; title: string }[]>([]);
 
