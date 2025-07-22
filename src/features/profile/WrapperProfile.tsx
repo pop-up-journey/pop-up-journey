@@ -32,9 +32,7 @@ export default function WrapperProfile() {
         {/* TODO: 내가 신청한 팝업 CRUD */}
         <MyParticipatedPopupList userId={userInfo.id} />
         {/* 관심팝업 */}
-
         <MySavedPopupList userId={userInfo.id} />
-
         <MembershipWithdrawal userInfo={userInfo} />
       </div>
     </main>

@@ -31,18 +31,17 @@ export default function MyParticipatedPopupList({ userId }: { userId: string }) 
       <h2 className="mb-4 text-2xl font-bold">신청한 팝업</h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {popups.map((popup, idx) => (
-          <div key={idx} className="relative">
-            <CardComponent
-              id={popup.eventId}
-              title={popup.title}
-              thumbnail={popup.thumbnail}
-              address={extractDistrict(popup.address)}
-              eventStart={popup.eventStart}
-              eventEnd={popup.eventEnd}
-              variant="compact"
-              onRemoveAction={() => handleDelete(popup.eventId)}
-            />
-          </div>
+          <CardComponent
+            key={idx}
+            id={popup.eventId}
+            title={popup.title}
+            thumbnail={popup.thumbnail}
+            address={extractDistrict(popup.address)}
+            eventStart={popup.eventStart}
+            eventEnd={popup.eventEnd}
+            variant="compact"
+            onRemoveAction={() => handleDelete(popup.eventId)}
+          />
         ))}
       </div>
       {popups.length === 0 && <p className="text-center text-gray-500">신청한 팝업이 없습니다.</p>}
