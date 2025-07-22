@@ -3,14 +3,15 @@
 import CardComponent from '@/components/common/card';
 import useHandleSave from '@/hooks/useHandleSave';
 import type { PopupWithTags } from '@/types/popup';
+import { extractDistrict } from '@/utils/addressFormatter';
 
-interface EventCardProps {
+interface PopupCardProps {
   event: PopupWithTags;
   userId?: string;
 }
 
-export default function EventCard({ event, userId }: EventCardProps) {
+export default function PopupCard({ event, userId }: PopupCardProps) {
   const { isSaved, toggle } = useHandleSave(event.id, userId);
-  console.log(event);
-  return <CardComponent {...event} isSaved={isSaved} onToggleSave={toggle} />;
+
+  return <CardComponent {...event} address={extractDistrict(event.address)} isSaved={isSaved} onToggleSave={toggle} />;
 }

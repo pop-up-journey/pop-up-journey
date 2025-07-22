@@ -11,7 +11,7 @@ interface PopupSummaryDataAction {
 export const usePopupSummaryDataStore = create<PopupSummaryDataState & PopupSummaryDataAction>((set) => ({
   popupSummaryData: [],
   fetchPopupSummaryData: async () => {
-    const response = await fetch('/api/events/all');
+    const response = await fetch('/api/search');
     const data = await response.json();
     set({ popupSummaryData: data });
   },

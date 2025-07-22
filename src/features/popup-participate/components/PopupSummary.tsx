@@ -28,7 +28,7 @@ export default function PopupSummary({ popup }: PopupSummaryProps) {
           loading="eager"
         />
       </div>
-      {/* 일시 */}
+
       <div id="defaultSt" className="mb-4">
         <div className="flex flex-row items-center gap-2">
           <div className="flex h-8 w-8 items-center overflow-hidden rounded border-none">
@@ -38,7 +38,7 @@ export default function PopupSummary({ popup }: PopupSummaryProps) {
             {formatDate(popup.eventStart)} ~ {formatDate(popup.eventEnd)}
           </p>
         </div>
-        {/* 장소 */}
+
         <div className="flex flex-row items-center gap-2">
           <div className="flex h-8 w-8 items-center overflow-hidden rounded border-none">
             <MapPinIcon className="h-5 w-5 text-gray-500" />

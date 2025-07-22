@@ -1,14 +1,14 @@
 import type { Popup } from '@/types/popup';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import PopupSlideCard from './PopupSlideCard';
+import OngoingPopupCard from './OngoingPopupCard';
 
-interface SwiperPopupListProps {
+interface PopupSwiperProps {
   events: Popup[];
   maxLimit?: number;
   userId?: string;
 }
 
-export function SwiperPopupList({ events, maxLimit = 8, userId }: SwiperPopupListProps) {
+export function PopupSwiper({ events, maxLimit = 8, userId }: PopupSwiperProps) {
   return (
     <Swiper
       spaceBetween={10}
@@ -22,7 +22,7 @@ export function SwiperPopupList({ events, maxLimit = 8, userId }: SwiperPopupLis
     >
       {events.slice(0, maxLimit).map((popup) => (
         <SwiperSlide key={popup.id} className="min-w-0">
-          <PopupSlideCard popup={popup} userId={userId} />
+          <OngoingPopupCard popup={popup} userId={userId} />
         </SwiperSlide>
       ))}
     </Swiper>

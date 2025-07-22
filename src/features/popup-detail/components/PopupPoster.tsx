@@ -3,14 +3,14 @@
 import { Image } from '@heroui/image';
 import NextImage, { StaticImageData } from 'next/image';
 
-interface EventPosterProps {
+interface PopupPosterProps {
   src: string | StaticImageData | null;
   alt: string;
   width?: number;
   height?: number;
 }
 
-export default function EventPoster({ src, alt, width = 400, height = 500 }: EventPosterProps) {
+export default function PopupPoster({ src, alt, width = 400, height = 500 }: PopupPosterProps) {
   if (!src) return null;
   const imageSrc = typeof src === 'string' ? src : src.src;
 

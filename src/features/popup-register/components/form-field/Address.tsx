@@ -3,7 +3,7 @@ import { usePopupRegisterFormStore } from '@/store/popup-register/usePopupRegist
 import { MapPinIcon } from '@heroicons/react/24/outline';
 import PostCode from './PostCode';
 
-export default function PopupLocation() {
+export default function Address() {
   const { zonecode, address, extraAddress } = usePopupRegisterFormStore();
   const { setValue } = usePopupRegisterFormStore.getState();
   return (

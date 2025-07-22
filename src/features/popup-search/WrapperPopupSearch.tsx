@@ -1,13 +1,13 @@
 'use client';
 
-import EventsFilter from '@/features/popup-search/components/EventFilter';
-import EventList from '@/features/popup-search/components/EventList';
-import EventsMap from '@/features/popup-search/components/EventsMap';
+import PopupFilter from '@/features/popup-search/components/PopupFilter';
+import PopupList from '@/features/popup-search/components/PopupList';
+import PopupMap from '@/features/popup-search/components/PopupMap';
 
-import { PAGE_SIZE } from '@/configs/constants';
+import { PAGE_SIZE_EIGHT } from '@/configs/pageSize';
 import { regionGroups } from '@/configs/regions';
 import { usePagination } from '@/hooks/usePagination';
-import { getEvents, GetEventsParams } from '@/services/getEvents';
+import { GetPopupsParams, getPopups } from '@/services/getPopups';
 import { PopupWithTags } from '@/types/popup';
 import { Divider } from '@heroui/react';
 import { useEffect } from 'react';
@@ -30,7 +30,7 @@ export default function WrapperPopupSearch({
 }: Props) {
   //NOTE: UseCallback, 페이지네이션: 6개씩 추가 렌더링
   const fetchFn = ({ page, pageSize }: { page: number; pageSize: number }) =>
-    getEvents({ zone: selectedZone, tags: selectedTags, page, pageSize } as GetEventsParams).then(
+    getPopups({ zone: selectedZone, tags: selectedTags, page, pageSize } as GetPopupsParams).then(
       ({ events, totalCount }) => ({
         items: events,
         totalCount,
@@ -41,7 +41,7 @@ export default function WrapperPopupSearch({
     fetchFn,
     initialItems,
     initialTotalCount,
-    PAGE_SIZE
+    PAGE_SIZE_EIGHT
   );
 
   const { observeRef, isVisible } = useIntersectionObserver({
@@ -62,17 +62,22 @@ export default function WrapperPopupSearch({
     ? items.filter((e) => regionGroups[selectedZone].some((region) => e?.address?.includes(region)))
     : items;
 
+  // id 기준으로 중복 제거
+  const uniqueFiltered = filtered.filter((event, idx, arr) => arr.findIndex((e) => e.id === event.id) === idx);
+
   const mapEvents = selectedZone
     ? fullEvents.filter((e) => regionGroups[selectedZone].some((r) => e.address?.includes(r)))
     : fullEvents;
 
+  const uniqueMapEvents = mapEvents.filter((event, idx, arr) => arr.findIndex((e) => e.id === event.id) === idx);
+
   return (
     <section className="mx-auto my-3 min-h-screen max-w-6xl overflow-hidden px-4">
       <HeroSection title="팝업의 여정 이벤트 탐색" description="지역과 관심 태그로 이벤트를 손쉽게 찾아보세요!" />
-      <EventsMap events={mapEvents} />
-      <EventsFilter selectedZone={selectedZone} selectedTags={selectedTags} />
+      <PopupMap events={uniqueMapEvents} />
+      <PopupFilter selectedZone={selectedZone} selectedTags={selectedTags} />
       <Divider />
-      <EventList events={filtered} />
+      <PopupList events={uniqueFiltered} />
       <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-1" />
     </section>
   );

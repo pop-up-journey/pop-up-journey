@@ -5,12 +5,12 @@ import { Zone, zones } from '@/configs/regions';
 import FilteringChip from '@/features/popup-search/components/FilteringChip';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-interface Props {
+interface PopupFilterProps {
   selectedZone: Zone | null;
   selectedTags: string[];
 }
 
-export default function EventsFilter({ selectedZone, selectedTags }: Props) {
+export default function PopupFilter({ selectedZone, selectedTags }: PopupFilterProps) {
   const router = useRouter();
   const params = useSearchParams();
 

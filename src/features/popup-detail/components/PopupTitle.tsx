@@ -1,13 +1,13 @@
 import { ChevronDoubleRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
-interface EventTitleProps {
+interface PopupTitleProps {
   title: string;
   hostName: string;
   hostLink: string;
 }
 
-export default function EventTitle({ title, hostName, hostLink }: EventTitleProps) {
+export default function PopupTitle({ title, hostName, hostLink }: PopupTitleProps) {
   return (
     <section className="flex items-baseline space-x-3">
       <strong className="text-3xl drop-shadow-lg">{title}</strong>

@@ -1,6 +1,7 @@
 import CardComponent from '@/components/common/card';
 import useHandleSave from '@/hooks/useHandleSave';
 import type { Popup } from '@/types/popup';
+import { extractDistrict } from '@/utils/addressFormatter';
 
 interface UpcomingPopupCardProps {
   popup: Popup;
@@ -13,11 +14,11 @@ export default function UpcomingPopupCard({ popup, userId }: UpcomingPopupCardPr
   return (
     <CardComponent
       key={popup.id}
-      location={popup?.address?.split(',').map((s: string) => s.trim())[2] || ''}
+      {...popup}
+      address={extractDistrict(popup?.address)}
       // savedCount={popup.saveCount}
       isSaved={isSaved}
       onToggleSave={toggle}
-      {...popup}
       variant="compact"
     />
   );

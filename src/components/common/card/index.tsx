@@ -1,4 +1,5 @@
 'use client';
+
 import Chip from '@/components/common/chip';
 import { formatDate } from '@/utils/dateformatter';
 import { EyeIcon, HeartIcon as HeartIconOutline, MapPinIcon, TrashIcon } from '@heroicons/react/24/outline';
@@ -13,7 +14,7 @@ interface CardProps {
   title?: string;
   thumbnail?: string | StaticImageData | null;
   tags?: string[];
-  location?: string;
+  address?: string;
   eventStart?: string | Date;
   eventEnd?: string | Date;
   variant?: 'default' | 'compact';
@@ -25,12 +26,12 @@ interface CardProps {
   onRemoveAction?: () => void;
 }
 
-export default function CardComponent({
+function CardComponent({
   id,
   title,
   thumbnail,
   tags,
-  location,
+  address,
   eventStart,
   eventEnd,
   variant = 'default',
@@ -148,17 +149,17 @@ export default function CardComponent({
                   ) : (
                     <HeartIconOutline className="size-5 cursor-pointer text-[#ffc0d4] transition-all duration-300 hover:scale-130" />
                   )}
-                  <span>{savedCount ?? 0}</span>
+                  <span>{savedCount ?? ''}</span>
                 </div>
                 {/* 좋아요·조회수·삭제 버튼 (호버 시 삭제만 나타남) */}
                 {onRemoveAction && (
-                  <button
+                  <span
                     onClick={handleRemove}
                     className="rounded-full p-1 opacity-100 hover:bg-white/20"
                     aria-label="관심 팝업 삭제"
                   >
                     <TrashIcon className="text-default-400 h-4 w-4 cursor-pointer hover:text-red-500" />
-                  </button>
+                  </span>
                 )}
               </div>
 
@@ -166,7 +167,7 @@ export default function CardComponent({
                 <h4 className="text-foreground text-base font-bold">{title}</h4>
 
                 <p className="text-default-500 flex items-center gap-1 text-sm">
-                  <MapPinIcon className="size-5" /> {location}
+                  <MapPinIcon className="size-5" /> {address}
                 </p>
                 <p className="text-default-400 text-sm">
                   {eventStart && `${formatDate(eventStart)}`} {eventEnd && `~ ${formatDate(eventEnd)}`}
@@ -179,3 +180,5 @@ export default function CardComponent({
     </>
   );
 }
+
+export default CardComponent;

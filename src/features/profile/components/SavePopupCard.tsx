@@ -2,6 +2,7 @@
 
 import CardComponent from '@/components/common/card';
 import type { Popup } from '@/types/popup';
+import { extractDistrict } from '@/utils/addressFormatter';
 
 interface SavedPopupCardProps {
   popup: Popup;
@@ -16,7 +17,7 @@ export default function SavedPopupCard({ popup, removeFavorite }: SavedPopupCard
       id={popup.id}
       title={popup.title}
       thumbnail={popup.thumbnail}
-      location={popup.address?.split(',').map((s) => s.trim())[2] ?? ''}
+      address={extractDistrict(popup.address)}
       eventStart={popup.eventStart}
       eventEnd={popup.eventEnd}
       variant="compact"

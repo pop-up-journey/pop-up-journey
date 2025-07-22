@@ -8,8 +8,9 @@ import useGeocode from '@/features/popup-detail/hooks/useGeocode';
 interface KakaoMapProps {
   address?: string;
   organizer: string;
+  avatarSrc?: string;
 }
-export default function WrapperSidebar({ address, organizer }: KakaoMapProps) {
+export default function WrapperSidebar({ address, organizer, avatarSrc }: KakaoMapProps) {
   const safeAddress = address ?? '';
   const { position } = useGeocode(safeAddress);
 
@@ -18,7 +19,7 @@ export default function WrapperSidebar({ address, organizer }: KakaoMapProps) {
       {/* 지도 */}
       <MapContainer center={position!} />
       {/* 주최자 */}
-      <OrganizerInfo organizer={organizer} />
+      <OrganizerInfo organizer={organizer} avatarSrc={avatarSrc} />
       {/* 신청 버튼*/}
       {/* TODO: 토스트 알림필요! */}
       <PopupActionButtons />
