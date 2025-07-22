@@ -8,8 +8,8 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: { popupId: string } }): Promise<Metadata> {
-  const { popupId } = params;
-  const popup = await getEventById(popupId);
+  const { popupId } = await params;
+  const popup = await getPopupById(popupId);
 
   if (!popup) return {};
 
