@@ -62,17 +62,22 @@ export default function WrapperPopupSearch({
     ? items.filter((e) => regionGroups[selectedZone].some((region) => e?.address?.includes(region)))
     : items;
 
+  // id 기준으로 중복 제거
+  const uniqueFiltered = filtered.filter((event, idx, arr) => arr.findIndex((e) => e.id === event.id) === idx);
+
   const mapEvents = selectedZone
     ? fullEvents.filter((e) => regionGroups[selectedZone].some((r) => e.address?.includes(r)))
     : fullEvents;
 
+  const uniqueMapEvents = mapEvents.filter((event, idx, arr) => arr.findIndex((e) => e.id === event.id) === idx);
+
   return (
     <section className="mx-auto my-3 min-h-screen max-w-6xl overflow-hidden px-4">
       <HeroSection title="팝업의 여정 이벤트 탐색" description="지역과 관심 태그로 이벤트를 손쉽게 찾아보세요!" />
-      <EventsMap events={mapEvents} />
+      <EventsMap events={uniqueMapEvents} />
       <EventsFilter selectedZone={selectedZone} selectedTags={selectedTags} />
       <Divider />
-      <EventList events={filtered} />
+      <EventList events={uniqueFiltered} />
       <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-1" />
     </section>
   );
