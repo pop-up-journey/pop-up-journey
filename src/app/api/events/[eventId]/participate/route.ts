@@ -9,6 +9,64 @@ import { and, eq, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * @swagger
+ * /api/events/{eventId}/participate:
+ *   post:
+ *     tags:
+ *       - events
+ *     summary: 이벤트 참여 신청
+ *     description: 로그인한 사용자가 특정 이벤트에 참여 신청합니다.
+ *     parameters:
+ *       - in: path
+ *         name: eventId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: 이벤트의 고유 ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               participantStatus:
+ *                 type: string
+ *               tickets:
+ *                 type: integer
+ *     responses:
+ *       201:
+ *         description: 참여 신청 성공
+ *       400:
+ *         description: 잘못된 요청
+ *       401:
+ *         description: 인증 필요
+ *       409:
+ *         description: 이미 신청한 경우
+ *       500:
+ *         description: 서버 에러
+ *   delete:
+ *     tags:
+ *       - events
+ *     summary: 이벤트 참여 취소
+ *     description: 로그인한 사용자가 이벤트 참여를 취소합니다.
+ *     parameters:
+ *       - in: path
+ *         name: eventId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: 이벤트의 고유 ID
+ *     responses:
+ *       200:
+ *         description: 참여 취소 성공
+ *       401:
+ *         description: 인증 필요
+ *       500:
+ *         description: 서버 에러
+ */
+
 const db = drizzle(process.env.DATABASE_URL!);
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ eventId: string }> }) {

@@ -1,7 +1,66 @@
-import { events, eventTags, tags, eventViewCounts } from '@/db/schema';
+import { events, eventTags, eventViewCounts, tags } from '@/db/schema';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextRequest, NextResponse } from 'next/server';
+
+/**
+ * @swagger
+ * /api/events:
+ *   get:
+ *     tags:
+ *       - events
+ *     summary: 이벤트 목록 조회
+ *     description: "상태(status), 태그(tags), 페이지(page) 등의 쿼리 파라미터를 사용하여 이벤트 목록을 조회합니다."
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [upcoming, ongoing, ended]
+ *         description: 이벤트 상태 필터
+ *       - in: query
+ *         name: tags
+ *         schema:
+ *           type: string
+ *         description: 콤마로 구분된 태그 목록
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: 페이지 번호
+ *       - in: query
+ *         name: pageSize
+ *         schema:
+ *           type: integer
+ *         description: 페이지 크기
+ *     responses:
+ *       200:
+ *         description: 이벤트 목록 조회 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 events:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                       title:
+ *                         type: string
+ *                       tags:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                       viewCount:
+ *                         type: integer
+ *                 totalCount:
+ *                   type: integer
+ *       500:
+ *         description: 서버 에러
+ */
 
 const db = drizzle(process.env.DATABASE_URL!);
 

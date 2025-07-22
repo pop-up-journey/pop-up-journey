@@ -4,6 +4,51 @@ import { and, eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * @swagger
+ * /api/like/{eventId}:
+ *   post:
+ *     tags:
+ *       - events
+ *     summary: 이벤트 좋아요 추가
+ *     description: 로그인한 사용자가 이벤트를 저장(좋아요)합니다.
+ *     parameters:
+ *       - in: path
+ *         name: eventId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: 이벤트의 고유 ID
+ *     responses:
+ *       200:
+ *         description: 저장 성공
+ *       400:
+ *         description: 잘못된 요청
+ *       401:
+ *         description: 인증 필요
+ *       500:
+ *         description: 서버 에러
+ *   delete:
+ *     tags:
+ *       - events
+ *     summary: 이벤트 좋아요 취소
+ *     description: 로그인한 사용자가 이벤트 저장을 취소합니다.
+ *     parameters:
+ *       - in: path
+ *         name: eventId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: 이벤트의 고유 ID
+ *     responses:
+ *       200:
+ *         description: 취소 성공
+ *       401:
+ *         description: 인증 필요
+ *       500:
+ *         description: 서버 에러
+ */
+
 const db = drizzle(process.env.DATABASE_URL!);
 
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ eventId: string }> }) {

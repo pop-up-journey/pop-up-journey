@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['heroui.com', 'app.requestly.io', 'lh3.googleusercontent.com', 'ocrdyvzgekumeppeqhib.supabase.co'], // 외부 이미지 도메인 허용
   },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
   turbopack: {
     rules: {
       '*.svg': {

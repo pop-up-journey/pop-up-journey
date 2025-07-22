@@ -8,6 +8,7 @@ import Naver from 'next-auth/providers/naver';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.NEXT_AUTH_SECRET,
+  trustHost: true,
 
   providers: [
     Google({
