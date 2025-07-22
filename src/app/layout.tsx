@@ -19,6 +19,32 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: '팝업의 여정 ',
   description: '팝업의 여정',
+  icons: {
+    icon: '/favicon.ico',
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL_DEV ?? 'http://localhost:3000'),
+  openGraph: {
+    title: '팝업의 여정',
+    description: '팝업의 여정',
+    url: process.env.NEXT_PUBLIC_API_URL_DEV,
+    siteName: '팝업의 여정',
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: '팝업의 여정',
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '팝업의 여정',
+    description: '팝업의 여정',
+    images: ['/logo.png'],
+  },
 };
 
 export default function RootLayout({

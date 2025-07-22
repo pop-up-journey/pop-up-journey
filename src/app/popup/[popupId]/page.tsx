@@ -5,6 +5,36 @@ import WrapperPopupDetail from '@/features/popup-detail/WrapperPopupDetail';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: { popupId: string } }): Promise<Metadata> {
+  const { popupId } = params;
+  const popup = await getEventById(popupId);
+
+  if (!popup) return {};
+
+  return {
+    title: `팝업의 여정 - ${popup.title}`,
+    description: popup.description ?? '팝업의 여정 - 팝업 상세 페이지',
+    openGraph: {
+      images: [
+        {
+          url: popup.thumbnail ?? '/logo.png',
+          width: 1200,
+          height: 630,
+          alt: popup.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: popup.title,
+      description: popup.description ?? '팝업의 여정 - 팝업 상세 페이지',
+      images: [popup.thumbnail ?? '/logo.png'],
+    },
+  };
+}
+
 export default async function Page({ params }: { params: Promise<{ popupId: string }> }) {
   const { popupId } = await params;
   const popup = await getEventById(popupId);
