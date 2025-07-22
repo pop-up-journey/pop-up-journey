@@ -72,13 +72,15 @@ export default function WrapperPopupSearch({
   const uniqueMapEvents = mapEvents.filter((event, idx, arr) => arr.findIndex((e) => e.id === event.id) === idx);
 
   return (
-    <section className="mx-auto my-3 min-h-screen max-w-6xl overflow-hidden px-4">
+    <main className="mb-10 min-h-screen">
       <HeroSection title="팝업의 여정 이벤트 탐색" description="지역과 관심 태그로 이벤트를 손쉽게 찾아보세요!" />
-      <PopupMap events={uniqueMapEvents} />
-      <PopupFilter selectedZone={selectedZone} selectedTags={selectedTags} />
-      <Divider />
-      <PopupList events={uniqueFiltered} />
-      <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-1" />
-    </section>
+      <section className="mx-auto max-w-6xl overflow-hidden px-4">
+        <PopupMap events={uniqueMapEvents} />
+        <PopupFilter selectedZone={selectedZone} selectedTags={selectedTags} />
+        <Divider />
+        <PopupList events={uniqueFiltered} />
+        <div ref={observeRef as React.RefObject<HTMLDivElement>} className="h-1" />
+      </section>
+    </main>
   );
 }

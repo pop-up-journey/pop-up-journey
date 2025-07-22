@@ -1,6 +1,5 @@
 'use client';
 
-import HeroSection from '@/components/common/hero-section';
 import useGetUserInfo from '@/hooks/useGetUserInfo';
 
 import MembershipWithdrawal from '@/features/profile/components/MembershipWithdrawal';
@@ -22,10 +21,6 @@ export default function WrapperProfile() {
 
   return (
     <main className="min-h-screen">
-      <HeroSection
-        title={`${userInfo && userInfo.name}님 환영합니다!`}
-        description="프로필 수정과 관심 팝업은 여기에서 볼 수 있어요"
-      />
       {/** TODO: 섹션 분리해야됨 mainpage 작업 이후에 진행할 예정*/}
       <div className="mx-auto max-w-6xl">
         <MyProfile userInfo={userInfo} />
