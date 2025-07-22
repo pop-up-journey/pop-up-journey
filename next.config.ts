@@ -3,7 +3,25 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ['heroui.com', 'app.requestly.io', 'lh3.googleusercontent.com', 'ocrdyvzgekumeppeqhib.supabase.co'], // 외부 이미지 도메인 허용
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'heroui.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'app.requestly.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ocrdyvzgekumeppeqhib.supabase.co',
+      },
+    ],
   },
   webpack: (config) => {
     config.module.rules.push({

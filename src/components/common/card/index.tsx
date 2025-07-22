@@ -4,8 +4,8 @@ import Chip from '@/components/common/chip';
 import { formatDate } from '@/utils/dateformatter';
 import { EyeIcon, HeartIcon as HeartIconOutline, MapPinIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-import { Card, CardBody, CardFooter, CardHeader, Image } from '@heroui/react';
-import NextImage, { StaticImageData } from 'next/image';
+import { Card, CardBody, CardFooter, CardHeader } from '@heroui/react';
+import Image, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
 import { If } from 'react-haiku';
 
@@ -80,17 +80,14 @@ function CardComponent({
             </span>
           </CardHeader>
           <CardBody className="overflow-x-auto p-0">
-            <div className="relative aspect-[4/5] w-full">
+            <div className="relative aspect-[4/5] w-full overflow-hidden">
               <Image
-                isZoomed
-                as={NextImage}
                 alt="Card background"
-                className="z-0 h-full w-full object-cover"
-                src={typeof thumbnail === 'string' ? thumbnail : thumbnail?.src}
-                radius="none"
-                width={240}
-                height={300}
+                src={typeof thumbnail === 'string' ? thumbnail : (thumbnail?.src ?? '/default-image.png')}
+                fill
+                priority
                 loading="eager"
+                className="object-cover"
               />
             </div>
           </CardBody>
@@ -120,13 +117,14 @@ function CardComponent({
           onPress={() => router.push(`/popup/${id}`)}
         >
           <CardBody className="relative grid grid-cols-6 gap-6 px-0 md:grid-cols-12 md:gap-4">
-            <div className="relative col-span-6 md:col-span-4">
+            <div className="relative col-span-6 aspect-[4/5] w-full overflow-hidden md:col-span-4">
               <Image
                 alt="썸네일"
-                className="h-full w-full cursor-pointer object-cover"
-                height={175}
-                src={typeof thumbnail === 'string' ? thumbnail : thumbnail?.src}
-                width={140}
+                src={typeof thumbnail === 'string' ? thumbnail : (thumbnail?.src ?? '/default-image.png')}
+                fill
+                loading="eager"
+                priority
+                className="cursor-pointer object-cover"
               />
             </div>
             <div className="relative col-span-6 flex cursor-pointer flex-col justify-end gap-2 md:col-span-8">
