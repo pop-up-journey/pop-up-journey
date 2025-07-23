@@ -84,8 +84,10 @@ function CardComponent({
               <Image
                 alt="Card background"
                 src={typeof thumbnail === 'string' ? thumbnail : (thumbnail?.src ?? '/default-image.png')}
-                fill
+                // fill
                 priority
+                width={240}
+                height={300}
                 loading="eager"
                 className="object-cover"
               />
@@ -121,7 +123,9 @@ function CardComponent({
               <Image
                 alt="썸네일"
                 src={typeof thumbnail === 'string' ? thumbnail : (thumbnail?.src ?? '/default-image.png')}
-                fill
+                // fill
+                height={175}
+                width={140}
                 loading="eager"
                 priority
                 className="cursor-pointer object-cover"

@@ -5,30 +5,26 @@ export interface UploadedImage {
   path: string;
 }
 
-export const uploadImageToStorage = async (file: File, bucketName: string = 'img'): Promise<UploadedImage> => {
+export const uploadImageToStorage = async (file: File): Promise<UploadedImage> => {
   try {
-    // 파일 확장자 추출
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `${fileName}`;
+    // FormData 생성
+    const formData = new FormData();
+    formData.append('file', file);
 
-    // Supabase Storage에 업로드
-    const { data: _data, error } = await supabase.storage.from(bucketName).upload(filePath, file, {
-      cacheControl: '3600',
-      upsert: false,
+    console.log('formData', formData);
+
+    // API Route로 전송 (sharp 리사이징)
+    const response = await fetch('/api/upload-thumbnail', {
+      method: 'POST',
+      body: formData,
     });
 
-    if (error) {
-      throw new Error(`Upload failed: ${error.message}`);
+    if (!response.ok) {
+      throw new Error('Upload failed');
     }
 
-    // 공개 URL 생성
-    const { data: urlData } = supabase.storage.from(bucketName).getPublicUrl(filePath);
-
-    return {
-      url: urlData.publicUrl,
-      path: filePath,
-    };
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.error('Image upload error:', error);
     throw error;
