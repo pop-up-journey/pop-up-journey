@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
   if (!isProtected) return NextResponse.next();
 
   // 로그인 토큰 검사
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   if (token) return NextResponse.next();
 
   // 비로그인 시 /auth/required 으로 리다이렉트
