@@ -7,7 +7,7 @@ import Kakao from 'next-auth/providers/kakao';
 import Naver from 'next-auth/providers/naver';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   trustHost: true,
 
   providers: [
