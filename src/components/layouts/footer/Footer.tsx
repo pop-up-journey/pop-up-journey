@@ -2,6 +2,7 @@
 
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { Divider } from '@heroui/react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Footer({ className = '' }: { className?: string } = {}) {
@@ -54,7 +55,7 @@ export default function Footer({ className = '' }: { className?: string } = {}) 
                   className="inline-flex items-center space-x-2"
                 >
                   <span>Team Repo</span>
-                  <img
+                  <Image
                     src="https://cdn.simpleicons.org/github/gray"
                     alt="GitHub Icon"
                     width="16"

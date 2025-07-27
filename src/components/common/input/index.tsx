@@ -60,15 +60,8 @@ export default function Input({
 
   const styles = {
     label: ['text-black/50 dark:text-white/90'],
-    // inputWrapper: []
-    // innerWrapper: []
-    // mainWrapper: []
     input: ['text-black/50 dark:text-white/90', inputStyleProps],
-    // clearButton: []
-    // helperWrapper: []
     description: ['text-black/50 dark:text-white/90'],
-    // errorMessage: []
-    // helperWrapper: []
   };
 
   return (

@@ -18,7 +18,6 @@ export default function InterestChip() {
       <label className="mb-1 block">관심사</label>
       <div className="mb-1 flex flex-wrap gap-2">
         {categories.map((category) => (
-          // NOTE: 임시 관심사 리스트임
           <Chip
             key={category}
             onClick={() => handleInterestClick(category)}

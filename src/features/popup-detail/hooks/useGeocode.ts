@@ -9,7 +9,6 @@ export interface LatLng {
 }
 
 export default function useGeocode(address: string) {
-  //HACK: 주소를 못 읽어오는 경우 띄워주는 기본좌표를 서울 중심으로 했는데 길찾기로 띄워줄까?
   const [position, setPosition] = useState<LatLng | null>({ lat: 37.5642135, lng: 127.0016985 });
   const { isLoaded } = useKakaoLoader();
   const [error, setError] = useState<Error | null>(null);

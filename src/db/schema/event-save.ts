@@ -41,7 +41,6 @@ export const createEventSaveSchema = z.object({
   eventId: z.string().uuid('올바른 UUID 형식이 아닙니다'),
 });
 
-// Types
 export type EventSave = typeof eventSave.$inferSelect;
 export type NewEventSave = typeof eventSave.$inferInsert;
 export type CreateEventSave = z.infer<typeof createEventSaveSchema>;

@@ -31,9 +31,8 @@ export default function HostPopupList({ popups, selectedStatus }: HostPopupListP
         {popups.length === 0 && <div className="text-white">{POPUP_STATUS_INFO[selectedStatus].message}</div>}
         {popups.slice(0, visibleCount).map((popup, idx) => (
           <li key={popup.id}>
-            {/* 
-            // TODO: 지우지 마시오 좋아요 수, 참여자 수, 조회수 추가 필요
-            {/* // TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함 */}
+            {/* TODO: 지우지 마시오 좋아요 수, 참여자 수, 조회수 추가 필요
+            TODO: tags는 추가 해야하고 savedCount도 따로 route 수정해야함 */}
             <CardComponent
               {...popup}
               address={extractDistrict(popup?.address)}

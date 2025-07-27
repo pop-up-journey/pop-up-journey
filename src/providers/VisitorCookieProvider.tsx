@@ -4,7 +4,6 @@ import { THIRTY_MINUTES } from '@/configs/time';
 import { useEffect } from 'react';
 
 function generateUUID() {
-  // 필요하면 env. COOKIE_SECRET 사용
   return crypto.randomUUID();
 }
 

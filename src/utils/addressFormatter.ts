@@ -9,7 +9,6 @@ export const extractAddressPart = (address: string | null | undefined, index: nu
 
   const parts = address.split(',').map((s: string) => s.trim());
   const result = parts[index] || '';
-  // 괄호 ( ) 제거
   return result.replace(/[()]/g, '');
 };
 

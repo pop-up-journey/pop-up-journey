@@ -45,7 +45,6 @@ export const updateParticipantStatusSchema = z.object({
   participantStatus: z.enum(['pending', 'approved', 'rejected', 'cancelled']),
 });
 
-// Types
 export type EventParticipant = typeof eventParticipants.$inferSelect;
 export type NewEventParticipant = typeof eventParticipants.$inferInsert;
 export type CreateEventParticipant = z.infer<typeof createEventParticipantSchema>;

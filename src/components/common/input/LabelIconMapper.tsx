@@ -1,4 +1,3 @@
-// iconMapper.ts
 import {
   EnvelopeIcon,
   LinkIcon,

@@ -42,7 +42,6 @@ export default function AddInfoForm() {
   const { userInfo } = useGetUserInfo();
   const setValue = useAddInfoFormStore((state) => state.setValue);
   const setIsValid = useAddInfoFormStore((state) => state.setIsValid);
-  // TODO: interests 항목을 db에 넣을지 아니면 localstorage에 넣을지 고민
   const userId = userInfo?.id;
 
   useEffect(() => {
@@ -58,7 +57,7 @@ export default function AddInfoForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { name, email, phone, role, nameValid, emailValid, phoneValid } = useAddInfoFormStore.getState(); // NOTE: interest 어떻게
+    const { name, email, phone, role, nameValid, emailValid, phoneValid } = useAddInfoFormStore.getState();
     const requiredFields = [name, email, phone, role];
     const validityFlags = [nameValid, emailValid, phoneValid];
 
@@ -74,7 +73,6 @@ export default function AddInfoForm() {
       try {
         await updateUserInfo({ name, email, phone, role }, userId);
         addToast({ title: '업데이트 완료', color: 'success' });
-        // 필요하면 폼 초기화나 페이지 이동 추가
       } catch (error) {
         console.error(error);
         addToast({

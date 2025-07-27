@@ -16,7 +16,7 @@ export const events = pgTable('events', {
   description: text('description'),
   address: text('address'), // zonecode + address + extraAddress
   capacity: integer('capacity').default(0),
-  eventStatus: eventStatusEnum('event_status').notNull(), // 검증 api 로직에서 필요
+  eventStatus: eventStatusEnum('event_status').notNull(),
   participationMode: participationModeEnum('participation_mode').default('auto').notNull(),
   extraInfo: text('extra_info'),
   eventStart: timestamp('event_start').notNull(),
@@ -38,7 +38,6 @@ export const insertEventSchema = createInsertSchema(events);
 
 /**
  * @description 새로운 이벤트 생성 시 입력 데이터의 유효성을 검증하는 스키마
- * //TODO: 수정 필요함
  */
 export const createEventSchema = z.object({
   hostId: z.string().uuid('올바른 UUID 형식이 아닙니다'),
@@ -84,7 +83,6 @@ export const validateEventDates = (data: { eventStart?: Date; eventEnd?: Date })
   }
 };
 
-// Types
 export type Event = typeof events.$inferSelect;
 export type NewEvent = typeof events.$inferInsert;
 export type CreateEvent = z.infer<typeof createEventSchema>;

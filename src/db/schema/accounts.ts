@@ -19,9 +19,7 @@ export const accounts = pgTable(
     id_token: text('id_token'),
     session_state: text('session_state'),
   },
-  // ✅ provider와 providerAccountId의 조합으로 유일한 외부 계정을 식별한다.
-  // ✅ 이 조합은 중복되면 안 되므로 기본 키로 설정한다.
-  // ✅ 이 구조는 여러 로그인 제공자를 지원할 때 매우 일반적인 방식이다.
+
   (account) => [
     {
       compoundKey: primaryKey({

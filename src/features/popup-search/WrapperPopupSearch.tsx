@@ -28,7 +28,7 @@ export default function WrapperPopupSearch({
   selectedTags,
   fullEvents,
 }: Props) {
-  //NOTE: UseCallback, 페이지네이션: 6개씩 추가 렌더링
+  // useCallback, 페이지네이션
   const fetchFn = ({ page, pageSize }: { page: number; pageSize: number }) =>
     getPopups({ zone: selectedZone, tags: selectedTags, page, pageSize } as GetPopupsParams).then(
       ({ events, totalCount }) => ({

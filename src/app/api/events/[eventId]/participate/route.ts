@@ -113,7 +113,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ eve
 // 참여 취소
 export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ eventId: string }> }) {
   const { eventId } = await params;
-  console.log(eventId);
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

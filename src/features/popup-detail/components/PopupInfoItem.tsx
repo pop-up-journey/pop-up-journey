@@ -4,10 +4,10 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 interface PopupInfoItemProps {
-  icon: ReactNode; // 왼쪽 아이콘 영역
-  label: ReactNode; // 텍스트 또는 JSX
-  href?: string; // 링크가 필요할 때
-  external?: boolean; // 새 창 여부
+  icon: ReactNode;
+  label: ReactNode;
+  href?: string;
+  external?: boolean;
 }
 
 export default function PopupInfoItem({ icon, label, href, external = false }: PopupInfoItemProps) {

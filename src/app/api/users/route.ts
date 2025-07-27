@@ -56,7 +56,6 @@ const db = drizzle(process.env.DATABASE_URL!);
  *                     description: 수정일시
  */
 export async function GET(_req: NextRequest) {
-  // TODO: session 검증 로직 필요
   try {
     const allUsers = await db.select().from(users);
     return NextResponse.json(allUsers);

@@ -67,7 +67,7 @@ export default function RegisterForm({ hostId }: RegisterFormProps) {
         try {
           const uploadedImage = await uploadImageToStorage(thumbnail[0]);
           thumbnailUrl = uploadedImage.url;
-          console.log('Image uploaded successfully:', uploadedImage.url);
+          console.log('Image uploaded successfully');
         } catch (uploadError) {
           console.error('Image upload failed:', uploadError);
           addToast({
@@ -108,7 +108,7 @@ export default function RegisterForm({ hostId }: RegisterFormProps) {
           title: '이벤트가 성공적으로 등록되었습니다!',
           color: 'success',
         });
-        router.push('/host-center'); // 호스트 센터로 이동
+        router.push('/host-center');
       } else {
         addToast({
           title: '이벤트 등록에 실패했습니다. 다시 시도해주세요.',

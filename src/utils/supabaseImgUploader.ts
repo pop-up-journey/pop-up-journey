@@ -10,9 +10,6 @@ export const uploadImageToStorage = async (file: File): Promise<UploadedImage> =
     // FormData 생성
     const formData = new FormData();
     formData.append('file', file);
-
-    console.log('formData', formData);
-
     // API Route로 전송 (sharp 리사이징)
     const response = await fetch('/api/upload-thumbnail', {
       method: 'POST',

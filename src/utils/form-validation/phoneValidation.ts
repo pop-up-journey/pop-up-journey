@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// TODO: phoneSchema, validatePhone 수정해야함 -> 코드 가독성 부분
 export const phoneSchema = z
   .string()
   .transform((val) => val.replace(/[^0-9]/g, ''))

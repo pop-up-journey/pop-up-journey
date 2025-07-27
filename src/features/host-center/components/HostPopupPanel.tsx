@@ -13,7 +13,6 @@ interface HostPopupPanelProps {
 export default function HostPopupPanel({ hostPopups }: HostPopupPanelProps) {
   const [selectedStatus, setSelectedStatus] = useState<PopupStatusType>(POPUP_STATUS.Ongoing);
 
-  // 상태별 배열
   const popupsByStatus = useMemo(
     () => ({
       [POPUP_STATUS.Ongoing]: hostPopups.filter((e) => e.eventStatus === POPUP_STATUS.Ongoing),

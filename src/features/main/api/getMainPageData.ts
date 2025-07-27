@@ -2,7 +2,6 @@ import { PAGE_SIZE_FOUR } from '@/configs/pageSize';
 import { getPopups } from '@/services/getPopups';
 import { getSavedPopupIds } from '@/services/getSavedPopupIds';
 
-// 일단 스킵
 export async function getMainPageData(userId?: string) {
   try {
     const [ongoingEvents, upcomingEvents, likedEventIds] = await Promise.all([

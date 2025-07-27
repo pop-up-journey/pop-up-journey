@@ -21,7 +21,6 @@ export default function WrapperSidebar({ address, organizer, avatarSrc }: KakaoM
       {/* 주최자 */}
       <OrganizerInfo organizer={organizer} avatarSrc={avatarSrc} />
       {/* 신청 버튼*/}
-      {/* TODO: 토스트 알림필요! */}
       <PopupActionButtons />
     </main>
   );

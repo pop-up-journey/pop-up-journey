@@ -16,7 +16,6 @@ export default function UpcomingPopupCard({ popup, userId }: UpcomingPopupCardPr
       key={popup.id}
       {...popup}
       address={extractDistrict(popup?.address)}
-      // savedCount={popup.saveCount}
       isSaved={isSaved}
       onToggleSave={toggle}
       variant="compact"

@@ -21,7 +21,6 @@ export default function PopupInfoList({ eventStart, eventEnd, address, extraInfo
   const day = format(start, 'd', { locale: ko });
   const city = extractCity(address);
 
-  // 기타 정보
   const extraInfos =
     typeof extraInfo === 'string'
       ? extraInfo

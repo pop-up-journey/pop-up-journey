@@ -48,7 +48,6 @@ export const createEventTagsSchema = z.object({
   tagIds: z.array(z.string().uuid('올바른 UUID 형식이 아닙니다')).min(1, '최소 1개의 태그를 선택해야 합니다'),
 });
 
-// Types
 export type Tag = typeof tags.$inferSelect;
 export type NewTag = typeof tags.$inferInsert;
 export type EventTag = typeof eventTags.$inferSelect;

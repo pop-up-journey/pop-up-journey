@@ -11,7 +11,6 @@ export default function ShareButton() {
   const clipboard = useClipboard({ timeout: 2000 });
   const currentURL = `${process.env.NEXT_PUBLIC_API_URL_DEV}/popup/${params.popupId}`;
 
-  // NOTE: useRef + throttle :  2초간 재호출을 무시
   const throttledCopy = useRef(
     throttle(() => {
       clipboard.copy(currentURL);

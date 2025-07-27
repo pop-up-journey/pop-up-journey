@@ -22,14 +22,12 @@ export const eventViewCounts = pgTable('event_view_counts', {
   lastUpdated: timestamp('last_updated', { mode: 'string' }).defaultNow().notNull(),
 });
 
-// Zod 스키마
 export const selectEventViewSchema = createSelectSchema(eventViews);
 export const insertEventViewSchema = createInsertSchema(eventViews);
 
 export const selectEventViewCountSchema = createSelectSchema(eventViewCounts);
 export const insertEventViewCountSchema = createInsertSchema(eventViewCounts);
 
-// Types
 export type EventView = typeof eventViews.$inferSelect;
 export type NewEventView = typeof eventViews.$inferInsert;
 export type EventViewCount = typeof eventViewCounts.$inferSelect;

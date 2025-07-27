@@ -20,8 +20,8 @@ export function AuthSyncProvider({ children }: Props) {
     if (status === 'authenticated' && session?.user) {
       setUser(session.user as User);
     } else if (status === 'unauthenticated') {
-      logout(); // authStore 초기화
-      setSavedStores([]); // 관심 팝업 초기화
+      logout();
+      setSavedStores([]);
     }
   }, [status, session, setUser, logout, setSavedStores]);
 

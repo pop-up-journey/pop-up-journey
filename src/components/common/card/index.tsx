@@ -84,7 +84,6 @@ function CardComponent({
               <Image
                 alt="Card background"
                 src={typeof thumbnail === 'string' ? thumbnail : (thumbnail?.src ?? '/default-image.png')}
-                // fill
                 priority
                 width={240}
                 height={300}
@@ -123,7 +122,6 @@ function CardComponent({
               <Image
                 alt="썸네일"
                 src={typeof thumbnail === 'string' ? thumbnail : (thumbnail?.src ?? '/default-image.png')}
-                // fill
                 height={175}
                 width={140}
                 loading="eager"
@@ -132,9 +130,7 @@ function CardComponent({
               />
             </div>
             <div className="relative col-span-6 flex cursor-pointer flex-col justify-end gap-2 md:col-span-8">
-              {/* 좋아요/조회수 아이콘 (compact) */}
               <div className="text-default-400 absolute top-0 right-0 flex items-center gap-3 text-xs">
-                {/* TODO: 조회수 렌더링 필요 */}
                 <div className="flex items-center gap-1 p-2 text-sm">
                   <EyeIcon className="size-5" />
                   <span>{viewCount ?? 0}</span>
@@ -153,7 +149,6 @@ function CardComponent({
                   )}
                   <span>{savedCount ?? ''}</span>
                 </div>
-                {/* 좋아요·조회수·삭제 버튼 (호버 시 삭제만 나타남) */}
                 {onRemoveAction && (
                   <span
                     onClick={handleRemove}

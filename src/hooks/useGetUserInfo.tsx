@@ -9,7 +9,6 @@ export default function useGetUserInfo() {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState<User | null>(null);
 
-  // NOTE: 유저 정보 가져오기 client component에서 사용
   const getUserInfo = useCallback(async () => {
     try {
       if (status === 'authenticated' && session?.user?.id) {

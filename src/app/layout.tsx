@@ -15,7 +15,6 @@ const pretendard = localFont({
   variable: '--font-pretendard',
 });
 
-// TODO: 메타데이터 open graph, twitter ㅊard 추가하기
 export const metadata: Metadata = {
   title: '팝업의 여정 ',
   description: '팝업의 여정',

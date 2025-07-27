@@ -38,7 +38,7 @@ export default function PopupList({ events = [], userId }: PopupListProps) {
 
   return (
     <ul className="mt-10 flex flex-wrap justify-between space-y-10">
-      {/* // TODO: savedCount도 따로 route 수정해야함 */}
+      {/* TODO: savedCount도 따로 route 수정해야함 */}
       {events.map((evt) => (
         <li key={evt.id} className="transform overflow-hidden transition-transform hover:scale-105">
           <PopupCard key={evt.id} event={evt} userId={userId} />
