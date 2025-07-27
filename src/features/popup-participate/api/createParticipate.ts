@@ -16,7 +16,7 @@ export const createParticipate = async ({ name, email, phone, tickets }: Partici
         email,
         phone,
         tickets,
-        participantStatus: 'pending', // TODO: default approve인듯 이건 서버에서 정해줘야될거같음
+        participantStatus: 'approved',
       },
       headers: { 'Content-Type': 'application/json' },
     });
