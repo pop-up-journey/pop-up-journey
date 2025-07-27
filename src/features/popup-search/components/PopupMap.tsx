@@ -2,6 +2,7 @@
 
 import useKakaoLoader from '@/hooks/useKakaoLoader';
 import type { Popup } from '@/types/popup';
+import { extractCity } from '@/utils/addressFormatter';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
@@ -12,14 +13,12 @@ export default function PopupMap({ events }: PopupMapProps) {
   const { isLoaded } = useKakaoLoader();
   const [positions, setPositions] = useState<{ id: string; lat: number; lng: number; title: string }[]>([]);
 
-  // TODO: address format 적용시키기
   useEffect(() => {
     if (!window.kakao?.maps) return;
     const geocoder = new kakao.maps.services.Geocoder();
 
     events.forEach((event) => {
-      const place = event?.address?.split(',').map((s: string) => s.trim())[1] ?? '';
-
+      const place = extractCity(event?.address);
       geocoder.addressSearch(place, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           setPositions((prev) => [

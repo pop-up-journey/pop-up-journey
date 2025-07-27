@@ -13,15 +13,6 @@ export const extractAddressPart = (address: string | null | undefined, index: nu
 };
 
 /**
- * 주소에서 세 번째 부분을 추출하는 함수 (구/군 단위)
- * @param address - 전체 주소 문자열
- * @returns 구/군 단위 주소 또는 빈 문자열
- */
-export const extractDistrict = (address: string | null | undefined): string => {
-  return extractAddressPart(address, 2);
-};
-
-/**
  * 주소에서 첫 번째 부분을 추출하는 함수 (시/도 단위)
  * @param address - 전체 주소 문자열
  * @returns 시/도 단위 주소 또는 빈 문자열
@@ -37,4 +28,13 @@ export const extractProvince = (address: string | null | undefined): string => {
  */
 export const extractCity = (address: string | null | undefined): string => {
   return extractAddressPart(address, 1);
+};
+
+/**
+ * 주소에서 세 번째 부분을 추출하는 함수 (구/군 단위)
+ * @param address - 전체 주소 문자열
+ * @returns 구/군 단위 주소 또는 빈 문자열
+ */
+export const extractDistrict = (address: string | null | undefined): string => {
+  return extractAddressPart(address, 2);
 };

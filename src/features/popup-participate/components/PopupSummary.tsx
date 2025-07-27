@@ -1,4 +1,5 @@
 import type { Popup } from '@/types/popup';
+import { extractCity } from '@/utils/addressFormatter';
 import { formatDate } from '@/utils/dateformatter';
 import { CalendarIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Image } from '@heroui/react';
@@ -10,7 +11,7 @@ interface PopupSummaryProps {
 
 export default function PopupSummary({ popup }: PopupSummaryProps) {
   const imgSrc = popup.thumbnail ?? undefined;
-  const place = popup?.address?.split(',').map((s: string) => s.trim())[1];
+  const place = extractCity(popup?.address);
 
   return (
     <section className="flex flex-col space-y-4">
