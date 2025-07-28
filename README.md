@@ -224,15 +224,15 @@ React 프로젝트에서 흔히 사용하는 `components`, `hooks`는 단일 폴
 # 🖥️ 화면
 
 # 💬 팀원 정보
-```
+
 <table>
-  <tr>
+  <tr align="center">
     <td><img src="https://avatars.githubusercontent.com/u/158163589?v=4" width="150" height="150" /></td>
     <td><img src="https://github.com/wrikit/wrikitFront/assets/67899735/0f3f503d-5123-48c8-8845-f58f8b3a795c" width="150" height="150"/></td>
    </tr>
   <tr align="center">
-    <td><a href="https://github.com/HighRol1er">조성윤</a></td>
-    <td><a href="https://github.com/uj-kim">김유정</a></td>
-  </tr>
+    <td><a href="https://github.com/HighRol1er">조성윤 a.k.a Hunter_Joe OR HighRoller🎲</a></td>
+    <td><a href="https://github.com/uj-kim">김유정 a.k.a 유정 Queen👑</a></td>
+  </tr>  
 </table>
-```
+
