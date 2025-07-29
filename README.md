@@ -1,62 +1,76 @@
-# 🚀 Pop-Up Journey
 
-🌐 배포 링크 https://pop-up-journey.vercel.app
+<a href="https://pop-up-journey.vercel.app"><img width="1000" height="450" alt="Image" src="https://github.com/user-attachments/assets/23a0a033-cbc9-4d49-8f9a-73c476976ce5" /></a>
 
-## 프로젝트 간단 소개! 
-사용자가 간편하게 팝업 이벤트를 개설하고 참여할 수 있도록 돕는 Next.js 기반 프론트엔드 프로젝트
+<div align="center"><a href="https://pop-up-journey.vercel.app">✨서비스 링크✨</a> </div>
 
-### ⭐ 프로젝트 목표
+## 🚀 프로젝트 간단 소개! 
+**팝업의 여정**은 누구나 쉽게 팝업 이벤트를 개설하고 참여할 수 있도록 돕는 Next.js 기반의 프론트엔드 프로젝트입니다.
 
-✅ 최근 빠르게 확산되는 팝업스토어 문화를 반영한 현실적인 주제
-✅ 참여 신청, 이벤트 등록 등 다양한 폼 처리 로직 구현
-✅ 사용자 친화적인 UI/UX, 효율적인 상태 관리 및 성능 최적화에 중점
+- 현실적으로 빠르게 성장 중인 팝업스토어 시장에 초점을 맞춘 기획
+- 참여 신청, 이벤트 등록 등 다양한 폼 처리 및 사용자 친화적 UI/UX 구현
+- 효율적 상태 관리, 성능 최적화와 유지보수에 중점
 
-# 🧭User-Flow
+## 🌟 주요 기능
+- **회원 인증 및 접근 권한 관리**
+  - 소셜/이메일 로그인 및 보호된 페이지 접근 제어
 
-# ⚙️ ERD
+- **프로필 관리**
+  - 나의 정보 조회 및 수정, 참여 내역/즐겨찾기 팝업 목록 확인
+  - 회원 탈퇴 등 계정 관리 기능 제공
 
-# 📌 주요 기술 스택 & 기술적 의사결정
+- **호스트 센터(대시보드)**
+  - 새로운 이벤트 등록
+  - 등록된 팝업 이벤트 통계 조회, 이벤트별 상세 데이터 확인
+
+- **관심 팝업 저장 및 프로필에서 관리**
+
+- **팝업 스토어 검색 및 필터링**
+  - 키워드, 지역, 태그 기반의 다중 조건 검색과 필터 제공
+
+- **사용자 경험을 높이는 최적화**
+  - 비동기 데이터 캐싱, 상태 관리(즐겨찾기 영속화 등), 접근성 및 반응형 UI
+
+
+## 📌 기술 스택 & 기술적 의사결정
 <table>
   <tr>
     <td>
 
-✔️ **Language & Framework**<br>
+**Language & Framework**<br/>
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white">
 <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white">
 
-✔️ **Code Quality & Git Hooks**<br>
+**Code Quality**<br/>
 <img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white">
 <img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white">
 <img src="https://img.shields.io/badge/husky-000000?style=for-the-badge&logo=git&logoColor=white">
 
-✔️ **State management**<br>
+**State Management**<br/>
 <img src="https://img.shields.io/badge/zustand-orange?style=for-the-badge&logo=zustand&logoColor=white">
 
-✔️ **Authentication**<br>
+**Authentication**<br/>
 <img src="https://img.shields.io/badge/Auth.js-191919?style=for-the-badge&logo=nextauth&logoColor=black">
 
-✔️ **Validation**<br>
+**Validation**<br/>
 <img src="https://img.shields.io/badge/zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white">
 
 </td>
 <td>
 
-✔️ **Design System & Style**<br>
+**Design System & Style**<br/>
 <img src="https://img.shields.io/badge/heroui-000000?style=for-the-badge&logo=heroui&logoColor=white">
 <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
-<img src="https://img.shields.io/badge/postgresql-4169E1?style=for-the-badge&logo=postgresql&logoColor=white">
 
-✔️ **Database & ORM**<br>
+**Database & ORM**<br/>
+<img src="https://img.shields.io/badge/postgresql-4169E1?style=for-the-badge&logo=postgresql&logoColor=white">
 <img src="https://img.shields.io/badge/supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white">
 <img src="https://img.shields.io/badge/drizzle-C5F74F?style=for-the-badge&logo=drizzle&logoColor=white">
 
-✔️ **Utils**<br>
+**Utils & 문서화**<br/>
 <img src="https://img.shields.io/badge/React--Haiku-E36C38?style=for-the-badge&logo=react&logoColor=white">
-
-✔️ **API Documentation**<br>
 <img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black">
 
-✔️ **Project Management**<br>
+**Project Management**<br/>
 <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white">
 <img src="https://img.shields.io/badge/GitHub%20Projects-181717?style=for-the-badge&logo=github&logoColor=white">
 
@@ -64,100 +78,95 @@
   </tr>
 </table>
 
-## 기술적 의사결정
-### 🔹 **TypeScript**
+---
+### 🔹 **TypeScript + Linting 파이프라인**
 
-- 타입을 통해 코드의 신뢰성과 유지보수성을 향상시키기 위해 선택
-    - 컴파일 단계에서 오류 방지
-    - 프로젝트에서 코드 품질 관리 용이
-    - eslint를 통한 코드 신뢰성 증가
+- 타입 안정성과 코드 일관성을 확보, 사전 오류를 차단하여 코드 품질을 유지하고 일관된 스타일을 보장
+  - TypeScript : 컴파일 단계에서 타입 오류 사전 차단
+  - ESLint : 잠재적 버그·코드 스멜 탐지
+  - Prettier – 코드 스타일 자동 정렬
+  - Husky + lint‑staged : 커밋 전에 코드 검사 자동화 및 불필요한 오류 방지
+  ```
+      // husky: commit-staged
+      merge: 브랜치 병합
+      feat: 새로운 기능 추가
+      fix: 버그 수정
+      refactor: 코드 리팩토링
+      design: 디자인, UI 변경
+      comment: 주석 추가, 주석 수정
+      test: 테스트 추가, 테스트 수정
+      chore: 기타 변경사항, asset폴더의 img 추가 등
+      rename: 파일 이름 변경
+      remove: 파일 이동 및 삭제
+  ```
 
 ---
 
 ### 🔹 **Next.js**
 
-- 서버리스 어플리케이션빠른 개발과 최적화를 동시에 추구하기 위해 선택
-    - **서버 컴포넌트** 및 **서버 액션**을 활용해 서버와의 연결 최적화
-    - **ISR, SSR, CSR** 등 상황에 따라 유연한 렌더링 전략 적용 가능
-    - SEO 친화적
+- 서버 컴포넌트/액션 및 다양한 렌더링 방식(ISR, SSR, CSR) 지원  
+- 빠른 개발, 서버리스 배포, SEO 친화성
 
 ---
 
 ### 🔹 **Auth.js**
 
-- 인증 및 세션 관리를 쉽게 구축하기 위해 Auth.js를 사용했습니다.
-    - 다양한 소셜 로그인 방식 지원
-    - Next.js와의 높은 호환성
-    - 세션 및 토큰 기반 인증을 간편하게 구성 가능
+- 인증/세션 관리 및 소셜로그인 구현 용이  
+- Next.js와 높은 호환성
 
 ---
 
-### 🔹 **Zustand - form 상태**
+### 🔹 **Zustand**
 
-- 전역 상태 관리 라이브러리로, React 애플리케이션에서 불필요한 렌더링을 최소화하며 간결한 상태관리를 가능하게 합니다.
-    - useShallow 및 개별 구독을 통한 최적화
-    - Selector 기반의 가벼운 구독 시스템
-- 
+- 간결하고 성능 최적화된 전역 상태 관리를 위해 Zustand 도입
+- 폼 데이터, 인증, 검색 캐싱, 즐겨찾기 등 다양한 상태를 독립적이고 모듈화된 스토어로 관리함으로써 비즈니스 로직과 UI 분리 강화
+- 로컬 스토리지와 연동이 편리함
+- 스토어 간 동기화(인증 상태 변화 시 즐겨찾기 동기화 등)
+- 유지보수성과 확장성을 모두 확보할 수 있다는 점
 
 ---
 
 ### 🔹 **Tailwind CSS & HeroUI**
 
-- 디자인 시스템 구축 시 빠르고 일관된 UI를 만들기 위해 선택했습니다.
-    - Tailwind CSS로 유틸리티 중심의 빠른 스타일링 가능
-    - HeroUI로 접근성과 UX를 고려한 컴포넌트 사용
-    - 디자인 시스템이 코드 기반으로 통합됨으로써 유지보수 용이
+- 빠르고 일관된 UI/UX 구현  
+- 접근성·사용성을 고려한 컴포넌트
 
 ---
 
 ### 🔹 **Drizzle ORM & Zod**
 
 - 타입 안정성과 마이그레이션 시스템이 강화된 타입 안전 ORM
-    - SQL 친화적인 문법과 완벽한 TypeScript 지원
-    - 런타임 타입 오류 방지
-    - 구조화된 스키마로 유지보수가 쉬움
-    - Drizzle과 Zod는 둘다 스키마 기반으로 작동해 서버와 클라이언트 간 타입 일관성과 유효성 검사 통합 가능해 백엔드에서 정의한 스키마를 클라이언트까지 안전하게 확장 가능
-
----
-
-### 🔹 **ESLint, Prettier, Husky**
-
-- 코드 품질 유지와 일관된 스타일을 보장하기 위해 구성
-    - ESLint: 코드 규칙 강제 및 잠재적 오류 사전 감지
-    - Prettier: 코드 스타일 일관성 유지
-    - Husky + lint-staged: 커밋 전에 코드 검사 자동화하여 불필요한 오류 방지
-        
-        ```
-        // husky: commit-staged
-        merge: 브랜치 병합
-        feat: 새로운 기능 추가
-        fix: 버그 수정
-        refactor: 코드 리팩토링
-        design: 디자인, UI 변경
-        comment: 주석 추가, 주석 수정
-        test: 테스트 추가, 테스트 수정
-        chore: 기타 변경사항, asset폴더의 img 추가 등
-        rename: 파일 이름 변경
-        remove: 파일 이동 및 삭제
-        ```
-        
+  - SQL 친화적인 문법과 완벽한 TypeScript 지원
+  - 런타임 타입 오류 방지
+  - 구조화된 스키마로 유지보수가 쉬움
+  - Drizzle과 Zod는 둘다 스키마 기반으로 작동해 서버와 클라이언트 간 타입 일관성과 유효성 검사 통합 가능해 백엔드에서 정의한 스키마를 클라이언트까지 안전하게 확장 가능
 
 ---
 
 ### 🔹 **React-Haiku**
 
-<details>
-<summary>React-Haiku란?</summary>
-
-- React 컴포넌트 간 통신과 연결을 선언적으로 구성할 수 있게 해주는 유틸리티  
-  - **React 전용 훅 기반**으로 구성되어 있어 최적화가 잘 되어 있으며 React의 동작 방식과 자연스럽게 통합  
-  - 소스코드가 **간단하고 직관적**으로 작성되어 있어 확장성과 이해도가 높음  
-  - **개발에 필요한 기능들이 적절하게 포함**되어 있어 실용성이 뛰어남  
+- react-haiku의 경량화된 유틸리티들을 적극 활용함으로써 직접 커스텀하여 구현하는 부담은 줄이고, 재사용성 높은 코드베이스를 구축할 수 있다고 판단하여 도입
+  - **React 전용 훅 기반**으로 구성되어 있어 최적화가 잘 되어 있으며 React의 동작 방식과 자연스럽게 통합
+  - 소스코드가 **간단하고 직관적**으로 작성되어 있어 확장성과 이해도가 높음
+  - **개발에 필요한 기능들이 적절하게 포함**되어 있어 실용성이 뛰어남
   - **8KB의 매우 가벼운 용량**
 
-</details>
+---
+
+### 🔹 **GitHub-Flow 전략**
+
+- **2인 팀에 적합한 간결하고 직관적인 브랜치 전략**
+    - Git Flow와 같은 복잡한 브랜치 전략보다 기능 단위로 feature/ 브랜치를 만들어 작업 후 `main`에 머지하는 방식으로 협업 속도와 브랜치의 명확성을 높힘
+
+- **`main` 브랜치의 프로덕션 코드 유지**
+    - 항상 최신의 안정된 코드가 `main`브랜치에 위치할 수 있도록 개발하여 빠른 프로덕션 모드로 전환이 가능
+
+- **PR과 Project-Dashboard를 활용한 협업**
+    - GitHub의 Project Dashboard를 활용해 각 작업을 명확히 분배
+    - PR 리뷰를 빠르게 처리함으로써 작업 충돌을 방지하고 개선사항을 즉각 반영
+
  
-# 📁 폴더 구조 
+## 📁 폴더 구조 
 ```
 src/
 ├── 📁 app/                # Next.js 라우팅 및 API 핸들러 관리 (App Router 기반)
@@ -183,47 +192,68 @@ src/
 ├── 📁 types/             # 전역 타입 정의 (예: 유저, API 응답 타입 등)
 └── 📁 utils/             # 공통 유틸리티 함수 (예: 날짜 포맷, 숫자 변환 등)
 ```
-이번 프로젝트는 FSD(Feature-Sliced Design)의 핵심 개념을 차용하여 폴더 구조를 설계했습니다.
-저희 팀에서 생각하는 FSD의 가장 큰 장점은 다음과 같습니다.
+**FSD(Feature-Sliced Design)** 의 핵심 개념을 차용한 폴더 구조 설계
 
 1. **기능 단위로 코드를 관리**
-    각 도메인을 독립적으로 나누어 기능별로 개발할 수 있으며 기능 추가/수정 시 다른 영역에 영향을 주지 않도록 설계가 가능한 부분
+    각 도메인을 독립적으로 나누어 기능별로 개발할 수 있으며 기능 추가/수정 시 다른 영역에 영향을 주지 않도록 설계 가능
     
-2. **관심사 분리(Separation of Concerns)**
-    `segment`의 확장을 통해 코드의 목적과 책임을 명확히 나눌 수 있는 부분
+2. **관심사 분리**
+    `segment`의 확장을 통해 코드의 목적과 책임을 명확히 할 수 있음
     
 3. **높은 응집도와 낮은 커플링**
-    각 기능은 관련된 로직과 UI, 상태관리, API 연동 등을 하나의 `slice`내부에 모아둠으로써 높은 응집도
-    다른 기능과의 의존도를 최소화하여, 기능 간 변경이 서로에게 영향을 주지않는 낮은 커플링 
+    각 기능과 관련된 로직과 UI, 상태관리, API 연동 등을 하나의 `slices`내부에 모아둠으로써 기능별 높은 응집도를 갖음과 동시에 다른 기능과의 의존도 최소화
+
     
-React 프로젝트에서 흔히 사용하는 `components`, `hooks`는 단일 폴더로는 확장성과 복잡도를 감당하기 어렵다고 판단하여, 각 기능(`slices`) 내부에 `components`, `hooks`, `api`, `services`, `types`를 함께 구성했습니다.
-이를 통해 전역과 로컬의 경계를 명확히 하며, 각 기능이 독립적으로 동작할 수 있도록 구성함과 동시에 한 명의 개발자가 하나의 기능을 온전히 맡아 개발할 수 있어 마치 개인 프로젝트처럼 독립적으로 작업이 가능하고 동시에 전체 시스템과의 충돌이나 의존성을 최소화해 유저보수성과 개발효율을 높일 수 있는 폴더구조를 설계하였습니다.
+React 프로젝트에서 흔히 사용하는 `components`, `hooks`는 단일 폴더로는 확장성과 복잡도를 감당하기 어렵다고 판단하여 각 기능(`slices`) 내부에 `components`, `hooks`, `api`, `services`, `types`를 함께 구성 <br />
+이를 통해 전역과 로컬의 경계를 명확히하며 각 기능이 독립적으로 동작할 수 있도록 구성함과 동시에 한 명의 개발자가 하나의 기능을 온전히 맡아 개발할 수 있어 마치 개인 프로젝트처럼 독립적으로 작업이 가능하고 동시에 전체 시스템과의 충돌이나 의존성을 최소화해 유저보수성과 개발효율을 향상 시킴
 
-# ✅ 주요 기능
-- **사용자 인증 , 로그인 및 접근 권한 제어 기능 제공**
-- **팝업 이벤트 생성, 조회 및 관리**
-- **이벤트 참여 신청 및 참여 이벤트 기록 조회**
-- **관심 팝업 저장 기능**
-- **원하는 이벤트를 쉽게 찾을 수 있도록 강력한 검색 및 지역, 태그 기반 필터링**
-- **프로필 관리** - 사용자 개인 정보 및 활동 기록 관리 기능을 제공합니다.
 
-# 📑 Git 전략: GitHub-Flow
-이번 프로젝트에서는 **협업 효율성과 배포 안정성**을 동시에 고려하여, **GitHub Flow 전략**을 사용했습니다. `main` 브랜치를 항상 배포 가능한 상태로 유지하면서, **기능 단위(feature-based) 브랜치 전략**을 통해 빠른 개발과 리뷰, 머지를 수행했습니다.
+## 🧭 유저 플로우
+- 모든 일반 사용자
+<img width="3296" height="2000" alt="Image" src="https://github.com/user-attachments/assets/b40246c3-3d34-4e8a-888a-147dbec99599" />
 
-### ✔️ 선택한 이유
+- 호스트
+<img width="3296" height="1472" alt="Image" src="https://github.com/user-attachments/assets/d91a355a-bddb-44d9-83d2-0c78098c10ac" />
 
-- **2인 팀에 최적화된 간단하면서도 명확한 브랜치 전략**
-    - 복잡한 브랜치 분기 없이, 기능별 브랜치를 만들어 작업하고 `main`으로 직접 머지하는 구조로 **의사결정과 협업 속도를 높였습니다.**
-- **`main` 브랜치의 배포 가능성 유지**
-    - 항상 최신의 안정된 코드가 `main`에 존재하도록 관리하여, 필요 시 즉시 프로덕션에 반영할 수 있는 상태를 유지했습니다.
-- **기능 단위 개발 & 빠른 피드백 루프**
-    - 각 기능을 feature 브랜치로 분리해 작업함으로써 충돌을 방지하고, **작고 명확한 단위의 코드 리뷰**가 가능했습니다.
+## ⚙️ ERD
+<img width="1645" height="1301" alt="Image" src="https://github.com/user-attachments/assets/671b2653-9757-4fe4-8da6-2896051b2b24" />
 
-# 📌 **향후 개선 사항**
+## 🖥️ 화면 미리보기
+### 🏠 메인페이지  
+![MainPage](https://github.com/user-attachments/assets/7b53bca7-e8b6-4a6d-8efd-371074df9b4b)
+<details>
+<summary> 다른 페이지 더보기</summary>
 
-# 🖥️ 화면
+<br />
 
-# 💬 팀원 정보
+### 🔐 로그인  
+![SocialLogin](https://github.com/user-attachments/assets/0b3ed1ff-4b33-48b8-8c67-e0f3be46b7d4)
+
+
+### 🔎 헤더 검색 기능  
+![HeaderSearch](https://github.com/user-attachments/assets/494f864e-f238-4efa-9f87-df690fed3d9c)
+
+### 🧩 검색 페이지 필터링  
+![SearchPage](https://github.com/user-attachments/assets/4932a4da-0133-4a82-a9bd-d41a6252e2c5)
+
+### 📄 디테일 페이지  
+![DetailPage](https://github.com/user-attachments/assets/6c6fc7cf-0b76-4ff1-85e4-42f7fb4bc64e)
+
+### 👤 프로필 페이지 & 수정  
+![Profile](https://github.com/user-attachments/assets/b67c94ce-cc89-44c1-9094-bac62cca6d40)
+
+### 📊 호스트 센터  
+![HostCenter](https://github.com/user-attachments/assets/5e3ca4bb-651a-455b-a18e-f89bb5890272)
+
+### 📝 팝업 등록 페이지  
+![Register](https://github.com/user-attachments/assets/1b230c92-8027-4073-9fcc-56d62e64c394)
+
+### 📱 반응형 화면  
+![Responsive](https://github.com/user-attachments/assets/99be014b-70a9-407c-9b1c-03ed7d4cee25)
+
+</details>
+
+## 😎 팀원
 
 <table>
   <tr align="center">
