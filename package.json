@@ -24,6 +24,7 @@
     "@heroui/react": "2.8.0-beta.6",
     "@supabase/supabase-js": "^2.49.8",
     "@svgr/webpack": "^8.1.0",
+    "@vercel/analytics": "^1.5.0",
     "browser-image-compression": "^2.0.2",
     "date-fns": "^4.1.0",
     "dotenv": "^16.5.0",

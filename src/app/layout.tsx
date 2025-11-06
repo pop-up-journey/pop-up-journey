@@ -1,6 +1,7 @@
 import ConditionalFooter from '@/components/layouts/footer';
 import ConditionalHeader from '@/components/layouts/header';
 import { Providers } from '@/providers/providers';
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import 'swiper/css';
@@ -56,7 +57,10 @@ export default function RootLayout({
       <body className={` ${pretendard.variable} antialiased`}>
         <Providers>
           <ConditionalHeader />
-          <div className="min-h-screen"> {children}</div>
+          <div className="min-h-screen">
+            {children}
+            <Analytics />
+          </div>
           <ConditionalFooter />
         </Providers>
       </body>
