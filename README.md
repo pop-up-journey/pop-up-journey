@@ -207,6 +207,9 @@ src/
 React 프로젝트에서 흔히 사용하는 `components`, `hooks`는 단일 폴더로는 확장성과 복잡도를 감당하기 어렵다고 판단하여 각 기능(`slices`) 내부에 `components`, `hooks`, `api`, `services`, `types`를 함께 구성 <br />
 이를 통해 전역과 로컬의 경계를 명확히하며 각 기능이 독립적으로 동작할 수 있도록 구성함과 동시에 한 명의 개발자가 하나의 기능을 온전히 맡아 개발할 수 있어 마치 개인 프로젝트처럼 독립적으로 작업이 가능하고 동시에 전체 시스템과의 충돌이나 의존성을 최소화해 유저보수성과 개발효율을 향상 시킴
 
+## 🖼️ 와이어프레임
+
+- [와이어프레임 Figma 링크](https://www.figma.com/design/46w3wjH6BU5Ee02lvbmB51/%EC%84%B1%EC%9C%A0%EC%A0%95_%ED%99%94%EB%A9%B4%EC%9E%91%EC%97%85?node-id=0-1&t=mjof1hUN9TaMYcEZ-1)
 
 ## 🧭 유저 플로우
 - 모든 일반 사용자
